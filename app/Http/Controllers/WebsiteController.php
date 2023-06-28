@@ -27,6 +27,28 @@ class WebsiteController extends Controller
         return view('login');
     }
 
+    public function login_submit(Request $request)
+    {
+        $credentials = [
+            'email' => $request->email,
+            'password' => $request->password,
+            'status' => 'Ativo'
+        ];
+
+        if (Auth::attempt($credentials)) {
+            return redirect()->route('dashboard');
+        } else {
+            return redirect()->route('login');
+        }
+    }
+
+    public function logout()
+    {
+        Auth::guard('web')->logout();
+
+        return redirect()->route('login');
+    }
+    
     public function register()
     {
         return view('register');
@@ -55,28 +77,39 @@ class WebsiteController extends Controller
         // return redirect()->route('login');
     }
 
-     public function registration_verify($token, $email)
-     {
-         $user = User::where('token', $token)->where('email', $email)->first();
-         if(!$user)
-         {
-            return redirect()->route('login');
-         }
-
-            $user->status = 'Pendente';
-            $user->token = '';
-
-         echo 'Seu e-mail foi verificado com sucesso.';
-        
-     }
-
-    public function logout()
+    public function registration_verify($token, $email)
     {
-        return view('logout');
+        $user = User::where('token', $token)->where('email', $email)->first();
+        if (!$user) {
+            return redirect()->route('login');
+        }
+
+        $user->status = 'Ativo';
+        $user->token = '';
+        $user->update();
+
+        echo 'Seu e-mail foi verificado com sucesso.';
     }
 
     public function forget_password()
     {
         return view('forget_password');
+    }
+
+    public function forget_password_submit(Request $request)
+    {
+        $token = hash('sha256', time());
+
+        $user = User::where('email', $request->email)->first();
+        if (!$user) {
+            dd('E-mail não encontrado.');
+        }
+
+        $user->token = $token;
+        $user->update();
+
+        $reset_link = url('reset-password/' . $token . '/' . $request->email);
+
+        echo 'Um link de redefinição de senha foi enviado para o seu e-mail. Por favor, verifique seu e-mail.';
     }
 }

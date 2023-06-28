@@ -1,6 +1,13 @@
 <a href="{{ route('home') }}">Home</a>
-<a href="{{ route('dashboard') }}">Dashboard</a>
-<a href="{{ route('login') }}">Login</a>
-<a href="{{ route('register') }}">Registrar</a>
-<a href="{{ route('logout') }}">Logout</a>
-<a href="{{ route('forget-password') }}">Esqueceu a senha</a>
+
+@if (Auth::guard('web')->user())
+    <a href="{{ route('dashboard') }}">Dashboard</a>
+    <a href="{{ route('logout') }}">Logout</a>
+@endif
+
+@if (!Auth::guard('web')->user())
+    <a href="{{ route('login') }}">Login</a>
+    <a href="{{ route('register') }}">Registrar</a>
+@endif
+
+<a href="{{ route('forget_password') }}">Esqueceu a senha</a>

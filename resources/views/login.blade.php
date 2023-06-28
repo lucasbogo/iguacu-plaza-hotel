@@ -3,7 +3,7 @@
 
 <h1>Bem-vindo ao Iguaçu Plaza Hotel</h1>
 
-<form action="/login" method="POST">
+<form action="{{ route('login_submit') }}" method="POST">
     @csrf
     <input type="text" name="email" placeholder="E-mail">
     <input type="password" name="password" placeholder="Senha">
