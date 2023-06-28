@@ -12,7 +12,10 @@ Route::get('/dashboard', [WebsiteController::class,'dashboard'])->name('dashboar
 Route::get('/login', [WebsiteController::class,'login'])->name('login');
 
 Route::get('/register', [WebsiteController::class,'register'])->name('register');
+
 Route::post('/register_submit', [WebsiteController::class,'register_submit'])->name('register_submit');
+
+Route::get('/registration/verify/{token}/{email}', [WebsiteController::class,'registration_verify']);
 
 Route::get('/logout', [WebsiteController::class,'logout'])->name('logout');
 

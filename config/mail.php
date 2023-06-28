@@ -99,7 +99,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'iguacuplazahotel@iguacuplazahotel.com.br'),
+        'address' => env('MAIL_FROM_ADDRESS', 'reservas@iguacuplazahotel.com.br'),
         'name' => env('MAIL_FROM_NAME', 'Iguaçu Plaza Hotel'),
     ],
 

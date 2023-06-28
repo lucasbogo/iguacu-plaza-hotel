@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Mail\Websitemail;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Auth;
 
 class WebsiteController extends Controller
 {
@@ -44,12 +46,29 @@ class WebsiteController extends Controller
 
         $verification_link = url('registration/verify/' . $token . '/' . $request->email);
         $subject = 'Confirmação de Cadastro';
-        $message = 'Por favor, clique neste link para confirmar seu cadastro: <br>' . $verification_link;
+        $message = 'Por favor, clique neste link para confirmar seu cadastro: <br><a href="' . $verification_link . '"> Clique Aqui</a>';
 
         Mail::to($request->email)->send(new Websitemail($subject, $message));
 
-        return redirect()->route('login');
+        echo 'Um link de confirmação foi enviado para o seu e-mail. Por favor, verifique seu e-mail.';
+
+        // return redirect()->route('login');
     }
+
+     public function registration_verify($token, $email)
+     {
+         $user = User::where('token', $token)->where('email', $email)->first();
+         if(!$user)
+         {
+            return redirect()->route('login');
+         }
+
+            $user->status = 'Pendente';
+            $user->token = '';
+
+         echo 'Seu e-mail foi verificado com sucesso.';
+        
+     }
 
     public function logout()
     {

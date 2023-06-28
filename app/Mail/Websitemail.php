@@ -38,8 +38,8 @@ class Websitemail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name', 
-            with: ['subject' => $this->subject]
+            view: 'email', 
+            with: ['subject' => $this->subject, 'body' => $this->body]
         );
     }
 
