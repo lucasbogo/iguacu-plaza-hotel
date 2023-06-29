@@ -9,7 +9,7 @@
     <div><input type="text" name="email"></div>
 
 <div style="margin-top:10px;">
-    <input type="submit" value="Registrar">
+    <input type="submit" value="redefinir senha">
     <br><br>
     <a href="{{ route('login') }}">Já tem uma conta? Faça login</a>
 </div>

@@ -12,5 +12,5 @@
     <div style="margin-top:10px;">
         <input type="submit" value="Registrar">
         <br>
-        <a href="{{ route('forget-password') }}">Esqueceu a senha?</a>
+        <a href="{{ route('forget_password') }}">Esqueceu a senha?</a>
     </div>

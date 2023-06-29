@@ -22,6 +22,11 @@ class WebsiteController extends Controller
         return view('dashboard');
     }
 
+    public function settings()
+    {
+        return view('settings');
+    }
+
     public function login()
     {
         return view('login');
@@ -48,7 +53,7 @@ class WebsiteController extends Controller
 
         return redirect()->route('login');
     }
-    
+
     public function register()
     {
         return view('register');
@@ -64,11 +69,12 @@ class WebsiteController extends Controller
         $user->password = Hash::make($request->password);
         $user->status = 'Pendente';
         $user->token = $token;
+        $user->role = 2;
         $user->save();
 
         $verification_link = url('registration/verify/' . $token . '/' . $request->email);
         $subject = 'Confirmação de Cadastro';
-        $message = 'Por favor, clique neste link para confirmar seu cadastro: <br><a href="' . $verification_link . '"> Clique Aqui</a>';
+        $message = 'Por favor, clique neste link para confirmar seu cadastro: <a href="' . $verification_link . '"> Clique Aqui</a>';
 
         Mail::to($request->email)->send(new Websitemail($subject, $message));
 
@@ -109,7 +115,37 @@ class WebsiteController extends Controller
         $user->update();
 
         $reset_link = url('reset-password/' . $token . '/' . $request->email);
+        $subject = 'Redefinição de Senha';
+        $message = 'Por favor, clique neste link para redefinir sua senha: <a href="' . $reset_link . '">Clique Aqui</a>';
+
+        Mail::to($request->email)->send(new Websitemail($subject, $message));
 
         echo 'Um link de redefinição de senha foi enviado para o seu e-mail. Por favor, verifique seu e-mail.';
+    }
+
+    public function reset_password($token, $email)
+    {
+        $user = User::where('token', $token)->where('email', $email)->first();
+        if (!$user) {
+            return redirect()->route('login');
+        }
+
+        return view('reset_password', compact('token', 'email'));
+    }
+
+    public function reset_password_submit(Request $request)
+    {
+        $user = User::where('token', $request->token)->where('email', $request->email)->first();
+        if (!$user) {
+            return redirect()->route('login');
+        }
+
+        $user->token = '';
+        $user->password = Hash::make($request->new_password);
+        $user->update();
+
+        echo 'Sua senha foi redefinida com sucesso.';
+
+        // return redirect()->route('login');
     }
 }
