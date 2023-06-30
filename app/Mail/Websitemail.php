@@ -28,7 +28,7 @@ class Websitemail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Websitemail',
+            subject: $this->subject,
         );
     }
 

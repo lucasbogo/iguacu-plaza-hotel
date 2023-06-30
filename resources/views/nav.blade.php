@@ -11,4 +11,4 @@
     <a href="{{ route('register') }}">Registrar</a>
 @endif
 
-<a href="{{ route('forget-password') }}">Esqueceu a senha?</a>
+<a href="{{ route('forget_password') }}">Esqueceu a senha?</a>
