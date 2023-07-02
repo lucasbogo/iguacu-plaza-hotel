@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\WebsiteController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminHomeController;
+use App\Http\Controllers\Admin\AdminProfileController;
 
 
 /* home route */
@@ -42,12 +43,22 @@ Route::get('/admin/home', [AdminHomeController::class, 'index'])->name('admin_ho
 
 Route::get('/admin/login', [AdminController::class, 'login'])->name('admin_login');
 
-Route::post('/admin/login_submit', [AdminController::class, 'login_submit'])->name('admin_login_submit');
+Route::post('/admin/login-submit', [AdminController::class, 'login_submit'])->name('admin_login_submit');
+
+Route::get('/admin/forget-password', [AdminController::class, 'forget_password'])->name('admin_forget_password');
+
+Route::post('/admin/forget-password-submit', [AdminController::class, 'forget_password_submit'])->name('admin_forget_password_submit');
+
+Route::get('/admin/reset-password/{token}/{email}', [AdminController::class, 'reset_password'])->name('admin_reset_password');
+
+Route::post('/admin/reset-password-submit', [AdminController::class, 'reset_password_submit'])->name('admin_reset_password_submit');
 
 Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin_dashboard')->middleware('admin:admin');
 
 Route::get('/admin/settings', [AdminController::class, 'settings'])->name('admin_settings')->middleware('admin:admin');
 
 Route::get('/admin/logout', [AdminController::class, 'logout'])->name('admin_logout');
+
+Route::get('/admin/profile', [AdminProfileController::class, 'index'])->name('admin_profile')->middleware('admin:admin');
 
 

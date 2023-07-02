@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Models\Admin;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use App\Mail\Websitemail;
 
 class AdminController extends Controller
 {
@@ -18,15 +20,19 @@ class AdminController extends Controller
 
     public function login_submit(Request $request)
     {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required ' //|min:8|max:20',
+        ]);
         $credentials = [
             'email' => $request->email,
             'password' => $request->password,
         ];
 
         if (Auth::guard('admin')->attempt($credentials)) {
-            return redirect()->route('admin_dashboard');
+            return redirect()->route('admin_home');
         } else {
-            return redirect()->route('admin_login');
+            return redirect()->route('admin_login')->withErrors(['error' => 'Email ou senha incorretos']);
         }
     }
 
@@ -40,9 +46,72 @@ class AdminController extends Controller
         return view('admin.settings');
     }
 
+    public function forget_password()
+    {
+        return view('admin.forget_password');
+    }
+
+    public function forget_password_submit(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email'
+        ]);
+
+        $admin = Admin::where('email', $request->email)->first();
+
+        if (!$admin) {
+            return redirect()->back()->with('error', 'Email não encontrado');
+        }
+
+        $token = hash('sha256', time());
+
+        $admin->token = $token;
+        $admin->save();
+
+        $reset_link = url('/admin/reset-password/' . $token . '/' . $request->email);
+        $subject = 'Redefinir senha';
+        $message = 'Clique no link abaixo para redefinir sua senha <br>';
+        $message .= '<a href="' . $reset_link . '">Redefinir senha</a>';
+
+        Mail::to($admin->email)->send(new Websitemail($subject, $message));
+
+        return redirect()->route('admin_login')->with('success', 'Link de redefinição de senha enviado para seu email');
+    }
+
+    public function reset_password($token, $email)
+    {
+        $admin = Admin::where('token', $token)->where('email', $email)->first();
+
+        if (!$admin) {
+            return redirect()->route('admin_login')->with('error', 'Link de redefinição de senha inválido');
+        }
+
+        return view('admin.reset_password', compact('token', 'email'));
+    }
+
+    public function reset_password_submit(Request $request)
+    {
+        $request->validate([
+            'password' => 'required',
+            'retype_password' => 'required|same:password'
+        ]);
+
+        $admin = Admin::where('token', $request->token)->where('email', $request->email)->first();
+
+        if (!$admin) {
+            return redirect()->route('admin_login')->with('error', 'Link de redefinição de senha inválido');
+        }
+
+        $admin->password = Hash::make($request->password);
+        $admin->token = '';
+        $admin->update();
+
+        return redirect()->route('admin_login')->with('success', 'Senha redefinida com sucesso');
+    }
+
     public function logout()
     {
         Auth::guard('admin')->logout();
-        return redirect()->route('home');
+        return redirect()->route('admin_login');
     }
 }

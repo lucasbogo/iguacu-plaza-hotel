@@ -1,4 +1,4 @@
-@include('admin.nav')
+@include('admin.layout.nav')
 
 <h3>Painel Admin</h3>
 

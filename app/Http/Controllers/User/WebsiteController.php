@@ -39,7 +39,7 @@ class WebsiteController extends Controller
         if (Auth::guard('web')->attempt($credentials)) {
             return redirect()->route('dashboard');
         } else {
-            return redirect()->route('user.login');
+            return redirect()->route('login');
         }
     }
 
@@ -82,7 +82,7 @@ class WebsiteController extends Controller
     {
         $user = User::where('token', $token)->where('email', $email)->first();
         if (!$user) {
-            return redirect()->route('user.login');
+            return redirect()->route('login');
         }
 
         $user->status = 'Ativo';
@@ -132,7 +132,7 @@ class WebsiteController extends Controller
     {
         $user = User::where('token', $request->token)->where('email', $request->email)->first();
         if (!$user) {
-            return redirect()->route('user.login');
+            return redirect()->route('login');
         }
 
         $user->token = '';

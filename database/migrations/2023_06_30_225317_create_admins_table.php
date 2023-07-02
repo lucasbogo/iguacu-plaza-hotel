@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('admins', function (Blueprint $table) {
             $table->id()->autoIncrement();
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('photo')->nullable();
             $table->string('token');
             $table->timestamps();
         });
