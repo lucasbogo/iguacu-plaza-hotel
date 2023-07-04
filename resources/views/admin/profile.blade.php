@@ -9,7 +9,8 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <form action="" method="post">
+                        <form action="{{ route('admin_profile_update') }}" method="post" enctype="multipart/form-data">
+                            @csrf
                             <div class="row">
                                 <div class="col-md-3">
                                     <img src="{{ asset('uploads/' . Auth::guard('admin')->user()->photo) }}" alt=""
@@ -18,16 +19,18 @@
                                 </div>
                                 <div class="col-md-9">
                                     <div class="mb-4">
-                                        <label class="form-label">{{ Auth::guard('admin')->user()->name }}</label>
-                                        <input type="text" class="form-control" name="name" value="John Doe">
+                                        <label class="form-label">Nome</label>
+                                        <input type="text" class="form-control" name="name"
+                                            value="{{ Auth::guard('admin')->user()->name }}">
                                     </div>
                                     <div class="mb-4">
-                                        <label class="form-label">{{ Auth::guard('admin')->user()->email }}</label>
-                                        <input type="text" class="form-control" name="email" value="john@gmail.com">
+                                        <label class="form-label">Email</label>
+                                        <input type="text" class="form-control" name="email"
+                                            value="{{ Auth::guard('admin')->user()->email }}">
                                     </div>
                                     <div class="mb-4">
                                         <label class="form-label">Senha</label>
-                                        <input type="password" class="form-control" name="new_password">
+                                        <input type="password" class="form-control" name="password">
                                     </div>
                                     <div class="mb-4">
                                         <label class="form-label">Confirmar senha</label>
@@ -35,7 +38,7 @@
                                     </div>
                                     <div class="mb-4">
                                         <label class="form-label"></label>
-                                        <button type="submit" class="btn btn-primary">Update</button>
+                                        <button type="submit" class="btn btn-primary">Atualizar</button>
                                     </div>
                                 </div>
                             </div>

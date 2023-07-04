@@ -61,4 +61,6 @@ Route::get('/admin/logout', [AdminController::class, 'logout'])->name('admin_log
 
 Route::get('/admin/profile', [AdminProfileController::class, 'index'])->name('admin_profile')->middleware('admin:admin');
 
+Route::post('/admin/profile-update', [AdminProfileController::class, 'update'])->name('admin_profile_update')->middleware('admin:admin');
+
 
