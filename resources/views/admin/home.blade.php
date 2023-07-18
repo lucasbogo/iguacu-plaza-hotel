@@ -4,7 +4,7 @@
     <div>
         <img src="{{ asset('uploads/logo-hotel.png') }}" alt="Logo" alt="Logo" style="padding: 10px;"></a>
     </div>
-    <h1>Painel Administrativo</h1>
+    <h3>Painel Administrativo</h3>
 @endsection
 
 @section('main_content')

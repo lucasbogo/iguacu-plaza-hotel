@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" href="{{ asset('uploads/favicon.ico') }}">
 
     <title>Admin Panel</title>
-    <link rel="icon" type="image/png" href="{{ asset('uploads/favicon.ico') }}">
+
 
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap"
         rel="stylesheet">
@@ -31,7 +31,7 @@
                     <div class="section-header">
                         <h1>@yield('heading')</h1>
                         <div class="section-header-breadcrumb">
-                            {{-- <a href="" class="btn btn-primary"><i class="fas fa-plus"></i></a> --}}
+                            @yield('right_top_button')
                         </div>
                     </div>
 

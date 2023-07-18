@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\User;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -10,13 +9,9 @@ use App\Mail\Websitemail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 
-class WebsiteController extends Controller
-{
-    public function index()
-    {
-        return view('user.home');
-    }
 
+class UserAuthController extends Controller
+{
     public function dashboard()
     {
         return view('user.dashboard');
@@ -144,3 +139,6 @@ class WebsiteController extends Controller
         // return redirect()->route('login');
     }
 }
+
+
+

@@ -3,7 +3,7 @@
         <div class="sidebar-brand">
             <a href="{{ route('admin_home') }}">
                 <img src="{{ asset('uploads/favicon.ico') }}" alt="Logo" alt="Logo" style="padding: 10px;"></a>
-                <span>Configurações</span>
+            <span>Configurações</span>
         </div>
 
         <div class="sidebar-brand sidebar-brand-sm">
@@ -26,6 +26,9 @@
                             Item 2</a></li>
                 </ul>
             </li>
+
+            <li class=""><a class="nav-link" href="{{ route('admin_slider') }}"><i class="fas fa-hand-point-right"></i>
+                    <span>Fotos Slide</span></a></li>
 
             <li class=""><a class="nav-link" href="setting.html"><i class="fas fa-hand-point-right"></i>
                     <span>Setting</span></a></li>

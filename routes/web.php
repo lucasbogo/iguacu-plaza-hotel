@@ -1,15 +1,19 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\User\WebsiteController;
+use App\Http\Controllers\Frontend\WebsiteController;
+use App\Http\Controllers\Frontend\AboutController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminHomeController;
 use App\Http\Controllers\Admin\AdminProfileController;
+use App\Http\Controllers\Admin\AdminSliderController;
 
 
-/* home route */
+/* Frontend Routes */
 
 Route::get('/', [WebsiteController::class, 'index'])->name('home');
+
+Route::get('/about', [AboutController::class, 'index'])->name('about');
 
 /* User Routes */
 
@@ -53,14 +57,24 @@ Route::get('/admin/reset-password/{token}/{email}', [AdminController::class, 're
 
 Route::post('/admin/reset-password-submit', [AdminController::class, 'reset_password_submit'])->name('admin_reset_password_submit');
 
-Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin_dashboard')->middleware('admin:admin');
-
-Route::get('/admin/settings', [AdminController::class, 'settings'])->name('admin_settings')->middleware('admin:admin');
-
 Route::get('/admin/logout', [AdminController::class, 'logout'])->name('admin_logout');
 
 Route::get('/admin/profile', [AdminProfileController::class, 'index'])->name('admin_profile')->middleware('admin:admin');
 
 Route::post('/admin/profile-update', [AdminProfileController::class, 'update'])->name('admin_profile_update')->middleware('admin:admin');
+
+/* Routes Admin Slider Photos*/
+
+Route::get('/admin/slide/view', [AdminSliderController::class, 'index'])->name('admin_slider')->middleware('admin:admin');
+
+Route::get('/admin/slide/add', [AdminSliderController::class, 'add'])->name('admin_slider_add')->middleware('admin:admin');
+
+Route::post('/admin/slide/store', [AdminSliderController::class, 'store'])->name('admin_slider_store')->middleware('admin:admin');
+
+Route::get('/admin/slide/edit/{id}', [AdminSliderController::class, 'edit'])->name('admin_slider_edit')->middleware('admin:admin');
+
+Route::post('/admin/slide/update/{id}', [AdminSliderController::class, 'update'])->name('admin_slider_update')->middleware('admin:admin');
+
+Route::get('/admin/slide/delete/{id}', [AdminSliderController::class, 'delete'])->name('admin_slider_delete')->middleware('admin:admin');
 
 
