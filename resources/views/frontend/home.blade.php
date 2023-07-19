@@ -3,35 +3,26 @@
 @section('main_content')
     <div class="slider">
         <div class="slide-carousel owl-carousel">
-            <div class="item" style="background-image:url(uploads/piscina2.jpg)">
-                <div class="bg"></div>
-                <div class="text">
-                    <h2>Hotel Economico</h2>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt libero voluptate, veritatis esse
-                        dolorem soluta.
-                    </p>
-                    <div class="button">
-                        <a href="">Mais informações</a>
+
+            @foreach ($sliders as $item)
+                <div class="item" style="background-image:url({{ asset('uploads/slider/' . $item->photo) }})">
+                    <div class="bg"></div>
+                    <div class="text">
+                        <h2>{{ $item->heading }}</h2>
+                        <p>
+                            {!! $item->text !!}
+                        </p>
+
+                        @if ($item->button_text != null)
+                            <div class="button">
+                                <a href="{{ $item->button_url }}">{{ $item->button_text }}</a>
+                            </div>
+                        @endif
                     </div>
                 </div>
-            </div>
-            <div class="item" style="background-image:url(uploads/piscina3.jpg)">
-                <div class="bg"></div>
-                <div class="text">
-                    <h2>Teexto</h2>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt libero voluptate, veritatis esse
-                        dolorem soluta.
-                    </p>
-                    <div class="button">
-                        <a href="">Ler</a>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
-
 
     <div class="search-section">
         <div class="container">
@@ -82,100 +73,20 @@
     <div class="home-feature">
         <div class="container">
             <div class="row">
-                <div class="col-md-3">
-                    <div class="inner">
-                        <div class="icon"><i class="fa fa-clock-o"></i></div>
-                        <div class="text">
-                            <h2>24 hour Room service</h2>
-                            <p>
-                                If you find a lower online rate, we will match it and give you an additional 25% off on your
-                                stay.
-                            </p>
+
+                @foreach ($features as $item)
+                    <div class="col-md-3">
+                        <div class="inner">
+                            <div class="icon"><i class="{{ $item->icon }}"></i></div>
+                            <div class="text">
+                                <h2>{{ $item->heading }}</h2>
+                                <p>
+                                    {{ $item->text }}
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="inner">
-                        <div class="icon"><i class="fa fa-wifi"></i></div>
-                        <div class="text">
-                            <h2>Wifi</h2>
-                            <p>
-                                If you find a lower online rate, we will match it and give you an additional 25% off on your
-                                stay.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="inner">
-                        <div class="icon"><i class="fa fa-superpowers"></i></div>
-                        <div class="text">
-                            <h2>Enjoy Free Nights</h2>
-                            <p>
-                                If you find a lower online rate, we will match it and give you an additional 25% off on your
-                                stay.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="inner">
-                        <div class="icon"><i class="fa fa-money"></i></div>
-                        <div class="text">
-                            <h2>Save up to 40%</h2>
-                            <p>
-                                Members get access to an exclusive discounts on Radissonblu.com. Not a member yet? Hurry Up!
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="inner">
-                        <div class="icon"><i class="fa fa-coffee"></i></div>
-                        <div class="text">
-                            <h2>Café da manhã</h2>
-                            <p>
-                                If you find a lower online rate, we will match it and give you an additional 25% off on your
-                                stay.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="inner">
-                        <div class="icon"><i class="fa fa-crosshairs"></i></div>
-                        <div class="text">
-                            <h2>Piscina</h2>
-                            <p>
-                                If you find a lower online rate, we will match it and give you an additional 25% off on your
-                                stay.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="inner">
-                        <div class="icon"><i class="fa fa-cubes"></i></div>
-                        <div class="text">
-                            <h2>Gym and Fitness</h2>
-                            <p>
-                                If you find a lower online rate, we will match it and give you an additional 25% off on your
-                                stay.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="inner">
-                        <div class="icon"><i class="fa fa-cutlery"></i></div>
-                        <div class="text">
-                            <h2>Top Class Restaurant</h2>
-                            <p>
-                                Members get access to an exclusive discounts on Radissonblu.com. Not a member yet? Hurry Up!
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -352,9 +263,11 @@
                             </div>
                             <div class="description">
                                 <p>
-                                    Lorem ipsum dolor sit amet, an labores explicari qui, eu nostrum copiosae argumentum
+                                    Lorem ipsum dolor sit amet, an labores explicari qui, eu nostrum copiosae
+                                    argumentum
                                     has. Latine propriae quo no, unum ridens. Lorem ipsum dolor sit amet, an labores
-                                    explicari qui, eu nostrum copiosae argumentum has. Latine propriae quo no, unum ridens.
+                                    explicari qui, eu nostrum copiosae argumentum has. Latine propriae quo no, unum
+                                    ridens.
                                 </p>
                             </div>
                         </div>
@@ -368,9 +281,11 @@
                             </div>
                             <div class="description">
                                 <p>
-                                    Lorem ipsum dolor sit amet, an labores explicari qui, eu nostrum copiosae argumentum
+                                    Lorem ipsum dolor sit amet, an labores explicari qui, eu nostrum copiosae
+                                    argumentum
                                     has. Latine propriae quo no, unum ridens. Lorem ipsum dolor sit amet, an labores
-                                    explicari qui, eu nostrum copiosae argumentum has. Latine propriae quo no, unum ridens.
+                                    explicari qui, eu nostrum copiosae argumentum has. Latine propriae quo no, unum
+                                    ridens.
                                 </p>
                             </div>
                         </div>
@@ -401,7 +316,8 @@
                             <div class="short-des">
                                 <p>
                                     If you want to get some good contents from the people of your country then just
-                                    contribute into the main community of your people and I am sure you will be benfitted
+                                    contribute into the main community of your people and I am sure you will be
+                                    benfitted
                                     from that.
                                 </p>
                             </div>
@@ -421,7 +337,8 @@
                             <div class="short-des">
                                 <p>
                                     If you want to get some good contents from the people of your country then just
-                                    contribute into the main community of your people and I am sure you will be benfitted
+                                    contribute into the main community of your people and I am sure you will be
+                                    benfitted
                                     from that.
                                 </p>
                             </div>
@@ -441,7 +358,8 @@
                             <div class="short-des">
                                 <p>
                                     If you want to get some good contents from the people of your country then just
-                                    contribute into the main community of your people and I am sure you will be benfitted
+                                    contribute into the main community of your people and I am sure you will be
+                                    benfitted
                                     from that.
                                 </p>
                             </div>

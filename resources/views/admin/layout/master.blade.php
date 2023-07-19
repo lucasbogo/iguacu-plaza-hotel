@@ -10,8 +10,7 @@
     <title>Admin Panel</title>
 
 
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
 
     @include('admin.layout.styles')
 
@@ -44,7 +43,6 @@
     </div>
 
     @include('admin.layout.scripts_footer')
-
     @if ($errors->any())
         @foreach ($errors->all() as $error)
             <script>
@@ -71,7 +69,7 @@
         <script>
             iziToast.success({
                 title: 'Sucesso',
-                message: '{{ session()->get('sucess') }}',
+                message: '{{ session()->get('success') }}',
                 position: 'topRight'
             });
         </script>

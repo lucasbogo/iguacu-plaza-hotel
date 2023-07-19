@@ -9,11 +9,16 @@ use Illuminate\Support\Facades\Hash;
 use App\Mail\Websitemail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Slider;
+use App\Models\Feature;
 
 class WebsiteController extends Controller
 {
     public function index()
     {
-        return view('frontend.home');
+        $sliders = Slider::get();
+        $features = Feature::get();
+        return view('frontend.home', compact('sliders', 'features'));
     }
+
 }

@@ -412,3 +412,9 @@ hr.invoice-above-table {
     border-color: #dc3545!important;
     
 }
+
+.card.card-statistic-1 .card-icon i {
+    font-size: 30px;
+    color: #ffffff;
+    
+}

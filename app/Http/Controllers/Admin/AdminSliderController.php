@@ -11,12 +11,12 @@ class AdminSliderController extends Controller
     public function index()
     {
         $sliders = Slider::get();
-        return view('admin.slide_view', compact('sliders'));
+        return view('admin.slider.slide_view', compact('sliders'));
     }
 
     public function add()
     {
-        return view('admin.slide_add');
+        return view('admin.slider.slide_add');
     }
 
     public function store(Request $request)
@@ -44,7 +44,7 @@ class AdminSliderController extends Controller
     public function edit($id)
     {
         $slider = Slider::where('id', $id)->first();
-        return view('admin.slide_edit', compact('slider'));
+        return view('admin.slider.slide_edit', compact('slider'));
     }
 
     public function update(Request $request)
@@ -75,6 +75,7 @@ class AdminSliderController extends Controller
     public function delete($id)
     {
         $slider = Slider::where('id', $id)->first();
+        unlink(public_path('uploads/slider/' . $slider->photo));
         $slider->delete();
         return redirect()->back()->with('success', 'Foto Excluída com Sucesso!');
     }
