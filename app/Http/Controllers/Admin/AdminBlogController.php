@@ -54,22 +54,41 @@ class AdminBlogController extends Controller
         $blog = Blog::findOrFail($id);
 
         $request->validate([
-            'photo' => 'required',
-            'title' => 'required',
-            'author' => '',
-            'short_content' => 'required',
-            'content' => 'required',
+            'photo' => 'sometimes|required',
+            'title' => 'sometimes|required',
+            'author' => 'sometimes',
+            'short_content' => 'sometimes|required',
+            'content' => 'sometimes|required',
         ]);
 
         if ($request->hasFile('photo')) {
+            // Process and save the uploaded photo
             $image = $request->file('photo');
             $image_name = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('uploads/blog'), $image_name);
             $blog->photo = $image_name;
         }
 
-        $blog->title = $request->title;
-        $blog->description = $request->description;
+        // Update title if provided
+        if ($request->has('title')) {
+            $blog->title = $request->title;
+        }
+
+        // Update author if provided
+        if ($request->has('author')) {
+            $blog->author = $request->author;
+        }
+
+        // Update short_content if provided
+        if ($request->has('short_content')) {
+            $blog->short_content = $request->short_content;
+        }
+
+        // Update content if provided
+        if ($request->has('content')) {
+            $blog->content = $request->content;
+        }
+
         $blog->save();
 
         return redirect()->route('admin_blog')->with('success', 'Blog Atualizado com Sucesso!');

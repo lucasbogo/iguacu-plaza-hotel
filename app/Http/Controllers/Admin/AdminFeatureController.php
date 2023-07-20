@@ -44,14 +44,27 @@ class AdminFeatureController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'icon' => 'required',
-            'heading' => 'required',
-        ]); 
+            'icon' => 'sometimes|required',
+            'heading' => 'sometimes|required',
+        ]);
 
-        $feature = Feature::where('id', $request->id)->first();
-        $feature->icon = $request->icon;
-        $feature->heading = $request->heading;
-        $feature->text = $request->text;
+        $feature = Feature::findOrFail($request->id);
+
+        // Update icon if provided
+        if ($request->has('icon')) {
+            $feature->icon = $request->icon;
+        }
+
+        // Update heading if provided
+        if ($request->has('heading')) {
+            $feature->heading = $request->heading;
+        }
+
+        // Update text if provided
+        if ($request->has('text')) {
+            $feature->text = $request->text;
+        }
+
         $feature->save();
 
         return back()->with('success', 'Ícone Atualizado com Sucesso!');
@@ -64,7 +77,4 @@ class AdminFeatureController extends Controller
 
         return back()->with('success', 'Ícone Deletado com Sucesso!');
     }
-
-
 }
-

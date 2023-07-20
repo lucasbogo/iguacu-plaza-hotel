@@ -50,23 +50,39 @@ class AdminSliderController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'photo' => 'image|mimes:jpg,jpeg,png,gif,svg|max:2048',
-
+            'photo' => 'sometimes|image|mimes:jpg,jpeg,png,gif,svg|max:2048',
         ]);
 
-        $slider = Slider::where('id', $request->id)->first();
+        $slider = Slider::findOrFail($request->id);
 
-        if ($request->file('photo')) {
+        if ($request->hasFile('photo')) {
+            // Process and save the uploaded photo
             $image = $request->file('photo');
             $image_name = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('uploads/slider'), $image_name);
             $slider->photo = $image_name;
         }
 
-        $slider->heading = $request->heading;
-        $slider->text = $request->text;
-        $slider->button_text = $request->button_text;
-        $slider->button_url = $request->button_url;
+        // Update heading if provided
+        if ($request->has('heading')) {
+            $slider->heading = $request->heading;
+        }
+
+        // Update text if provided
+        if ($request->has('text')) {
+            $slider->text = $request->text;
+        }
+
+        // Update button_text if provided
+        if ($request->has('button_text')) {
+            $slider->button_text = $request->button_text;
+        }
+
+        // Update button_url if provided
+        if ($request->has('button_url')) {
+            $slider->button_url = $request->button_url;
+        }
+
         $slider->save();
 
         return redirect()->back()->with('success', 'Foto Atualizada com Sucesso!');
