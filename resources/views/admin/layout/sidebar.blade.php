@@ -33,6 +33,10 @@
                         class="fa fa-hand-o-right"></i>
                     <span>Ícones Características</span></a></li>
 
+            <li class=""><a class="nav-link" href="{{ route('admin_testimonial') }}"><i
+                        class="fa fa-hand-o-right"></i>
+                    <span>Avaliações</span></a></li>
+
 
 
         </ul>

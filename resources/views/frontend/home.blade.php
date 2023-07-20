@@ -50,17 +50,17 @@
                         <div class="col-lg-2">
                             <div class="form-group">
                                 <input type="number" name="" class="form-control" min="1" max="30"
-                                    placeholder="Adults">
+                                    placeholder="Adultos">
                             </div>
                         </div>
                         <div class="col-lg-2">
                             <div class="form-group">
                                 <input type="number" name="" class="form-control" min="1" max="30"
-                                    placeholder="Children">
+                                    placeholder="Crianças">
                             </div>
                         </div>
                         <div class="col-lg-2">
-                            <button type="submit" class="btn btn-primary">Book Now</button>
+                            <button type="submit" class="btn btn-primary">Reservar Agora</button>
                         </div>
                     </div>
                 </div>
@@ -233,7 +233,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="big-button">
-                        <a href="" class="btn btn-primary">See All Rooms</a>
+                        <a href="" class="btn btn-primary">Ver Todos</a>
                     </div>
                 </div>
             </div>
@@ -253,42 +253,23 @@
             <div class="row">
                 <div class="col-12">
                     <div class="testimonial-carousel owl-carousel">
-                        <div class="item">
-                            <div class="photo">
-                                <img src="{{ asset('uploads/t1.jpg') }}" alt="">
+
+                        @foreach ($testimonials as $item)
+                            <div class="item">
+                                <div class="photo">
+                                    <img src="{{ asset('uploads/testimonial/' . $item->photo) }}" alt="">
+                                </div>
+                                <div class="text">
+                                    <h4>{{ $item->name }}</h4>
+                                    <p>{{ $item->designation }}</p>
+                                </div>
+                                <div class="description">
+                                    <p>
+                                        {!! $item->comment !!}
+                                    </p>
+                                </div>
                             </div>
-                            <div class="text">
-                                <h4>Robert Krol</h4>
-                                <p>CEO, ABC Company</p>
-                            </div>
-                            <div class="description">
-                                <p>
-                                    Lorem ipsum dolor sit amet, an labores explicari qui, eu nostrum copiosae
-                                    argumentum
-                                    has. Latine propriae quo no, unum ridens. Lorem ipsum dolor sit amet, an labores
-                                    explicari qui, eu nostrum copiosae argumentum has. Latine propriae quo no, unum
-                                    ridens.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="photo">
-                                <img src="{{ asset('uploads/t2.jpg') }}" alt="">
-                            </div>
-                            <div class="text">
-                                <h4>Sal Harvey</h4>
-                                <p>Director, DEF Company</p>
-                            </div>
-                            <div class="description">
-                                <p>
-                                    Lorem ipsum dolor sit amet, an labores explicari qui, eu nostrum copiosae
-                                    argumentum
-                                    has. Latine propriae quo no, unum ridens. Lorem ipsum dolor sit amet, an labores
-                                    explicari qui, eu nostrum copiosae argumentum has. Latine propriae quo no, unum
-                                    ridens.
-                                </p>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

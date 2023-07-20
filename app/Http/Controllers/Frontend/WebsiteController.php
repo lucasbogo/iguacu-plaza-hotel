@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Slider;
 use App\Models\Feature;
+use App\Models\Testimonial;
+
 
 class WebsiteController extends Controller
 {
@@ -18,7 +20,8 @@ class WebsiteController extends Controller
     {
         $sliders = Slider::get();
         $features = Feature::get();
-        return view('frontend.home', compact('sliders', 'features'));
-    }
+        $testimonials = Testimonial::get();
 
+        return view('frontend.home', compact('sliders', 'features', 'testimonials'));
+    }
 }
