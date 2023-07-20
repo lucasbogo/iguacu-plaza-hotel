@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Admin\AdminSliderController;
 use App\Http\Controllers\Admin\AdminFeatureController;
 use App\Http\Controllers\Admin\AdminTestimonialController;
+use App\Http\Controllers\Admin\AdminBlogController;
 
 
 /* Frontend Routes */
@@ -93,7 +94,7 @@ Route::post('/admin/feature/update/{id}', [AdminFeatureController::class, 'updat
 
 Route::get('/admin/feature/delete/{id}', [AdminFeatureController::class, 'delete'])->name('admin_feature_delete')->middleware('admin:admin');
 
-/* Routes Testimonials */
+/* Routes Admin Testimonials */
 
 Route::get('/admin/testimonial/view', [AdminTestimonialController::class, 'index'])->name('admin_testimonial')->middleware('admin:admin');
 
@@ -106,6 +107,21 @@ Route::get('/admin/testimonial/edit/{id}', [AdminTestimonialController::class, '
 Route::post('/admin/testimonial/update/{id}', [AdminTestimonialController::class, 'update'])->name('admin_testimonial_update')->middleware('admin:admin');
 
 Route::get('/admin/testimonial/delete/{id}', [AdminTestimonialController::class, 'delete'])->name('admin_testimonial_delete')->middleware('admin:admin');
+
+/* Routes Admin Blogs */
+
+Route::get('/admin/blog/view', [AdminBlogController::class, 'index'])->name('admin_blog')->middleware('admin:admin');
+
+Route::get('/admin/blog/add', [AdminBlogController::class, 'add'])->name('admin_blog_add')->middleware('admin:admin');
+
+Route::post('/admin/blog/store', [AdminBlogController::class, 'store'])->name('admin_blog_store')->middleware('admin:admin');
+
+Route::get('/admin/blog/edit/{id}', [AdminBlogController::class, 'edit'])->name('admin_blog_edit')->middleware('admin:admin');
+
+Route::post('/admin/blog/update/{id}', [AdminBlogController::class, 'update'])->name('admin_blog_update')->middleware('admin:admin');
+
+Route::get('/admin/blog/delete/{id}', [AdminBlogController::class, 'delete'])->name('admin_blog_delete')->middleware('admin:admin');
+
 
 
 

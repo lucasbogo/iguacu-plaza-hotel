@@ -37,6 +37,10 @@
                         class="fa fa-hand-o-right"></i>
                     <span>Avaliações</span></a></li>
 
+            <li class=""><a class="nav-link" href="{{ route('admin_blog') }}"><i
+                        class="fa fa-hand-o-right"></i>
+                    <span>Blog</span></a></li>
+
 
 
         </ul>
