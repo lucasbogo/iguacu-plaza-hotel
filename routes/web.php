@@ -1,8 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Frontend\WebsiteController;
-use App\Http\Controllers\Frontend\AboutController;
+
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminHomeController;
 use App\Http\Controllers\Admin\AdminProfileController;
@@ -11,12 +10,20 @@ use App\Http\Controllers\Admin\AdminFeatureController;
 use App\Http\Controllers\Admin\AdminTestimonialController;
 use App\Http\Controllers\Admin\AdminBlogController;
 
+use App\Http\Controllers\Frontend\WebsiteController;
+use App\Http\Controllers\Frontend\AboutController;
+use App\Http\Controllers\Frontend\BlogController;
+
 
 /* Frontend Routes */
 
 Route::get('/', [WebsiteController::class, 'index'])->name('home');
 
 Route::get('/about', [AboutController::class, 'index'])->name('about');
+
+Route::get('/blog', [BlogController::class, 'index'])->name('blog');
+
+Route::get('/blog/{id}', [BlogController::class, 'post'])->name('post');
 
 /* User Routes */
 

@@ -68,8 +68,6 @@
         </div>
     </div>
 
-
-
     <div class="home-feature">
         <div class="container">
             <div class="row">
@@ -90,8 +88,6 @@
             </div>
         </div>
     </div>
-
-
 
     <div class="home-rooms">
         <div class="container">
@@ -240,117 +236,76 @@
         </div>
     </div>
 
-
-
-    <div class="testimonial" style="background-image: url(uploads/piscina2.jpg)">
-        <div class="bg"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h2 class="main-header">Nossos clientes</h2>
+    @if (count($testimonials) > 0)
+        <!-- Check if there are testimonials in the $testimonials array -->
+        <div class="testimonial" style="background-image: url(uploads/piscina2.jpg)">
+            <div class="bg"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="main-header">Nossos clientes</h2>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="testimonial-carousel owl-carousel">
-
-                        @foreach ($testimonials as $item)
-                            <div class="item">
-                                <div class="photo">
-                                    <img src="{{ asset('uploads/testimonial/' . $item->photo) }}" alt="">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="testimonial-carousel owl-carousel">
+                            @foreach ($testimonials as $item)
+                                <div class="item">
+                                    <div class="photo">
+                                        <img src="{{ asset('uploads/testimonial/' . $item->photo) }}" alt="">
+                                    </div>
+                                    <div class="text">
+                                        <h4>{{ $item->name }}</h4>
+                                        <p>{{ $item->designation }}</p>
+                                    </div>
+                                    <div class="description">
+                                        <p>
+                                            {!! $item->comment !!}
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="text">
-                                    <h4>{{ $item->name }}</h4>
-                                    <p>{{ $item->designation }}</p>
-                                </div>
-                                <div class="description">
-                                    <p>
-                                        {!! $item->comment !!}
-                                    </p>
-                                </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
-
+    @endif
 
 
     <div class="blog-item">
         <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h2 class="main-header">Posts recentes</h2>
+            @if (count($blogs) > 0)
+                <!-- Check if there are blogs in the $blogs array -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="main-header">Blog Iguaçu Plaza</h2>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="inner">
-                        <div class="photo">
-                            <img src="{{ asset('uploads/1.jpg') }}" alt="">
-                        </div>
-                        <div class="text">
-                            <h2><a href="post.html">This is a sample blog post title</a></h2>
-                            <div class="short-des">
-                                <p>
-                                    If you want to get some good contents from the people of your country then just
-                                    contribute into the main community of your people and I am sure you will be
-                                    benfitted
-                                    from that.
-                                </p>
-                            </div>
-                            <div class="button">
-                                <a href="post.html" class="btn btn-primary">Read More</a>
+                @foreach ($blogs as $item)
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="inner">
+                                <div class="photo">
+                                    <img src="{{ asset('uploads/blog/' . $item->photo) }}" alt="">
+                                </div>
+                                <div class="text">
+                                    <h2><a href="{{ route('post', $item->id) }}">{{ $item->title }}</a></h2>
+                                    <div class="short-des">
+                                        <p>
+                                            {{ $item->short_content }}
+                                        </p>
+                                    </div>
+                                    <div class="button">
+                                        <a href="{{ route('post', $item->id) }}" class="btn btn-primary">Ler</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="inner">
-                        <div class="photo">
-                            <img src="{{ asset('uploads/2.jpg') }}" alt="">
-                        </div>
-                        <div class="text">
-                            <h2><a href="post.html">This is a sample blog post title</a></h2>
-                            <div class="short-des">
-                                <p>
-                                    If you want to get some good contents from the people of your country then just
-                                    contribute into the main community of your people and I am sure you will be
-                                    benfitted
-                                    from that.
-                                </p>
-                            </div>
-                            <div class="button">
-                                <a href="post.html" class="btn btn-primary">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="inner">
-                        <div class="photo">
-                            <img src="{{ asset('uploads/3.jpg') }}" alt="">
-                        </div>
-                        <div class="text">
-                            <h2><a href="post.html">This is a sample blog post title</a></h2>
-                            <div class="short-des">
-                                <p>
-                                    If you want to get some good contents from the people of your country then just
-                                    contribute into the main community of your people and I am sure you will be
-                                    benfitted
-                                    from that.
-                                </p>
-                            </div>
-                            <div class="button">
-                                <a href="post.html" class="btn btn-primary">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                @endforeach
+            @endif
         </div>
     </div>
+
 @endsection

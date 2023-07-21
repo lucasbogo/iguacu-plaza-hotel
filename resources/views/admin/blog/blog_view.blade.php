@@ -24,6 +24,7 @@
                                         <th>Referencia</th>
                                         <th>Foto</th>
                                         <th>Titulo</th>
+                                        <th>Autor</th>
                                         <th>Descrição Curta</th>
                                         <th>Ação</th>
                                     </tr>
@@ -33,15 +34,16 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>
-                                                <img src="{{ asset('uploads/slider/' . $row->photo) }}" alt=""
+                                                <img src="{{ asset('uploads/blog/' . $row->photo) }}" alt=""
                                                     class="w_200">
                                             </td>
                                             <td>{{ $row->title }}</td>
-                                            <td>{{ $row->short_description }}</td>
+                                            <td>{{ $row->author }}</td>
+                                            <td>{{ $row->short_content }}</td>
                                             <td class="pt_10 pb_10">
                                                 <a href="{{ route('admin_blog_edit', $row->id) }}"
                                                     class="btn btn-primary">Editar</a>
-                                                <a href="{{ route('admin_blof_delete', $row->id) }}" class="btn btn-danger"
+                                                <a href="{{ route('admin_blog_delete', $row->id) }}" class="btn btn-danger"
                                                     onClick="return confirm('Tem Certeza?');">Deletar</a>
                                             </td>
                                         </tr>

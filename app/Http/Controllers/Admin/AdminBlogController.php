@@ -24,7 +24,7 @@ class AdminBlogController extends Controller
         $request->validate([
             'photo' => 'required',
             'title' => 'required',
-            'author' => '',
+            'author' => 'required',
             'short_content' => 'required',
             'content' => 'required',
         ]);
@@ -36,6 +36,7 @@ class AdminBlogController extends Controller
         $blog = new Blog();
         $blog->photo = $image_name;
         $blog->title = $request->title;
+        $blog->author = $request->author;
         $blog->short_content = $request->short_content;
         $blog->content = $request->content;
         $blog->save();

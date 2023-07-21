@@ -29,8 +29,8 @@
                                     </div>
                                     <div class="mb-4">
                                         <label class="form-label">Título</label>
-                                        <input type="text" class="form-control" name="heading"
-                                            value="{{ old('heading') }}">
+                                        <input type="text" class="form-control" name="title"
+                                            value="{{ old('title') }}">
                                     </div>
                                     <div class="mb-4">
                                         <label class="form-label">Autor</label>
