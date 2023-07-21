@@ -27,19 +27,21 @@
             </li> --}}
 
             <li class=""><a class="nav-link" href="{{ route('admin_slider') }}"><i class="fa fa-hand-o-right"></i>
-                    <span>Fotos Slide</span></a></li>
+                    <span>Imagens Slide</span></a></li>
 
             <li class=""><a class="nav-link" href="{{ route('admin_feature') }}"><i
                         class="fa fa-hand-o-right"></i>
-                    <span>Ícones Características</span></a></li>
+                    <span>Ícones/Características</span></a></li>
 
             <li class=""><a class="nav-link" href="{{ route('admin_testimonial') }}"><i
                         class="fa fa-hand-o-right"></i>
                     <span>Avaliações</span></a></li>
 
-            <li class=""><a class="nav-link" href="{{ route('admin_blog') }}"><i
-                        class="fa fa-hand-o-right"></i>
+            <li class=""><a class="nav-link" href="{{ route('admin_blog') }}"><i class="fa fa-hand-o-right"></i>
                     <span>Blog</span></a></li>
+
+            <li class=""><a class="nav-link" href="{{ route('admin_image') }}"><i class="fa fa-hand-o-right"></i>
+                    <span>Galeria de Fotos</span></a></li>
 
 
 

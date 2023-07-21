@@ -11,3 +11,12 @@
 <link rel="stylesheet" href="{{ asset('dist-front/css/daterangepicker.css') }}">
 <link rel="stylesheet" href="{{ asset('dist-front/css/meanmenu.css') }}">
 <link rel="stylesheet" href="{{ asset('dist-front/css/style.css') }}">
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<!-- Add your custom icon -->
+<style>
+  .fa-swimming-pool:before {
+    content: url('/path/to/icons/swimming-pool.svg'); /* Replace with the path to your image file */
+  }
+</style>

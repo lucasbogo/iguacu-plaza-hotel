@@ -45,6 +45,14 @@
                                                     <a href="{{ route('admin_feature_delete', $row->id) }}"
                                                         class="btn btn-danger"
                                                         onClick="return confirm('Tem Certeza?');">Deletar</a>
+                                                    <form action="{{ route('admin_feature_toggle', $row->id) }}"
+                                                        method="post" style="display: inline;">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <button type="submit" class="btn btn-info">
+                                                            {{ $row->status ? 'Desativar' : 'Ativar' }}
+                                                        </button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                         @endforeach

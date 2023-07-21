@@ -19,6 +19,10 @@ class AdminFeatureController extends Controller
         return view('admin.features.feature_add');
     }
 
+    // AdminFeatureController.php
+
+    // ...
+
     public function store(Request $request)
     {
         $request->validate([
@@ -30,15 +34,10 @@ class AdminFeatureController extends Controller
         $feature->icon = $request->icon;
         $feature->heading = $request->heading;
         $feature->text = $request->text;
+        $feature->status = $request->has('status'); // Set the status based on the checkbox value (true or false)
         $feature->save();
 
         return back()->with('success', 'Ícone Adicionado com Sucesso!');
-    }
-
-    public function edit($id)
-    {
-        $feature = Feature::where('id', $id)->first();
-        return view('admin.features.feature_edit', compact('feature'));
     }
 
     public function update(Request $request)
@@ -65,10 +64,25 @@ class AdminFeatureController extends Controller
             $feature->text = $request->text;
         }
 
+        // Update status if provided
+        if ($request->has('status')) {
+            $feature->status = $request->has('status');
+        }
+
         $feature->save();
 
         return back()->with('success', 'Ícone Atualizado com Sucesso!');
     }
+
+    public function toggleStatus($id)
+    {
+        $feature = Feature::findOrFail($id);
+        $feature->status = !$feature->status; // Toggle the status (active to inactive or vice versa)
+        $feature->save();
+
+        return back()->with('success', 'Status do Ícone Atualizado com Sucesso!');
+    }
+
 
     public function delete($id)
     {

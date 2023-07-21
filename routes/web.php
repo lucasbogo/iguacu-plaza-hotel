@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\AdminSliderController;
 use App\Http\Controllers\Admin\AdminFeatureController;
 use App\Http\Controllers\Admin\AdminTestimonialController;
 use App\Http\Controllers\Admin\AdminBlogController;
+use App\Http\Controllers\Admin\AdminImageController;
 
 use App\Http\Controllers\Frontend\WebsiteController;
 use App\Http\Controllers\Frontend\AboutController;
@@ -99,6 +100,8 @@ Route::get('/admin/feature/edit/{id}', [AdminFeatureController::class, 'edit'])-
 
 Route::post('/admin/feature/update/{id}', [AdminFeatureController::class, 'update'])->name('admin_feature_update')->middleware('admin:admin');
 
+Route::put('admin/features/{id}/toggle', [AdminFeatureController::class, 'toggleStatus'])->name('admin_feature_toggle');
+
 Route::get('/admin/feature/delete/{id}', [AdminFeatureController::class, 'delete'])->name('admin_feature_delete')->middleware('admin:admin');
 
 /* Routes Admin Testimonials */
@@ -129,7 +132,18 @@ Route::post('/admin/blog/update/{id}', [AdminBlogController::class, 'update'])->
 
 Route::get('/admin/blog/delete/{id}', [AdminBlogController::class, 'delete'])->name('admin_blog_delete')->middleware('admin:admin');
 
+/* Routes Admin Images */
 
+Route::get('/admin/image/view', [AdminImageController::class, 'index'])->name('admin_image')->middleware('admin:admin');
 
+Route::get('/admin/image/add', [AdminImageController::class, 'add'])->name('admin_image_add')->middleware('admin:admin');
 
+Route::post('/admin/image/store', [AdminImageController::class, 'store'])->name('admin_image_store')->middleware('admin:admin');
 
+Route::get('/admin/image/edit/{id}', [AdminImageController::class, 'edit'])->name('admin_image_edit')->middleware('admin:admin');
+
+Route::post('/admin/image/update/{id}', [AdminImageController::class, 'update'])->name('admin_image_update')->middleware('admin:admin');
+
+Route::put('admin/images/{id}/toggle', [AdminImageController::class, 'toggleStatus'])->name('admin_image_toggle');
+
+Route::get('/admin/image/delete/{id}', [AdminImageController::class, 'delete'])->name('admin_image_delete')->middleware('admin:admin');

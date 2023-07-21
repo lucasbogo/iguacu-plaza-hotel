@@ -71,23 +71,26 @@
     <div class="home-feature">
         <div class="container">
             <div class="row">
-
                 @foreach ($features as $item)
-                    <div class="col-md-3">
-                        <div class="inner">
-                            <div class="icon"><i class="{{ $item->icon }}"></i></div>
-                            <div class="text">
-                                <h2>{{ $item->heading }}</h2>
-                                <p>
-                                    {{ $item->text }}
-                                </p>
+                    @if ($item->status)
+                        <!-- Check if the feature is active -->
+                        <div class="col-md-3">
+                            <div class="inner">
+                                <div class="icon"><i class="{{ $item->icon }}"></i></div>
+                                <div class="text">
+                                    <h2>{{ $item->heading }}</h2>
+                                    <p>
+                                        {{ $item->text }}
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                 @endforeach
             </div>
         </div>
     </div>
+
 
     <div class="home-rooms">
         <div class="container">
