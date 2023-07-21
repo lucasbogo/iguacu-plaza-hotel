@@ -1,14 +1,14 @@
 @extends('admin.layout.master')
 
 @section('heading')
-    <div>
+    {{-- <div>
         <img src="{{ asset('uploads/logo-hotel.png') }}" alt="Logo" alt="Logo" style="padding: 10px;"></a>
-    </div>
+    </div> --}}
     <h3>Avaliações</h3>
 @endsection
 
 @section('right_top_button')
-    <a href="{{ route('admin_testimonial_add') }}" class="btn btn-primary"><i class="fa fa-plus"></i>Adicionar</a>
+    <a href="{{ route('admin_testimonial_add') }}" class="btn btn-success"><i class="fa fa-plus"></i>Adicionar</a>
 @endsection
 
 @section('main_content')
@@ -35,7 +35,7 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>
                                                 <img src="{{ asset('uploads/testimonial/' . $row->photo) }}" alt=""
-                                                    class="w_100">
+                                                    style="width: 200px; height: 150px;">
                                             </td>
                                             <td>{{ $row->name }}</td>
                                             <td>{{ $row->designation }}</td>

@@ -1,14 +1,14 @@
 @extends('admin.layout.master')
 
 @section('heading')
-    <div>
+    {{-- <div>
         <img src="{{ asset('uploads/logo-hotel.png') }}" alt="Logo" alt="Logo" style="padding: 10px;"></a>
-    </div>
-    <h3>Todos as fotos 'Slide'</h3>
+    </div> --}}
+    <h3>Slides</h3>
 @endsection
 
 @section('right_top_button')
-    <a href="{{ route('admin_slider_add') }}" class="btn btn-primary"><i class="fa fa-plus"></i>Adicionar</a>
+    <a href="{{ route('admin_slider_add') }}" class="btn btn-success"><i class="fa fa-plus"></i>Adicionar</a>
 @endsection
 
 @section('main_content')

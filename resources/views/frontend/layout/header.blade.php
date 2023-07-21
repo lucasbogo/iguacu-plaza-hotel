@@ -34,7 +34,7 @@
         <div class="container">
             <nav class="navbar navbar-expand-md navbar-light">
                 <a class="navbar-brand" href="{{ route('home') }}">
-                    <img src="{{ asset('uploads/logo-hotel.png') }}" alt="">
+                    <img src="{{ asset('uploads/logo-hotel.png') }}" alt="" style="max-height: 200px;">
                 </a>
                 <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
@@ -65,10 +65,10 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="javascript:void;" class="nav-link dropdown-toggle">Fotos</a>
+                            <a href="javascript:void;" class="nav-link dropdown-toggle">Galeria</a>
                             <ul class="dropdown-menu">
                                 <li class="nav-item">
-                                    <a href="photo-gallery.html" class="nav-link">Galeria de fotos</a>
+                                    <a href="{{ route('image_gallery') }}" class="nav-link">Galeria de fotos</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="video-gallery.html" class="nav-link">Galeria de videos</a>

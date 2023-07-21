@@ -1,9 +1,9 @@
 @extends('admin.layout.master')
 
 @section('heading')
-    <div>
+    {{-- <div>
         <img src="{{ asset('uploads/logo-hotel.png') }}" alt="Logo" alt="Logo" style="padding: 10px;"></a>
-    </div>
+    </div> --}}
     <h3>Editar Fotos 'Slides'</h3>
 @endsection
 
@@ -41,7 +41,7 @@
                                     </div>
                                     <div class="mb-4">
                                         <label class="form-label"></label>
-                                        <button type="submit" class="btn btn-primary">Atualizar</button>
+                                        <button type="submit" class="btn btn-success">Atualizar</button>
                                     </div>
                                 </div>
                             </div>

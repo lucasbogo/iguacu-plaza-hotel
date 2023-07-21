@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\AdminImageController;
 use App\Http\Controllers\Frontend\WebsiteController;
 use App\Http\Controllers\Frontend\AboutController;
 use App\Http\Controllers\Frontend\BlogController;
+use App\Http\Controllers\Frontend\ImageGalleryController;
 
 
 /* Frontend Routes */
@@ -25,6 +26,8 @@ Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 
 Route::get('/blog/{id}', [BlogController::class, 'post'])->name('post');
+
+Route::get('/image-gallery', [ImageGalleryController::class, 'index'])->name('image_gallery');
 
 /* User Routes */
 

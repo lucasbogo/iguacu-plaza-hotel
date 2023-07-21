@@ -1,10 +1,12 @@
 <div class="main-sidebar">
     <aside id="sidebar-wrapper">
-        <div class="sidebar-brand">
+        <div class="sidebar-brand text-center">
             <a href="{{ route('admin_home') }}">
-                <img src="{{ asset('uploads/favicon.ico') }}" alt="Logo" alt="Logo" style="padding: 10px;"></a>
-            <span>Configurações</span>
+                <img src="{{ asset('uploads/logo-hotel.png') }}" alt="Logo" style="padding: 10px;">
+            </a>
+            <h4 style="margin-top: 10px; font-weight: bold;">Configurações</h4>
         </div>
+        
 
         <div class="sidebar-brand sidebar-brand-sm">
             <a href="{{ route('admin_home') }}"></a>

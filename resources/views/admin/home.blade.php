@@ -1,9 +1,9 @@
 @extends('admin.layout.master')
 
 @section('heading')
-    <div>
+    {{-- <div>
         <img src="{{ asset('uploads/logo-hotel.png') }}" alt="Logo" alt="Logo" style="padding: 10px;"></a>
-    </div>
+    </div> --}}
     <h3>Painel Administrativo</h3>
 @endsection
 
