@@ -23,46 +23,45 @@ class AdminImageController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'image' => 'required',
+            'photo' => 'required|image|mimes:jpg,jpeg,png,gif,svg|max:2048',
+
         ]);
 
-        $image = new Image();
-        $image->image = $request->image;
-        $image->caption = $request->caption;
-        $image->status = $request->has('status'); // Set the status based on the checkbox value (true or false)
-        $image->save();
+        $image = $request->file('photo');
+        $image_name = time() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('uploads/image'), $image_name);
+
+        $newImage = new Image();
+        $newImage->photo = $image_name;
+        $newImage->caption = $request->caption;
+        $newImage->status = $request->has('status'); // Set the status based on the checkbox value (true or false)
+        $newImage->save();
 
         return back()->with('success', 'Imagem Adicionada com Sucesso!');
-    }
-
-    public function edit($id)
-    {
-        $image = Image::findOrFail($id);
-        return view('admin.images.image_edit', compact('image'));
     }
 
     public function update(Request $request)
     {
         $request->validate([
             'image' => 'sometimes|required',
+            'caption' => 'required',
         ]);
 
         $image = Image::findOrFail($request->id);
 
-        // Update image if provided
-        if ($request->has('image')) {
-            $image->image = $request->image;
+        if ($request->hasFile('photo')) {
+            // Process and save the uploaded photo
+            $uploadedImage = $request->file('photo');
+            $image_name = time() . '.' . $uploadedImage->getClientOriginalExtension();
+            $uploadedImage->move(public_path('uploads/image'), $image_name);
+            $image->photo = $image_name;
         }
 
         // Update caption if provided
-        if ($request->has('caption')) {
-            $image->caption = $request->caption;
-        }
+        $image->caption = $request->caption;
 
         // Update status if provided
-        if ($request->has('status')) {
-            $image->status = $request->has('status');
-        }
+        $image->status = $request->has('status');
 
         $image->save();
 
