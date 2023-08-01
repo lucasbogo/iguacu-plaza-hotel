@@ -2,7 +2,7 @@
 
 @section('main_content')
     <div class="slider">
-        <div class="slide-carousel owl-carousel">
+        <div class="slide-carousel owl-carousel" style="background-color: white;">
 
             @foreach ($sliders as $item)
                 <div class="item" style="background-image:url({{ asset('uploads/slider/' . $item->photo) }})">
@@ -24,7 +24,7 @@
         </div>
     </div>
 
-    <div class="search-section">
+    <div class="search-section" style="background-color: white;">
         <div class="container">
             <form action="cart.html" method="post">
                 <div class="inner">
@@ -68,7 +68,7 @@
         </div>
     </div>
 
-    <div class="home-feature">
+    <div class="home-feature" style="background-color: white;">
         <div class="container">
             <div class="row">
                 @foreach ($features as $item)
@@ -239,8 +239,14 @@
         </div>
     </div>
 
-    @if (count($testimonials) > 0)
-        <!-- Check if there are testimonials in the $testimonials array -->
+    @php
+        // Check if there are no testimonials or no active testimonials
+        $hasTestimonials = count($testimonials) > 0;
+        $hasActiveTestimonials = $testimonials->contains('status', true);
+    @endphp
+
+    @if ($hasTestimonials && $hasActiveTestimonials)
+        <!-- Show the testimonials section when there are testimonials and at least one is active -->
         <div class="testimonial" style="background-image: url(uploads/piscina2.jpg)">
             <div class="bg"></div>
             <div class="container">
@@ -253,20 +259,23 @@
                     <div class="col-12">
                         <div class="testimonial-carousel owl-carousel">
                             @foreach ($testimonials as $item)
-                                <div class="item">
-                                    <div class="photo">
-                                        <img src="{{ asset('uploads/testimonial/' . $item->photo) }}" alt="">
+                                @if ($item->status)
+                                    <!-- Check if the testimonial is active (status is true) -->
+                                    <div class="item">
+                                        <div class="photo">
+                                            <img src="{{ asset('uploads/testimonial/' . $item->photo) }}" alt="">
+                                        </div>
+                                        <div class="text">
+                                            <h4>{{ $item->name }}</h4>
+                                            <p>{{ $item->designation }}</p>
+                                        </div>
+                                        <div class="description">
+                                            <p>
+                                                {!! $item->comment !!}
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div class="text">
-                                        <h4>{{ $item->name }}</h4>
-                                        <p>{{ $item->designation }}</p>
-                                    </div>
-                                    <div class="description">
-                                        <p>
-                                            {!! $item->comment !!}
-                                        </p>
-                                    </div>
-                                </div>
+                                @endif
                             @endforeach
                         </div>
                     </div>
@@ -276,39 +285,37 @@
     @endif
 
 
-    <div class="blog-item">
-        <div class="container">
-            @if (count($blogs) > 0)
-                <!-- Check if there are blogs in the $blogs array -->
+
+    @if ($blogs->count() > 0)
+        <div class="blog-item">
+            <div class="container">
                 <div class="row">
-                    <div class="col-md-12">
-                        <h2 class="main-header">Blog Iguaçu Plaza</h2>
-                    </div>
-                </div>
-                @foreach ($blogs as $item)
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="inner">
-                                <div class="photo">
-                                    <img src="{{ asset('uploads/blog/' . $item->photo) }}" alt="">
-                                </div>
-                                <div class="text">
-                                    <h2><a href="{{ route('post', $item->id) }}">{{ $item->title }}</a></h2>
-                                    <div class="short-des">
-                                        <p>
-                                            {{ $item->short_content }}
-                                        </p>
+                    @foreach ($blogs as $item)
+                        @if ($item->status)
+                            <!-- Check if the blog post is active (status is true) -->
+                            <div class="col-md-4">
+                                <div class="inner">
+                                    <div class="photo">
+                                        <img src="{{ asset('uploads/blog/' . $item->photo) }}" alt="">
                                     </div>
-                                    <div class="button">
-                                        <a href="{{ route('post', $item->id) }}" class="btn btn-primary">Ler</a>
+                                    <div class="text">
+                                        <h2><a href="{{ route('post', $item->id) }}">{{ $item->title }}</a></h2>
+                                        <div class="short-des">
+                                            <p>
+                                                {{ $item->short_content }}
+                                            </p>
+                                        </div>
+                                        <div class="button">
+                                            <a href="{{ route('post', $item->id) }}" class="btn btn-primary">Ler</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                @endforeach
-            @endif
+                        @endif
+                    @endforeach
+                </div>
+            </div>
         </div>
-    </div>
+    @endif
 
 @endsection

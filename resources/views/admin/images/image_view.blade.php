@@ -45,17 +45,18 @@
                                             <td class="pt_10 pb_10">
                                                 <a href="{{ route('admin_image_edit', $image->id) }}"
                                                     class="btn btn-primary">Editar</a>
-                                                <a href="{{ route('admin_image_delete', $image->id) }}"
-                                                    class="btn btn-danger"
-                                                    onClick="return confirm('Tem Certeza?');">Deletar</a>
                                                 <form action="{{ route('admin_image_toggle', $image->id) }}" method="post"
                                                     style="display: inline;">
                                                     @csrf
                                                     @method('PUT')
-                                                    <button type="submit" class="btn btn-info">
+                                                    <button type="submit"
+                                                        class="btn btn-{{ $image->status ? 'warning' : 'success' }}">
                                                         {{ $image->status ? 'Desativar' : 'Ativar' }}
                                                     </button>
                                                 </form>
+                                                <a href="{{ route('admin_image_delete', $image->id) }}"
+                                                    class="btn btn-danger"
+                                                    onClick="return confirm('Tem Certeza?');">Deletar</a>
                                             </td>
                                         </tr>
                                     @endforeach

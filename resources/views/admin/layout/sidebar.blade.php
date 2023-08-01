@@ -6,7 +6,7 @@
             </a>
             <h4 style="margin-top: 10px; font-weight: bold;">Configurações</h4>
         </div>
-        
+
 
         <div class="sidebar-brand sidebar-brand-sm">
             <a href="{{ route('admin_home') }}"></a>
@@ -14,7 +14,7 @@
 
         <ul class="sidebar-menu">
 
-            <li class="active"><a class="nav-link" href="{{ route('admin_home') }}"><i class="fa fa-hand-o-right"></i>
+            <li class="active"><a class="nav-link" href="{{ route('admin_home') }}"><i class="fa fa-home"></i>
                     <span>Dashboard</span></a></li>
 
             {{-- <li class="nav-item dropdown active">
@@ -44,6 +44,9 @@
 
             <li class=""><a class="nav-link" href="{{ route('admin_image') }}"><i class="fa fa-hand-o-right"></i>
                     <span>Galeria de Fotos</span></a></li>
+
+            <li class=""><a class="nav-link" href="{{ route('admin_video') }}"><i class="fa fa-hand-o-right"></i>
+                    <span>Galeria de Vídeos</span></a></li>
 
 
 

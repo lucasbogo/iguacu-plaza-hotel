@@ -88,6 +88,17 @@ class AdminSliderController extends Controller
         return redirect()->back()->with('success', 'Foto Atualizada com Sucesso!');
     }
 
+    public function activate($id)
+    {
+        $slider = Slider::findOrFail($id);
+        $slider->status = !$slider->status; // Toggle the status (activate if deactivated, and vice versa)
+        $slider->save();
+
+        $message = $slider->status ? 'Slider Ativado com Sucesso!' : 'Slider Desativado com Sucesso!';
+        return redirect()->back()->with('success', $message);
+    }
+
+
     public function delete($id)
     {
         $slider = Slider::where('id', $id)->first();

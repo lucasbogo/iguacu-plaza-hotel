@@ -95,6 +95,16 @@ class AdminBlogController extends Controller
         return redirect()->route('admin_blog')->with('success', 'Blog Atualizado com Sucesso!');
     }
 
+    public function activate($id)
+    {
+        $blog = Blog::findOrFail($id);
+        $blog->status = !$blog->status; // Toggle the status (activate if deactivated, and vice versa)
+        $blog->save();
+
+        $message = $blog->status ? 'Blog Ativado com Sucesso!' : 'Blog Desativado com Sucesso!';
+        return redirect()->back()->with('success', $message);
+    }
+
     public function delete($id)
     {
         $blog = Blog::findOrFail($id);

@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\AdminFeatureController;
 use App\Http\Controllers\Admin\AdminTestimonialController;
 use App\Http\Controllers\Admin\AdminBlogController;
 use App\Http\Controllers\Admin\AdminImageController;
+use App\Http\Controllers\Admin\AdminVideoController;
 
 use App\Http\Controllers\Frontend\WebsiteController;
 use App\Http\Controllers\Frontend\AboutController;
@@ -89,6 +90,8 @@ Route::get('/admin/slide/edit/{id}', [AdminSliderController::class, 'edit'])->na
 
 Route::post('/admin/slide/update/{id}', [AdminSliderController::class, 'update'])->name('admin_slider_update')->middleware('admin:admin');
 
+Route::get('/admin/slider/activate/{id}', [AdminSliderController::class, 'activate'])->name('admin_slider_activate')->middleware('admin:admin');
+
 Route::get('/admin/slide/delete/{id}', [AdminSliderController::class, 'delete'])->name('admin_slider_delete')->middleware('admin:admin');
 
 /* Routes Admin Features */
@@ -103,7 +106,7 @@ Route::get('/admin/feature/edit/{id}', [AdminFeatureController::class, 'edit'])-
 
 Route::post('/admin/feature/update/{id}', [AdminFeatureController::class, 'update'])->name('admin_feature_update')->middleware('admin:admin');
 
-Route::put('admin/features/{id}/toggle', [AdminFeatureController::class, 'toggleStatus'])->name('admin_feature_toggle');
+Route::put('admin/features/{id}/toggle', [AdminFeatureController::class, 'toggleStatus'])->name('admin_feature_toggle')->middleware('admin:admin');
 
 Route::get('/admin/feature/delete/{id}', [AdminFeatureController::class, 'delete'])->name('admin_feature_delete')->middleware('admin:admin');
 
@@ -119,6 +122,8 @@ Route::get('/admin/testimonial/edit/{id}', [AdminTestimonialController::class, '
 
 Route::post('/admin/testimonial/update/{id}', [AdminTestimonialController::class, 'update'])->name('admin_testimonial_update')->middleware('admin:admin');
 
+Route::get('/admin/testimonial/activate/{id}', [AdminTestimonialController::class, 'activate'])->name('admin_testimonial_activate')->middleware('admin:admin');
+
 Route::get('/admin/testimonial/delete/{id}', [AdminTestimonialController::class, 'delete'])->name('admin_testimonial_delete')->middleware('admin:admin');
 
 /* Routes Admin Blogs */
@@ -132,6 +137,8 @@ Route::post('/admin/blog/store', [AdminBlogController::class, 'store'])->name('a
 Route::get('/admin/blog/edit/{id}', [AdminBlogController::class, 'edit'])->name('admin_blog_edit')->middleware('admin:admin');
 
 Route::post('/admin/blog/update/{id}', [AdminBlogController::class, 'update'])->name('admin_blog_update')->middleware('admin:admin');
+
+Route::get('/admin/blog/activate/{id}', [AdminBlogController::class, 'activate'])->name('admin_blog_activate')->middleware('admin:admin');
 
 Route::get('/admin/blog/delete/{id}', [AdminBlogController::class, 'delete'])->name('admin_blog_delete')->middleware('admin:admin');
 
@@ -150,3 +157,19 @@ Route::post('/admin/image/update/{id}', [AdminImageController::class, 'update'])
 Route::put('admin/images/{id}/toggle', [AdminImageController::class, 'toggleStatus'])->name('admin_image_toggle');
 
 Route::get('/admin/image/delete/{id}', [AdminImageController::class, 'delete'])->name('admin_image_delete')->middleware('admin:admin');
+
+/* Routes Admin Videos */
+
+Route::get('/admin/video/view', [AdminVideoController::class, 'index'])->name('admin_video')->middleware('admin:admin');
+
+Route::get('/admin/video/add', [AdminVideoController::class, 'add'])->name('admin_video_add')->middleware('admin:admin');
+
+Route::post('/admin/video/store', [AdminVideoController::class, 'store'])->name('admin_video_store')->middleware('admin:admin');
+
+Route::get('/admin/video/edit/{id}', [AdminVideoController::class, 'edit'])->name('admin_video_edit')->middleware('admin:admin');
+
+Route::post('/admin/video/update/{id}', [AdminVideoController::class, 'update'])->name('admin_video_update')->middleware('admin:admin');
+
+Route::put('admin/videos/{id}/toggle', [AdminVideoController::class, 'toggleStatus'])->name('admin_video_toggle');
+
+Route::get('/admin/video/delete/{id}', [AdminVideoController::class, 'delete'])->name('admin_video_delete')->middleware('admin:admin');

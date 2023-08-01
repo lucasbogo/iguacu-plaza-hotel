@@ -88,6 +88,16 @@ class AdminTestimonialController extends Controller
         return redirect()->route('admin_testimonial')->with('success', 'Avaliação Atualizada com Sucesso!');
     }
 
+    public function activate($id)
+    {
+        $testimonial = Testimonial::findOrFail($id);
+        $testimonial->status = !$testimonial->status; // Toggle the status (activate if deactivated, and vice versa)
+        $testimonial->save();
+
+        $message = $testimonial->status ? 'Avaliação Ativada com Sucesso!' : 'Avaliação Desativada com Sucesso!';
+        return redirect()->back()->with('success', $message);
+    }
+
     public function delete($id)
     {
         $testimonial = Testimonial::find($id);
