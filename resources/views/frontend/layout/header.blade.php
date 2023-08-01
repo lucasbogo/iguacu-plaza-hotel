@@ -4,7 +4,7 @@
             <div class="col-md-6 left-side">
                 <ul>
                     <li class="phone-text">+55 (45) 99919-0001</li>
-                    <li class="email-text">reservas@igucauplazahote.com.br</li>
+                    <li class="email-text">reservas@iguacuplazahotel.com.br</li>
                 </ul>
             </div>
             <div class="col-md-6 right-side">
@@ -45,7 +45,7 @@
                             <a href="{{ route('about') }}" class="nav-link">Sobre nós</a>
                         </li>
                         <li class="nav-item">
-                            <a href="javascript:void;" class="nav-link dropdown-toggle">Room & Suite</a>
+                            <a href="javascript:void;" class="nav-link dropdown-toggle">Quartos</a>
                             <ul class="dropdown-menu">
                                 <li class="nav-item">
                                     <a href="room-detail.html" class="nav-link">Regular Couple Bed</a>
