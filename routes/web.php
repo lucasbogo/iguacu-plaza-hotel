@@ -16,6 +16,7 @@ use App\Http\Controllers\Frontend\WebsiteController;
 use App\Http\Controllers\Frontend\AboutController;
 use App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\Frontend\ImageGalleryController;
+use App\Http\Controllers\Frontend\VideoGalleryController;
 
 
 /* Frontend Routes */
@@ -29,6 +30,8 @@ Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 Route::get('/blog/{id}', [BlogController::class, 'post'])->name('post');
 
 Route::get('/image-gallery', [ImageGalleryController::class, 'index'])->name('image_gallery');
+
+Route::get('/video-gallery', [VideoGalleryController::class, 'index'])->name('video_gallery');
 
 /* User Routes */
 
@@ -168,8 +171,8 @@ Route::post('/admin/video/store', [AdminVideoController::class, 'store'])->name(
 
 Route::get('/admin/video/edit/{id}', [AdminVideoController::class, 'edit'])->name('admin_video_edit')->middleware('admin:admin');
 
-Route::post('/admin/video/update/{id}', [AdminVideoController::class, 'update'])->name('admin_video_update')->middleware('admin:admin');
+Route::put('/admin/video/update/{id}', [AdminVideoController::class, 'update'])->name('admin_video_update')->middleware('admin:admin');
 
-Route::put('admin/videos/{id}/toggle', [AdminVideoController::class, 'toggleStatus'])->name('admin_video_toggle');
+Route::put('admin/videos/{id}/activate', [AdminVideoController::class, 'activate'])->name('admin_video_activate')->middleware('admin:admin');
 
 Route::get('/admin/video/delete/{id}', [AdminVideoController::class, 'delete'])->name('admin_video_delete')->middleware('admin:admin');

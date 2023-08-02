@@ -71,7 +71,7 @@
                                     <a href="{{ route('image_gallery') }}" class="nav-link">Galeria de fotos</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="video-gallery.html" class="nav-link">Galeria de videos</a>
+                                    <a href="{{ route('video_gallery')}}" class="nav-link">Galeria de videos</a>
                                 </li>
                             </ul>
                         </li>
