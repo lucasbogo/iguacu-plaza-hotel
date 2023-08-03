@@ -8,9 +8,10 @@ use App\Models\Slider;
 
 class AdminSliderController extends Controller
 {
+
     public function index()
     {
-        $sliders = Slider::get();
+        $sliders = Slider::where('status', 1)->get();
         return view('admin.slider.slide_view', compact('sliders'));
     }
 

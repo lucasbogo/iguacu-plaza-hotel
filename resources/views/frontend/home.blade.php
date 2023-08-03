@@ -1,28 +1,34 @@
 @extends('frontend.layout.master')
 
 @section('main_content')
-    <div class="slider">
-        <div class="slide-carousel owl-carousel" style="background-color: white;">
+    <!-- Wrap the slider section in an if directive to check if there are active sliders -->
+    @if (count($sliders) > 0)
+        <div class="slider">
+            <div class="slide-carousel owl-carousel" style="background-color: white;">
+                @foreach ($sliders as $item)
+                    <!-- Add an if directive to check if the current slider is active -->
+                    @if ($item->status)
+                        <div class="item" style="background-image:url({{ asset('uploads/slider/' . $item->photo) }})">
+                            <div class="bg"></div>
+                            <div class="text">
+                                <h2>{{ $item->heading }}</h2>
+                                <p>{!! $item->text !!}</p>
 
-            @foreach ($sliders as $item)
-                <div class="item" style="background-image:url({{ asset('uploads/slider/' . $item->photo) }})">
-                    <div class="bg"></div>
-                    <div class="text">
-                        <h2>{{ $item->heading }}</h2>
-                        <p>
-                            {!! $item->text !!}
-                        </p>
-
-                        @if ($item->button_text != null)
-                            <div class="button">
-                                <a href="{{ $item->button_url }}">{{ $item->button_text }}</a>
+                                @if ($item->button_text != null)
+                                    <div class="button">
+                                        <a href="{{ $item->button_url }}">{{ $item->button_text }}</a>
+                                    </div>
+                                @endif
                             </div>
-                        @endif
-                    </div>
-                </div>
-            @endforeach
+                        </div>
+                    @endif
+                @endforeach
+            </div>
         </div>
-    </div>
+    @endif
+    <br>
+    <br
+
 
     <div class="search-section" style="background-color: white;">
         <div class="container">
@@ -317,5 +323,4 @@
             </div>
         </div>
     @endif
-
 @endsection
