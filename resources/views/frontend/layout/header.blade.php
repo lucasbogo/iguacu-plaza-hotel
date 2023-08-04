@@ -41,9 +41,11 @@
                         <li class="nav-item">
                             <a href="{{ route('home') }}" class="nav-link">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ route('about') }}" class="nav-link">Sobre nós</a>
-                        </li>
+                        @if ($global_page->about_status == 1)
+                            <li class="nav-item">
+                                <a href="{{ route('about') }}" class="nav-link">Sobre nós</a>
+                            </li>
+                        @endif
                         <li class="nav-item">
                             <a href="javascript:void;" class="nav-link dropdown-toggle">Quartos</a>
                             <ul class="dropdown-menu">
@@ -71,7 +73,7 @@
                                     <a href="{{ route('image_gallery') }}" class="nav-link">Galeria de fotos</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('video_gallery')}}" class="nav-link">Galeria de videos</a>
+                                    <a href="{{ route('video_gallery') }}" class="nav-link">Galeria de videos</a>
                                 </li>
                             </ul>
                         </li>

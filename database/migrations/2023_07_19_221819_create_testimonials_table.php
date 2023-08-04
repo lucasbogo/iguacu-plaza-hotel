@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('designation');
             $table->text('comment');
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }

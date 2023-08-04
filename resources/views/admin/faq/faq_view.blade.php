@@ -31,19 +31,21 @@
                                             <td>
                                                 {{ $row->question }}
                                             </td>
-                                            <td>{{ $row->answer }}</td>
+                                            <td>{!! $row->answer !!}</td>
                                             <td class="pt_10 pb_10">
                                                 <a href="{{ route('admin_faq_edit', $row->id) }}"
                                                     class="btn btn-primary">Editar</a>
-                                                    <form action="{{ route('admin_faq_activate', $row->id) }}" method="POST" style="display: inline;">
-                                                        @csrf
-                                                        <!-- Add a hidden input field to specify the HTTP method as PUT -->
-                                                        <input type="hidden" name="_method" value="PUT">
-                                                        <button type="submit" class="btn btn-{{ $row->status ? 'warning' : 'success' }}">
-                                                            {{ $row->status ? 'Desativar' : 'Ativar' }}
-                                                        </button>
-                                                    </form>
-                                                    
+                                                <form action="{{ route('admin_faq_activate', $row->id) }}" method="POST"
+                                                    style="display: inline;">
+                                                    @csrf
+                                                    <!-- Add a hidden input field to specify the HTTP method as PUT -->
+                                                    <input type="hidden" name="_method" value="PUT">
+                                                    <button type="submit"
+                                                        class="btn btn-{{ $row->status ? 'warning' : 'success' }}">
+                                                        {{ $row->status ? 'Desativar' : 'Ativar' }}
+                                                    </button>
+                                                </form>
+
                                                 <a href="{{ route('admin_faq_delete', $row->id) }}" class="btn btn-danger"
                                                     onClick="return confirm('Tem Certeza?');">Deletar</a>
                                             </td>

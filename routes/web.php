@@ -12,12 +12,14 @@ use App\Http\Controllers\Admin\AdminBlogController;
 use App\Http\Controllers\Admin\AdminImageController;
 use App\Http\Controllers\Admin\AdminVideoController;
 use App\Http\Controllers\Admin\AdminFaqController;
+use App\Http\Controllers\Admin\AdminPageController;
 
 use App\Http\Controllers\Frontend\WebsiteController;
 use App\Http\Controllers\Frontend\AboutController;
 use App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\Frontend\ImageGalleryController;
 use App\Http\Controllers\Frontend\VideoGalleryController;
+use App\Http\Controllers\Frontend\FaqController;
 
 
 /* Frontend Routes */
@@ -33,6 +35,8 @@ Route::get('/blog/{id}', [BlogController::class, 'post'])->name('post');
 Route::get('/image-gallery', [ImageGalleryController::class, 'index'])->name('image_gallery');
 
 Route::get('/video-gallery', [VideoGalleryController::class, 'index'])->name('video_gallery');
+
+Route::get('/faq', [FaqController::class, 'index'])->name('faq');
 
 /* User Routes */
 
@@ -193,3 +197,10 @@ Route::post('/admin/faq/update/{id}', [AdminFaqController::class, 'update'])->na
 Route::put('/admin/faq/activate/{id}', [AdminFaqController::class, 'activate'])->name('admin_faq_activate')->middleware('admin:admin');
 
 Route::get('/admin/faq/delete/{id}', [AdminFaqController::class, 'delete'])->name('admin_faq_delete')->middleware('admin:admin');
+
+/*** Routes Admin Pages ***/
+
+// About Page
+Route::get('/admin/page/about', [AdminPageController::class, 'about'])->name('admin_page_about')->middleware('admin:admin');
+
+Route::post('/admin/page/about/update', [AdminPageController::class, 'about_update'])->name('admin_page_about_update')->middleware('admin:admin');

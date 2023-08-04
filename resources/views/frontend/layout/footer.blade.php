@@ -18,8 +18,7 @@
                     <ul class="useful-links">
                         <li><a href="index.html">Página Principal</a></li>
                         <li><a href="terms.html">Termos e condições</a></li>
-                        <li><a href="privacy.html">Política de Privacidade</a></li>
-                        <li><a href="disclaimer.html">Exoneração de Responsabilidade</a></li>
+                        <li><a href="{{ route('faq')}}">Perguntas Frequentes</a></li>
                     </ul>
                 </div>
             </div>
