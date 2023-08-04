@@ -48,8 +48,8 @@
             <li class=""><a class="nav-link" href="{{ route('admin_video') }}"><i class="fa fa-hand-o-right"></i>
                     <span>Galeria de Vídeos</span></a></li>
 
-
-
+            <li class=""><a class="nav-link" href="{{ route('admin_faq') }}"><i class="fa fa-hand-o-right"></i>
+                    <span>Perguntas Frequentes</span></a></li>
         </ul>
     </aside>
 </div>

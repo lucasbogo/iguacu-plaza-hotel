@@ -19,10 +19,6 @@ class AdminFeatureController extends Controller
         return view('admin.features.feature_add');
     }
 
-    // AdminFeatureController.php
-
-    // ...
-
     public function store(Request $request)
     {
         $request->validate([
@@ -38,6 +34,12 @@ class AdminFeatureController extends Controller
         $feature->save();
 
         return back()->with('success', 'Ícone Adicionado com Sucesso!');
+    }
+
+    public function edit($id)
+    {
+        $feature = Feature::where('id', $id)->first();
+        return view('admin.features.feature_edit', compact('feature'));
     }
 
     public function update(Request $request)

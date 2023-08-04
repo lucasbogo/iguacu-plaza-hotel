@@ -73,8 +73,9 @@ class AdminImageController extends Controller
         $image = Image::findOrFail($id);
         $image->status = !$image->status;
         $image->save();
-
-        return back()->with('success', 'Status da Imagem Atualizado com Sucesso!');
+        
+        $message = $image->status ? 'Imagem Ativada com Sucesso' : 'Imagem Desativa com Sucesso';
+        return back()->with('success', $message);
     }
 
     public function delete($id)

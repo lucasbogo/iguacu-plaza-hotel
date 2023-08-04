@@ -37,6 +37,7 @@ class AdminSliderController extends Controller
         $slider->text = $request->text;
         $slider->button_text = $request->button_text;
         $slider->button_url = $request->button_url;
+        $slider->status = $request->has('status'); // Set the status based on the checkbox value (true or false)
         $slider->save();
 
         return redirect()->back()->with('success', 'Foto Adicionado ao Slider com Sucesso!');
@@ -84,6 +85,11 @@ class AdminSliderController extends Controller
             $slider->button_url = $request->button_url;
         }
 
+        // Update status if provided
+        if ($request->has('status')) {
+            $slider->status = $request->has('status');
+        }
+      
         $slider->save();
 
         return redirect()->back()->with('success', 'Foto Atualizada com Sucesso!');
@@ -95,16 +101,16 @@ class AdminSliderController extends Controller
         $slider->status = !$slider->status; // Toggle the status (activate if deactivated, and vice versa)
         $slider->save();
 
-        $message = $slider->status ? 'Slider Ativado com Sucesso!' : 'Slider Desativado com Sucesso!';
-        return redirect()->back()->with('success', $message);
+        return back()->with('success', 'Foto Ativada com Sucesso!');
     }
 
 
     public function delete($id)
     {
-        $slider = Slider::where('id', $id)->first();
-        unlink(public_path('uploads/slider/' . $slider->photo));
+
+        $slider = Slider::findOrFail($id);
         $slider->delete();
-        return redirect()->back()->with('success', 'Foto Excluída com Sucesso!');
+
+        return back()->with('success', 'Foto Deletada com Sucesso!');
     }
 }

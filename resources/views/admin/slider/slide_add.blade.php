@@ -17,40 +17,34 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{ route('admin_slider_store') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('admin_slider_store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="mb-4">
-                                        <label class="form-label">Foto*</label>
-                                        <div>
-                                            <input type="file" class="form-control" name="photo">
-                                        </div>
-                                    </div>
-                                    <div class="mb-4">
-                                        <label class="form-label">Titulo</label>
-                                        <input type="text" class="form-control" name="heading"
-                                            value="{{ old('heading') }}">
-                                    </div>
-                                    <div class="mb-4">
-                                        <label class="form-label">Texto</label>
-                                        <textarea name="text" class="form-control h_100" cols="30" rows="10">{{ old('text') }}</textarea>
-                                    </div>
-                                    <div class="mb-4">
-                                        <label class="form-label">Texto Botão</label>
-                                        <input type="text" class="form-control" name="button_text"
-                                            value="{{ old('button_text') }}">
-                                    </div>
-                                    <div class="mb-4">
-                                        <label class="form-label">Link Botão</label>
-                                        <input type="text" class="form-control" name="button_url"
-                                            value="{{ old('button_url') }}">
-                                    </div>
-                                    <div class="mb-4">
-                                        <label class="form-label"></label>
-                                        <button type="submit" class="btn btn-success">Enviar</button>
-                                    </div>
-                                </div>
+                            <div class="form-group">
+                                <label for="photo">Foto:</label>
+                                <input type="file" name="photo" id="photo" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="heading">Heading:</label>
+                                <input type="text" name="heading" id="heading" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="text">Text:</label>
+                                <textarea name="text" id="text" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="button_text">Button Text:</label>
+                                <input type="text" name="button_text" id="button_text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="button_url">Button URL:</label>
+                                <input type="text" name="button_url" id="button_url" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="status">Status:</label>
+                                <input type="checkbox" name="status" id="status" value="1" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-success">Adicionar</button>
                             </div>
                         </form>
                     </div>

@@ -11,6 +11,8 @@
     <a href="{{ route('admin_slider_add') }}" class="btn btn-success"><i class="fa fa-plus"></i>Adicionar</a>
 @endsection
 
+
+
 @section('main_content')
     <div class="section-body">
         <div class="row">
@@ -21,7 +23,7 @@
                             <table class="table table-bordered" id="example1">
                                 <thead>
                                     <tr>
-                                        <th>Referencia</th>
+                                        {{-- <th>Referencia</th> --}}
                                         <th>Foto</th>
                                         <th>Ação</th>
                                     </tr>
@@ -29,7 +31,6 @@
                                 <tbody>
                                     @foreach ($sliders as $row)
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
                                             <td>
                                                 <img src="{{ asset('uploads/slider/' . $row->photo) }}" alt=""
                                                     class="w_200">
@@ -37,10 +38,12 @@
                                             <td class="pt_10 pb_10">
                                                 <a href="{{ route('admin_slider_edit', $row->id) }}"
                                                     class="btn btn-primary">Editar</a>
-                                                <a href="{{ route('admin_slider_activate', $row->id) }}"
-                                                    class="btn btn-{{ $row->status ? 'warning' : 'success' }}">
-                                                    {{ $row->status ? 'Desativar' : 'Ativar' }}
-                                                </a>
+                                                <form action="{{ route('admin_slider_activate', $row->id) }}" method="POST"
+                                                    style="display: inline;">
+                                                    @csrf
+                                                    @method('PUT') <!-- Method spoofing: Use the PUT method -->
+                                                    <button type="submit" class="btn btn-warning">Desativar</button>
+                                                </form> 
                                                 <a href="{{ route('admin_slider_delete', $row->id) }}"
                                                     class="btn btn-danger"
                                                     onClick="return confirm('Tem Certeza?');">Deletar</a>
@@ -48,7 +51,6 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
-
                             </table>
                         </div>
                     </div>
