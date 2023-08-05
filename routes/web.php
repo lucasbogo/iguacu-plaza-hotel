@@ -20,6 +20,7 @@ use App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\Frontend\ImageGalleryController;
 use App\Http\Controllers\Frontend\VideoGalleryController;
 use App\Http\Controllers\Frontend\FaqController;
+use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\Frontend\TermsController;
 
 
@@ -27,19 +28,24 @@ use App\Http\Controllers\Frontend\TermsController;
 
 Route::get('/', [WebsiteController::class, 'index'])->name('home');
 
-Route::get('/about', [AboutController::class, 'index'])->name('about');
-
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 
 Route::get('/blog/{id}', [BlogController::class, 'post'])->name('post');
 
-Route::get('/image-gallery', [ImageGalleryController::class, 'index'])->name('image_gallery');
 
-Route::get('/video-gallery', [VideoGalleryController::class, 'index'])->name('video_gallery');
 
 Route::get('/faq', [FaqController::class, 'index'])->name('faq');
 
-Route::get('/terms', [TermsController::class, 'index'])->name('terms');
+// Routes for pages
+Route::get('/image-gallery', [PageController::class, 'image_gallery'])->name('image_gallery');
+
+Route::get('/video-gallery', [PageController::class, 'video_gallery'])->name('video_gallery');
+
+Route::get('/about', [PageController::class, 'about'])->name('about');
+
+Route::get('/terms', [PageController::class, 'terms'])->name('terms');
+
+Route::get('/privacy', [PageController::class, 'privacy'])->name('privacy');
 
 /* User Routes */
 
@@ -201,7 +207,7 @@ Route::put('/admin/faq/activate/{id}', [AdminFaqController::class, 'activate'])-
 
 Route::get('/admin/faq/delete/{id}', [AdminFaqController::class, 'delete'])->name('admin_faq_delete')->middleware('admin:admin');
 
-/*** Routes Admin Pages ***/
+/*** Routes Admin Edit Pages Frontend ***/
 
 // About Page
 Route::get('/admin/page/about', [AdminPageController::class, 'about'])->name('admin_page_about')->middleware('admin:admin');
@@ -212,3 +218,8 @@ Route::post('/admin/page/about/update', [AdminPageController::class, 'about_upda
 Route::get('/admin/page/terms', [AdminPageController::class, 'terms'])->name('admin_page_terms')->middleware('admin:admin');
 
 Route::post('/admin/page/terms/update', [AdminPageController::class, 'terms_update'])->name('admin_page_terms_update')->middleware('admin:admin');
+
+// Privacy Policy Page
+Route::get('/admin/page/privacy', [AdminPageController::class, 'privacy'])->name('admin_page_privacy')->middleware('admin:admin');
+
+Route::post('/admin/page/privacy', [AdminPageController::class, 'privacy_update'])->name('admin_page_privacy_update')->middleware('admin:admin');

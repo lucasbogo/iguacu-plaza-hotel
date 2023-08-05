@@ -1,7 +1,7 @@
 @extends('frontend.layout.master')
 
 @section('main_content')
-    @if ($about->about_status == 0)
+    @if ($privacy->privacy_status == 0)
         <div class="alert alert-info">
             <p>página em construção</p>
         </div>
@@ -11,7 +11,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2>{{ $about->about_heading }}</h2>
+                        <h2>{{ $privacy->privacy_heading }}</h2>
                     </div>
                 </div>
             </div>
@@ -22,7 +22,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <p>
-                            {!! $about->about_content !!}
+                            {!! $privacy->privacy_content !!}
                         </p>
                     </div>
                 </div>

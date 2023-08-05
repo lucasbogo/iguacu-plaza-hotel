@@ -6,8 +6,9 @@
                     <h2 class="heading">Iguaçu Plaza Hotel</h2>
                     <ul class="useful-links">
                         <li><a href="rooms.html">Quartos</a></li>
-                        <li><a href="photo-gallery.html">Galeria de Fotos</a></li>
-                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="{{ route('image_gallery') }}">Galeria de Fotos</a></li>
+                        <li><a href="{{ route('video_gallery') }}">Galeria de Fotos</a></li>
+                        <li><a href="{{ route('blog') }}">Blog</a></li>
                         <li><a href="contact.html">Contato</a></li>
                     </ul>
                 </div>
@@ -16,9 +17,17 @@
                 <div class="item">
                     <h2 class="heading">Informações</h2>
                     <ul class="useful-links">
-                        <li><a href="{{ route('home')}}">Página Principal</a></li>
-                        <li><a href="{{ route('terms')}}">Termos e condições</a></li>
-                        <li><a href="{{ route('faq')}}">Perguntas Frequentes</a></li>
+                        <li><a href="{{ route('home') }}">Página Principal</a></li>
+
+                        @if ($global_page->terms_status == 1)
+                            <li><a href="{{ route('terms') }}">Termos e condições</a></li>
+                        @endif
+
+                        @if ($global_page->privacy_status == 1)
+                            <li><a href="{{ route('privacy') }}">Política de Privacidade</a></li>
+                        @endif
+
+                        <li><a href="{{ route('faq') }}">Perguntas Frequentes</a></li>
                     </ul>
                 </div>
             </div>

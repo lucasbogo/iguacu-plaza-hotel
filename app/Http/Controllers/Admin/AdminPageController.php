@@ -11,7 +11,7 @@ class AdminPageController extends Controller
     public function about()
     {
         $page = Page::where('id', 1)->first();
-        return view('admin.page.about', compact('page'));
+        return view('admin.pages.about', compact('page'));
     }
 
     public function about_update(Request $request)
@@ -28,7 +28,7 @@ class AdminPageController extends Controller
     public function terms()
     {
         $page = Page::where('id', 1)->first();
-        return view('admin.page.terms', compact('page'));
+        return view('admin.pages.terms', compact('page'));
     }
 
     public function terms_update(Request $request)
@@ -40,5 +40,22 @@ class AdminPageController extends Controller
         $page->update();
 
         return redirect()->back()->with('success', 'Página "Termos e Condições" atualizada com sucesso!');
+    }
+
+    public function privacy()
+    {
+        $page = Page::where('id', 1)->first();
+        return view('admin.pages.privacy', compact('page'));
+    }
+
+    public function privacy_update(Request $request)
+    {
+        $page = Page::where('id', 1)->first();
+        $page->privacy_heading = $request->privacy_heading;
+        $page->privacy_content = $request->privacy_content;
+        $page->privacy_status = $request->privacy_status;
+        $page->update();
+
+        return redirect()->back()->with('success', 'Página "Política de Privacidade" atualizada com sucesso!');
     }
 }
