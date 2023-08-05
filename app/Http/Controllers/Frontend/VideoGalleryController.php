@@ -11,6 +11,6 @@ class VideoGalleryController extends Controller
     public function index()
     {
         $videos = Video::paginate(12);
-        return view('frontend.video_gallery', compact('videos'));
+        return view('frontend.pages.video_gallery', compact('videos'));
     }
 }

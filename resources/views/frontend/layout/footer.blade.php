@@ -16,8 +16,8 @@
                 <div class="item">
                     <h2 class="heading">Informações</h2>
                     <ul class="useful-links">
-                        <li><a href="index.html">Página Principal</a></li>
-                        <li><a href="terms.html">Termos e condições</a></li>
+                        <li><a href="{{ route('home')}}">Página Principal</a></li>
+                        <li><a href="{{ route('terms')}}">Termos e condições</a></li>
                         <li><a href="{{ route('faq')}}">Perguntas Frequentes</a></li>
                     </ul>
                 </div>

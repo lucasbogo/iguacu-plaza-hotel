@@ -11,6 +11,6 @@ class ImageGalleryController extends Controller
     public function index()
     {
         $images = Image::paginate(12);
-        return view('frontend.image_gallery', compact('images'));
+        return view('frontend.pages.image_gallery', compact('images'));
     }
 }

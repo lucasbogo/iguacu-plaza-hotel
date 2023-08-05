@@ -20,6 +20,7 @@ use App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\Frontend\ImageGalleryController;
 use App\Http\Controllers\Frontend\VideoGalleryController;
 use App\Http\Controllers\Frontend\FaqController;
+use App\Http\Controllers\Frontend\TermsController;
 
 
 /* Frontend Routes */
@@ -37,6 +38,8 @@ Route::get('/image-gallery', [ImageGalleryController::class, 'index'])->name('im
 Route::get('/video-gallery', [VideoGalleryController::class, 'index'])->name('video_gallery');
 
 Route::get('/faq', [FaqController::class, 'index'])->name('faq');
+
+Route::get('/terms', [TermsController::class, 'index'])->name('terms');
 
 /* User Routes */
 
@@ -204,3 +207,8 @@ Route::get('/admin/faq/delete/{id}', [AdminFaqController::class, 'delete'])->nam
 Route::get('/admin/page/about', [AdminPageController::class, 'about'])->name('admin_page_about')->middleware('admin:admin');
 
 Route::post('/admin/page/about/update', [AdminPageController::class, 'about_update'])->name('admin_page_about_update')->middleware('admin:admin');
+
+// Terms and Conditions Page
+Route::get('/admin/page/terms', [AdminPageController::class, 'terms'])->name('admin_page_terms')->middleware('admin:admin');
+
+Route::post('/admin/page/terms/update', [AdminPageController::class, 'terms_update'])->name('admin_page_terms_update')->middleware('admin:admin');

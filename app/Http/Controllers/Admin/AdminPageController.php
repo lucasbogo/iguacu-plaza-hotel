@@ -24,4 +24,21 @@ class AdminPageController extends Controller
 
         return redirect()->back()->with('success', 'Página "Sobre o Hotel" atualizada com sucesso!');
     }
+
+    public function terms()
+    {
+        $page = Page::where('id', 1)->first();
+        return view('admin.page.terms', compact('page'));
+    }
+
+    public function terms_update(Request $request)
+    {
+        $page = Page::where('id', 1)->first();
+        $page->terms_heading = $request->terms_heading;
+        $page->terms_content = $request->terms_content;
+        $page->terms_status = $request->terms_status;
+        $page->update();
+
+        return redirect()->back()->with('success', 'Página "Termos e Condições" atualizada com sucesso!');
+    }
 }

@@ -11,7 +11,7 @@ class BlogController extends Controller
     public function index()
     {
         $blogs = Blog::orderBy('id', 'desc')->paginate(9);
-        return view('frontend.blog', compact('blogs'));
+        return view('frontend.pages.blog', compact('blogs'));
     }
 
     public function post($id)
@@ -23,7 +23,7 @@ class BlogController extends Controller
             $blog->views = $blog->views + 1;
             $blog->save();
 
-            return view('frontend.post', compact('blog'));
+            return view('frontend.pages.post', compact('blog'));
         } else {
             // Blog not found, handle the error
             return redirect()->route('home')->with('error', 'Blog não encontrado.');

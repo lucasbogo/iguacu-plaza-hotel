@@ -11,6 +11,6 @@ class FaqController extends Controller
     public function index()
     {
         $faqs = Faq::get();
-        return view('frontend.faq', compact('faqs'));
+        return view('frontend.pages.faq', compact('faqs'));
     }
 }
