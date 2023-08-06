@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Peguntas Frequentes</h2>
+                    <h2>{{$global_page->faq_heading}}</h2>
                 </div>
             </div>
         </div>

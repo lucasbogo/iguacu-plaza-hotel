@@ -44,6 +44,8 @@ Route::get('/terms', [PageController::class, 'terms'])->name('terms');
 
 Route::get('/privacy', [PageController::class, 'privacy'])->name('privacy');
 
+Route::get('/faq', [PageController::class, 'faq'])->name('faq');
+
 /* User Routes */
 
 Route::get('/dashboard', [WebsiteController::class, 'dashboard'])->name('dashboard')->middleware('auth');

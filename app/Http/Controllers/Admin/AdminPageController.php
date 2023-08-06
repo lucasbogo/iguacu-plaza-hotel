@@ -62,7 +62,7 @@ class AdminPageController extends Controller
     public function image_gallery()
     {
         $page = Page::where('id', 1)->first();
-        return view('admin.pages.image_gallery', compact('images'));
+        return view('admin.pages.image_gallery', compact('page'));
     }
 
     public function image_gallery_update(Request $request)
@@ -78,7 +78,7 @@ class AdminPageController extends Controller
     public function video_gallery()
     {
         $page = Page::where('id', 1)->first();
-        return view('admin.pages.video_gallery', compact('videos'));
+        return view('admin.pages.video_gallery', compact('page'));
     }
 
     public function video_gallery_update(Request $request)
@@ -94,7 +94,7 @@ class AdminPageController extends Controller
     public function faq()
     {
         $page = Page::where('id', 1)->first();
-        return view('admin.pages.faq', compact('faqs'));
+        return view('admin.pages.faq', compact('page'));
     }
 
     public function faq_update(Request $request)
@@ -110,7 +110,7 @@ class AdminPageController extends Controller
     public function blog()
     {
         $page = Page::where('id', 1)->first();
-        return view('admin.pages.blog', compact('blogs'));
+        return view('admin.pages.blog', compact('page'));
     }
 
     public function blog_update(Request $request)
