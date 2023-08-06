@@ -6,10 +6,26 @@
                     <h2 class="heading">Iguaçu Plaza Hotel</h2>
                     <ul class="useful-links">
                         <li><a href="rooms.html">Quartos</a></li>
-                        <li><a href="{{ route('image_gallery') }}">Galeria de Fotos</a></li>
-                        <li><a href="{{ route('video_gallery') }}">Galeria de Fotos</a></li>
-                        <li><a href="{{ route('blog') }}">Blog</a></li>
-                        <li><a href="contact.html">Contato</a></li>
+                        @if ($global_page->about_status == 1)
+                            <li><a href="{{ route('about') }}">Sobre Nós</a></li>
+                        @endif
+
+                        @if ($global_page->image_gallery_status == 1)
+                            <li><a href="{{ route('image_gallery') }}">Galeria de Fotos</a></li>
+                        @endif
+
+                        @if ($global_page->video_gallery_status == 1)
+                            <li><a href="{{ route('video_gallery') }}">Galeria de Fotos</a></li>
+                        @endif
+
+                        @if ($global_page->blog_status == 1)
+                            <li><a href="{{ route('blog') }}">Blog</a></li>
+                        @endif
+
+                        @if ($global_page->contact_status == 1)
+                            <li><a href="contact.html">Contato</a></li>
+                        @endif
+
                     </ul>
                 </div>
             </div>
@@ -27,7 +43,10 @@
                             <li><a href="{{ route('privacy') }}">Política de Privacidade</a></li>
                         @endif
 
-                        <li><a href="{{ route('faq') }}">Perguntas Frequentes</a></li>
+                        @if ($global_page->faq_status == 1)
+                            <li><a href="{{ route('faq') }}">Perguntas Frequentes</a></li>
+                        @endif
+
                     </ul>
                 </div>
             </div>

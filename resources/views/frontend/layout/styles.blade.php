@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="{{ asset('dist-front/css/daterangepicker.css') }}">
 <link rel="stylesheet" href="{{ asset('dist-front/css/meanmenu.css') }}">
 <link rel="stylesheet" href="{{ asset('dist-front/css/style.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
