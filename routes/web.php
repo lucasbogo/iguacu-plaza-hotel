@@ -32,11 +32,8 @@ Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 
 Route::get('/blog/{id}', [BlogController::class, 'post'])->name('post');
 
-
-
-Route::get('/faq', [FaqController::class, 'index'])->name('faq');
-
 // Routes for pages
+
 Route::get('/image-gallery', [PageController::class, 'image_gallery'])->name('image_gallery');
 
 Route::get('/video-gallery', [PageController::class, 'video_gallery'])->name('video_gallery');
@@ -223,3 +220,23 @@ Route::post('/admin/page/terms/update', [AdminPageController::class, 'terms_upda
 Route::get('/admin/page/privacy', [AdminPageController::class, 'privacy'])->name('admin_page_privacy')->middleware('admin:admin');
 
 Route::post('/admin/page/privacy', [AdminPageController::class, 'privacy_update'])->name('admin_page_privacy_update')->middleware('admin:admin');
+
+// Image Gallery Page
+Route::get('/admin/page/image-gallery', [AdminPageController::class, 'image_gallery'])->name('admin_page_image_gallery')->middleware('admin:admin');
+
+Route::post('/admin/page/image-gallery/update', [AdminPageController::class, 'image_gallery_update'])->name('admin_page_image_gallery_update')->middleware('admin:admin');
+
+// Video Gallery Page
+Route::get('/admin/page/video-gallery', [AdminPageController::class, 'video_gallery'])->name('admin_page_video_gallery')->middleware('admin:admin');
+
+Route::post('/admin/page/video-gallery/update', [AdminPageController::class, 'video_gallery_update'])->name('admin_page_video_gallery_update')->middleware('admin:admin');
+
+// FAQ Page
+Route::get('/admin/page/faq', [AdminPageController::class, 'faq'])->name('admin_page_faq')->middleware('admin:admin');
+
+Route::post('/admin/page/faq/update', [AdminPageController::class, 'faq_update'])->name('admin_page_faq_update')->middleware('admin:admin');
+
+// Blog Page
+Route::get('/admin/page/blog', [AdminPageController::class, 'blog'])->name('admin_page_blog')->middleware('admin:admin');
+
+Route::post('/admin/page/blog/update', [AdminPageController::class, 'blog_update'])->name('admin_page_blog_update')->middleware('admin:admin');

@@ -58,4 +58,68 @@ class AdminPageController extends Controller
 
         return redirect()->back()->with('success', 'Página "Política de Privacidade" atualizada com sucesso!');
     }
+
+    public function image_gallery()
+    {
+        $page = Page::where('id', 1)->first();
+        return view('admin.pages.image_gallery', compact('images'));
+    }
+
+    public function image_gallery_update(Request $request)
+    {
+        $page = Page::where('id', 1)->first();
+        $page->image_gallery_heading = $request->image_gallery_heading;
+        $page->image_gallery_status = $request->image_gallery_status;
+        $page->update();
+
+        return redirect()->back()->with('success', 'Página "Galeria de Imagens" atualizada com sucesso!');
+    }
+
+    public function video_gallery()
+    {
+        $page = Page::where('id', 1)->first();
+        return view('admin.pages.video_gallery', compact('videos'));
+    }
+
+    public function video_gallery_update(Request $request)
+    {
+        $page = Page::where('id', 1)->first();
+        $page->video_gallery_heading = $request->video_gallery_heading;
+        $page->video_gallery_status = $request->video_gallery_status;
+        $page->update();
+
+        return redirect()->back()->with('success', 'Página "Galeria de Vídeos" atualizada com sucesso!');
+    }
+
+    public function faq()
+    {
+        $page = Page::where('id', 1)->first();
+        return view('admin.pages.faq', compact('faqs'));
+    }
+
+    public function faq_update(Request $request)
+    {
+        $page = Page::where('id', 1)->first();
+        $page->faq_heading = $request->faq_heading;
+        $page->faq_status = $request->faq_status;
+        $page->update();
+
+        return redirect()->back()->with('success', 'Página "Perguntas Frequentes" atualizada com sucesso!');
+    }
+
+    public function blog()
+    {
+        $page = Page::where('id', 1)->first();
+        return view('admin.pages.blog', compact('blogs'));
+    }
+
+    public function blog_update(Request $request)
+    {
+        $page = Page::where('id', 1)->first();
+        $page->blog_heading = $request->blog_heading;
+        $page->blog_status = $request->blog_status;
+        $page->update();
+
+        return redirect()->back()->with('success', 'Página "Blog" atualizada com sucesso!');
+    }
 }

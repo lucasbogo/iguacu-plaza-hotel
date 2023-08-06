@@ -25,8 +25,8 @@ return new class extends Migration
             $table->text('contact_heading');
             $table->text('contact_map')->nullable();
             $table->boolean('contact_status')->default(1);
-            $table->text('photo_gallery_heading');
-            $table->boolean('photo_gallery_status')->default(1);
+            $table->text('image_gallery_heading');
+            $table->boolean('image_gallery_status')->default(1);
             $table->text('video_gallery_heading');
             $table->boolean('video_gallery_status')->default(1);
             $table->text('faq_heading');

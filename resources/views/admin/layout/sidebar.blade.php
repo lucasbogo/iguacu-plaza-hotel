@@ -19,7 +19,7 @@
                     <span>Dashboard</span></a></li>
 
             <li
-                class="nav-item dropdown {{ Request::is('admin/page/about') || Request::is('admin/page/terms') || Request::is('admin/page/privacy') ? 'active' : '' }}">
+                class="nav-item dropdown {{ Request::is('admin/page/about') || Request::is('admin/page/terms') || Request::is('admin/page/privacy') || Request::is('admin/page/image-gallery') ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown"><i
                         class="fa fa-hand-o-right"></i><span>Páginas</span></a>
                 <ul class="dropdown-menu">
@@ -34,6 +34,22 @@
 
                     <li class="{{ Request::is('admin/page/privacy') ? 'active' : '' }}"><a class="nav-link"
                             href="{{ route('admin_page_privacy') }}"><i class="fa fa-angle-right"></i>
+                            Página Política de Privacidade</a></li>
+
+                    <li class="{{ Request::is('admin/page/image-gallery') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('admin_page_image_gallery') }}"><i class="fa fa-angle-right"></i>
+                            Página Galeria de Imagens</a></li>
+
+                    <li class="{{ Request::is('admin/page/video-gallery') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('admin_page_image_gallery') }}"><i class="fa fa-angle-right"></i>
+                            Página Galeria de Vídeos</a></li>
+
+                    <li class="{{ Request::is('admin/page/blog') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('admin_page_image_blog') }}"><i class="fa fa-angle-right"></i>
+                            Página Política de Privacidade</a></li>
+
+                    <li class="{{ Request::is('admin/page/faq') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('admin_page_faq') }}"><i class="fa fa-angle-right"></i>
                             Página Política de Privacidade</a></li>
 
                     <li class=""><a class="nav-link" href=""><i class="fa fa-angle-right"></i>
