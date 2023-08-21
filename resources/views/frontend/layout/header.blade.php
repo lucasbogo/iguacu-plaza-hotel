@@ -22,7 +22,7 @@
             <div class="col-md-7 left-side">
                 <ul class="contact-info">
                     <li>
-                        <a href="https://wa.me/5545999190001" target="_blank">
+                        <a href="https://wa.me/5545999510002" target="_blank">
                             <i class="fab fa-whatsapp"></i> +55 (45) 99919-0001
                         </a>
                     </li>
