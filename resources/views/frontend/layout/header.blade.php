@@ -23,7 +23,7 @@
                 <ul class="contact-info">
                     <li>
                         <a href="https://wa.me/5545999510002" target="_blank">
-                            <i class="fab fa-whatsapp"></i> +55 (45) 99919-0001
+                            <i class="fab fa-whatsapp"></i> +55 (45) 99951-0002
                         </a>
                     </li>
 
