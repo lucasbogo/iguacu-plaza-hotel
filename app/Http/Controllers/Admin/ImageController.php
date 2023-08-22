@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Image;
 
-class AdminImageController extends Controller
+class ImageController extends Controller
 {
     public function index()
     {

@@ -7,7 +7,7 @@ use App\Models\Testimonial;
 use Illuminate\Http\Request;
 
 
-class AdminTestimonialController extends Controller
+class TestimonialController extends Controller
 {
     public function index()
     {

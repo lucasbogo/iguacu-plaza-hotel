@@ -7,6 +7,21 @@
             <h4 style="margin-top: 10px; font-weight: bold;">Configurações</h4>
         </div>
 
+        <li
+            class="nav-item dropdown {{ Request::is('admin/subscriber/show') || Request::is('admin/subscriber/send-email') ? 'active' : '' }}">
+            <a href="#" class="nav-link has-dropdown"><i class="fa fa-users"></i><span>Hotel</span></a>
+            <ul class="dropdown-menu">
+
+                <li class="{{ Request::is('admin/subscriber/show') ? 'active' : '' }}"><a class="nav-link"
+                        href="{{ route('admin_subscriber_show') }}"><i class="fa fa-angle-right"></i> Comodidades</a>
+                </li>
+
+                <li class="{{ Request::is('admin/subscriber/send-email') ? 'active' : '' }}"><a class="nav-link"
+                        href="{{ route('admin_subscriber_send_email') }}"><i class="fa fa-angle-right"></i> Quartos</a>
+                </li>
+            </ul>
+        </li>
+
 
         <div class="sidebar-brand sidebar-brand-sm">
             <a href="{{ route('admin_home') }}"></a>

@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Page;
 
-class AdminPageController extends Controller
+class PagesController extends Controller
 {
     public function about()
     {

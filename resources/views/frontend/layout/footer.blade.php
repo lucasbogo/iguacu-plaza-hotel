@@ -23,7 +23,7 @@
                         @endif
 
                         @if ($global_page->contact_status == 1)
-                            <li><a href="{{ route('contact')}}">{{$global_page->contact_heading}}</a></li>
+                            <li><a href="{{ route('contact') }}">{{ $global_page->contact_heading }}</a></li>
                         @endif
 
                     </ul>
@@ -66,10 +66,12 @@
                     </div>
                     <div class="list-item">
                         <div class="left">
-                            <i class="fa fa-volume-control-phone"></i>
+                            <i class="fab fa-whatsapp"></i>
                         </div>
                         <div class="right">
-                            +55 (45) 99919-0001
+                            <a href="https://wa.me/5545999510002" target="_blank">
+                                +55 (45) 99951-0002
+                            </a>
                         </div>
                     </div>
                     <div class="list-item">

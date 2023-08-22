@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Blog;
 
-class AdminBlogController extends Controller
+class BlogsController extends Controller
 {
     public function index()
     {

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Admin as AdminModel;
 
-class AdminProfileController extends Controller
+class ProfileController extends Controller
 {
     public function index()
     {
