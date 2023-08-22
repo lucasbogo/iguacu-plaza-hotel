@@ -125,7 +125,7 @@
 
                         @if ($global_page->contact_status == 1)
                             <li class="nav-item">
-                                <a href="contact.html" class="nav-link">Contato</a>
+                                <a href="{{ route('contact')}}" class="nav-link">Contato</a>
                             </li>
                         @endif
 

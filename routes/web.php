@@ -15,22 +15,26 @@ use App\Http\Controllers\Admin\AdminFaqController;
 use App\Http\Controllers\Admin\AdminPageController;
 
 use App\Http\Controllers\Frontend\WebsiteController;
-use App\Http\Controllers\Frontend\AboutController;
 use App\Http\Controllers\Frontend\BlogController;
-use App\Http\Controllers\Frontend\ImageGalleryController;
-use App\Http\Controllers\Frontend\VideoGalleryController;
-use App\Http\Controllers\Frontend\FaqController;
 use App\Http\Controllers\Frontend\PageController;
-use App\Http\Controllers\Frontend\TermsController;
+use App\Http\Controllers\Frontend\ContactController;
+
 
 
 /* Frontend Routes */
 
 Route::get('/', [WebsiteController::class, 'index'])->name('home');
 
+// Routes for blogs
+
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 
 Route::get('/blog/{id}', [BlogController::class, 'post'])->name('post');
+
+// Routes for contact
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+
+Route::post('/contact/send-email', [ContactController::class, 'send_email'])->name('contact_send_email');
 
 // Routes for pages
 
@@ -45,6 +49,7 @@ Route::get('/terms', [PageController::class, 'terms'])->name('terms');
 Route::get('/privacy', [PageController::class, 'privacy'])->name('privacy');
 
 Route::get('/faq', [PageController::class, 'faq'])->name('faq');
+
 
 /* User Routes */
 
@@ -242,3 +247,8 @@ Route::post('/admin/page/faq/update', [AdminPageController::class, 'faq_update']
 Route::get('/admin/page/blog', [AdminPageController::class, 'blog'])->name('admin_page_blog')->middleware('admin:admin');
 
 Route::post('/admin/page/blog/update', [AdminPageController::class, 'blog_update'])->name('admin_page_blog_update')->middleware('admin:admin');
+
+// Contact Page
+Route::get('/admin/page/contact', [AdminPageController::class, 'contact'])->name('admin_page_contact')->middleware('admin:admin');
+
+Route::post('/admin/page/contact/update', [AdminPageController::class, 'contact_update'])->name('admin_page_contact_update')->middleware('admin:admin');

@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>{{ $global_page->image_gallery_heading}}</h2>
+                    <h2>{{ $global_page->image_gallery_heading }}</h2>
                 </div>
             </div>
         </div>
@@ -17,7 +17,7 @@
             <div class="photo-gallery">
                 <div class="row">
 
-                    @foreach ($images as $item)
+                    @forelse ($images as $item)
                         <div class="col-lg-3 col-md-4 col-sm-6">
                             <div class="photo-thumb">
                                 <img src="{{ asset('uploads/image/' . $item->photo) }}" alt="">
@@ -31,10 +31,23 @@
                                 {{ $item->caption }}
                             </div>
                         </div>
+                    @empty
                         <div class="col-md-12">
-                            {{ $images->links() }}
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-md-8">
+                                        <div class="alert alert-info" role="alert">
+                                            Não há imagens disponíveis no momento.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    @endforeach
+                    @endforelse
+
+                    <div class="col-md-12">
+                        {{ $images->links() }}
+                    </div>
                 </div>
             </div>
         </div>

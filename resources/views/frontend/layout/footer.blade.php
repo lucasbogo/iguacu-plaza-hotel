@@ -15,7 +15,7 @@
                         @endif
 
                         @if ($global_page->video_gallery_status == 1)
-                            <li><a href="{{ route('video_gallery') }}">Galeria de Fotos</a></li>
+                            <li><a href="{{ route('video_gallery') }}">Galeria de Videos</a></li>
                         @endif
 
                         @if ($global_page->blog_status == 1)
@@ -23,7 +23,7 @@
                         @endif
 
                         @if ($global_page->contact_status == 1)
-                            <li><a href="contact.html">Contato</a></li>
+                            <li><a href="{{ route('contact')}}">{{$global_page->contact_heading}}</a></li>
                         @endif
 
                     </ul>

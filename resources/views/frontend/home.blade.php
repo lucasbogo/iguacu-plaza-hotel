@@ -8,7 +8,8 @@
                 @foreach ($sliders as $item)
                     <!-- Add an if directive to check if the current slider is active -->
                     @if ($item->status)
-                        <div class="item" style="background-image:url({{ asset('uploads/slider/' . $item->photo) }})">
+                        <div class="item"
+                            style="background-image: url({{ asset('uploads/slider/' . $item->photo) }}); background-size: cover; background-repeat: no-repeat; background-position: center;">
                             <div class="bg"></div>
                             <div class="text">
                                 <h2>{{ $item->heading }}</h2>

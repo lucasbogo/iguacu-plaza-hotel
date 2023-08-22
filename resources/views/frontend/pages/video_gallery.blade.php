@@ -34,7 +34,15 @@
                         @endif
                     @empty
                         <div class="col-md-12">
-                            <p>Não há vídeos disponíveis no momento.</p>
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-md-8">
+                                        <div class="alert alert-info" role="alert">
+                                            Não há vídeos disponíveis no momento.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     @endforelse
                     <div class="col-md-12">

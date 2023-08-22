@@ -122,4 +122,21 @@ class AdminPageController extends Controller
 
         return redirect()->back()->with('success', 'Página "Blog" atualizada com sucesso!');
     }
+
+    public function contact()
+    {
+        $page = Page::where('id', 1)->first();
+        return view('admin.pages.contact', compact('page'));
+    }
+
+    public function contact_update(Request $request)
+    {
+        $page = Page::where('id', 1)->first();
+        $page->contact_heading = $request->contact_heading;
+        $page->contact_map = $request->contact_map;
+        $page->contact_status = $request->contact_status;
+        $page->update();
+
+        return redirect()->back()->with('success', 'Página "Contato" atualizada com sucesso!');
+    }
 }
