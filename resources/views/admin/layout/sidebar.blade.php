@@ -9,19 +9,18 @@
 
         <li
             class="nav-item dropdown {{ Request::is('admin/subscriber/show') || Request::is('admin/subscriber/send-email') ? 'active' : '' }}">
-            <a href="#" class="nav-link has-dropdown"><i class="fa fa-users"></i><span>Hotel</span></a>
+            <a href="#" class="nav-link has-dropdown"><i class="fa fa-building"></i><span> Hotel</span></a>
             <ul class="dropdown-menu">
 
                 <li class="{{ Request::is('admin/subscriber/show') ? 'active' : '' }}"><a class="nav-link"
-                        href="{{ route('admin_subscriber_show') }}"><i class="fa fa-angle-right"></i> Comodidades</a>
+                        href="#"><i class="fa fa-angle-right"></i> Comodidades</a>
                 </li>
 
                 <li class="{{ Request::is('admin/subscriber/send-email') ? 'active' : '' }}"><a class="nav-link"
-                        href="{{ route('admin_subscriber_send_email') }}"><i class="fa fa-angle-right"></i> Quartos</a>
+                        href="#"><i class="fa fa-angle-right"></i> Quartos</a>
                 </li>
             </ul>
         </li>
-
 
         <div class="sidebar-brand sidebar-brand-sm">
             <a href="{{ route('admin_home') }}"></a>
@@ -46,7 +45,7 @@
                     ? 'active'
                     : '' }}">
                 <a href="#" class="nav-link has-dropdown" title="Editar títulos e status das páginas"><i
-                        class="fa fa-hand-o-right"></i><span>Páginas</span></a>
+                        class="fa fa-tasks"></i><span>Páginas</span></a>
                 <ul class="dropdown-menu">
 
                     <li class="{{ Request::is('admin/page/about') ? 'active' : '' }}"><a class="nav-link"
@@ -86,31 +85,31 @@
             </li>
 
             <li class="{{ Request::is('admin/slide/*') ? 'active' : '' }}"><a class="nav-link"
-                    href="{{ route('admin_slider') }}"><i class="fa fa-hand-o-right"></i>
+                    href="{{ route('admin_slider') }}"><i class="fa fa-picture-o"></i>
                     <span>Imagens Slide</span></a></li>
 
             <li class="{{ Request::is('admin/feature/*') ? 'active' : '' }}"><a class="nav-link"
-                    href="{{ route('admin_feature') }}"><i class="fa fa-hand-o-right"></i>
+                    href="{{ route('admin_feature') }}"><i class="fa fa-font-awesome"></i>
                     <span>Ícones/Características</span></a></li>
 
             <li class="{{ Request::is('admin/testimonial/*') ? 'active' : '' }}"><a class="nav-link"
-                    href="{{ route('admin_testimonial') }}"><i class="fa fa-hand-o-right"></i>
+                    href="{{ route('admin_testimonial') }}"><i class="fa fa-user-circle"></i>
                     <span>Avaliações</span></a></li>
 
             <li class="{{ Request::is('admin/blog/*') ? 'active' : '' }}"><a class="nav-link"
-                    href="{{ route('admin_blog') }}"><i class="fa fa-hand-o-right"></i>
+                    href="{{ route('admin_blog') }}"><i class="fa fa-commenting"></i>
                     <span>Blog</span></a></li>
 
             <li class="{{ Request::is('admin/image/*') ? 'active' : '' }}"><a class="nav-link"
-                    href="{{ route('admin_image') }}"><i class="fa fa-hand-o-right"></i>
+                    href="{{ route('admin_image') }}"><i class="fa fa-file-image-o"></i>
                     <span>Galeria de Fotos</span></a></li>
 
             <li class="{{ Request::is('admin/video/*') ? 'active' : '' }}"><a class="nav-link"
-                    href="{{ route('admin_video') }}"><i class="fa fa-hand-o-right"></i>
+                    href="{{ route('admin_video') }}"><i class="fa fa-youtube"></i>
                     <span>Galeria de Vídeos</span></a></li>
 
             <li class="{{ Request::is('admin/faq/*') ? 'active' : '' }}"><a class="nav-link"
-                    href="{{ route('admin_faq') }}"><i class="fa fa-hand-o-right"></i>
+                    href="{{ route('admin_faq') }}"><i class="fa fa-question-circle"></i>
                     <span>Perguntas Frequentes</span></a></li>
         </ul>
     </aside>
