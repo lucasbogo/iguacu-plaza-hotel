@@ -167,7 +167,7 @@ class PagesController extends Controller
         $page = Page::where('id', 1)->first();
         $page->checkout_heading = $request->checkout_heading;
         $page->checkout_status = $request->checkout_status;
-        $page->update();
+        $page->update();    
 
         return redirect()->back()->with('success', 'Página "Checkout" atualizada com sucesso!');
     }

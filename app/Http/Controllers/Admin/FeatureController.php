@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Feature;
 
-class AdminFeatureController extends Controller
+class FeatureController extends Controller
 {
     public function index()
     {
