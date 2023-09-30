@@ -252,3 +252,18 @@ Route::post('/admin/page/blog/update', [PagesController::class, 'blog_update'])-
 Route::get('/admin/page/contact', [PagesController::class, 'contact'])->name('admin_page_contact')->middleware('admin:admin');
 
 Route::post('/admin/page/contact/update', [PagesController::class, 'contact_update'])->name('admin_page_contact_update')->middleware('admin:admin');
+
+// Cart Page
+Route::get('/admin/page/cart', [PagesController::class, 'cart'])->name('admin_page_cart')->middleware('admin:admin');
+
+Route::post('admin/page/cart/update', [PagesController::class, 'cart_update'])->name('admin_page_cart_update')->middleware('admin:admin');
+
+// Checkout Page
+Route::get('/admin/page/checkout', [PagesController::class, 'checkout'])->name('admin_page_checkout')->middleware('admin:admin');
+
+Route::post('admin/page/checkout/update', [PagesController::class, 'checkout_update'])->name('admin_page_checkout_update')->middleware('admin:admin');
+
+// Payment Page
+Route::get('admin/page/payment', [pagesController::class, 'payment'])->name('admin_page_payment')->middleware('admin:admin');
+
+Route::post('admin/page/payment/update', [PagesController::class, 'payment_update'])->name('admin_page_payment_update')->middleware('admin:admin');
