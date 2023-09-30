@@ -139,4 +139,55 @@ class PagesController extends Controller
 
         return redirect()->back()->with('success', 'Página "Contato" atualizada com sucesso!');
     }
+
+    public function cart()
+    {
+        $page = Page::where('id', 1)->first();
+        return view('admin.pages.cart', compact('page'));
+    }
+
+    public function cart_update(Request $request)
+    {
+        $page = Page::where('id', 1)->first();
+        $page->cart_heading = $request->cart_heading;
+        $page->cart_status = $request->cart_status;
+        $page->update();
+
+        return redirect()->back()->with('success', 'Página "Carrinho" atualizada com sucesso!');
+    }
+
+    public function checkout()
+    {
+        $page = Page::where('id', 1)->first();
+        return view('admin.pages.checkout', compact('page'));
+    }
+
+    public function checkout_update(Request $request)
+    {
+        $page = Page::where('id', 1)->first();
+        $page->checkout_heading = $request->checkout_heading;
+        $page->checkout_status = $request->checkout_status;
+        $page->update();
+
+        return redirect()->back()->with('success', 'Página "Checkout" atualizada com sucesso!');
+    }
+
+    public function payment()
+    {
+        $page = Page::where('id', 1)->first();
+        return view('admin.pages.payment', compact('page'));
+    }
+
+    public function payment_update(Request $request)
+    {
+        $page = Page::where('id', 1)->first();
+        $page->payment_heading = $request->payment_heading;
+        $page->payment_status = $request->payment_status;
+        $page->update();
+
+        return redirect()->back()->with('success','Página "Pagamento" atualizada com sucesso!');
+    }
 }
+
+
+
