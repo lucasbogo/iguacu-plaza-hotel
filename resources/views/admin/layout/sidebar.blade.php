@@ -41,7 +41,10 @@
                 Request::is('admin/page/privacy') ||
                 Request::is('admin/page/faq') ||
                 Request::is('admin/page/blog') ||
-                Request::is('admin/page/contact')
+                Request::is('admin/page/contact') ||
+                Request::is('admin/page/cart') ||
+                Request::is('admin/page/checkout') ||
+                Request::is('admin/page/payment')
                     ? 'active'
                     : '' }}">
                 <a href="#" class="nav-link has-dropdown" title="Editar títulos e status das páginas"><i
@@ -79,6 +82,18 @@
                     <li class="{{ Request::is('admin/page/contact') ? 'active' : '' }}"><a class="nav-link"
                             href="{{ route('admin_page_contact') }}"><i class="fa fa-angle-right"></i>
                             Contato</a></li>
+
+                    <li class="{{ Request::is('admin/page/cart') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('admin_page_cart') }}"><i class="fa fa-angle-right"></i>
+                            Carrinho</a></li>
+
+                    <li class="{{ Request::is('admin/page/checkout') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('admin_page_checkout') }}"><i class="fa fa-angle-right"></i>
+                            Checkout</a></li>
+
+                    <li class="{{ Request::is('admin/page/payment') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('admin_page_payment') }}"><i class="fa fa-angle-right"></i>
+                            Pagamento</a></li>
 
 
                 </ul>
