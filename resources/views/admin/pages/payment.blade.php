@@ -4,7 +4,7 @@
     {{-- <div>
         <img src="{{ asset('uploads/logo-hotel.png') }}" alt="Logo" alt="Logo" style="padding: 10px;"></a>
     </div> --}}
-    <h3>Editar Página "Checkout"</h3>
+    <h3>Editar Página "Pagamento"</h3>
 @endsection
 
 @section('main_content')
@@ -13,21 +13,21 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{ route('admin_page_checkout_update') }}" method="post">
+                        <form action="{{ route('admin_page_payment_update') }}" method="post">
                             @csrf
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="mb-4">
                                         <label class="form-label">Titulo *</label>
-                                        <input type="text" class="form-control" name="checkout_heading"
-                                            value="{{ $page->checkout_heading }}">
+                                        <input type="text" class="form-control" name="payment_heading"
+                                            value="{{ $page->payment_heading }}">
                                     </div>
                                     <div class="mb-4">
                                         <label class="form-label">Status * (esconder ou não da página cliente)</label>
-                                        <select name="checkout_status" class="form-control">
-                                            <option value="1" @if ($page->checkout_status == 1) selected @endif>Mostrar
+                                        <select name="about_status" class="form-control">
+                                            <option value="1" @if ($page->payment_status == 1) selected @endif>Mostrar
                                             </option>
-                                            <option value="0" @if ($page->checkout_status == 0) selected @endif>
+                                            <option value="0" @if ($page->payment_status == 0) selected @endif>
                                                 Esconder</option>
                                         </select>
                                     </div>

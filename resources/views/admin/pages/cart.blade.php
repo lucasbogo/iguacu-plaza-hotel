@@ -24,7 +24,7 @@
                                     </div>
                                     <div class="mb-4">
                                         <label class="form-label">Status * (esconder ou não da página cliente)</label>
-                                        <select name="about_status" class="form-control">
+                                        <select name="cart_status" class="form-control">
                                             <option value="1" @if ($page->cart_status == 1) selected @endif>Mostrar
                                             </option>
                                             <option value="0" @if ($page->cart_status == 0) selected @endif>
