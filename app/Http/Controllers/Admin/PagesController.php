@@ -167,7 +167,7 @@ class PagesController extends Controller
         $page = Page::where('id', 1)->first();
         $page->checkout_heading = $request->checkout_heading;
         $page->checkout_status = $request->checkout_status;
-        $page->update();    
+        $page->update();
 
         return redirect()->back()->with('success', 'Página "Checkout" atualizada com sucesso!');
     }
@@ -185,9 +185,38 @@ class PagesController extends Controller
         $page->payment_status = $request->payment_status;
         $page->update();
 
-        return redirect()->back()->with('success','Página "Pagamento" atualizada com sucesso!');
+        return redirect()->back()->with('success', 'Página "Pagamento" atualizada com sucesso!');
+    }
+
+    public function signup()
+    {
+        $page = Page::where('id', 1)->first();
+        return view('admin.pages.signup', compact('page'));
+    }
+
+    public function signup_update(Request $request)
+    {
+        $page = Page::where('id', 1)->first();
+        $page->signup_heading = $request->signup_heading;
+        $page->signup_status = $request->signup_status;
+        $page->update();
+
+        return redirect()->back()->with('success', 'Página "Registrar" atualizada com sucesso!');
+    }
+
+    public function signin()
+    {
+        $page = Page::where('id', 1)->first();
+        return view('admin.pages.signup', compact('page'));
+    }
+
+    public function signin_update(Request $request)
+    {
+        $page = Page::where('id', 1)->first();
+        $page->signin_heading = $request->signin_heading;
+        $page->signin_status = $request->signin_status;
+        $page->update();
+
+        return redirect()->back()->with('success', 'Página "Login" atualizada com sucesso!');
     }
 }
-
-
-

@@ -269,9 +269,9 @@ Route::get('admin/page/payment', [PagesController::class, 'payment'])->name('adm
 Route::post('admin/page/payment/update', [PagesController::class, 'payment_update'])->name('admin_page_payment_update')->middleware('admin:admin');
 
 // Sign-Up Page
-Route::get('admin/page/sign-up', [PagesController::class,'sign_up'])->name('admin_page_signup')->middleware('admin:admin');
+Route::get('admin/page/sign-up', [PagesController::class,'signup'])->name('admin_page_signup')->middleware('admin:admin');
 
-Route::post('admin/page/sign-up/update', [PagesController::class,'sign_up_update'])->name('admin_page_signup_update')->middleware('addmin:admin');
+Route::post('admin/page/sign-up/update', [PagesController::class,'signup_update'])->name('admin_page_signup_update')->middleware('addmin:admin');
 
 // Sign-In Page
 Route::get('admin/page/sign-in', [PagesController::class,'sign_in'])->name('admin_page_signin')->middleware('admin:admin');

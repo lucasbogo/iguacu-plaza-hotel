@@ -44,7 +44,9 @@
                 Request::is('admin/page/contact') ||
                 Request::is('admin/page/cart') ||
                 Request::is('admin/page/checkout') ||
-                Request::is('admin/page/payment')
+                Request::is('admin/page/payment') ||
+                Request::is('admin/page/signup') ||
+                Request::is('admin/page/signin')
                     ? 'active'
                     : '' }}">
                 <a href="#" class="nav-link has-dropdown" title="Editar títulos e status das páginas"><i
@@ -95,7 +97,13 @@
                             href="{{ route('admin_page_payment') }}"><i class="fa fa-angle-right"></i>
                             Pagamento</a></li>
 
+                    <li class="{{ Request::is('admin/page/sign-up') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('admin_page_signup') }}"><i class="fa fa-angle-right"></i>
+                            Registrar</a></li>
 
+                    <li class="{{ Request::is('admin/page/sign-in') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('admin_page_signin') }}"><i class="fa fa-angle-right"></i>
+                            Login</a></li>
                 </ul>
             </li>
 
