@@ -207,7 +207,7 @@ class PagesController extends Controller
     public function signin()
     {
         $page = Page::where('id', 1)->first();
-        return view('admin.pages.signup', compact('page'));
+        return view('admin.pages.signin', compact('page'));
     }
 
     public function signin_update(Request $request)
