@@ -39,8 +39,14 @@
 
             <div class="col-md-5 right-side">
                 <ul class="right">
-                    <li class="menu"><a href="cart.html">Carrinho</a></li>
-                    <li class="menu"><a href="checkout.html">Checkout</a></li>
+                    @if ($global_page->cart_status == 1)
+                        <li class="menu"><a href="cart.html">{{ $global_page->cart_heading }}</a></li>
+                    @endif
+
+                    @if ($global_page->checkout_status == 1)
+                        <li class="menu"><a href="checkout.html">{{ $global_page->checkout_heading }}</a></li>
+                    @endif
+
                     <li class="menu"><a href="signup.html">Registrar</a></li>
                     <li class="menu"><a href="login.html">Login</a></li>
                 </ul>
@@ -125,7 +131,7 @@
 
                         @if ($global_page->contact_status == 1)
                             <li class="nav-item">
-                                <a href="{{ route('contact')}}" class="nav-link">Contato</a>
+                                <a href="{{ route('contact') }}" class="nav-link">Contato</a>
                             </li>
                         @endif
 
