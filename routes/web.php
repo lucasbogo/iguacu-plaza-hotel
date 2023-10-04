@@ -18,15 +18,14 @@ use App\Http\Controllers\Frontend\WebsiteController;
 use App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\Frontend\ContactController;
+use App\Http\Controllers\Frontend\SubscriberController;
 
 
 
 /* Frontend Routes */
-
 Route::get('/', [WebsiteController::class, 'index'])->name('home');
 
 // Routes for blogs
-
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 
 Route::get('/blog/{id}', [BlogController::class, 'post'])->name('post');
@@ -36,8 +35,13 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 
 Route::post('/contact/send-email', [ContactController::class, 'send_email'])->name('contact_send_email');
 
-// Routes for pages
+// Routes for Newsletter Subscribers
+Route::post('/subscriber/send-email', [SubscriberController::class, 'send_email'])->name('subscriber_send_email');
 
+Route::get('/subscriber/verify/{email}/{token}', [SubscriberController::class, 'verify'])->name('subscriber_verify');
+
+
+// Routes for pages
 Route::get('/image-gallery', [PageController::class, 'image_gallery'])->name('image_gallery');
 
 Route::get('/video-gallery', [PageController::class, 'video_gallery'])->name('video_gallery');
@@ -52,7 +56,6 @@ Route::get('/faq', [PageController::class, 'faq'])->name('faq');
 
 
 /* User Routes */
-
 Route::get('/dashboard', [WebsiteController::class, 'dashboard'])->name('dashboard')->middleware('auth');
 
 Route::get('/login', [WebsiteController::class, 'login'])->name('login');
