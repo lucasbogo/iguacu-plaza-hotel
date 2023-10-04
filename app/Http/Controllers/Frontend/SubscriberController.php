@@ -28,7 +28,7 @@ class SubscriberController extends Controller
             return response()->json(['code' => 0, 'error_message' => $validator->errors()->toArray()]);
         } else {
 
-            $token = hash('sha56', time());
+            $token = hash('sha256', time());
 
             $obj = new Subscriber();
             $obj->email = $request->email;
@@ -52,7 +52,19 @@ class SubscriberController extends Controller
         }
     }
 
-    public function verify()
+    public function verify($email, $token)
     {
+        $subscriber = Subscriber::where('email', $email)->where('token', $token)->first();
+
+        if ($subscriber) {
+
+            $subscriber->token = '';
+            $subscriber->status = 1;
+            $subscriber->update();
+
+            return redirect()->route('home')->with('success', 'Inscrição em nossa newsletter realizada com sucesso!');
+        } else {
+            return redirect()->route('home')->with('error', 'Não foi possṕivel realizar sua inscrição');
+        }
     }
 }

@@ -18,7 +18,12 @@
 
 <!-- Add your custom icon -->
 <style>
-  .fa-swimming-pool:before {
-    content: url('/path/to/icons/swimming-pool.svg'); /* Replace with the path to your image file */
-  }
+    .fa-swimming-pool:before {
+        content: url('/path/to/icons/swimming-pool.svg');
+        /* Replace with the path to your image file */
+    }
+
+    .text_danger {
+        color: rgb(238, 61, 61);
+    }
 </style>

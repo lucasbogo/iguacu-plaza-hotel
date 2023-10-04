@@ -141,6 +141,7 @@
                     $(form).find('span.error-text').text('');
                 },
                 success: function(data) {
+                    console.log(data);
                     $('#loader').hide();
                     if (data.code == 0) {
                         $.each(data.error_message, function(prefix, val) {

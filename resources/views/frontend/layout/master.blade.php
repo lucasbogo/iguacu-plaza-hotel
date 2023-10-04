@@ -40,7 +40,27 @@
 
     @include('frontend.layout.footer')
 
-    @include('frontend.layout.scripts_footer')
+    @include('frontend.layout.scripts_footer')]
+      
+    @if (session()->get('error'))
+        <script>
+            iziToast.error({
+                title: 'Erro',
+                message: '{{ session()->get('error') }}',
+                position: 'topRight'
+            });
+        </script>
+    @endif
+
+    @if (session()->get('success'))
+        <script>
+            iziToast.success({
+                title: 'Sucesso',
+                message: '{{ session()->get('success') }}',
+                position: 'topRight'
+            });
+        </script>
+    @endif
 
 </body>
 
