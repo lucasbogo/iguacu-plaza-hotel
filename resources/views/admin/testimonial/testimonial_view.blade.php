@@ -21,7 +21,7 @@
                             <table class="table table-bordered" id="example1">
                                 <thead>
                                     <tr>
-                                        <th>Referencia</th>
+                                        {{-- <th>Referencia</th> --}}
                                         <th>Foto</th>
                                         <th>Nome</th>
                                         <th>Titulo Profissional</th>
@@ -32,10 +32,10 @@
                                 <tbody>
                                     @foreach ($testimonials as $row)
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
+                                            {{-- <td>{{ $loop->iteration }}</td> --}}
                                             <td>
                                                 <img src="{{ asset('uploads/testimonial/' . $row->photo) }}" alt=""
-                                                    style="width: 200px; height: 150px;">
+                                                    style="width: 100px; height: 100px;">
                                             </td>
                                             <td>{{ $row->name }}</td>
                                             <td>{{ $row->designation }}</td>

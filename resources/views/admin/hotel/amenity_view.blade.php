@@ -1,14 +1,11 @@
 @extends('admin.layout.master')
 
 @section('heading')
-    {{-- <div>
-        <img src="{{ asset('uploads/logo-hotel.png') }}" alt="Logo" alt="Logo" style="padding: 10px;"></a>
-    </div> --}}
-    <h3>Blog</h3>
+    <h3>Comodidades</h3>
 @endsection
 
 @section('right_top_button')
-    <a href="{{ route('admin_blog_add') }}" class="btn btn-success"><i class="fa fa-plus"></i>Adicionar</a>
+    <a href="{{ route('admin_amenity_add') }}" class="btn btn-success"><i class="fa fa-plus"></i>Adicionar</a>
 @endsection
 
 @section('main_content')
@@ -22,36 +19,33 @@
                                 <thead>
                                     <tr>
                                         {{-- <th>Referencia</th> --}}
-                                        <th>Foto</th>
-                                        <th>Titulo</th>
-                                        <th>Autor</th>
-                                        <th>Descrição Curta</th>
+                                        <th>Nome</th>
                                         <th>Ação</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($blogs as $row)
+                                    @foreach ($amenities as $row)
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
+                                            {{-- <td>{{ $loop->iteration }}</td> --}}
                                             <td>
-                                                <img src="{{ asset('uploads/blog/' . $row->photo) }}" alt=""
-                                                    class="w_200">
+                                                {{ $row->name }}
                                             </td>
-                                            <td>{{ $row->title }}</td>
-                                            <td>{{ $row->author }}</td>
-                                            <td>{{ $row->short_content }}</td>
                                             <td class="pt_10 pb_10">
-                                                <a href="{{ route('admin_blog_edit', $row->id) }}"
+                                                <a href="{{ route('admin_amenity_edit', $row->id) }}"
                                                     class="btn btn-primary">Editar</a>
-                                                <form action="{{ route('admin_blog_activate', $row->id) }}" method="put"
-                                                    style="display: inline;">
+                                                <form action="{{ route('admin_amenity_activate', $row->id) }}"
+                                                    method="POST" style="display: inline;">
                                                     @csrf
+                                                    <!-- Add a hidden input field to specify the HTTP method as PUT -->
+                                                    <input type="hidden" name="_method" value="PUT">
                                                     <button type="submit"
                                                         class="btn btn-{{ $row->status ? 'warning' : 'success' }}">
                                                         {{ $row->status ? 'Desativar' : 'Ativar' }}
                                                     </button>
                                                 </form>
-                                                <a href="{{ route('admin_blog_delete', $row->id) }}" class="btn btn-danger"
+
+                                                <a href="{{ route('admin_amenity_delete', $row->id) }}"
+                                                    class="btn btn-danger"
                                                     onClick="return confirm('Tem Certeza?');">Deletar</a>
                                             </td>
                                         </tr>

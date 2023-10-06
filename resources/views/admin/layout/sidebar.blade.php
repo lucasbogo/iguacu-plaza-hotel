@@ -7,20 +7,6 @@
             <h4 style="margin-top: 10px; font-weight: bold;">Configurações</h4>
         </div>
 
-        <li
-            class="nav-item dropdown {{ Request::is('admin/subscriber/show') || Request::is('admin/subscriber/send-email') ? 'active' : '' }}">
-            <a href="#" class="nav-link has-dropdown"><i class="fa fa-building"></i><span> Hotel</span></a>
-            <ul class="dropdown-menu">
-
-                <li class="{{ Request::is('admin/subscriber/show') ? 'active' : '' }}"><a class="nav-link"
-                        href="#"><i class="fa fa-angle-right"></i> Comodidades</a>
-                </li>
-
-                <li class="{{ Request::is('admin/subscriber/send-email') ? 'active' : '' }}"><a class="nav-link"
-                        href="#"><i class="fa fa-angle-right"></i> Quartos</a>
-                </li>
-            </ul>
-        </li>
 
         <div class="sidebar-brand sidebar-brand-sm">
             <a href="{{ route('admin_home') }}"></a>
@@ -31,6 +17,21 @@
             <li class="{{ Request::is('admin/home') ? 'active' : '' }}"><a class="nav-link"
                     href="{{ route('admin_home') }}"><i class="fa fa-home"></i>
                     <span>Dashboard</span></a></li>
+
+            <li
+                class="nav-item dropdown {{ Request::is('admin/subscriber/show') || Request::is('admin/subscriber/send-email') ? 'active' : '' }}">
+                <a href="#" class="nav-link has-dropdown"><i class="fa fa-building"></i><span> Hotel</span></a>
+                <ul class="dropdown-menu">
+
+                    <li class="{{ Request::is('admin/subscriber/show') ? 'active' : '' }}"><a class="nav-link"
+                            href="#"><i class="fa fa-angle-right"></i> Comodidades</a>
+                    </li>
+
+                    <li class="{{ Request::is('admin/subscriber/send-email') ? 'active' : '' }}"><a class="nav-link"
+                            href="#"><i class="fa fa-angle-right"></i> Quartos</a>
+                    </li>
+                </ul>
+            </li>
 
             <li
                 class="nav-item dropdown {{ Request::is('admin/page/about') ||
@@ -97,11 +98,11 @@
                             href="{{ route('admin_page_payment') }}"><i class="fa fa-angle-right"></i>
                             Pagamento</a></li>
 
-                    <li class="{{ Request::is('admin/page/sign-up') ? 'active' : '' }}"><a class="nav-link"
+                    <li class="{{ Request::is('admin/page/signup') ? 'active' : '' }}"><a class="nav-link"
                             href="{{ route('admin_page_signup') }}"><i class="fa fa-angle-right"></i>
                             Registrar</a></li>
 
-                    <li class="{{ Request::is('admin/page/sign-in') ? 'active' : '' }}"><a class="nav-link"
+                    <li class="{{ Request::is('admin/page/signin') ? 'active' : '' }}"><a class="nav-link"
                             href="{{ route('admin_page_signin') }}"><i class="fa fa-angle-right"></i>
                             Login</a></li>
                 </ul>
@@ -134,6 +135,27 @@
             <li class="{{ Request::is('admin/faq/*') ? 'active' : '' }}"><a class="nav-link"
                     href="{{ route('admin_faq') }}"><i class="fa fa-question-circle"></i>
                     <span>Perguntas Frequentes</span></a></li>
-        </ul>
+
+            <li
+                class="nav-item dropdown {{ Request::is('admin/subscribers') || Request::is('admin/subscribers/send-email') ? 'active' : '' }}">
+                <a href="#" class="nav-link has-dropdown" title="Editar títulos e status das páginas">
+                    <i class="fa fa-tasks"></i>
+                    <span>Inscritos na newsletter</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="{{ Request::is('admin/subscribers') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('admin_subscribers') }}">
+                            <i class="fa fa-angle-right"></i>
+                            Todos os Inscritos
+                        </a>
+                    </li>
+                    <li class="{{ Request::is('admin/subscribers/send-email') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('admin_subscribers_send_email') }}">
+                            <i class="fa fa-angle-right"></i>
+                            Enviar E-mail
+                        </a>
+                    </li>
+                </ul>
+            </li>
     </aside>
 </div>

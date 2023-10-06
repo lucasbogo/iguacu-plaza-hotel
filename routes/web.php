@@ -13,14 +13,14 @@ use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\VideoController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\PagesController;
+use App\Http\Controllers\Admin\SubscribersController;
 
 use App\Http\Controllers\Frontend\WebsiteController;
 use App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\SubscriberController;
-
-
+use App\Models\Amenity;
 
 /* Frontend Routes */
 Route::get('/', [WebsiteController::class, 'index'])->name('home');
@@ -214,6 +214,31 @@ Route::put('/admin/faq/activate/{id}', [FaqController::class, 'activate'])->name
 
 Route::get('/admin/faq/delete/{id}', [FaqController::class, 'delete'])->name('admin_faq_delete')->middleware('admin:admin');
 
+/* Routes Admin Amenities */
+
+Route::get('/admin/amenity/view', [AmenityController::class, 'index'])->name('admin_amenity')->middleware('admin:admin');
+
+Route::get('/admin/amenity/add', [AmenityController::class, 'add'])->name('admin_amenity_add')->middleware('admin:admin');
+
+Route::post('/admin/amenity/store', [AmenityController::class, 'store'])->name('admin_amenity_store')->middleware('admin:admin');
+
+Route::get('/admin/amenity/edit/{id}', [AmenityController::class, 'edit'])->name('admin_amenity_edit')->middleware('admin:admin');
+
+Route::post('/admin/amenity/update/{id}', [AmenityController::class, 'update'])->name('admin_amenity_update')->middleware('admin:admin');
+
+Route::put('/admin/amenity/activate/{id}', [AmenityController::class, 'activate'])->name('admin_amenity_activate')->middleware('admin:admin');
+
+Route::get('/admin/amenity/delete/{id}', [AmenityController::class, 'delete'])->name('admin_amenity_delete')->middleware('admin:admin');
+
+/* Routes Admin Subscribers */
+
+Route::get('/admin/subscribers', [SubscribersController::class, 'show'])->name('admin_subscribers')->middleware('admin:admin');
+
+Route::get('/admin/subscribers/send-email', [SubscribersController::class, 'send_email'])->name('admin_subscribers_send_email')->middleware('admin:admin');
+
+Route::post('/admin/subscribers/send-email-submit', [SubscribersController::class, 'send_email_submit'])->name('admin_subscribers_send_email_submit')->middleware('admin:admin');
+
+
 /*** Routes Admin Edit Pages Frontend ***/
 
 // About Page
@@ -272,11 +297,11 @@ Route::get('admin/page/payment', [PagesController::class, 'payment'])->name('adm
 Route::post('admin/page/payment/update', [PagesController::class, 'payment_update'])->name('admin_page_payment_update')->middleware('admin:admin');
 
 // Sign-Up Page
-Route::get('admin/page/sign-up', [PagesController::class,'signup'])->name('admin_page_signup')->middleware('admin:admin');
+Route::get('admin/page/signup', [PagesController::class,'signup'])->name('admin_page_signup')->middleware('admin:admin');
 
-Route::post('admin/page/sign-up/update', [PagesController::class,'signup_update'])->name('admin_page_signup_update')->middleware('admin:admin');
+Route::post('admin/page/signup/update', [PagesController::class,'signup_update'])->name('admin_page_signup_update')->middleware('admin:admin');
 
 // Sign-In Page
-Route::get('admin/page/sign-in', [PagesController::class,'signin'])->name('admin_page_signin')->middleware('admin:admin');
+Route::get('admin/page/signin', [PagesController::class,'signin'])->name('admin_page_signin')->middleware('admin:admin');
 
-Route::post('admin/page/sign-in/update', [PagesController::class,'signin_update'])->name('admin_page_signin_update')->middleware('admin:admin');
+Route::post('admin/page/signin/update', [PagesController::class,'signin_update'])->name('admin_page_signin_update')->middleware('admin:admin');
