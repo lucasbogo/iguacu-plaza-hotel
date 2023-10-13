@@ -19,15 +19,15 @@
                     <span>Dashboard</span></a></li>
 
             <li
-                class="nav-item dropdown {{ Request::is('admin/subscriber/show') || Request::is('admin/subscriber/send-email') ? 'active' : '' }}">
+                class="nav-item dropdown {{ Request::is('admin/amenity/view') || Request::is('#') ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown"><i class="fa fa-building"></i><span> Hotel</span></a>
                 <ul class="dropdown-menu">
 
-                    <li class="{{ Request::is('admin/subscriber/show') ? 'active' : '' }}"><a class="nav-link"
-                            href="#"><i class="fa fa-angle-right"></i> Comodidades</a>
+                    <li class="{{ Request::is('admin/amenity/view') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('admin_amenity')}}"><i class="fa fa-angle-right"></i> Comodidades</a>
                     </li>
 
-                    <li class="{{ Request::is('admin/subscriber/send-email') ? 'active' : '' }}"><a class="nav-link"
+                    <li class="#"><a class="nav-link"
                             href="#"><i class="fa fa-angle-right"></i> Quartos</a>
                     </li>
                 </ul>

@@ -11,12 +11,12 @@ class AmenityController extends Controller
     public function index()
     {
         $amenities = Amenity::get();
-        return view('admin.amenities.amenity_view', compact('amenities'));
+        return view('admin.amenity.amenity_view', compact('amenities'));
     }
 
     public function add()
     {
-        return view('admin.amenities.amenities_add');
+        return view('admin.amenity.amenity_add');
     }
 
     public function store(Request $request)
@@ -29,13 +29,13 @@ class AmenityController extends Controller
         $amenities->name = $request->name;
         $amenities->save();
 
-        return redirect()->route('admin_amenities')->with('success', 'Comodidade Adicionado com Sucesso!');
+        return redirect()->route('admin_amenity')->with('success', 'Comodidade Adicionado com Sucesso!');
     }
 
     public function edit($id)
     {
         $amenities = Amenity::findOrFail($id);
-        return view('admin.amenities.amenities_edit', compact('amenities'));
+        return view('admin.amenity.amenity_edit', compact('amenities'));
     }
 
 
@@ -50,7 +50,7 @@ class AmenityController extends Controller
         $amenities->name = $request->name;
         $amenities->save();
 
-        return redirect()->route('admin_amenities')->with('success', 'Comodidade Atualizado com Sucesso!');
+        return redirect()->route('admin_amenity')->with('success', 'Comodidade Atualizado com Sucesso!');
     }
 
     public function activate($id)
@@ -59,7 +59,7 @@ class AmenityController extends Controller
         $amenities->status = !$amenities->status; // Toggle the status (if it's 1, make it 0, and vice versa)
         $amenities->save();
 
-        return redirect()->route('admin_amenities')->with('success', 'Comodidade Ativada/Desativada com Sucesso!');
+        return redirect()->route('admin_amenity')->with('success', 'Comodidade Ativada/Desativada com Sucesso!');
     }
 
     public function delete($id)
@@ -67,6 +67,6 @@ class AmenityController extends Controller
         $amenities = Amenity::findOrFail($id);
         $amenities->delete();
 
-        return redirect()->route('admin_amenities')->with('success', 'Comodidade Deletado com Sucesso!');
+        return redirect()->route('admin_amenity')->with('success', 'Comodidade Deletado com Sucesso!');
     }
 }

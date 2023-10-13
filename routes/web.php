@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\VideoController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\PagesController;
 use App\Http\Controllers\Admin\SubscribersController;
+use App\Http\Controllers\Admin\AmenityController;
 
 use App\Http\Controllers\Frontend\WebsiteController;
 use App\Http\Controllers\Frontend\BlogController;
