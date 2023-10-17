@@ -18,17 +18,16 @@
                     href="{{ route('admin_home') }}"><i class="fa fa-home"></i>
                     <span>Dashboard</span></a></li>
 
-            <li
-                class="nav-item dropdown {{ Request::is('admin/amenity/view') || Request::is('#') ? 'active' : '' }}">
+            <li class="nav-item dropdown {{ Request::is('admin/amenity/view') || Request::is('admin/room/view') ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown"><i class="fa fa-building"></i><span> Hotel</span></a>
                 <ul class="dropdown-menu">
 
                     <li class="{{ Request::is('admin/amenity/view') ? 'active' : '' }}"><a class="nav-link"
-                            href="{{ route('admin_amenity')}}"><i class="fa fa-angle-right"></i> Comodidades</a>
+                            href="{{ route('admin_amenity') }}"><i class="fa fa-angle-right"></i> Comodidades</a>
                     </li>
 
-                    <li class="#"><a class="nav-link"
-                            href="#"><i class="fa fa-angle-right"></i> Quartos</a>
+                    <li class="{{ Request::is('admin/room/view') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('admin_room')}}"><i class="fa fa-angle-right"></i> Quartos</a>
                     </li>
                 </ul>
             </li>

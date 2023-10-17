@@ -15,6 +15,8 @@ use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\PagesController;
 use App\Http\Controllers\Admin\SubscribersController;
 use App\Http\Controllers\Admin\AmenityController;
+use App\Http\Controllers\Admin\RoomController;
+
 
 use App\Http\Controllers\Frontend\WebsiteController;
 use App\Http\Controllers\Frontend\BlogController;
@@ -230,6 +232,30 @@ Route::post('/admin/amenity/update/{id}', [AmenityController::class, 'update'])-
 Route::put('/admin/amenity/activate/{id}', [AmenityController::class, 'activate'])->name('admin_amenity_activate')->middleware('admin:admin');
 
 Route::get('/admin/amenity/delete/{id}', [AmenityController::class, 'delete'])->name('admin_amenity_delete')->middleware('admin:admin');
+
+/* Routes Admin Rooms */
+
+Route::get('/admin/room/view', [RoomController::class, 'index'])->name('admin_room')->middleware('admin:admin');
+
+Route::get('/admin/room/add', [RoomController::class, 'add'])->name('admin_room_add')->middleware('admin:admin');
+
+Route::post('/admin/room/store', [RoomController::class, 'store'])->name('admin_room_store')->middleware('admin:admin');
+
+Route::get('/admin/room/edit/{id}', [RoomController::class, 'edit'])->name('admin_room_edit')->middleware('admin:admin');
+
+Route::post('/admin/room/update/{id}', [RoomController::class, 'update'])->name('admin_room_update')->middleware('admin:admin');
+
+Route::put('/admin/room/activate/{id}', [RoomController::class, 'activate'])->name('admin_room_activate')->middleware('admin:admin');
+
+Route::put('/admin/room/deactivate/{id}', [RoomController::class, 'deactivate'])->name('admin_room_deactivate')->middleware('admin:admin');
+
+Route::get('/admin/room/delete/{id}', [RoomController::class, 'delete'])->name('admin_room_delete')->middleware('admin:admin');
+
+Route::get('/admin/room/gallery/{id}', [RoomController::class, 'gallery'])->name('admin_room_gallery');
+
+Route::post('/admin/room/gallery/store/{id}', [RoomController::class, 'gallery_store'])->name('admin_room_gallery_store');
+
+Route::get('/admin/room/gallery/delete/{id}', [RoomController::class, 'gallery_delete'])->name('admin_room_gallery_delete');
 
 /* Routes Admin Subscribers */
 
