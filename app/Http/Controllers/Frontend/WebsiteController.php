@@ -13,7 +13,7 @@ use App\Models\Slider;
 use App\Models\Feature;
 use App\Models\Testimonial;
 use App\Models\Blog;
-
+use App\Models\Room;
 
 
 class WebsiteController extends Controller
@@ -24,7 +24,8 @@ class WebsiteController extends Controller
         $features = Feature::get();
         $testimonials = Testimonial::get();
         $blogs = Blog::orderBy('id', 'desc')->limit(3)->get();
+        $rooms = Room::where('status', true)->get();
 
-        return view('frontend.home', compact('sliders', 'features', 'testimonials', 'blogs'));
+        return view('frontend.home', compact('sliders', 'features', 'testimonials', 'blogs', 'rooms'));
     }
 }

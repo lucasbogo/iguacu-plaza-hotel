@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Page;
+use App\Models\Room;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,7 +25,9 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrap();
 
         $page = Page::where('id', 1)->first();
+        $room = Room::where('status', true)->get();
 
         view()->share('global_page', $page);
+        view()->share('global_room', $room);
     }
 }

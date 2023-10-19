@@ -140,6 +140,21 @@ class PagesController extends Controller
         return redirect()->back()->with('success', 'Página "Contato" atualizada com sucesso!');
     }
 
+    public function room()
+    {
+        $page = Page::where('id',1)->first();
+        return view('admin.pages.room', compact('page'));
+    }
+
+    public function room_update(Request $request)
+    {
+        $page  = Page::where('id',1)->first();
+        $page ->room_heading = $request->room_heading;
+        $page ->update();
+
+        return redirect()->back()->with('success', 'Página "Quarto" atualizada com sucesso!');
+    }
+
     public function cart()
     {
         $page = Page::where('id', 1)->first();

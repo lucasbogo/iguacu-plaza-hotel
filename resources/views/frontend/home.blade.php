@@ -108,221 +108,119 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-3">
-                    <div class="inner">
-                        <div class="photo">
-                            <img src="{{ asset('uploads/DSC_0661.jpg') }}" alt="">
-                        </div>
-                        <div class="text">
-                            <h2><a href="">Casal</a></h2>
-                            <div class="price">
-                                $100/night
+                @if (count($rooms) > 0)
+                    @foreach ($rooms as $item)
+                        @if ($loop->iteration > 4)
+                        @break
+                    @endif
+                    <div class="col-md-3">
+                        <div class="inner">
+                            <div class="photo">
+                                <img src="{{ asset('uploads/' . $item->featured_image) }}" alt="">
                             </div>
-                            <div class="button">
-                                <a href="room-detail.html" class="btn btn-primary">Informações</a>
+                            <div class="text">
+                                <h2><a href="{{ route('room_detail', $item->id) }}">{{ $item->name }}</a></h2>
+                                <div class="price">
+                                    R$ {{ $item->price }}/diária
+                                </div>
+                                <div class="button">
+                                    <a href="{{ route('room_detail', $item->id) }}"
+                                        class="btn btn-primary">Informações</a>
+                                </div>
                             </div>
                         </div>
                     </div>
+                @endforeach
+            @else
+                <p>Sem quartos disponíveis no momento.</p>
+            @endif
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="big-button">
+                    <a href="{{ route('rooms') }}" class="btn btn-primary">Ver Todos</a>
                 </div>
-                <div class="col-md-3">
-                    <div class="inner">
-                        <div class="photo">
-                            <img src="{{ asset('uploads/DSC_0801.jpg') }}" alt="">
-                        </div>
-                        <div class="text">
-                            <h2><a href="">Duplo solteiro</a></h2>
-                            <div class="price">
-                                $100/night
-                            </div>
-                            <div class="button">
-                                <a href="room-detail.html" class="btn btn-primary">Informações</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="inner">
-                        <div class="photo">
-                            <img src="{{ asset('uploads/DSC_0544.jpg') }}" alt="">
-                        </div>
-                        <div class="text">
-                            <h2><a href="">Triplo</a></h2>
-                            <div class="price">
-                                $100/night
-                            </div>
-                            <div class="button">
-                                <a href="room-detail.html" class="btn btn-primary">Informações</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="inner">
-                        <div class="photo">
-                            <img src="{{ asset('uploads/DSC_0594.jpg') }}" alt="">
-                        </div>
-                        <div class="text">
-                            <h2><a href="">Casal + solteiro</a></h2>
-                            <div class="price">
-                                $100/night
-                            </div>
-                            <div class="button">
-                                <a href="room-detail.html" class="btn btn-primary">See Detail</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="inner">
-                        <div class="photo">
-                            <img src="{{ asset('uploads/5.jpg') }}" alt="">
-                        </div>
-                        <div class="text">
-                            <h2><a href="">Casal + duplo solteiro</a></h2>
-                            <div class="price">
-                                $100/night
-                            </div>
-                            <div class="button">
-                                <a href="room-detail.html" class="btn btn-primary">Informações</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="inner">
-                        <div class="photo">
-                            <img src="{{ asset('uploads/6.jpg') }}" alt="">
-                        </div>
-                        <div class="text">
-                            <h2><a href="">Quadruplo</a></h2>
-                            <div class="price">
-                                $100/night
-                            </div>
-                            <div class="button">
-                                <a href="room-detail.html" class="btn btn-primary">See Detail</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="inner">
-                        <div class="photo">
-                            <img src="{{ asset('uploads/7.jpg') }}" alt="">
-                        </div>
-                        <div class="text">
-                            <h2><a href="">Casal + duplo solteiro</a></h2>
-                            <div class="price">
-                                $100/night
-                            </div>
-                            <div class="button">
-                                <a href="room-detail.html" class="btn btn-primary">See Detail</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="inner">
-                        <div class="photo">
-                            <img src="{{ asset('uploads/1.jpg') }}" alt="">
-                        </div>
-                        <div class="text">
-                            <h2><a href="">Standard Couple Bed</a></h2>
-                            <div class="price">
-                                $100/night
-                            </div>
-                            <div class="button">
-                                <a href="room-detail.html" class="btn btn-primary">See Detail</a>
-                            </div>
-                        </div>
-                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+
+@php
+    // Check if there are no testimonials or no active testimonials
+    $hasTestimonials = count($testimonials) > 0;
+    $hasActiveTestimonials = $testimonials->contains('status', true);
+@endphp
+
+@if ($hasTestimonials && $hasActiveTestimonials)
+    <!-- Show the testimonials section when there are testimonials and at least one is active -->
+    <div class="testimonial" style="background-image: url(uploads/piscina2.jpg)">
+        <div class="bg"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="main-header">Nossos clientes</h2>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12">
-                    <div class="big-button">
-                        <a href="" class="btn btn-primary">Ver Todos</a>
+                <div class="col-12">
+                    <div class="testimonial-carousel owl-carousel">
+                        @foreach ($testimonials as $item)
+                            @if ($item->status)
+                                <!-- Check if the testimonial is active (status is true) -->
+                                <div class="item">
+                                    <div class="photo">
+                                        <img src="{{ asset('uploads/testimonial/' . $item->photo) }}" alt="">
+                                    </div>
+                                    <div class="text">
+                                        <h4>{{ $item->name }}</h4>
+                                        <p>{{ $item->designation }}</p>
+                                    </div>
+                                    <div class="description">
+                                        <p>
+                                            {!! $item->comment !!}
+                                        </p>
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <br>
-    <br>
+@endif
 
-    @php
-        // Check if there are no testimonials or no active testimonials
-        $hasTestimonials = count($testimonials) > 0;
-        $hasActiveTestimonials = $testimonials->contains('status', true);
-    @endphp
-
-    @if ($hasTestimonials && $hasActiveTestimonials)
-        <!-- Show the testimonials section when there are testimonials and at least one is active -->
-        <div class="testimonial" style="background-image: url(uploads/piscina2.jpg)">
-            <div class="bg"></div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h2 class="main-header">Nossos clientes</h2>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="testimonial-carousel owl-carousel">
-                            @foreach ($testimonials as $item)
-                                @if ($item->status)
-                                    <!-- Check if the testimonial is active (status is true) -->
-                                    <div class="item">
-                                        <div class="photo">
-                                            <img src="{{ asset('uploads/testimonial/' . $item->photo) }}" alt="">
-                                        </div>
-                                        <div class="text">
-                                            <h4>{{ $item->name }}</h4>
-                                            <p>{{ $item->designation }}</p>
-                                        </div>
-                                        <div class="description">
-                                            <p>
-                                                {!! $item->comment !!}
-                                            </p>
-                                        </div>
+@if ($blogs->count() > 0)
+    <div class="blog-item">
+        <div class="container">
+            <div class="row">
+                @foreach ($blogs as $item)
+                    @if ($item->status)
+                        <!-- Check if the blog post is active (status is true) -->
+                        <div class="col-md-4">
+                            <div class="inner">
+                                <div class="photo">
+                                    <img src="{{ asset('uploads/blog/' . $item->photo) }}" alt="">
+                                </div>
+                                <div class="text">
+                                    <h2><a href="{{ route('post', $item->id) }}">{{ $item->title }}</a></h2>
+                                    <div class="short-des">
+                                        <p>
+                                            {{ $item->short_content }}
+                                        </p>
                                     </div>
-                                @endif
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endif
-
-    @if ($blogs->count() > 0)
-        <div class="blog-item">
-            <div class="container">
-                <div class="row">
-                    @foreach ($blogs as $item)
-                        @if ($item->status)
-                            <!-- Check if the blog post is active (status is true) -->
-                            <div class="col-md-4">
-                                <div class="inner">
-                                    <div class="photo">
-                                        <img src="{{ asset('uploads/blog/' . $item->photo) }}" alt="">
-                                    </div>
-                                    <div class="text">
-                                        <h2><a href="{{ route('post', $item->id) }}">{{ $item->title }}</a></h2>
-                                        <div class="short-des">
-                                            <p>
-                                                {{ $item->short_content }}
-                                            </p>
-                                        </div>
-                                        <div class="button">
-                                            <a href="{{ route('post', $item->id) }}" class="btn btn-primary">Ler</a>
-                                        </div>
+                                    <div class="button">
+                                        <a href="{{ route('post', $item->id) }}" class="btn btn-primary">Ler</a>
                                     </div>
                                 </div>
                             </div>
-                        @endif
-                    @endforeach
-                </div>
+                        </div>
+                    @endif
+                @endforeach
             </div>
         </div>
-    @endif
+    </div>
+@endif
 @endsection

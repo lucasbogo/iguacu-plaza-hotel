@@ -8,7 +8,7 @@
 @endsection
 
 @section('right_top_button')
-    <a href="{{ route('admin_room_view') }}" class="btn btn-primary"><i class="fa fa-eye"></i> Voltar</a>
+    <a href="{{ route('admin_room') }}" class="btn btn-primary"><i class="fa fa-eye"></i> Voltar</a>
 @endsection
 
 @section('main_content')
@@ -52,8 +52,8 @@
                                 <thead>
                                     <tr>
                                         {{-- <th>SL</th> --}}
-                                        <th>Photo</th>
-                                        <th>Action</th>
+                                        <th>Imagem</th>
+                                        <th>Ação</th>
                                     </tr>
                                 </thead>
                                 <tbody>

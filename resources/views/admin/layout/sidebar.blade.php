@@ -18,7 +18,8 @@
                     href="{{ route('admin_home') }}"><i class="fa fa-home"></i>
                     <span>Dashboard</span></a></li>
 
-            <li class="nav-item dropdown {{ Request::is('admin/amenity/view') || Request::is('admin/room/view') ? 'active' : '' }}">
+            <li
+                class="nav-item dropdown {{ Request::is('admin/amenity/view') || Request::is('admin/room/view') ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown"><i class="fa fa-building"></i><span> Hotel</span></a>
                 <ul class="dropdown-menu">
 
@@ -27,7 +28,7 @@
                     </li>
 
                     <li class="{{ Request::is('admin/room/view') ? 'active' : '' }}"><a class="nav-link"
-                            href="{{ route('admin_room')}}"><i class="fa fa-angle-right"></i> Quartos</a>
+                            href="{{ route('admin_room') }}"><i class="fa fa-angle-right"></i> Quartos</a>
                     </li>
                 </ul>
             </li>
@@ -41,6 +42,7 @@
                 Request::is('admin/page/privacy') ||
                 Request::is('admin/page/faq') ||
                 Request::is('admin/page/blog') ||
+                Request::is('admin/page/room') ||
                 Request::is('admin/page/contact') ||
                 Request::is('admin/page/cart') ||
                 Request::is('admin/page/checkout') ||
@@ -80,6 +82,10 @@
                     <li class="{{ Request::is('admin/page/blog') ? 'active' : '' }}"><a class="nav-link"
                             href="{{ route('admin_page_blog') }}"><i class="fa fa-angle-right"></i>
                             Blog</a></li>
+
+                    <li class="{{ Request::is('admin/page/room') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('admin_page_room') }}"><i class="fa fa-angle-right"></i>
+                            Quartos</a></li>
 
                     <li class="{{ Request::is('admin/page/contact') ? 'active' : '' }}"><a class="nav-link"
                             href="{{ route('admin_page_contact') }}"><i class="fa fa-angle-right"></i>

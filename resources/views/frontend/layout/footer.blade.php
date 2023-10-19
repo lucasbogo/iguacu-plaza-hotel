@@ -111,7 +111,6 @@
                     </form>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
@@ -155,7 +154,6 @@
                             message: data.success_message,
                         });
                     }
-
                 }
             });
         });

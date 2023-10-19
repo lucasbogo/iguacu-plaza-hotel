@@ -22,8 +22,9 @@ use App\Http\Controllers\Frontend\WebsiteController;
 use App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\Frontend\ContactController;
+use App\Http\Controllers\Frontend\RoomsController;
 use App\Http\Controllers\Frontend\SubscriberController;
-use App\Models\Amenity;
+
 
 /* Frontend Routes */
 Route::get('/', [WebsiteController::class, 'index'])->name('home');
@@ -42,6 +43,11 @@ Route::post('/contact/send-email', [ContactController::class, 'send_email'])->na
 Route::post('/subscriber/send-email', [SubscriberController::class, 'send_email'])->name('subscriber_send_email');
 
 Route::get('/subscriber/verify/{email}/{token}', [SubscriberController::class, 'verify'])->name('subscriber_verify');
+
+// Routes for room page on front end
+Route::get('/rooms', [RoomsController::class, 'rooms'])->name('rooms');
+
+Route::get('/room/{id}', [RoomsController::class, 'room'])->name('room_detail');
 
 
 // Routes for pages
@@ -332,3 +338,8 @@ Route::post('admin/page/signup/update', [PagesController::class,'signup_update']
 Route::get('admin/page/signin', [PagesController::class,'signin'])->name('admin_page_signin')->middleware('admin:admin');
 
 Route::post('admin/page/signin/update', [PagesController::class,'signin_update'])->name('admin_page_signin_update')->middleware('admin:admin');
+
+// Room Page
+Route::get('admin/page/room', [PagesController::class,'room'])->name('admin_page_room')->middleware('admin:admin');
+
+Route::post('admin/page/room/update', [PagesController::class,'room_update'])->name('admin_page_room_update')->middleware('admin:admin');

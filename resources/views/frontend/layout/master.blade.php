@@ -40,7 +40,7 @@
 
     @include('frontend.layout.footer')
 
-    @include('frontend.layout.scripts_footer')]
+    @include('frontend.layout.scripts_footer')
       
     @if (session()->get('error'))
         <script>

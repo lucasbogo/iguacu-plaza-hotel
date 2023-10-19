@@ -88,6 +88,7 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
+
                                                         <div class="form-group row bdb1 pt_10 mb_0">
                                                             <div class="col-md-4"><label class="form-label">Imagem</label>
                                                             </div>
@@ -123,20 +124,16 @@
                                                             <div class="col-md-8">{{ $row->total_rooms }}</div>
                                                         </div>
                                                         <div class="form-group row bdb1 pt_10 mb_0">
-                                                            <div class="col-md-4"><label class="form-label">Total de
-                                                                    Comodidades</label></div>
+                                                            <div class="col-md-4">
+                                                                <label class="form-label">Comodidades</label>
+                                                            </div>
                                                             <div class="col-md-8">
-                                                                @php
-                                                                    $arr = !empty($row->amenities) ? explode(',', $row->amenities) : [];
-                                                                    $checkedAmenitiesCount = count($arr);
-                                                                    foreach ($arr as $amenityId) {
-                                                                        $temp_row = \App\Models\Amenity::find($amenityId);
-                                                                        if ($temp_row) {
-                                                                            echo $temp_row->name . '<br>';
-                                                                        }
-                                                                    }
-                                                                    echo 'Total Checked Amenities: ' . $checkedAmenitiesCount;
-                                                                @endphp
+                                                                @forelse ($amenities as $amenity)
+                                                                    {{ $amenity->name }}<br>
+                                                                @empty
+                                                                    N/A
+                                                                @endforelse
+                                                                {{-- Total de Comodidades: {{ $checkedAmenitiesCount }} --}}
                                                             </div>
                                                         </div>
                                                         <div class="form-group row bdb1 pt_10 mb_0">
@@ -165,7 +162,8 @@
                                                             <div class="col-md-8">{{ $row->total_guests }}</div>
                                                         </div>
                                                         <div class="form-group row bdb1 pt_10 mb_0">
-                                                            <div class="col-md-4"><label class="form-label">Video</label>
+                                                            <div class="col-md-4">
+                                                                <label class="form-label">Video</label>
                                                             </div>
                                                             <div class="col-md-8">
                                                                 <div class="iframe-container1">
@@ -177,6 +175,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+
                                                     </div>
                                                 </div>
                                             </div>

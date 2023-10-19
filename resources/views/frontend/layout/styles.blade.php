@@ -26,4 +26,5 @@
     .text_danger {
         color: rgb(238, 61, 61);
     }
+    
 </style>

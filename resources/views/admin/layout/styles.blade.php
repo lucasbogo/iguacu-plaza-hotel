@@ -19,7 +19,20 @@
 
 <!-- Add your custom icon -->
 <style>
-  .fa-swimming-pool:before {
-    content: url('/path/to/icons/swimming-pool.svg'); /* Replace with the path to your image file */
-  }
+    .fa-swimming-pool:before {
+        content: url('/path/to/icons/swimming-pool.svg');
+        /* Replace with the path to your image file */
+    }
+
+    .iframe-container1 {
+        position: relative;
+        overflow: hidden;
+        max-width: 100%;
+        /* Adjust this value based on your design */
+    }
+
+    .iframe-container1 iframe {
+        width: 100%;
+        height: 100%;
+    }
 </style>

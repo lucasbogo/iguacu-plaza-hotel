@@ -25,6 +25,7 @@ return new class extends Migration
             $table->text('total_guests')->nullable();
             $table->text('featured_image');
             $table->text('video_id')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
