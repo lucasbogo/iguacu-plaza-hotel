@@ -15,7 +15,6 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-4">
-
                     <form action="{{ route('customer_login_submit') }}" method="post">
                         @csrf
                         <div class="login-form">
@@ -33,14 +32,14 @@
                                     <span class="text-danger">{{ $errors->first('password') }}</span>
                                 @endif
                             </div>
-                            <div class="mb-3">
-                                <button type="submit" class="btn btn-primary bg-website">Login</button>
-                                <a href="{{ route('customer_forget_password') }}" class="primary-color">Esqueceu a
-                                    Senha?</a>
+                            <div class="mb-3 text-center">
+                                <button type="submit" class="btn btn-primary bg-website">Entrar</button>
                             </div>
                             <div class="mb-3">
-                                <a href="{{ route('customer_signup') }}" class="primary-color">Novo Usuário? Registre-se
-                                    agora.</a>
+                                <a href="#" class="primary-color">Esqueceu a Senha?</a>
+                            </div>
+                            <div class="mb-3">
+                                <a href="{{ route('customer_signup') }}" class="primary-color">Novo Usuário? Registre-se agora.</a>
                             </div>
                         </div>
                     </form>
