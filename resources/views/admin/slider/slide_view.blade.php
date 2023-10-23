@@ -36,18 +36,25 @@
                                                     class="w_200">
                                             </td>
                                             <td class="pt_10 pb_10">
-                                                <a href="{{ route('admin_slider_edit', $row->id) }}"
-                                                    class="btn btn-primary">Editar</a>
-                                                <form action="{{ route('admin_slider_activate', $row->id) }}" method="POST"
-                                                    style="display: inline;">
-                                                    @csrf
-                                                    @method('PUT') <!-- Method spoofing: Use the PUT method -->
-                                                    <button type="submit" class="btn btn-warning">Desativar</button>
-                                                </form> 
-                                                <a href="{{ route('admin_slider_delete', $row->id) }}"
-                                                    class="btn btn-danger"
-                                                    onClick="return confirm('Tem Certeza?');">Deletar</a>
+                                                <a href="{{ route('admin_slider_edit', $row->id) }}" class="btn btn-primary">Editar</a>
+                                            
+                                                @if($row->status)
+                                                    <form action="{{ route('admin_slider_deactivate', $row->id) }}" method="POST" style="display: inline;">
+                                                        @csrf
+                                                        @method('PUT') <!-- Method spoofing: Use the PUT method -->
+                                                        <button type="submit" class="btn btn-warning">Desativar</button>
+                                                    </form>
+                                                @else
+                                                    <form action="{{ route('admin_slider_activate', $row->id) }}" method="POST" style="display: inline;">
+                                                        @csrf
+                                                        @method('PUT') <!-- Method spoofing: Use the PUT method -->
+                                                        <button type="submit" class="btn btn-success">Ativar</button>
+                                                    </form>
+                                                @endif
+                                                
+                                                <a href="{{ route('admin_slider_delete', $row->id) }}" class="btn btn-danger" onClick="return confirm('Tem Certeza?');">Deletar</a>
                                             </td>
+                                            
                                         </tr>
                                     @endforeach
                                 </tbody>

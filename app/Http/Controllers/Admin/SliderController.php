@@ -11,7 +11,7 @@ class SliderController extends Controller
 
     public function index()
     {
-        $sliders = Slider::where('status', 1)->get();
+        $sliders = Slider::all();
         return view('admin.slider.slide_view', compact('sliders'));
     }
 
@@ -37,7 +37,7 @@ class SliderController extends Controller
         $slider->text = $request->text;
         $slider->button_text = $request->button_text;
         $slider->button_url = $request->button_url;
-        $slider->status = $request->has('status'); // Set the status based on the checkbox value (true or false)
+        $slider->status = $request->has('status') ? 1 : 0;
         $slider->save();
 
         return redirect()->back()->with('success', 'Foto Adicionado ao Slider com Sucesso!');
@@ -87,9 +87,9 @@ class SliderController extends Controller
 
         // Update status if provided
         if ($request->has('status')) {
-            $slider->status = $request->has('status');
+            $slider->status = $request->has('status') ? 1 : 0;
         }
-      
+
         $slider->save();
 
         return redirect()->back()->with('success', 'Foto Atualizada com Sucesso!');
@@ -104,11 +104,30 @@ class SliderController extends Controller
         return back()->with('success', 'Foto Ativada com Sucesso!');
     }
 
+    public function deactivate($id)
+    {
+        $slider = Slider::findOrFail($id);
+        $slider->status = 0; // Deactivate the slider
+        $slider->save();
+
+        return back()->with('success', 'Foto Desativada com Sucesso!');
+    }
 
     public function delete($id)
     {
-
         $slider = Slider::findOrFail($id);
+
+        // Delete associated image
+        $imagePath = public_path('uploads/slider/' . $slider->photo);
+
+        // Alternatively, you can use the Storage facade for better file handling
+        // $imagePath = storage_path('app/public/uploads/slider/' . $slider->photo);
+
+        if (file_exists($imagePath)) {
+            unlink($imagePath);
+        }
+
+        // Delete slider
         $slider->delete();
 
         return back()->with('success', 'Foto Deletada com Sucesso!');

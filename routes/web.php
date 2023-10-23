@@ -141,6 +141,8 @@ Route::post('/admin/slide/update/{id}', [SliderController::class, 'update'])->na
 
 Route::put('/admin/slider/activate/{id}', [SliderController::class, 'activate'])->name('admin_slider_activate')->middleware('admin:admin');
 
+Route::put('/admin/slider/deactivate/{id}', [SliderController::class, 'deactivate'])->name('admin_slider_deactivate')->middleware('admin:admin');
+
 Route::get('/admin/slide/delete/{id}', [SliderController::class, 'delete'])->name('admin_slider_delete')->middleware('admin:admin');
 
 /* Routes Admin Features */
