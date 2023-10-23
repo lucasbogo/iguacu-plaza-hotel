@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\User;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -10,7 +11,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 
 
-class UserAuthController extends Controller
+class AuthController extends Controller
 {
     public function dashboard()
     {
@@ -59,6 +60,16 @@ class UserAuthController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->status = 'Pendente';
+
+        // New fields
+        $user->phone = $request->phone;
+        $user->country = $request->country;
+        $user->street = $request->street;
+        $user->number = $request->number;
+        $user->state = $request->state;
+        $user->city = $request->city;
+        $user->zip_code = $request->zip_code;
+
         $user->token = $token;
         $user->save();
 
@@ -134,11 +145,17 @@ class UserAuthController extends Controller
         $user->password = Hash::make($request->new_password);
         $user->update();
 
+        //you can update the new fields here if needed
+        $user->phone = $request->phone;
+        $user->country = $request->country;
+        $user->street = $request->street;
+        $user->number = $request->number;
+        $user->state = $request->state;
+        $user->city = $request->city;
+        $user->zip_code = $request->zip_code;
+
         echo 'Sua senha foi redefinida com sucesso.';
 
         // return redirect()->route('login');
     }
 }
-
-
-

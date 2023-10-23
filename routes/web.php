@@ -17,7 +17,6 @@ use App\Http\Controllers\Admin\SubscribersController;
 use App\Http\Controllers\Admin\AmenityController;
 use App\Http\Controllers\Admin\RoomController;
 
-
 use App\Http\Controllers\Frontend\WebsiteController;
 use App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\Frontend\PageController;
@@ -25,8 +24,13 @@ use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\RoomsController;
 use App\Http\Controllers\Frontend\SubscriberController;
 
+use App\Http\Controllers\User\AuthController;
+
+use App\Http\Controllers\Customer\HomeController as CustomerHomeController;
+use App\Http\Controllers\Customer\AuthController as CustomerAuthController;
 
 /* Frontend Routes */
+
 Route::get('/', [WebsiteController::class, 'index'])->name('home');
 
 // Routes for blogs
@@ -49,7 +53,6 @@ Route::get('/rooms', [RoomsController::class, 'rooms'])->name('rooms');
 
 Route::get('/room/{id}', [RoomsController::class, 'room'])->name('room_detail');
 
-
 // Routes for pages
 Route::get('/image-gallery', [PageController::class, 'image_gallery'])->name('image_gallery');
 
@@ -63,31 +66,44 @@ Route::get('/privacy', [PageController::class, 'privacy'])->name('privacy');
 
 Route::get('/faq', [PageController::class, 'faq'])->name('faq');
 
+/* Customer Routes */
+Route::get('/customer/login', [CustomerAuthController::class, 'login'])->name('customer_login');
+Route::post('/customer/login-submit', [CustomerAuthController::class, 'login_submit'])->name('customer_login_submit');
+Route::get('/customer/logout', [CustomerAuthController::class, 'logout'])->name('customer_logout');
+Route::get('/customer/signup', [CustomerAuthController::class, 'signup'])->name('customer_signup');
+Route::post('/Customer/signup-submit', [CustomerAuthController::class, 'signup_submit'])->name('customer_signup_submit');
+
+/* Customer Routes with Middleware */
+Route::group(['middleware' => ['customer:customer'], 'as' => 'customer.'], function () {
+    Route::get('/customer/home', [CustomerHomeController::class, 'index'])->name('home');
+    Route::get('/customer/edit-profile', [CustomerHomeController::class, 'edit_profile'])->name('profile');
+    Route::post('/customer/edit-profile-submit', [CustomerHomeController::class, 'edit_profile'])->name('edit_profile');
+});
 
 /* User Routes */
-Route::get('/dashboard', [WebsiteController::class, 'dashboard'])->name('dashboard')->middleware('auth');
+Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard')->middleware('auth');
 
-Route::get('/login', [WebsiteController::class, 'login'])->name('login');
+Route::get('/login', [AuthController::class, 'login'])->name('login');
 
-Route::post('/login_submit', [WebsiteController::class, 'login_submit'])->name('login_submit');
+Route::post('/login_submit', [AuthController::class, 'login_submit'])->name('login_submit');
 
-Route::get('/logout', [WebsiteController::class, 'logout'])->name('logout');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/register', [WebsiteController::class, 'register'])->name('register');
+Route::get('/register', [AuthController::class, 'register'])->name('register');
 
-Route::post('/register_submit', [WebsiteController::class, 'register_submit'])->name('register_submit');
+Route::post('/register_submit', [AuthController::class, 'register_submit'])->name('register_submit');
 
-Route::get('/registration/verify/{token}/{email}', [WebsiteController::class, 'registration_verify']);
+Route::get('/registration/verify/{token}/{email}', [AuthController::class, 'registration_verify']);
 
-Route::get('/logout', [WebsiteController::class, 'logout'])->name('logout');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/forget-password', [WebsiteController::class, 'forget_password'])->name('forget_password');
+Route::get('/forget-password', [AuthController::class, 'forget_password'])->name('forget_password');
 
-Route::post('/forget_password_submit', [WebsiteController::class, 'forget_password_submit'])->name('forget_password_submit');
+Route::post('/forget_password_submit', [AuthController::class, 'forget_password_submit'])->name('forget_password_submit');
 
-Route::get('/reset-password/{token}/{email}', [WebsiteController::class, 'reset_password'])->name('reset_password');
+Route::get('/reset-password/{token}/{email}', [AuthController::class, 'reset_password'])->name('reset_password');
 
-Route::post('/reset_password_submit', [WebsiteController::class, 'reset_password_submit'])->name('reset_password_submit');
+Route::post('/reset_password_submit', [AuthController::class, 'reset_password_submit'])->name('reset_password_submit');
 
 /* Admin Routes */
 
@@ -330,16 +346,16 @@ Route::get('admin/page/payment', [PagesController::class, 'payment'])->name('adm
 Route::post('admin/page/payment/update', [PagesController::class, 'payment_update'])->name('admin_page_payment_update')->middleware('admin:admin');
 
 // Sign-Up Page
-Route::get('admin/page/signup', [PagesController::class,'signup'])->name('admin_page_signup')->middleware('admin:admin');
+Route::get('admin/page/signup', [PagesController::class, 'signup'])->name('admin_page_signup')->middleware('admin:admin');
 
-Route::post('admin/page/signup/update', [PagesController::class,'signup_update'])->name('admin_page_signup_update')->middleware('admin:admin');
+Route::post('admin/page/signup/update', [PagesController::class, 'signup_update'])->name('admin_page_signup_update')->middleware('admin:admin');
 
 // Sign-In Page
-Route::get('admin/page/signin', [PagesController::class,'signin'])->name('admin_page_signin')->middleware('admin:admin');
+Route::get('admin/page/signin', [PagesController::class, 'signin'])->name('admin_page_signin')->middleware('admin:admin');
 
-Route::post('admin/page/signin/update', [PagesController::class,'signin_update'])->name('admin_page_signin_update')->middleware('admin:admin');
+Route::post('admin/page/signin/update', [PagesController::class, 'signin_update'])->name('admin_page_signin_update')->middleware('admin:admin');
 
 // Room Page
-Route::get('admin/page/room', [PagesController::class,'room'])->name('admin_page_room')->middleware('admin:admin');
+Route::get('admin/page/room', [PagesController::class, 'room'])->name('admin_page_room')->middleware('admin:admin');
 
-Route::post('admin/page/room/update', [PagesController::class,'room_update'])->name('admin_page_room_update')->middleware('admin:admin');
+Route::post('admin/page/room/update', [PagesController::class, 'room_update'])->name('admin_page_room_update')->middleware('admin:admin');

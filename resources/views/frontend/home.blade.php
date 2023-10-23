@@ -99,7 +99,6 @@
         </div>
     </div>
 
-
     <div class="home-rooms">
         <div class="container">
             <div class="row">
