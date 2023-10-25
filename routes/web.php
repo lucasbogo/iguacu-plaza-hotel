@@ -71,7 +71,8 @@ Route::get('/customer/login', [CustomerAuthController::class, 'login'])->name('c
 Route::post('/customer/login-submit', [CustomerAuthController::class, 'login_submit'])->name('customer_login_submit');
 Route::get('/customer/logout', [CustomerAuthController::class, 'logout'])->name('customer_logout');
 Route::get('/customer/signup', [CustomerAuthController::class, 'signup'])->name('customer_signup');
-Route::post('/Customer/signup-submit', [CustomerAuthController::class, 'signup_submit'])->name('customer_signup_submit');
+Route::post('/customer/signup-submit', [CustomerAuthController::class, 'signup_submit'])->name('customer_signup_submit');
+Route::get('/customer/signup-verify/{email}/{token}', [CustomerAuthController::class, 'signup_verify'])->name('customer_signup_verify');
 
 /* Customer Routes with Middleware */
 Route::group(['middleware' => ['customer:customer'], 'as' => 'customer.'], function () {

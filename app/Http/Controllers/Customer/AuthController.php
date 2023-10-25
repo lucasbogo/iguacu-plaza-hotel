@@ -31,7 +31,7 @@ class AuthController extends Controller
         ];
 
         if (Auth::guard('customer')->attempt($credential)) {
-            return redirect()->route('customer_home');
+            return redirect()->route('home'); // implmente customer_home view page later on
         } else {
             return redirect()->route('customer_login')->with('error', 'Informação Incorreta');
         }
@@ -49,12 +49,20 @@ class AuthController extends Controller
             'email' => 'required|email|unique:customers',
             'password' => 'required',
             'retype_password' => 'required|same:password'
+        ], [
+            'name.required' => 'O campo Nome Completo é obrigatório.',
+            'email.required' => 'O campo E-mail é obrigatório.',
+            'email.email' => 'Por favor, insira um endereço de e-mail válido.',
+            'email.unique' => 'Este e-mail já está em uso.',
+            'password.required' => 'O campo Senha é obrigatório.',
+            'retype_password.required' => 'O campo Confirmar Senha é obrigatório.',
+            'retype_password.same' => 'Os campos Senha e Confirmar Senha devem ser iguais.'
         ]);
 
 
         $token = hash('sha256', time());
         $password = Hash::make($request->password);
-        $verification_link = url('signup-verify/' . $request->email . '/' . $token);
+        $verification_link = url('customer/signup-verify/' . $request->email . '/' . $token);
 
         $obj = new Customer();
         $obj->name = $request->name;
@@ -73,7 +81,7 @@ class AuthController extends Controller
 
         Mail::to($request->email)->send(new Websitemail($subject, $message));
 
-        return redirect()->back()->with('success', 'Para concluir sua inscrição, por favor, confira seu e-mail e clique no link correspondente. Agradecemos pela sua colaboração.');
+        return redirect()->back()->with('success', 'Para concluir sua inscrição, por favor, confira seu e-mail e clique no link correspondente.');
     }
 
     public function signup_verify($email, $token)

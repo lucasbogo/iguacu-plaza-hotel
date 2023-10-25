@@ -142,7 +142,7 @@ class RoomController extends Controller
     public function delete($id)
     {
         $single_data = Room::where('id', $id)->first();
-        unlink(public_path('uploads/' . $single_data->featured_photo));
+        unlink(public_path('uploads/' . $single_data->featured_image));
         $single_data->delete();
 
         $room_images = RoomImage::where('room_id', $id)->get();
