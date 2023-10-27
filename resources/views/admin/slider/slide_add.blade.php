@@ -40,11 +40,6 @@
                                 <input type="text" name="button_url" id="button_url" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="status">Status:</label>
-                                <input type="checkbox" name="status" id="status" value="1" class="form-control"
-                                    {{ old('status') ? 'checked' : '' }}>
-                            </div>
-                            <div class="form-group">
                                 <button type="submit" class="btn btn-success">Adicionar Slider</button>
                             </div>
                         </form>
