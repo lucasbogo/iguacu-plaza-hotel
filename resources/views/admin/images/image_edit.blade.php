@@ -17,10 +17,18 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{ route('admin_image_update', $image->id) }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('admin_image_update', $image->id) }}" method="post"
+                            enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-md-12">
+                                    @if (isset($image->photo))
+                                        <div class="mb-4">
+                                            <label class="form-label">Imagem Atual</label><br>
+                                            <img src="{{ asset('uploads/image/' . $image->photo) }}" alt="Current Image"
+                                                style="max-width: 200px; max-height: 150px;">
+                                        </div>
+                                    @endif
                                     <div class="mb-4">
                                         <label class="form-label">Foto *</label>
                                         <input type="file" class="form-control" name="photo">
@@ -32,7 +40,8 @@
                                     </div>
                                     <div class="mb-4">
                                         <label class="form-label">Status</label>
-                                        <input type="checkbox" name="status" value="1" {{ $image->status ? 'checked' : '' }}> Ativo
+                                        <input type="checkbox" name="status" value="1"
+                                            {{ $image->status ? 'checked' : '' }}> Ativo
                                     </div>
                                     <div class="mb-4">
                                         <label class="form-label"></label>

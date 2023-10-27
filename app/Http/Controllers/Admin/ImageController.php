@@ -40,10 +40,16 @@ class ImageController extends Controller
         return back()->with('success', 'Imagem Adicionada com Sucesso!');
     }
 
+    public function edit($id)
+    {
+        $image = Image::where('id', $id)->first();
+        return view('admin.images.image_edit', compact('image'));
+    }
+
     public function update(Request $request)
     {
         $request->validate([
-            'image' => 'sometimes|required',
+            'photo' => 'sometimes|required|image|mimes:jpeg,png,jpg,gif',
             'caption' => 'required',
         ]);
 
@@ -73,7 +79,7 @@ class ImageController extends Controller
         $image = Image::findOrFail($id);
         $image->status = !$image->status;
         $image->save();
-        
+
         $message = $image->status ? 'Imagem Ativada com Sucesso' : 'Imagem Desativa com Sucesso';
         return back()->with('success', $message);
     }

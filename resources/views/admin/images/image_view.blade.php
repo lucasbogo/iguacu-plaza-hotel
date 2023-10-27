@@ -21,27 +21,25 @@
                             <table class="table table-bordered" id="example1">
                                 <thead>
                                     <tr>
-                                        <th>Referencia</th>
-                                        <th>Imagem</th>
-                                        <th>Legenda</th>
-                                        <th>Status</th>
-                                        <th>Ação</th>
+                                        <th style="text-align: center;">Imagem</th>
+                                        <th style="text-align: center;">Legenda</th>
+                                        {{-- <th>Status</th> --}}
+                                        <th style="text-align: center;" >Ação</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($images as $image)
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>
-                                                <img src="{{ asset('uploads/image/' . $image->photo) }}" alt=""
-                                                    style="width: 200px; height: 150px;">
+                                            <td style="text-align: center;">
+                                                <img src="{{ asset('uploads/image/' . $image->photo) }}" alt="Image"
+                                                    style="width: 250px; height: 150px; display: block; margin: 0 auto;">
                                             </td>
-                                            <td>
-                                                {{ $image->caption }}
+                                            <td style="text-align: center;">
+                                                {{ $image->caption ? $image->caption : 'Sem Legenda' }}
                                             </td>
-                                            <td>
+                                            {{-- <td>
                                                 {{ $image->status ? 'Ativo' : 'Inativo' }}
-                                            </td>
+                                            </td> --}}
                                             <td class="pt_10 pb_10">
                                                 <a href="{{ route('admin_image_edit', $image->id) }}"
                                                     class="btn btn-primary">Editar</a>
