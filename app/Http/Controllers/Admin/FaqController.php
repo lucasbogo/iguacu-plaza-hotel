@@ -66,7 +66,6 @@ class FaqController extends Controller
         return redirect()->route('admin_faq')->with('success', 'Pergunta Ativada/Desativada com Sucesso!');
     }
 
-
     public function delete($id)
     {
         $faq = Faq::findOrFail($id);

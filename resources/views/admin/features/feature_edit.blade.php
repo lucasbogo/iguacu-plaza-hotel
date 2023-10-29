@@ -35,10 +35,10 @@
                                         <label class="form-label">Texto</label>
                                         <textarea name="text" class="form-control h_100" cols="30" rows="10">{{ $feature->text }}</textarea>
                                     </div>
-                                    {{-- <div class="mb-4">
-                                        <label class="form-label">Status</label>
-                                        <input type="checkbox" name="status" value="1" checked> Ativo
-                                    </div> --}}
+                                        {{-- <div class="mb-4">
+                                            <label class="form-label">Status</label>
+                                            <input type="checkbox" name="status" value="1" checked> Ativo
+                                        </div> --}}
                                     <div class="mb-4">
                                         <label class="form-label"></label>
                                         <button type="submit" class="btn btn-success">Atualizar</button>

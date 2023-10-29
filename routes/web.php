@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SliderController;
@@ -23,8 +23,6 @@ use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\RoomsController;
 use App\Http\Controllers\Frontend\SubscriberController;
-
-use App\Http\Controllers\User\AuthController;
 
 use App\Http\Controllers\Customer\HomeController as CustomerHomeController;
 use App\Http\Controllers\Customer\AuthController as CustomerAuthController;
@@ -53,7 +51,7 @@ Route::get('/rooms', [RoomsController::class, 'rooms'])->name('rooms');
 
 Route::get('/room/{id}', [RoomsController::class, 'room'])->name('room_detail');
 
-// Routes for pages
+// Routes for Pages
 Route::get('/image-gallery', [PageController::class, 'image_gallery'])->name('image_gallery');
 
 Route::get('/video-gallery', [PageController::class, 'video_gallery'])->name('video_gallery');
@@ -110,19 +108,19 @@ Route::post('/reset_password_submit', [AuthController::class, 'reset_password_su
 
 Route::get('/admin/home', [HomeController::class, 'index'])->name('admin_home')->middleware('admin:admin');
 
-Route::get('/admin/login', [AdminController::class, 'login'])->name('admin_login');
+Route::get('/admin/login', [AuthController::class, 'login'])->name('admin_login');
 
-Route::post('/admin/login-submit', [AdminController::class, 'login_submit'])->name('admin_login_submit');
+Route::post('/admin/login-submit', [AuthController::class, 'login_submit'])->name('admin_login_submit');
 
-Route::get('/admin/forget-password', [AdminController::class, 'forget_password'])->name('admin_forget_password');
+Route::get('/admin/forget-password', [AuthController::class, 'forget_password'])->name('admin_forget_password');
 
-Route::post('/admin/forget-password-submit', [AdminController::class, 'forget_password_submit'])->name('admin_forget_password_submit');
+Route::post('/admin/forget-password-submit', [AuthController::class, 'forget_password_submit'])->name('admin_forget_password_submit');
 
-Route::get('/admin/reset-password/{token}/{email}', [AdminController::class, 'reset_password'])->name('admin_reset_password');
+Route::get('/admin/reset-password/{token}/{email}', [AuthController::class, 'reset_password'])->name('admin_reset_password');
 
-Route::post('/admin/reset-password-submit', [AdminController::class, 'reset_password_submit'])->name('admin_reset_password_submit');
+Route::post('/admin/reset-password-submit', [AuthController::class, 'reset_password_submit'])->name('admin_reset_password_submit');
 
-Route::get('/admin/logout', [AdminController::class, 'logout'])->name('admin_logout');
+Route::get('/admin/logout', [AuthController::class, 'logout'])->name('admin_logout');
 
 Route::get('/admin/profile', [ProfileController::class, 'index'])->name('admin_profile')->middleware('admin:admin');
 

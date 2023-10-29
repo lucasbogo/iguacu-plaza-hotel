@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Mail\Websitemail;
 
-class AdminController extends Controller
+class AuthController extends Controller
 {
     public function login()
     {
@@ -20,10 +20,18 @@ class AdminController extends Controller
 
     public function login_submit(Request $request)
     {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required ' //|min:8|max:20',
-        ]);
+        $request->validate(
+            [
+                'email' => 'required|email',
+                'password' => 'required ' //|min:8|max:20',
+            ],
+            [
+                'email.required' => 'O campo E-mail é obrigatório.',
+                'email.email' => 'Por favor, insira um endereço válido',
+                'password' => 'O campo Senha é obrigatório'
+            ]
+        );
+
         $credentials = [
             'email' => $request->email,
             'password' => $request->password,
