@@ -24,7 +24,7 @@ class AuthController extends Controller
                 'email' => 'required|email',
                 'password' => 'required'
             ],
-            [ 
+            [
                 'email.required' => 'O campo E-mail é obrigatório.',
                 'email.email' => 'Por favor, insira um endereço válido',
                 'password' => 'O campo Senha é obrigatório'
@@ -38,9 +38,9 @@ class AuthController extends Controller
         ];
 
         if (Auth::guard('customer')->attempt($credential)) {
-            return redirect()->route('home'); // implmente customer_home view page later on
+            return redirect()->route('customer.customer_home');
         } else {
-            return redirect()->route('customer_login')->with('error', 'Informação Incorreta');
+            return redirect()->route('customer_login')->with('error', 'Informações Incorretas, tente novamente.');
         }
     }
 
@@ -107,22 +107,22 @@ class AuthController extends Controller
         }
     }
 
-    public function logout()
-    {
-        Auth::guard('customer')->logout();
-        return redirect()->route('customer_login');
-    }
-
     public function forget_password()
     {
-        return view('front.forget_password');
+        return view('frontend.pages.forget_password');
     }
 
     public function forget_password_submit(Request $request)
     {
-        $request->validate([
-            'email' => 'required|email'
-        ]);
+        $request->validate(
+            [
+                'email' => 'required|email|',
+            ],
+            [
+                'email.required' => 'O campo E-mail é obrigatório.',
+                'email.email' => 'Por favor, insira um endereço de e-mail válido.',
+            ]
+        );
 
         $customer = Customer::where('email', $request->email)->first();
         if (!$customer) {
@@ -134,7 +134,8 @@ class AuthController extends Controller
         $customer->token = $token;
         $customer->update();
 
-        $reset_link = url('reset-password/' . $token . '/' . $request->email);
+        $reset_link = url('/customer/reset-password/' . $token . '/' . $request->email);
+        logger('Reset Link: ' . $reset_link);
         $subject = 'Redefinir senha';
         $message = 'Clique no link abaixo para redefinir sua senha <br>';
         $message .= '<a href="' . $reset_link . '">Redefinir senha</a>';
@@ -145,21 +146,27 @@ class AuthController extends Controller
     }
 
 
-    public function reset_password($token, $email)
+    public function customer_reset_password($token, $email)
     {
         $customer = Customer::where('token', $token)->where('email', $email)->first();
-        if (!$customer) {
-            return redirect()->route('customer_login');
-        }
 
-        return view('front.reset_password', compact('token', 'email'));
+        if (!$customer) {
+            return redirect()->route('customer_login')->with('error', 'Link de redefinição de senha inválido.');
+        } else {
+
+            return view('frontend.pages.reset_password', compact('token', 'email'));
+        }
     }
 
-    public function reset_password_submit(Request $request)
+    public function customer_reset_password_submit(Request $request)
     {
         $request->validate([
             'password' => 'required',
             'retype_password' => 'required|same:password'
+        ], [
+            'password.required' => 'O campo Senha é obrigatório.',
+            'retype_password.required' => 'O campo Confirmar Senha é obrigatório.',
+            'retype_password.same' => 'Os campos Senha e Confirmar Senha devem ser iguais.'
         ]);
 
         $customer = Customer::where('token', $request->token)->where('email', $request->email)->first();
@@ -169,5 +176,11 @@ class AuthController extends Controller
         $customer->update();
 
         return redirect()->route('customer_login')->with('success', 'Senha redefinida com sucesso');
+    }
+
+    public function logout()
+    {
+        Auth::guard('customer')->logout();
+        return redirect()->route('customer_login');
     }
 }

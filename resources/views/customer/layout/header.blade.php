@@ -9,15 +9,22 @@
     </form>
     <ul class="navbar-nav navbar-right">
         <li class="nav-link">
-            <a href="" target="_blank" class="btn btn-warning">Site cliente</a>
+            <a href="{{ route('home') }}" class="btn btn-warning">Retornar à página inicial.</a>
         </li>
+
         <li class="dropdown"><a href="#" data-toggle="dropdown"
                 class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                <img alt="image" src="{{ asset('uploads/' . Auth::guard('customer')->customer()->photo) }}" class="rounded-circle mr-1">
-                <div class="d-sm-none d-lg-inline-block">{{ Auth::guard('customer')->customer()->name }}</div>
+                @if (Auth::guard('customer')->user()->photo == '')
+                    <img alt="image" src="{{ asset('uploads/default.png') }}" class="rounded-circle mr-1">
+                @else
+                    <img alt="image" src="{{ asset('uploads/' . Auth::guard('customer')->user()->photo) }}"
+                        class="rounded-circle mr-1">
+                @endif
+
+                <div class="d-sm-none d-lg-inline-block">{{ Auth::guard('customer')->user()->name }}</div>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-                <a href="{{ route('customer_profile') }}" class="dropdown-item has-icon">
+                <a href="customer.profile" class="dropdown-item has-icon">
                     <i class="fa fa-user"></i> Editar perfil
                 </a>
                 <a href="{{ route('customer_logout') }}" class="dropdown-item has-icon text-danger">

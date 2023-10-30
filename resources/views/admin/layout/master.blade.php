@@ -43,16 +43,17 @@
     </div>
 
     @include('admin.layout.scripts_footer')
+
     @if ($errors->any())
-        @foreach ($errors->all() as $error)
-            <script>
+        <script>
+            @foreach ($errors->all() as $error)
                 iziToast.error({
                     title: 'Erro',
                     message: '{{ $error }}',
                     position: 'topRight'
                 });
-            </script>
-        @endforeach
+            @endforeach
+        </script>
     @endif
 
     @if (session()->get('error'))

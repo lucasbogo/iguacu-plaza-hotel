@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 
-class Customer
+class Customer extends Middleware
 {
     protected function redirectTo($request)
     {

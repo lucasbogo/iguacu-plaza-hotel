@@ -6,16 +6,17 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>{{ $global_page->signin_heading }}</h2>
+                    <h2>{{ $global_page->forget_password_heading }}</h2>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="page-content">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-4">
-                    <form action="{{ route('customer_login_submit') }}" method="post">
+                    <form action="{{ route('customer_forget_password_submit') }}" method="post">
                         @csrf
                         <div class="login-form">
                             <div class="mb-3">
@@ -26,20 +27,8 @@
                                 @endif
                             </div>
                             <div class="mb-3">
-                                <label for="" class="form-label">Senha</label>
-                                <input type="password" class="form-control" name="password">
-                                @if ($errors->has('password'))
-                                    <span class="text-danger">{{ $errors->first('password') }}</span>
-                                @endif
-                            </div>
-                            <div class="mb-3 text-center">
-                                <button type="submit" class="btn btn-primary bg-website">Entrar</button>
-                            </div>
-                            <div class="mb-3">
-                                <a href="{{ route('customer_forget_password')}}" class="primary-color">Esqueceu a Senha?</a>
-                            </div>
-                            <div class="mb-3">
-                                <a href="{{ route('customer_signup') }}" class="primary-color">Novo Usuário? Registre-se agora.</a>
+                                <button type="submit" class="btn btn-primary bg-website te">Enviar</button>
+                                <a href="{{ route('customer_login') }}" class="primary-color">Retornar para o Login.</a>
                             </div>
                         </div>
                     </form>

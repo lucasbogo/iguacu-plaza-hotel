@@ -71,13 +71,17 @@ Route::get('/customer/logout', [CustomerAuthController::class, 'logout'])->name(
 Route::get('/customer/signup', [CustomerAuthController::class, 'signup'])->name('customer_signup');
 Route::post('/customer/signup-submit', [CustomerAuthController::class, 'signup_submit'])->name('customer_signup_submit');
 Route::get('/customer/signup-verify/{email}/{token}', [CustomerAuthController::class, 'signup_verify'])->name('customer_signup_verify');
+Route::get('/customer/forget-password', [CustomerAuthController::class, 'forget_password'])->name('customer_forget_password');
+Route::post('/customer/forget-password-submit', [CustomerAuthController::class, 'forget_password_submit'])->name('customer_forget_password_submit');
+Route::get('/customer/reset-password/{token}/{email}', [CustomerAuthController::class, 'customer_reset_password'])->name('customer_reset_password');
+Route::post('/customer/reset-password-submit', [CustomerAuthController::class, 'customer_reset_password_submit'])->name('customer_reset_password_submit');
 
 /* Customer Routes with Middleware */
 Route::group(['middleware' => ['customer:customer'], 'as' => 'customer.'], function () {
-    Route::get('/customer/home', [CustomerHomeController::class, 'index'])->name('home');
+    Route::get('/customer/home', [CustomerHomeController::class, 'index'])->name('customer_home');  
     Route::get('/customer/edit-profile', [CustomerHomeController::class, 'edit_profile'])->name('profile');
     Route::post('/customer/edit-profile-submit', [CustomerHomeController::class, 'edit_profile'])->name('edit_profile');
-});
+});     
 
 /* User Routes */
 Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard')->middleware('auth');
@@ -360,3 +364,13 @@ Route::post('admin/page/signin/update', [PagesController::class, 'signin_update'
 Route::get('admin/page/room', [PagesController::class, 'room'])->name('admin_page_room')->middleware('admin:admin');
 
 Route::post('admin/page/room/update', [PagesController::class, 'room_update'])->name('admin_page_room_update')->middleware('admin:admin');
+
+// Forget Password Page
+Route::get('admin/page/forget-password', [PagesController::class, 'forget_password'])->name('admin_page_forget_password')->middleware('admin:admin');
+
+Route::post('admin/page/forget-password/update', [PagesController::class, 'forget_password_update'])->name('admin_page_forget_password_update')->middleware('admin:admin');
+
+// Reset Password Page
+Route::get('admin/page/reset-password', [PagesController::class, 'reset_password'])->name('admin_page_reset_password')->middleware('admin:admin');
+
+Route::post('admin/page/reset-password/update', [PagesController::class, 'reset_password_update'])->name('admin_page_reset_password_update')->middleware('admin:admin');

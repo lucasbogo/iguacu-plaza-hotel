@@ -44,7 +44,9 @@
                 Request::is('admin/page/checkout') ||
                 Request::is('admin/page/payment') ||
                 Request::is('admin/page/signup') ||
-                Request::is('admin/page/signin')
+                Request::is('admin/page/signin') ||
+                Request::is('admin/page/forget_password') ||
+                Request::is('admin/page/reset_password')
                     ? 'active'
                     : '' }}">
                 <a href="#" class="nav-link has-dropdown" title="Editar títulos e status das páginas"><i
@@ -71,11 +73,9 @@
                     <li class="{{ Request::is('admin/page/blog') ? 'active' : '' }}"><a class="nav-link"
                             href="{{ route('admin_page_blog') }}"><i class="fa fa-angle-right"></i>
                             Blog</a></li>
-
                     <li class="{{ Request::is('admin/page/room') ? 'active' : '' }}"><a class="nav-link"
                             href="{{ route('admin_page_room') }}"><i class="fa fa-angle-right"></i>
                             Quartos</a></li>
-
                     <li class="{{ Request::is('admin/page/contact') ? 'active' : '' }}"><a class="nav-link"
                             href="{{ route('admin_page_contact') }}"><i class="fa fa-angle-right"></i>
                             Contato</a></li>
@@ -94,6 +94,12 @@
                     <li class="{{ Request::is('admin/page/signin') ? 'active' : '' }}"><a class="nav-link"
                             href="{{ route('admin_page_signin') }}"><i class="fa fa-angle-right"></i>
                             Login</a></li>
+                    <li class="{{ Request::is('admin/page/forget_password') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('admin_page_forget_password') }}"><i class="fa fa-angle-right"></i>
+                            Esqueceu a Senha</a></li>
+                    <li class="{{ Request::is('admin/page/reset_password') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('admin_page_reset_password') }}"><i class="fa fa-angle-right"></i>
+                            Redefinição de Senha</a></li>
                 </ul>
             </li>
             <li class="{{ Request::is('admin/slide/*') ? 'active' : '' }}"><a class="nav-link"

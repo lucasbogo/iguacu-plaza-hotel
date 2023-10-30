@@ -4,7 +4,7 @@
     {{-- <div>
         <img src="{{ asset('uploads/logo-hotel.png') }}" alt="Logo" alt="Logo" style="padding: 10px;"></a>
     </div> --}}
-    <h3>Olá {{ $customer->name }}, bem-vindo ao seu painel de reservas.</h3>
+    <h3>Olá {{Auth::guard('customer')->user()->name}}, bem-vindo ao seu painel de reservas.</h3>
 @endsection
 
 @section('main_content')

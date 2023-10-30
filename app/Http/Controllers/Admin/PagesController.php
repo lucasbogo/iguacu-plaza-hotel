@@ -142,15 +142,15 @@ class PagesController extends Controller
 
     public function room()
     {
-        $page = Page::where('id',1)->first();
+        $page = Page::where('id', 1)->first();
         return view('admin.pages.room', compact('page'));
     }
 
     public function room_update(Request $request)
     {
-        $page  = Page::where('id',1)->first();
-        $page ->room_heading = $request->room_heading;
-        $page ->update();
+        $page  = Page::where('id', 1)->first();
+        $page->room_heading = $request->room_heading;
+        $page->update();
 
         return redirect()->back()->with('success', 'Página "Quarto" atualizada com sucesso!');
     }
@@ -197,7 +197,7 @@ class PagesController extends Controller
     {
         $page = Page::where('id', 1)->first();
         $page->payment_heading = $request->payment_heading;
-        $page->payment_status = $request->payment_status;
+        // $page->payment_status = $request->payment_status;
         $page->update();
 
         return redirect()->back()->with('success', 'Página "Pagamento" atualizada com sucesso!');
@@ -233,5 +233,35 @@ class PagesController extends Controller
         $page->update();
 
         return redirect()->back()->with('success', 'Página "Login" atualizada com sucesso!');
+    }
+
+    public function forget_password()
+    {
+        $page = Page::where('id', 1)->first();
+        return view('admin.pages.forget_password', compact('page'));
+    }
+
+    public function forget_password_update(Request $request)
+    {
+        $page = Page::where('id', 1)->first();
+        $page->forget_password_heading = $request->forget_password_heading;
+        $page->update();
+
+        return redirect()->back()->with('success', 'Página "Esqueceu a Senha" atualizada com sucesso!');
+    }
+
+    public function reset_password()
+    {
+        $page = Page::where('id', 1)->first();
+        return view('admin.pages.reset_password', compact('page'));
+    }
+
+    public function reset_password_update(Request $request)
+    {
+        $page = Page::where('id', 1)->first();
+        $page->reset_password_heading = $request->reset_password_heading;
+        $page->update();
+
+        return redirect()->back()->with('success', 'Página "Redefinir Senha" atualizada com sucesso!');
     }
 }

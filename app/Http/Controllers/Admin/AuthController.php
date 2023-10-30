@@ -23,12 +23,12 @@ class AuthController extends Controller
         $request->validate(
             [
                 'email' => 'required|email',
-                'password' => 'required ' //|min:8|max:20',
+                'password' => 'required',
             ],
             [
                 'email.required' => 'O campo E-mail é obrigatório.',
                 'email.email' => 'Por favor, insira um endereço válido',
-                'password' => 'O campo Senha é obrigatório'
+                'password.required' => 'O campo Senha é obrigatório.',
             ]
         );
 
@@ -37,10 +37,20 @@ class AuthController extends Controller
             'password' => $request->password,
         ];
 
+        $admin = Admin::where('email', $request->email)->first();
+
+        if (!$admin) {
+            // Display a custom error message for non-existent email
+            return redirect()->route('admin_login')
+                ->withErrors(['error' => 'E-mail não encontrado.']);
+        }
+
         if (Auth::guard('admin')->attempt($credentials)) {
             return redirect()->route('admin_home');
         } else {
-            return redirect()->route('admin_login')->withErrors(['error' => 'Email ou senha incorretos']);
+            // Display a custom error message for incorrect password
+            return redirect()->route('admin_login')
+                ->withErrors(['error' => 'Senha incorreta. Por favor, tente novamente.']);
         }
     }
 
