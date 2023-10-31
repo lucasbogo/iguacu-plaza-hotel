@@ -24,7 +24,7 @@
                 <div class="d-sm-none d-lg-inline-block">{{ Auth::guard('customer')->user()->name }}</div>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-                <a href="customer.profile" class="dropdown-item has-icon">
+                <a href="{{ route('customer.customer_profile') }}" class="dropdown-item has-icon">
                     <i class="fa fa-user"></i> Editar perfil
                 </a>
                 <a href="{{ route('customer_logout') }}" class="dropdown-item has-icon text-danger">

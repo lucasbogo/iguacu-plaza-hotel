@@ -24,8 +24,9 @@ use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\RoomsController;
 use App\Http\Controllers\Frontend\SubscriberController;
 
-use App\Http\Controllers\Customer\HomeController as CustomerHomeController;
 use App\Http\Controllers\Customer\AuthController as CustomerAuthController;
+use App\Http\Controllers\Customer\HomeController as CustomerHomeController;
+use App\Http\Controllers\Customer\ProfileController as CustomerProfileController;
 
 /* Frontend Routes */
 
@@ -79,8 +80,8 @@ Route::post('/customer/reset-password-submit', [CustomerAuthController::class, '
 /* Customer Routes with Middleware */
 Route::group(['middleware' => ['customer:customer'], 'as' => 'customer.'], function () {
     Route::get('/customer/home', [CustomerHomeController::class, 'index'])->name('customer_home');  
-    Route::get('/customer/edit-profile', [CustomerHomeController::class, 'edit_profile'])->name('profile');
-    Route::post('/customer/edit-profile-submit', [CustomerHomeController::class, 'edit_profile'])->name('edit_profile');
+    Route::get('/customer/edit-profile', [CustomerProfileController::class, 'profile'])->name('customer_profile');
+    Route::post('/customer/edit-profile-submit', [CustomerProfileController::class, 'profile_submit'])->name('customer_profile_submit');
 });     
 
 /* User Routes */

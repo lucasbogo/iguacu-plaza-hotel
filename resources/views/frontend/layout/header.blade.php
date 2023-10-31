@@ -47,17 +47,23 @@
                         <li class="menu"><a href="checkout.html">{{ $global_page->checkout_heading }}</a></li>
                     @endif
 
-                    @if ($global_page->signup_status == 1)
-                        <li class="menu"><a
-                                href="{{ route('customer_signup') }}">{{ $global_page->signup_heading }}</a></li>
-                    @endif
+                    @auth('customer')
+                        <li class="menu"><a href="{{ route('customer.customer_home') }}">Meu Painel</a></li>
+                        <li class="menu"><a href="{{ route('customer_logout') }}">Sair</a></li>
+                    @else
+                        @if ($global_page->signup_status == 1)
+                            <li class="menu"><a
+                                    href="{{ route('customer_signup') }}">{{ $global_page->signup_heading }}</a></li>
+                        @endif
 
-                    @if ($global_page->signup_status == 1)
-                        <li class="menu"><a
-                                href="{{ route('customer_login') }}">{{ $global_page->signin_heading }}</a></li>
-                    @endif
+                        @if ($global_page->signup_status == 1)
+                            <li class="menu"><a
+                                    href="{{ route('customer_login') }}">{{ $global_page->signin_heading }}</a></li>
+                        @endif
+                    @endauth
                 </ul>
             </div>
+
         </div>
     </div>
 </div>

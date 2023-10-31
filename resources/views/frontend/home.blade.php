@@ -41,11 +41,9 @@
                             <div class="form-group">
                                 <select name="" class="form-select">
                                     <option value="">Selecionar quarto</option>
-                                    <option value="">Casal</option>
-                                    <option value="">Duplo solteiro</option>
-                                    <option value="">Triplo</option>
-                                    <option value="">Casal + solteiro</option>
-                                    <option value="">Casal + duplo solteiro</option>
+                                    @foreach ($rooms as $item)
+                                        <option value="">{{ $item->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>

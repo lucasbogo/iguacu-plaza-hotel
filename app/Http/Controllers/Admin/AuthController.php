@@ -112,7 +112,7 @@ class AuthController extends Controller
         $request->validate([
             'password' => 'required',
             'retype_password' => 'required|same:password'
-        ]);
+        ][]);
 
         $admin = Admin::where('token', $request->token)->where('email', $request->email)->first();
 
