@@ -27,7 +27,7 @@
                                 <th>Serial</th>
                                 <th>Imagem</th>
                                 <th>Informações do Quarto</th>
-                                <th>Preço/Noite</th>
+                                <th>Diária</th>
                                 <th>Checkin</th>
                                 <th>Checkout</th>
                                 <th>Hóspedes</th>
@@ -86,7 +86,7 @@
                                     <td>
                                         <a href="{{ route('room_detail',$rooms->id) }}" class="room-name">{{ $rooms->name }}</a>
                                     </td>
-                                    <td>${{ $rooms->price }}</td>
+                                    <td>R${{ $rooms->price }}</td>
                                     <td>{{ $arr_cart_checkin_date[$i] }}</td>
                                     <td>{{ $arr_cart_checkout_date[$i] }}</td>
                                     <td>

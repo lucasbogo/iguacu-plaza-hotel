@@ -112,7 +112,7 @@
                                 R${{ $room->price }}
                             </div>
                         </div>
-                        {{-- <div class="widget">
+                        <div class="widget">
                             <h2>Reservar este quarto</h2>
                             <form action="{{ route('cart_submit') }}" method="post">
                                 @csrf
@@ -132,9 +132,9 @@
                                     <input type="number" name="children" class="form-control" min="0" max="30"
                                         placeholder="Children">
                                 </div>
-                                <button type="submit" class="book-now">Adicionar ao Carrinho</button>
+                                <button type="submit" class="book-now">Reservar</button>
                             </form>
-                        </div> --}}
+                        </div>
                     </div>
                 </div>
             </div>
