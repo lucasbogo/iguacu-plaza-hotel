@@ -34,15 +34,16 @@
 
     <div class="search-section" style="background-color: white;">
         <div class="container">
-            <form action="cart.html" method="post">
+            <form action="{{ route('cart_submit') }}" method="post">
+                @csrf
                 <div class="inner">
                     <div class="row">
                         <div class="col-lg-3">
                             <div class="form-group">
-                                <select name="" class="form-select">
-                                    <option value="">Selecionar quarto</option>
+                                <select name="room_id" class="form-select">
+                                    <option value="room_id">Selecionar Quarto</option>
                                     @foreach ($rooms as $item)
-                                        <option value="">{{ $item->name }}</option>
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -55,13 +56,13 @@
                         </div>
                         <div class="col-lg-2">
                             <div class="form-group">
-                                <input type="number" name="" class="form-control" min="1" max="30"
+                                <input type="number" name="adult" class="form-control" min="1" max="30"
                                     placeholder="Adultos">
                             </div>
                         </div>
                         <div class="col-lg-2">
                             <div class="form-group">
-                                <input type="number" name="" class="form-control" min="1" max="30"
+                                <input type="number" name="children" class="form-control" min="0" max="30"
                                     placeholder="Crianças">
                             </div>
                         </div>
@@ -219,5 +220,17 @@
             </div>
         </div>
     </div>
+@endif
+
+@if ($errors->any())
+    <script>
+        @foreach ($errors->all() as $error)
+            iziToast.error({
+                title: 'Erro',
+                message: '{{ $error }}',
+                position: 'topRight'
+            });
+        @endforeach
+    </script>
 @endif
 @endsection

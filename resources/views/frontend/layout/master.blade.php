@@ -41,7 +41,19 @@
     @include('frontend.layout.footer')
 
     @include('frontend.layout.scripts_footer')
-      
+
+    @if ($errors->any())
+        <script>
+            @foreach ($errors->all() as $error)
+                iziToast.error({
+                    title: 'Erro',
+                    message: '{{ $error }}',
+                    position: 'topRight'
+                });
+            @endforeach
+        </script>
+    @endif
+
     @if (session()->get('error'))
         <script>
             iziToast.error({

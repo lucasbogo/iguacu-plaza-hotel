@@ -40,7 +40,7 @@
             <div class="col-md-5 right-side">
                 <ul class="right">
                     @if ($global_page->cart_status == 1)
-                        <li class="menu"><a href="cart.html">{{ $global_page->cart_heading }}</a></li>
+                        <li class="menu"><a href="{{ route('cart')}}">{{ $global_page->cart_heading }}</a></li>
                     @endif
 
                     @if ($global_page->checkout_status == 1)

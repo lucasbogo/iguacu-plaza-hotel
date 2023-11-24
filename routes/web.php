@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\RoomController;
 
 use App\Http\Controllers\Frontend\WebsiteController;
 use App\Http\Controllers\Frontend\BlogController;
+use App\Http\Controllers\Frontend\BookingController;
 use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\RoomsController;
@@ -79,10 +80,10 @@ Route::post('/customer/reset-password-submit', [CustomerAuthController::class, '
 
 /* Customer Routes with Middleware */
 Route::group(['middleware' => ['customer:customer'], 'as' => 'customer.'], function () {
-    Route::get('/customer/home', [CustomerHomeController::class, 'index'])->name('customer_home');  
+    Route::get('/customer/home', [CustomerHomeController::class, 'index'])->name('customer_home');
     Route::get('/customer/edit-profile', [CustomerProfileController::class, 'profile'])->name('customer_profile');
     Route::post('/customer/edit-profile-submit', [CustomerProfileController::class, 'profile_submit'])->name('customer_profile_submit');
-});     
+});
 
 /* User Routes */
 Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard')->middleware('auth');
@@ -108,6 +109,13 @@ Route::post('/forget_password_submit', [AuthController::class, 'forget_password_
 Route::get('/reset-password/{token}/{email}', [AuthController::class, 'reset_password'])->name('reset_password');
 
 Route::post('/reset_password_submit', [AuthController::class, 'reset_password_submit'])->name('reset_password_submit');
+
+// Booking functions
+Route::post('/booking/submit', [BookingController::class, 'cart_submit'])->name('cart_submit');
+
+Route::get('/cart', [BookingController::class, 'cart_view'])->name('cart');
+
+Route::get('/cart/delete/{id}', [BookingController::class, 'cart_delete'])->name('cart_delete');
 
 /* Admin Routes */
 
