@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <title>Iguaçu Plaza Hotel</title>
 
-    <link rel="icon" type="image/png" href="{{ asset('uploads/favicon.ico') }}">
+    <link rel="icon" type="image/png" href="{{ asset('uploads/' . $global_setting->favicon) }}">
 
     <!-- All CSS -->
     @include('frontend.layout.styles')

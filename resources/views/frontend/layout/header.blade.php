@@ -40,7 +40,7 @@
             <div class="col-md-5 right-side">
                 <ul class="right">
                     @if ($global_page->cart_status == 1)
-                        <li class="menu"><a href="{{ route('cart')}}">{{ $global_page->cart_heading }}</a></li>
+                        <li class="menu"><a href="{{ route('cart') }}">{{ $global_page->cart_heading }}</a></li>
                     @endif
 
                     @if ($global_page->checkout_status == 1)
@@ -74,7 +74,7 @@
     <!-- Menu For Mobile Device -->
     <div class="mobile-nav">
         <a href="{{ route('home') }}" class="logo">
-            <img src="{{ asset('uploads/logo-hotel.png') }}" alt="">
+            <img src="{{ asset('uploads/' . $global_setting->logo) }}" alt="">
         </a>
     </div>
 
@@ -83,7 +83,8 @@
         <div class="container">
             <nav class="navbar navbar-expand-md navbar-light">
                 <a class="navbar-brand" href="{{ route('home') }}">
-                    <img src="{{ asset('uploads/logo-hotel.png') }}" alt="" style="max-height: 200px;">
+                    <img src="{{ asset('uploads/' . $global_setting->logo) }}" alt=""
+                        style="max-height: 200px;">
                 </a>
                 <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">

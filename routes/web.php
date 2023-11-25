@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\PagesController;
 use App\Http\Controllers\Admin\SubscribersController;
 use App\Http\Controllers\Admin\AmenityController;
 use App\Http\Controllers\Admin\RoomController;
+use App\Http\Controllers\Admin\SettingController;
 
 use App\Http\Controllers\Frontend\WebsiteController;
 use App\Http\Controllers\Frontend\BlogController;
@@ -117,6 +118,8 @@ Route::get('/cart', [BookingController::class, 'cart_view'])->name('cart');
 
 Route::get('/cart/delete/{id}', [BookingController::class, 'cart_delete'])->name('cart_delete');
 
+Route::get('/checkout', [BookingController::class, 'checkout'])->name('checkout');
+
 /* Admin Routes */
 
 Route::get('/admin/home', [HomeController::class, 'index'])->name('admin_home')->middleware('admin:admin');
@@ -138,6 +141,10 @@ Route::get('/admin/logout', [AuthController::class, 'logout'])->name('admin_logo
 Route::get('/admin/profile', [ProfileController::class, 'index'])->name('admin_profile')->middleware('admin:admin');
 
 Route::post('/admin/profile-update', [ProfileController::class, 'update'])->name('admin_profile_update')->middleware('admin:admin');
+
+Route::get('/admin/setting', [SettingController::class, 'index'])->name('admin_setting');
+
+Route::post('/admin/setting/update', [SettingController::class, 'update'])->name('admin_setting_update');
 
 /* Routes Admin Slider Photos*/
 

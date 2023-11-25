@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Room;
+use Illuminate\Support\Facades\Auth;
 
 class BookingController extends Controller
 {
@@ -123,5 +124,54 @@ class BookingController extends Controller
         }
 
         return redirect()->back()->with('success', 'Quarto excluído com sucesso.');
+    }
+
+    public function checkout()
+    {
+        if (!Auth::guard('customer')->check()) {
+            return redirect()->back()->with('error', 'Você precisa fazer login para finalizar a compra.');
+        }
+
+        if (!session()->has('cart_room_id')) {
+            return redirect()->back()->with('error', 'Não há itens no carrinho.');
+        }
+
+        return view('frontend.booking.checkout');
+    }
+
+    public function payment(Request $request)
+    {
+        if (!Auth::guard('customer')->check()) {
+            return redirect()->back()->with('error', 'Você precisa fazer login para finalizar a compra.');
+        }
+
+        if (!session()->has('cart_room_id')) {
+            return redirect()->back()->with('error', 'Não há itens no carrinho.');
+        }
+
+        $request->validate([
+            'billing_name' => 'required',
+            'billing_email' => 'required|email',
+            'billing_phone' => 'required',
+            'billing_country' => 'required',
+            'billing_street' => 'required',
+            'billing_number' => 'required',
+            'billing_state' => 'required',
+            'billing_city' => 'required',
+            'billing_zip_code' => 'required'
+        ]);
+        
+
+        session()->put('billing_name', $request->billing_name);
+        session()->put('billing_email', $request->billing_email);
+        session()->put('billing_phone', $request->billing_phone);
+        session()->put('billing_country', $request->billing_country);
+        session()->put('billing_street', $request->billing_street);
+        session()->put('billing_number', $request->billing_number);
+        session()->put('billing_state', $request->billing_state);
+        session()->put('billing_city', $request->billing_city);
+        session()->put('billing_zip_code', $request->billing_zip_code);
+
+        return view('frontend.booking.payment');
     }
 }

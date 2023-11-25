@@ -4,7 +4,7 @@
             <a href="{{ route('admin_home') }}">
                 <img src="{{ asset('uploads/logo-hotel.png') }}" alt="Logo" style="padding: 10px;">
             </a>
-            <h4 style="margin-top: 10px; font-weight: bold;">Configurações</h4>
+            <h4 style="margin-top: 10px; font-weight: bold;"></h4><br>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
             <a href="{{ route('admin_home') }}"></a>
@@ -14,9 +14,11 @@
                     href="{{ route('admin_home') }}"><i class="fa fa-home"></i>
                     <span>Dashboard</span></a></li>
 
+            <li class="{{ Request::is('admin/setting') ? 'active' : '' }}"><a class="nav-link"
+                    href="{{ route('admin_setting') }}"><i class="fa fa-cog"></i>
+                    <span>Configurações</span></a></li>
 
-            <li
-                class="nav-item dropdown {{ Request::is('admin/amenity/view') || Request::is('admin/room/view') ? 'active' : '' }}">
+            <li class="nav-item dropdown {{ Request::is('admin/amenity/view') || Request::is('admin/room/view') ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown"><i class="fa fa-building"></i><span> Hotel</span></a>
                 <ul class="dropdown-menu">
 
