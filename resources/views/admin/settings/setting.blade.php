@@ -17,14 +17,14 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="mb-4">
-                                                <label class="form-label">Existing Logo</label>
+                                                <label class="form-label">Logo Existente</label>
                                                 <div>
                                                     <img src="{{ asset('uploads/' . $settings->logo) }}" alt=""
                                                         class="w_200">
                                                 </div>
                                             </div>
                                             <div class="mb-4">
-                                                <label class="form-label">Change Logo</label>
+                                                <label class="form-label">Mudar Logo</label>
                                                 <div>
                                                     <input type="file" name="logo">
                                                 </div>
@@ -32,14 +32,14 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mb-4">
-                                                <label class="form-label">Existing Favicon</label>
+                                                <label class="form-label">Favicon Existente</label>
                                                 <div>
                                                     <img src="{{ asset('uploads/' . $settings->favicon) }}" alt=""
                                                         class="w_50">
                                                 </div>
                                             </div>
                                             <div class="mb-4">
-                                                <label class="form-label">Change Favicon</label>
+                                                <label class="form-label">Mudar Favicon</label>
                                                 <div>
                                                     <input type="file" name="favicon">
                                                 </div>
@@ -48,13 +48,25 @@
                                     </div>
 
                                     <div class="mb-4">
-                                        <label class="form-label">Top Bar Phone</label>
+                                        <label class="form-label">Numero WhatsApp (parte superior)</label>
+                                        <input type="text" class="form-control" name="top_bar_whatsapp"
+                                            value="{{ $settings->top_bar_whatsapp }}">
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label class="form-label">Link do WhatsApp</label>
+                                        <input type="url" class="form-control" name="top_bar_whatsapp_link"
+                                            value="{{ $settings->top_bar_whatsapp_link }}">
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label class="form-label">Numero de telefone (parte superior)</label>
                                         <input type="text" class="form-control" name="top_bar_phone"
                                             value="{{ $settings->top_bar_phone }}">
                                     </div>
 
                                     <div class="mb-4">
-                                        <label class="form-label">Top Bar Email</label>
+                                        <label class="form-label">Email (Parte Superior)</label>
                                         <input type="text" class="form-control" name="top_bar_email"
                                             value="{{ $settings->top_bar_email }}">
                                     </div>
@@ -112,24 +124,42 @@
                                     </div>
 
                                     <div class="mb-4">
-                                        <label class="form-label">Footer Address</label>
+                                        <label class="form-label">Titulo/Nome do Hotel (parte inferior)</label>
+                                        <input type="text" class="form-control" name="footer_hotel_title"
+                                            value="{{ $settings->footer_hotel_title }}">
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label class="form-label">Endereço (parte inferior)</label>
                                         <textarea name="footer_address" class="form-control h_100" cols="30" rows="10">{{ $settings->footer_address }}</textarea>
                                     </div>
 
                                     <div class="mb-4">
-                                        <label class="form-label">Footer Phone</label>
+                                        <label class="form-label">Numero WhatsApp (parte inferior)</label>
+                                        <input type="text" class="form-control" name="footer_hotel_whatsapp"
+                                            value="{{ $settings->footer_hotel_whatsapp }}">
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label class="form-label">Link do WhatsApp (parte inferior)</label>
+                                        <input type="url" class="form-control" name="footer_hotel_whatsapp_link"
+                                            value="{{ $settings->footer_hotel_whatsapp_link }}">
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label class="form-label">Telefone (parte inferior)</label>
                                         <input type="text" class="form-control" name="footer_phone"
                                             value="{{ $settings->footer_phone }}">
                                     </div>
 
                                     <div class="mb-4">
-                                        <label class="form-label">Footer Email</label>
+                                        <label class="form-label">E-mail (parte inferior)</label>
                                         <input type="text" class="form-control" name="footer_email"
                                             value="{{ $settings->footer_email }}">
                                     </div>
 
                                     <div class="mb-4">
-                                        <label class="form-label">Copyright Text</label>
+                                        <label class="form-label"> Texto Copyright</label>
                                         <input type="text" class="form-control" name="copyright"
                                             value="{{ $settings->copyright }}">
                                     </div>

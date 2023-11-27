@@ -22,17 +22,23 @@
             <div class="col-md-7 left-side">
                 <ul class="contact-info">
                     <li>
-                        <a href="https://wa.me/5545999510002" target="_blank">
-                            <i class="fab fa-whatsapp"></i> +55 (45) 99951-0002
-                        </a>
+                        @if (!empty($global_setting->top_bar_whatsapp_link))
+                            <a href="{{ $global_setting->top_bar_whatsapp_link }}" target="_blank">
+                                <i class="fab fa-whatsapp"></i> {{ $global_setting->top_bar_whatsapp }}
+                            </a>
+                        @else
+                            <a href="{{ $global_setting->top_bar_whatsapp_link }}" target="_blank">
+                                <i class="fab fa-whatsapp"></i> {{ $global_setting->top_bar_whatsapp }}
+                            </a>
+                        @endif
                     </li>
 
                     <li>
-                        <i class="fa fa-phone"></i> (45) 3523-2273
+                        <i class="fa fa-phone"></i> {{ $global_setting->top_bar_phone }}
                     </li>
 
                     <li>
-                        <i class="fa fa-envelope"></i> reservas@iguacuplazahotel.com.br
+                        <i class="fa fa-envelope"></i> {{ $global_setting->top_bar_email }}
                     </li>
                 </ul>
             </div>

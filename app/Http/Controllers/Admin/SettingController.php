@@ -53,6 +53,8 @@ class SettingController extends Controller
             $obj->favicon = $final_name;
         }
 
+        $obj->top_bar_whatsapp = $request->top_bar_whatsapp;
+        $obj->top_bar_whatsapp_link = $request->top_bar_whatsapp_link;
         $obj->top_bar_phone = $request->top_bar_phone;
         $obj->top_bar_email = $request->top_bar_email;
         $obj->home_feature_status = $request->home_feature_status;
@@ -61,7 +63,10 @@ class SettingController extends Controller
         $obj->home_testimonial_status = $request->home_testimonial_status;
         $obj->home_latest_post_total = $request->home_latest_post_total;
         $obj->home_latest_post_status = $request->home_latest_post_status;
+        $obj->footer_hotel_title = $request->footer_hotel_title;
         $obj->footer_address = $request->footer_address;
+        $obj->footer_hotel_whatsapp = $request->footer_hotel_whatsapp;
+        $obj->footer_hotel_whatsapp_link = $request->footer_hotel_whatsapp_link;
         $obj->footer_phone = $request->footer_phone;
         $obj->footer_email = $request->footer_email;
         $obj->copyright = $request->copyright;

@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="item">
-                    <h2 class="heading">Iguaçu Plaza Hotel</h2>
+                    <h2 class="heading">{{ $global_setting->footer_hotel_title }}</h2>
                     <ul class="useful-links">
                         <li><a href="rooms.html">Quartos</a></li>
                         @if ($global_page->about_status == 1)
@@ -60,8 +60,7 @@
                             <i class="fa fa-map-marker"></i>
                         </div>
                         <div class="right">
-                            Rua Bartolomeu de Gusmão - Centro,
-                            Foz do Iguaçu - PR, 85851-160
+                            {{ $global_setting->footer_address }}
                         </div>
                     </div>
                     <div class="list-item">
@@ -69,9 +68,17 @@
                             <i class="fab fa-whatsapp"></i>
                         </div>
                         <div class="right">
-                            <a href="https://wa.me/5545999510002" target="_blank">
-                                +55 (45) 99951-0002
+                            <a href="{{ $global_setting->footer_hotel_whatsapp_link }}" target="_blank">
+                                {{ $global_setting->footer_hotel_whatsapp }}
                             </a>
+                        </div>
+                    </div>
+                    <div class="list-item">
+                        <div class="left">
+                            <i class="fa fa-phone"></i>
+                        </div>
+                        <div class="right">
+                            {{ $global_setting->footer_phone }}
                         </div>
                     </div>
                     <div class="list-item">
@@ -79,15 +86,15 @@
                             <i class="fa fa-envelope-o"></i>
                         </div>
                         <div class="right">
-                            reservas@igucacuplazahotel.com.br
+                            {{ $global_setting->footer_email }}
                         </div>
                     </div>
                     <ul class="social">
-                        <li><a href=""><i class="fa fa-facebook-f"></i></a></li>
-                        <li><a href=""><i class="fa fa-twitter"></i></a></li>
-                        <li><a href=""><i class="fa fa-pinterest-p"></i></a></li>
-                        <li><a href=""><i class="fa fa-linkedin"></i></a></li>
-                        <li><a href=""><i class="fa fa-instagram"></i></a></li>
+                        <li><a href="{{ $global_setting->facebook }}"><i class="fa fa-facebook-f"></i></a></li>
+                        <li><a href="{{ $global_setting->twitter }}"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="{{ $global_setting->pinterest }}"><i class="fa fa-pinterest-p"></i></a></li>
+                        <li><a href="{{ $global_setting->linkedin }}"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="{{ $global_setting->instagram }}"><i class="fa fa-instagram"></i></a></li>
                     </ul>
                 </div>
             </div>
