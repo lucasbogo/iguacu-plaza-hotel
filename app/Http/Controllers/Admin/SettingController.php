@@ -57,12 +57,6 @@ class SettingController extends Controller
         $obj->top_bar_whatsapp_link = $request->top_bar_whatsapp_link;
         $obj->top_bar_phone = $request->top_bar_phone;
         $obj->top_bar_email = $request->top_bar_email;
-        $obj->home_feature_status = $request->home_feature_status;
-        $obj->home_room_total = $request->home_room_total;
-        $obj->home_room_status = $request->home_room_status;
-        $obj->home_testimonial_status = $request->home_testimonial_status;
-        $obj->home_latest_post_total = $request->home_latest_post_total;
-        $obj->home_latest_post_status = $request->home_latest_post_status;
         $obj->footer_hotel_title = $request->footer_hotel_title;
         $obj->footer_address = $request->footer_address;
         $obj->footer_hotel_whatsapp = $request->footer_hotel_whatsapp;
