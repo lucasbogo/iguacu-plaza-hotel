@@ -144,15 +144,16 @@
 
                                     <div class="mb-4">
                                         <label class="form-label">Cor do Tema 1</label>
-                                        <input type="text" class="form-control" name="theme_color_1"
+                                        <input type="color" class="form-control" name="theme_color_1"
                                             value="{{ $settings->theme_color_1 }}">
                                     </div>
 
                                     <div class="mb-4">
                                         <label class="form-label">Cor do Tema 2</label>
-                                        <input type="text" class="form-control" name="theme_color_2"
+                                        <input type="color" class="form-control" name="theme_color_2"
                                             value="{{ $settings->theme_color_2 }}">
                                     </div>
+
 
                                     <div class="mb-4">
                                         <label class="form-label"></label>

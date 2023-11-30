@@ -73,6 +73,6 @@ class SettingController extends Controller
         $obj->theme_color_2 = $request->theme_color_2;
         $obj->update();
 
-        return redirect()->back()->with('success', 'Setting is updated successfully.');
+        return redirect()->back()->with('success', 'As configurações foram atualizadas com sucesso.');
     }
 }
