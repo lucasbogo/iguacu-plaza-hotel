@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\PagesController;
 use App\Http\Controllers\Admin\SubscribersController;
 use App\Http\Controllers\Admin\AmenityController;
+use App\Http\Controllers\Admin\DateController;
 use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\SettingController;
 
@@ -119,6 +120,8 @@ Route::get('/cart', [BookingController::class, 'cart_view'])->name('cart');
 Route::get('/cart/delete/{id}', [BookingController::class, 'cart_delete'])->name('cart_delete');
 
 Route::get('/checkout', [BookingController::class, 'checkout'])->name('checkout');
+
+Route::get('/payment', [BookingController::class, 'payment'])->name('payment');
 
 /* Admin Routes */
 
@@ -308,6 +311,11 @@ Route::get('/admin/subscribers/send-email', [SubscribersController::class, 'send
 
 Route::post('/admin/subscribers/send-email-submit', [SubscribersController::class, 'send_email_submit'])->name('admin_subscribers_send_email_submit')->middleware('admin:admin');
 
+/* Routes Admin Booked Rooms */
+
+Route::get('/admin/date', [DateController::class, 'index'])->name('admin_date')->middleware('admin:admin');
+
+Route::post('/admin/date/submit', [DateController::class, 'show'])->name('admin_date_submit')->middleware('admin:admin');
 
 /*** Routes Admin Edit Pages Frontend ***/
 

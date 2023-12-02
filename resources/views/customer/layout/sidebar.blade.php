@@ -4,8 +4,12 @@
             <a href="{{ route('customer.customer_home') }}">
                 <img src="{{ asset('uploads/logo-hotel.png') }}" alt="Logo" style="padding: 10px;">
             </a>
-            <h4 style="margin-top: 10px; font-weight: bold;">Configurações</h4>
+            {{-- <h4 style="margin-top: 10px; font-weight: bold;"></h4> --}}
         </div>
+        <br>
+        <br>
+        <br>
+        <br>
 
         <div class="sidebar-brand sidebar-brand-sm">
             <a href="{{ route('customer.customer_home') }}"></a>

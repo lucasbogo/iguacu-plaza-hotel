@@ -18,7 +18,8 @@
                     href="{{ route('admin_setting') }}"><i class="fa fa-cog"></i>
                     <span>Configurações</span></a></li>
 
-            <li class="nav-item dropdown {{ Request::is('admin/amenity/view') || Request::is('admin/room/view') ? 'active' : '' }}">
+            <li
+                class="nav-item dropdown {{ Request::is('admin/amenity/view') || Request::is('admin/room/view') ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown"><i class="fa fa-building"></i><span> Hotel</span></a>
                 <ul class="dropdown-menu">
 
@@ -31,6 +32,10 @@
                     </li>
                 </ul>
             </li>
+
+            <li class="{{ Request::is('admin/date') ? 'active' : '' }}"><a class="nav-link"
+                    href="{{ route('admin_date') }}"><i class="fa fa-calendar"></i>
+                    <span>Disponibilidade por data</span></a></li>
             <li
                 class="nav-item dropdown {{ Request::is('admin/page/about') ||
                 Request::is('admin/page/terms') ||

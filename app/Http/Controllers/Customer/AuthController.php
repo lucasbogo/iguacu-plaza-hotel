@@ -38,7 +38,7 @@ class AuthController extends Controller
         ];
 
         if (Auth::guard('customer')->attempt($credential)) {
-            return redirect()->route('customer.customer_home');
+            return redirect()->route('home');
         } else {
             return redirect()->route('customer_login')->with('error', 'Informações Incorretas, tente novamente.');
         }

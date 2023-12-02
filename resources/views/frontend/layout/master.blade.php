@@ -78,7 +78,8 @@
         .home-rooms .inner .text .button a,
         .blog-item .inner .text .button a,
         .room-detail .amenity .item,
-        .cart .table-cart tr th {
+        .cart .table-cart tr th,
+        .top {
             background-color: {{ $global_setting->theme_color_2 }} !important;
         }
     </style>

@@ -5,7 +5,7 @@
                 <div class="item">
                     <h2 class="heading">{{ $global_setting->footer_hotel_title }}</h2>
                     <ul class="useful-links">
-                        <li><a href="rooms.html">Quartos</a></li>
+                        <li><a href="{{ route('rooms')}}">Quartos</a></li>
                         @if ($global_page->about_status == 1)
                             <li><a href="{{ route('about') }}">Sobre Nós</a></li>
                         @endif

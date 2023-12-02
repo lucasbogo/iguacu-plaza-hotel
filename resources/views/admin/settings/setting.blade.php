@@ -137,6 +137,12 @@
                                     </div>
 
                                     <div class="mb-4">
+                                        <label class="form-label">Instagram</label>
+                                        <input type="text" class="form-control" name="instagram"
+                                            value="{{ $settings->instagram}}">
+                                    </div>
+
+                                    <div class="mb-4">
                                         <label class="form-label">ID do Google Analytics</label>
                                         <input type="text" class="form-control" name="analytic_id"
                                             value="{{ $settings->analytic_id }}">
@@ -153,7 +159,6 @@
                                         <input type="color" class="form-control" name="theme_color_2"
                                             value="{{ $settings->theme_color_2 }}">
                                     </div>
-
 
                                     <div class="mb-4">
                                         <label class="form-label"></label>

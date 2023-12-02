@@ -68,6 +68,7 @@ class SettingController extends Controller
         $obj->twitter = $request->twitter;
         $obj->linkedin = $request->linkedin;
         $obj->pinterest = $request->pinterest;
+        $obj->instagram = $request->instagram;
         $obj->analytic_id = $request->analytic_id;
         $obj->theme_color_1 = $request->theme_color_1;
         $obj->theme_color_2 = $request->theme_color_2;
