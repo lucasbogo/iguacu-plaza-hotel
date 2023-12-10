@@ -3,6 +3,7 @@
 @section('heading', 'Disponibilidade por Data')
 
 @section('main_content')
+
     <div class="section-body">
         <div class="row">
             <div class="col-6">
@@ -14,7 +15,7 @@
                                 <div class="col-md-12">
                                     <div class="mb-4">
                                         <label class="form-label">Selecionar Data *</label>
-                                        <input type="text" class="form-control datepicker" name="selected_date">
+                                        <input type="date" class="form-control" name="selected_date">
                                     </div>
                                     <div class="mb-4">
                                         <label class="form-label"></label>
@@ -28,4 +29,5 @@
             </div>
         </div>
     </div>
+
 @endsection

@@ -11,16 +11,19 @@
         </div>
         <ul class="sidebar-menu">
             <li class="{{ Request::is('admin/home') ? 'active' : '' }}"><a class="nav-link"
-                    href="{{ route('admin_home') }}"><i class="fa fa-home"></i>
+                    href="{{ route('admin_home') }}" title="voltar para dashboard"><i class="fa fa-home"></i>
                     <span>Dashboard</span></a></li>
 
             <li class="{{ Request::is('admin/setting') ? 'active' : '' }}"><a class="nav-link"
-                    href="{{ route('admin_setting') }}"><i class="fa fa-cog"></i>
+                    href="{{ route('admin_setting') }}"
+                    title="Editar logo, favicon, imagem de fundo e informações da parte inferior (footer) da página Home"><i
+                        class="fa fa-cog"></i>
                     <span>Configurações</span></a></li>
 
             <li
                 class="nav-item dropdown {{ Request::is('admin/amenity/view') || Request::is('admin/room/view') ? 'active' : '' }}">
-                <a href="#" class="nav-link has-dropdown"><i class="fa fa-building"></i><span> Hotel</span></a>
+                <a href="#" class="nav-link has-dropdown" title="Edição de quartos e comodidades"><i
+                        class="fa fa-building"></i><span> Hotel</span></a>
                 <ul class="dropdown-menu">
 
                     <li class="{{ Request::is('admin/amenity/view') ? 'active' : '' }}"><a class="nav-link"
@@ -34,7 +37,8 @@
             </li>
 
             <li class="{{ Request::is('admin/date') ? 'active' : '' }}"><a class="nav-link"
-                    href="{{ route('admin_date') }}"><i class="fa fa-calendar"></i>
+                    href="{{ route('admin_date') }}" title="Verificar quartos vendidos por data"><i
+                        class="fa fa-calendar"></i>
                     <span>Disponibilidade por data</span></a></li>
             <li
                 class="nav-item dropdown {{ Request::is('admin/page/about') ||
@@ -110,19 +114,24 @@
                 </ul>
             </li>
             <li class="{{ Request::is('admin/slide/*') ? 'active' : '' }}"><a class="nav-link"
-                    href="{{ route('admin_slider') }}"><i class="fa fa-picture-o"></i>
+                    href="{{ route('admin_slider') }}"
+                    title="Editar as imagems de fundo na parte superior da página Home"><i
+                        class="fa fa-picture-o"></i>
                     <span>Imagens Slide</span></a></li>
             <li class="{{ Request::is('admin/feature/*') ? 'active' : '' }}"><a class="nav-link"
-                    href="{{ route('admin_feature') }}"><i class="fa fa-font-awesome"></i>
+                    href="{{ route('admin_feature') }}"
+                    title="Editar as Caractrísticas e seus respectivos ícones na página Home"><i
+                        class="fa fa-font-awesome"></i>
                     <span>Ícones/Características</span></a></li>
             <li class="{{ Request::is('admin/testimonial/*') ? 'active' : '' }}"><a class="nav-link"
-                    href="{{ route('admin_testimonial') }}"><i class="fa fa-user-circle"></i>
+                    href="{{ route('admin_testimonial') }}" title="Adicionar/Editar avaliaçãoes"><i
+                        class="fa fa-user-circle"></i>
                     <span>Avaliações</span></a></li>
             <li class="{{ Request::is('admin/blog/*') ? 'active' : '' }}"><a class="nav-link"
-                    href="{{ route('admin_blog') }}"><i class="fa fa-commenting"></i>
+                    href="{{ route('admin_blog') }}" title="Criar/Editar blogs"><i class="fa fa-commenting"></i>
                     <span>Blog</span></a></li>
             <li class="{{ Request::is('admin/image/*') ? 'active' : '' }}"><a class="nav-link"
-                    href="{{ route('admin_image') }}"><i class="fa fa-file-image-o"></i>
+                    href="{{ route('admin_image') }}" title="Acicionar fots do hotel e escoçher se devem aparecer ou não n'pagina 'imagens' na Home"><i class="fa fa-file-image-o"></i>
                     <span>Galeria de Fotos</span></a></li>
             <li class="{{ Request::is('admin/video/*') ? 'active' : '' }}"><a class="nav-link"
                     href="{{ route('admin_video') }}"><i class="fa fa-youtube"></i>
@@ -132,7 +141,8 @@
                     <span>Perguntas Frequentes</span></a></li>
             <li
                 class="nav-item dropdown {{ Request::is('admin/subscribers') || Request::is('admin/subscribers/send-email') ? 'active' : '' }}">
-                <a href="#" class="nav-link has-dropdown" title="Editar títulos e status das páginas">
+                <a href="#" class="nav-link has-dropdown"
+                    title="Verificar email de clientes que se inscreveram na newsletter">
                     <i class="fa fa-tasks"></i>
                     <span>Inscritos na newsletter</span>
                 </a>

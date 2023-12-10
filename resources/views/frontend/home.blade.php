@@ -153,7 +153,8 @@
 
 @if ($hasTestimonials && $hasActiveTestimonials)
     <!-- Show the testimonials section when there are testimonials and at least one is active -->
-    <div class="testimonial" style="background-image: url('{{ asset('uploads/' . $global_setting->background_image) }}')">
+    <div class="testimonial"
+        style="background-image: url('{{ asset('uploads/' . $global_setting->background_image) }}')">
         <div class="bg"></div>
         <div class="container">
             <div class="row">
@@ -233,4 +234,23 @@
         @endforeach
     </script>
 @endif
+
+<script>
+    $(function() {
+        $('input[name="checkin_checkout"]').daterangepicker({
+            locale: {
+                format: 'DD/MM/YYYY',
+                applyLabel: 'Aplicar',
+                cancelLabel: 'Cancelar',
+                daysOfWeek: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+                monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho',
+                    'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+                ],
+            },
+            startDate: moment(), // Set the initial start date to today
+            endDate: moment().add(1, 'days'), // Set the initial end date to tomorrow
+        });
+    });
+</script>
+
 @endsection
