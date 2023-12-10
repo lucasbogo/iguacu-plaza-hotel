@@ -48,6 +48,20 @@
                                     </div>
 
                                     <div class="mb-4">
+                                        <label class="form-label">Imagem de fundo (Avaliações)</label>
+                                        <div>
+                                            <img src="{{ asset('uploads/' . $settings->background_image) }}" alt=""
+                                                class="w_200">
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Mudar Imagem de fundo</label>
+                                        <div>
+                                            <input type="file" name="background_image">
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4">
                                         <label class="form-label">Numero WhatsApp (parte superior)</label>
                                         <input type="text" class="form-control" name="top_bar_whatsapp"
                                             value="{{ $settings->top_bar_whatsapp }}">
@@ -139,7 +153,13 @@
                                     <div class="mb-4">
                                         <label class="form-label">Instagram</label>
                                         <input type="text" class="form-control" name="instagram"
-                                            value="{{ $settings->instagram}}">
+                                            value="{{ $settings->instagram }}">
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label class="form-label">Texto do Newletter</label>
+                                        <input type="text" class="form-control" name="newsletter_text"
+                                            value="{{ $settings->newsletter_text }}">
                                     </div>
 
                                     <div class="mb-4">

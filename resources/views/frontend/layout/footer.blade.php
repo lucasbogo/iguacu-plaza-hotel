@@ -5,7 +5,7 @@
                 <div class="item">
                     <h2 class="heading">{{ $global_setting->footer_hotel_title }}</h2>
                     <ul class="useful-links">
-                        <li><a href="{{ route('rooms')}}">Quartos</a></li>
+                        <li><a href="{{ route('rooms') }}">Quartos</a></li>
                         @if ($global_page->about_status == 1)
                             <li><a href="{{ route('about') }}">Sobre Nós</a></li>
                         @endif
@@ -103,9 +103,7 @@
                 <div class="item">
                     <h2 class="heading">Newsletter</h2>
                     <p>
-                        🌴 Descubra a beleza das Cataratas do Iguaçu em grande estilo! Inscreva-se na nossa Newsletter
-                        para receber ofertas exclusivas, dicas de viagem e atualizações sobre nosso hotel econômico em
-                        Foz do Iguaçu. Não perca essa oportunidade, junte-se a nós! 🏨✨ </p>
+                        {{ $global_setting->newsletter_text }} </p>
                     <form action="{{ route('subscriber_send_email') }}" method="post" class="form_subscribe_ajax">
                         @csrf
                         <div class="form-group">

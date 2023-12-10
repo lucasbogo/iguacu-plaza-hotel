@@ -26,5 +26,8 @@
     .text_danger {
         color: rgb(238, 61, 61);
     }
-    
+
+    .daterangepicker {
+        z-index: 9999 !important;
+    }
 </style>

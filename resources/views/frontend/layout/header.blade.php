@@ -50,7 +50,8 @@
                     @endif
 
                     @if ($global_page->checkout_status == 1)
-                        <li class="menu"><a href="checkout.html">{{ $global_page->checkout_heading }}</a></li>
+                        <li class="menu"><a href="{{ route('checkout') }}">{{ $global_page->checkout_heading }}</a>
+                        </li>
                     @endif
 
                     @auth('customer')

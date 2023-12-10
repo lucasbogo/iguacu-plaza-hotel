@@ -53,6 +53,24 @@ class SettingController extends Controller
             $obj->favicon = $final_name;
         }
 
+        // Check if background_image file exists in the request
+        if ($request->hasFile('background_image')) {
+            $request->validate([
+                'background_image' => 'image|mimes:jpg,jpeg,png,gif,ico'
+            ]);
+
+            // Check if the old background_image file exists before attempting to unlink
+            if ($obj->background_image && file_exists(public_path('uploads/' . $obj->background_image))) {
+                unlink(public_path('uploads/' . $obj->background_image));
+            }
+
+            $ext = $request->file('background_image')->extension();
+            $final_name = time() . '.' . $ext;
+            $request->file('background_image')->move(public_path('uploads/'), $final_name);
+            $obj->background_image = $final_name;
+        }
+
+
         $obj->top_bar_whatsapp = $request->top_bar_whatsapp;
         $obj->top_bar_whatsapp_link = $request->top_bar_whatsapp_link;
         $obj->top_bar_phone = $request->top_bar_phone;
@@ -70,6 +88,7 @@ class SettingController extends Controller
         $obj->pinterest = $request->pinterest;
         $obj->instagram = $request->instagram;
         $obj->analytic_id = $request->analytic_id;
+        $obj->newsletter_text = $request->newsletter_text;
         $obj->theme_color_1 = $request->theme_color_1;
         $obj->theme_color_2 = $request->theme_color_2;
         $obj->update();
