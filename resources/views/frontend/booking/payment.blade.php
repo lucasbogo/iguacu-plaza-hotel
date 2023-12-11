@@ -104,7 +104,7 @@
             </div>
             <div class="col-lg-4 col-md-4 checkout-right">
                 <div class="inner">
-                    <h4 class="mb_10">Billing Details</h4>
+                    <h4 class="mb_10">Detalhes do Pagamento</h4>
                     <div>
                         Nome: {{ session()->get('billing_name') }}
                     </div>
@@ -118,10 +118,13 @@
                         País: {{ session()->get('billing_country') }}
                     </div>
                     <div>
-                        Address: {{ session()->get('billing_address') }}
+                        Rua: {{ session()->get('billing_street') }}
                     </div>
                     <div>
-                        State: {{ session()->get('billing_state') }}
+                        Numero: {{ session()->get('billing_number') }}
+                    </div>
+                    <div>
+                        Estado: {{ session()->get('billing_state') }}
                     </div>
                     <div>
                         Cidade: {{ session()->get('billing_city') }}
@@ -133,7 +136,7 @@
             </div>
             <div class="col-lg-4 col-md-4 checkout-right">
                 <div class="inner">
-                    <h4 class="mb_10">Cart Details</h4>
+                    <h4 class="mb_10">Detalhes do Carrinho</h4>
                     <div class="table-responsive">
                         <table class="table">
                             <tbody>
@@ -206,7 +209,7 @@
                                 @endphp                                
                                 <tr>
                                     <td><b>Total:</b></td>
-                                    <td class="p_price"><b>${{ $total_price }}</b></td>
+                                    <td class="p_price"><b>R${{ $total_price }}</b></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -217,7 +220,7 @@
     </div>
 </div>
 
-@php
+{{-- @php
 $client = 'ARw2VtkTvo3aT7DILgPWeSUPjMK_AS5RlMKkUmB78O8rFCJcfX6jFSmTDpgdV3bOFLG2WE-s11AcCGTD';
 @endphp
 <script>
@@ -252,5 +255,5 @@ $client = 'ARw2VtkTvo3aT7DILgPWeSUPjMK_AS5RlMKkUmB78O8rFCJcfX6jFSmTDpgdV3bOFLG2W
 			return actions.redirect();
 		}
 	}, '#paypal-button');
-</script>
+</script> --}}
 @endsection

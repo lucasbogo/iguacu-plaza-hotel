@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col-lg-8 col-md-6 checkout-left">
 
-                <form action="#" method="post" class="frm_checkout">
+                <form action=" {{ route('payment')}}" method="post" class="frm_checkout">
                     @csrf
                     <div class="billing-info">
                         <h4 class="mb_30">Informações de Cobrança</h4>
@@ -118,7 +118,7 @@
             </div>
             <div class="col-lg-4 col-md-6 checkout-right">
                 <div class="inner">
-                    <h4 class="mb_10">Detalhes do Carrinho</h4>
+                    <h4 class="mb_10">Detalhes da Reserva</h4>
                     <div class="table-responsive">
                         <table class="table">
                             <tbody>

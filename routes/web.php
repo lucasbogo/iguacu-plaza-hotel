@@ -121,7 +121,8 @@ Route::get('/cart/delete/{id}', [BookingController::class, 'cart_delete'])->name
 
 Route::get('/checkout', [BookingController::class, 'checkout'])->name('checkout');
 
-Route::get('/payment', [BookingController::class, 'payment'])->name('payment');
+Route::post('/payment', [BookingController::class, 'payment'])->name('payment');
+
 
 /* Admin Routes */
 
