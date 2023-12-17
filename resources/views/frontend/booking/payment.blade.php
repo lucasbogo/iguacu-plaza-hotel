@@ -69,23 +69,22 @@
                 <h4>Efetuar Pagamento</h4>
                 <select name="payment_method" class="form-control select2" id="paymentMethodChange" autocomplete="off">
                     <option value="">Selecionar Método de Pagamento</option>
-                    <option value="PayPal">PayPal</option>
                     <option value="Stripe">Cartão de Crédito/Débito</option>
                 </select>
-
-                <div class="paypal mt_20">
+                
+                {{-- <div class="paypal mt_20">
                     <h4>Pagar com PayPal</h4>
                     <div id="paypal-button"></div>
-                </div>
+                </div> --}}
 
-                {{-- <div class="stripe mt_20">
+                <div class="stripe mt_20">
                     <h4>Pagar com Cartão</h4>
                     @php
                     $cents = $total_price*100;
                     $customer_email = Auth::guard('customer')->user()->email;
-                    $stripe_publishable_key = 'pk_test_51LT28GF67T3XLjgLXbAMW8YNgvDyv6Yrg7mB6yHJhfmWgLrAL79rSBPvxcbKrsKtCesqJmxlOd259nMrNx4Qlhoa00zX7rOhOq';
-                    @endphp --}}
-                    {{-- <form action="{{ route('stripe',$total_price) }}" method="post">
+                    $stripe_publishable_key = 'pk_test_51OMfk0LM0jg28WdRMtwehJaiO6qTKdBJtSkpa9dO5YKkHRIz8uxsYO1S7SDwf7s5jFoGqbku2ttPrzBxndnFmUN300xOmKgDqM';
+                    @endphp
+                    <form action="{{ route('stripe',$total_price) }}" method="post">
                         @csrf
                         <script
                             src="https://checkout.stripe.com/checkout.js" class="stripe-button"
@@ -98,7 +97,7 @@
                             data-email="{{ $customer_email }}"
                         >
                         </script>
-                    </form> --}}
+                    </form> 
                 </div>
 
             </div>
@@ -136,7 +135,7 @@
             </div>
             <div class="col-lg-4 col-md-4 checkout-right">
                 <div class="inner">
-                    <h4 class="mb_10">Detalhes do Carrinho</h4>
+                    <h4 class="mb_10">Detalhes da Reserva</h4>
                     <div class="table-responsive">
                         <table class="table">
                             <tbody>

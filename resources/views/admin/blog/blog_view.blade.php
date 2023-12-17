@@ -1,9 +1,6 @@
 @extends('admin.layout.master')
 
 @section('heading')
-    {{-- <div>
-        <img src="{{ asset('uploads/logo-hotel.png') }}" alt="Logo" alt="Logo" style="padding: 10px;"></a>
-    </div> --}}
     <h3>Blog</h3>
 @endsection
 
@@ -21,7 +18,7 @@
                             <table class="table table-bordered" id="example1">
                                 <thead>
                                     <tr>
-                                        {{-- <th>Referencia</th> --}}
+                                        <th>#</th>
                                         <th>Foto</th>
                                         <th>Titulo</th>
                                         <th>Autor</th>
@@ -43,15 +40,17 @@
                                             <td class="pt_10 pb_10">
                                                 <a href="{{ route('admin_blog_edit', $row->id) }}"
                                                     class="btn btn-primary">Editar</a>
-                                                <form action="{{ route('admin_blog_activate', $row->id) }}" method="put"
+                                                <form action="{{ route('admin_blog_activate', $row->id) }}" method="post"
                                                     style="display: inline;">
                                                     @csrf
+                                                    @method('put')
                                                     <button type="submit"
                                                         class="btn btn-{{ $row->status ? 'warning' : 'success' }}">
                                                         {{ $row->status ? 'Desativar' : 'Ativar' }}
                                                     </button>
                                                 </form>
-                                                <a href="{{ route('admin_blog_delete', $row->id) }}" class="btn btn-danger"
+                                                <a href="{{ route('admin_blog_delete', $row->id) }}"
+                                                    class="btn btn-danger"
                                                     onClick="return confirm('Tem Certeza?');">Deletar</a>
                                             </td>
                                         </tr>
