@@ -19,7 +19,6 @@
         <div class="row">
             <div class="col-lg-4 col-md-4 checkout-left mb_30">
 
-
                 @php
                 $arr_cart_room_id = array();
                 $i=0;
@@ -71,11 +70,6 @@
                     <option value="">Selecionar Método de Pagamento</option>
                     <option value="Stripe">Cartão de Crédito/Débito</option>
                 </select>
-                
-                {{-- <div class="paypal mt_20">
-                    <h4>Pagar com PayPal</h4>
-                    <div id="paypal-button"></div>
-                </div> --}}
 
                 <div class="stripe mt_20">
                     <h4>Pagar com Cartão</h4>
@@ -91,10 +85,11 @@
                             data-key="{{ $stripe_publishable_key }}"
                             data-amount="{{ $cents }}"
                             data-name="{{ env('APP_NAME') }}"
-                            data-description=""
-                            data-image="{{ asset('stripe.png') }}"
+                            data-description="Reservar quarto"
+                            data-image="{{ asset('uploads/logo-hotel.png') }}"
                             data-currency="brl"
                             data-email="{{ $customer_email }}"
+                            data-locale="pt-BR" 
                         >
                         </script>
                     </form> 
