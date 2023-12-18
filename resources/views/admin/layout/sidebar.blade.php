@@ -113,6 +113,15 @@
                             Redefinição de Senha</a></li>
                 </ul>
             </li>
+
+            <li class="{{ Request::is('admin/customers') ? 'active' : '' }}"><a class="nav-link"
+                    href="{{ route('admin_customer') }}" data-bs-toggle="tooltip" data-bs-placement="right"
+                    data-bs-title="Customers"><i class="fa fa-user-plus"></i> <span>Clientes</span></a></li>
+
+            {{-- <li class="{{ Request::is('admin/order/*') ? 'active' : '' }}"><a class="nav-link"
+                    href="{{ route('admin_orders') }}" data-bs-toggle="tooltip" data-bs-placement="right"
+                    data-bs-title="Orders"><i class="fa fa-cart-plus"></i> <span>Reservas</span></a></li> --}}
+
             <li class="{{ Request::is('admin/slide/*') ? 'active' : '' }}"><a class="nav-link"
                     href="{{ route('admin_slider') }}"
                     title="Editar as imagems de fundo na parte superior da página Home"><i
@@ -131,7 +140,9 @@
                     href="{{ route('admin_blog') }}" title="Criar/Editar blogs"><i class="fa fa-commenting"></i>
                     <span>Blog</span></a></li>
             <li class="{{ Request::is('admin/image/*') ? 'active' : '' }}"><a class="nav-link"
-                    href="{{ route('admin_image') }}" title="Acicionar fots do hotel e escoçher se devem aparecer ou não n'pagina 'imagens' na Home"><i class="fa fa-file-image-o"></i>
+                    href="{{ route('admin_image') }}"
+                    title="Acicionar fots do hotel e escoçher se devem aparecer ou não n'pagina 'imagens' na Home"><i
+                        class="fa fa-file-image-o"></i>
                     <span>Galeria de Fotos</span></a></li>
             <li class="{{ Request::is('admin/video/*') ? 'active' : '' }}"><a class="nav-link"
                     href="{{ route('admin_video') }}"><i class="fa fa-youtube"></i>

@@ -23,10 +23,9 @@
                 </a>
             </li>
 
-
-            {{-- <li class="{{ Request::is('customer/order/*') ? 'active' : '' }}"><a class="nav-link"
-                    href="{{ route('customer_order_view') }}"><i class="fa fa-hand-o-right"></i> <span>Orders</span></a>
-            </li> --}}
+            <li class="{{ Request::is('customer/order/*') ? 'active' : '' }}"><a class="nav-link"
+                    href="{{ route('customer.customer_order_view') }}"><i class="fa fa-hand-o-right"></i> <span>Minhas Reservas</span></a>
+            </li>
 
         </ul>
     </aside>

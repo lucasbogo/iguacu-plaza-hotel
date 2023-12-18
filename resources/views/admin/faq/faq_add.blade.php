@@ -1,6 +1,6 @@
 @extends('admin.layout.master')
 
-@section('heading', 'Add FAQ')
+@section('heading', 'Adicionar Perguntas Frequentes')
 
 @section('right_top_button')
     <a href="{{ route('admin_faq') }}" class="btn btn-primary"><i class="fa fa-eye"></i> Ver Todas Perguntas</a>

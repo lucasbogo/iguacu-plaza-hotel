@@ -15,9 +15,11 @@ use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\PagesController;
 use App\Http\Controllers\Admin\SubscribersController;
 use App\Http\Controllers\Admin\AmenityController;
+use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DateController;
 use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\SettingController;
+
 
 use App\Http\Controllers\Frontend\WebsiteController;
 use App\Http\Controllers\Frontend\BlogController;
@@ -30,6 +32,7 @@ use App\Http\Controllers\Frontend\SubscriberController;
 use App\Http\Controllers\Customer\AuthController as CustomerAuthController;
 use App\Http\Controllers\Customer\HomeController as CustomerHomeController;
 use App\Http\Controllers\Customer\ProfileController as CustomerProfileController;
+use App\Http\Controllers\Customer\OrderController as CustomerOrderController;
 
 /* Frontend Routes */
 
@@ -85,6 +88,8 @@ Route::group(['middleware' => ['customer:customer'], 'as' => 'customer.'], funct
     Route::get('/customer/home', [CustomerHomeController::class, 'index'])->name('customer_home');
     Route::get('/customer/edit-profile', [CustomerProfileController::class, 'profile'])->name('customer_profile');
     Route::post('/customer/edit-profile-submit', [CustomerProfileController::class, 'profile_submit'])->name('customer_profile_submit');
+    Route::get('/customer/order/view', [CustomerOrderController::class, 'index'])->name('customer_order_view');
+    Route::get('/customer/invoice/{id}', [CustomerOrderController::class, 'invoice'])->name('customer_invoice');
 });
 
 /* User Routes */
@@ -401,3 +406,8 @@ Route::post('admin/page/forget-password/update', [PagesController::class, 'forge
 Route::get('admin/page/reset-password', [PagesController::class, 'reset_password'])->name('admin_page_reset_password')->middleware('admin:admin');
 
 Route::post('admin/page/reset-password/update', [PagesController::class, 'reset_password_update'])->name('admin_page_reset_password_update')->middleware('admin:admin');
+
+// Order Routes
+Route::get('/admin/customers', [CustomerController::class, 'index'])->name('admin_customer')->middleware('admin:admin');;
+
+Route::get('/admin/customer/change-status/{id}', [CustomerController::class, 'change_status'])->name('admin_customer_change_status')->middleware('admin:admin');;

@@ -16,10 +16,10 @@
                 </div>
                 <div class="card-wrap">
                     <div class="card-header">
-                        <h4>Reservas/Pedidos</h4>
+                        <h4>Reservas</h4>
                     </div>
                     <div class="card-body">
-                        12
+                        {{ $total_completed_orders }}
                     </div>
                 </div>
             </div>
@@ -31,10 +31,10 @@
                 </div>
                 <div class="card-wrap">
                     <div class="card-header">
-                        <h4>Reservas/Pedidos Pendentes</h4>
+                        <h4>Reservas Pendentes</h4>
                     </div>
                     <div class="card-body">
-                        122
+                        {{ $total_pending_orders }}
                     </div>
                 </div>
             </div>
