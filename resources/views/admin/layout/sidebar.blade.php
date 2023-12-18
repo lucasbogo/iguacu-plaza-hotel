@@ -118,9 +118,9 @@
                     href="{{ route('admin_customer') }}" data-bs-toggle="tooltip" data-bs-placement="right"
                     data-bs-title="Customers"><i class="fa fa-user-plus"></i> <span>Clientes</span></a></li>
 
-            {{-- <li class="{{ Request::is('admin/order/*') ? 'active' : '' }}"><a class="nav-link"
+            <li class="{{ Request::is('admin/order/*') ? 'active' : '' }}"><a class="nav-link"
                     href="{{ route('admin_orders') }}" data-bs-toggle="tooltip" data-bs-placement="right"
-                    data-bs-title="Orders"><i class="fa fa-cart-plus"></i> <span>Reservas</span></a></li> --}}
+                    data-bs-title="Orders"><i class="fa fa-cart-plus"></i> <span>Reservas</span></a></li>
 
             <li class="{{ Request::is('admin/slide/*') ? 'active' : '' }}"><a class="nav-link"
                     href="{{ route('admin_slider') }}"

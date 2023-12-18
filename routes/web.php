@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\SubscribersController;
 use App\Http\Controllers\Admin\AmenityController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DateController;
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\SettingController;
 
@@ -407,7 +408,14 @@ Route::get('admin/page/reset-password', [PagesController::class, 'reset_password
 
 Route::post('admin/page/reset-password/update', [PagesController::class, 'reset_password_update'])->name('admin_page_reset_password_update')->middleware('admin:admin');
 
-// Order Routes
+// Customer Status Routes
 Route::get('/admin/customers', [CustomerController::class, 'index'])->name('admin_customer')->middleware('admin:admin');;
 
-Route::get('/admin/customer/change-status/{id}', [CustomerController::class, 'change_status'])->name('admin_customer_change_status')->middleware('admin:admin');;
+Route::get('/admin/customer/change-status/{id}', [CustomerController::class, 'change_status'])->name('admin_customer_change_status')->middleware('admin:admin');
+
+// Customer Orders Admin
+Route::get('/admin/order/view', [AdminOrderController::class, 'index'])->name('admin_orders');
+
+Route::get('/admin/order/invoice/{id}', [AdminOrderController::class, 'invoice'])->name('admin_invoice');
+
+Route::get('/admin/order/delete/{id}', [AdminOrderController::class, 'delete'])->name('admin_order_delete');

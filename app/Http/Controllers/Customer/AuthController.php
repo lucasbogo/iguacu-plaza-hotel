@@ -22,7 +22,8 @@ class AuthController extends Controller
         $request->validate(
             [
                 'email' => 'required|email',
-                'password' => 'required'
+                'password' => 'required',
+                
             ],
             [
                 'email.required' => 'O campo E-mail é obrigatório.',

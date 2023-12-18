@@ -1,6 +1,6 @@
-@extends('customer.layout.master')
+@extends('admin.layout.master')
 
-@section('heading', 'Reserva')
+@section('heading', 'Detalhes da Reserva')
 
 @section('main_content')
     <div class="section-body">
@@ -46,7 +46,7 @@
                             <table class="table table-striped table-hover table-md">
                                 <tr>
                                     <th>SL</th>
-                                    <th>Tipo do Quarto Reservado</th>
+                                    <th>Tipo de quarto</th>
                                     <th class="text-center">Checkin</th>
                                     <th class="text-center">Checkout</th>
                                     <th class="text-center">Adultos</th>
@@ -76,7 +76,7 @@
                                                 $diff = ($t2 - $t1) / 60 / 60 / 24;
                                                 $sub = $room_data->price * $diff;
                                             @endphp
-                                            R${{ $sub }}
+                                            ${{ $sub }}
                                         </td>
                                     </tr>
                                     @php
@@ -89,7 +89,7 @@
                             <div class="col-lg-12 text-right">
                                 <div class="invoice-detail-item">
                                     <div class="invoice-detail-name">Total</div>
-                                    <div class="invoice-detail-value invoice-detail-value-lg">R${{ $total }}</div>
+                                    <div class="invoice-detail-value invoice-detail-value-lg">${{ $total }}</div>
                                 </div>
                             </div>
                         </div>

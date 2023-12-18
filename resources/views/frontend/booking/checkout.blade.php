@@ -118,7 +118,7 @@
             </div>
             <div class="col-lg-4 col-md-6 checkout-right">
                 <div class="inner">
-                    <h4 class="mb_10">Detalhes da Reserva</h4>
+                    <h4 class="mb_10">Detalhes da Reserva   </h4>
                     <div class="table-responsive">
                         <table class="table">
                             <tbody>

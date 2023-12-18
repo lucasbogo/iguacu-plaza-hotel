@@ -16,7 +16,7 @@
         <div class="row cart">
             <div class="col-md-12">
                 
-
+                
                 @if(session()->has('cart_room_id'))
 
                 <div class="table-responsive">
@@ -35,6 +35,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                            
 
                             @php
                             $arr_cart_room_id = array();
