@@ -20,7 +20,6 @@ class BookingController extends Controller
         $request->validate([
             'room_id' => 'required|exists:rooms,id', // Ensure that the room_id exists in the rooms table
             'checkin_checkout' => 'required',
-            'checkin_checkout' => 'required',
             'adult' => 'required'
         ], [
             'room_id.required' => 'Por favor, selecione um quarto para prosseguir com a reserva.',

@@ -39,7 +39,7 @@
                                         {{ $cnt }}
                                     </td>
                                     <td>
-                                        {{ $row->total_rooms-$cnt }}
+                                        {{ $row->total_rooms - $cnt }}
                                     </td>
                                 </tr>
                                 @endforeach

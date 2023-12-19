@@ -3,7 +3,6 @@
 @section('heading', 'Disponibilidade por Data')
 
 @section('main_content')
-
     <div class="section-body">
         <div class="row">
             <div class="col-6">
@@ -15,7 +14,8 @@
                                 <div class="col-md-12">
                                     <div class="mb-4">
                                         <label class="form-label">Selecionar Data *</label>
-                                        <input type="date" class="form-control" name="selected_date">
+                                        <input type="text" class="form-control" name="selected_date" pattern="\d{2}/\d{2}/\d{4}" placeholder="DD/MM/YYYY">
+                                        <small class="form-text text-muted">Formato: DD/MM/YYYY</small>
                                     </div>
                                     <div class="mb-4">
                                         <label class="form-label"></label>
@@ -29,5 +29,4 @@
             </div>
         </div>
     </div>
-
 @endsection
