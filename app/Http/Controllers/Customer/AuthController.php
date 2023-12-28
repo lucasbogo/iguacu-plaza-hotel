@@ -41,7 +41,7 @@ class AuthController extends Controller
         if (Auth::guard('customer')->attempt($credential)) {
             return redirect()->route('home');
         } else {
-            return redirect()->route('customer_login')->with('error', 'Informações Incorretas, tente novamente.');
+            return redirect()->route('customer_login')->with('error', 'Informações Incorretas, Tente Novamente.');
         }
     }
 
@@ -81,15 +81,15 @@ class AuthController extends Controller
         $obj->save();
 
         // Send email
-        $subject = 'Verificar Inscrição';
-        $message = 'PPor Favor, clique no link abaibo para confirmar sua inscrição no site Iguaçu Plaza Hotel:<br>';
+        $subject = 'Verificar Registro';
+        $message = 'Por Favor, clique no link abaixo para confirmar seu registro no site Iguaçu Plaza Hotel:<br>';
         $message .= '<a href="' . $verification_link . '">';
         $message .= $verification_link;
         $message .= '</a>';
 
         Mail::to($request->email)->send(new Websitemail($subject, $message));
 
-        return redirect()->back()->with('success', 'Para concluir sua inscrição, por favor, confira seu e-mail e clique no link correspondente.');
+        return redirect()->back()->with('success', 'Para concluir seu registro, por favor, confira seu e-mail e clique no link correspondente.');
     }
 
     public function signup_verify($email, $token)
