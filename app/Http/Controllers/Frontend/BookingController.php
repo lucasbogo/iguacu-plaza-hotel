@@ -13,7 +13,7 @@ use App\Mail\Websitemail;
 use App\Models\BookedRoom;
 use Stripe;
 
-class BookingController extends Controller  
+class BookingController extends Controller
 {
     public function cart_submit(Request $request)
     {
@@ -146,6 +146,7 @@ class BookingController extends Controller
 
         return view('frontend.booking.checkout', compact('customer'));
     }
+
 
     public function payment(Request $request)
     {

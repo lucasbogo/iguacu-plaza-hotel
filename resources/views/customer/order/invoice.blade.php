@@ -17,14 +17,25 @@
                             <div class="col-md-6">
                                 <address>
                                     <strong>Dados do cliente</strong><br>
-                                    {{ Auth::guard('customer')->user()->name }}<br>
-                                    {{ Auth::guard('customer')->user()->phone }},<br>
-                                    {{ Auth::guard('customer')->user()->street }},
-                                    {{ Auth::guard('customer')->user()->number }},
-                                    {{ Auth::guard('customer')->user()->city }},
-                                    {{ Auth::guard('customer')->user()->state }},
-                                    {{ Auth::guard('customer')->user()->zip_code }},
-                                    {{ Auth::guard('customer')->user()->country }}.
+                                    @if (session()->has('billing_name'))
+                                        {{ session('billing_name') }}<br>
+                                        {{ session('billing_phone') }},<br>
+                                        {{ session('billing_street') }},
+                                        {{ session('billing_number') }},
+                                        {{ session('billing_city') }},
+                                        {{ session('billing_state') }},
+                                        {{ session('billing_zip_code') }},
+                                        {{ session('billing_country') }}.
+                                    @else
+                                        {{ Auth::guard('customer')->user()->name }}<br>
+                                        {{ Auth::guard('customer')->user()->phone }},<br>
+                                        {{ Auth::guard('customer')->user()->street }},
+                                        {{ Auth::guard('customer')->user()->number }},
+                                        {{ Auth::guard('customer')->user()->city }},
+                                        {{ Auth::guard('customer')->user()->state }},
+                                        {{ Auth::guard('customer')->user()->zip_code }},
+                                        {{ Auth::guard('customer')->user()->country }}.
+                                    @endif
                                 </address>
                             </div>
                             <div class="col-md-6 text-md-right">

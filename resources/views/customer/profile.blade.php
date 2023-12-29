@@ -8,7 +8,8 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{ route('customer.customer_profile_submit') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('customer.customer_profile_submit') }}" method="post"
+                            enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-md-3">
@@ -66,6 +67,13 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mb-4">
+                                                <label class="form-label">Numero</label>
+                                                <input type="text" class="form-control" name="number"
+                                                    value="{{ Auth::guard('customer')->user()->number }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-4">
                                                 <label class="form-label">Estado</label>
                                                 <input type="text" class="form-control" name="state"
                                                     value="{{ Auth::guard('customer')->user()->state }}">
@@ -89,14 +97,14 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-12">
                                             <div class="mb-4">
                                                 <label class="form-label">Senha</label>
                                                 <input type="password" class="form-control" name="password">
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
+                                        <div class="col-md-12">
                                             <div class="mb-4">
                                                 <label class="form-label">Redigitar Senha</label>
                                                 <input type="password" class="form-control" name="retype_password">

@@ -135,7 +135,7 @@
                                                     <td>{{ $row->paid_amount }}</td>
                                                     <td class="pt_10 pb_10">
                                                         <a href="{{ route('admin_invoice', $row->id) }}"
-                                                            class="btn btn-primary">Detail</a>
+                                                            class="btn btn-primary">Detalhes</a>
                                                         <a href="{{ route('admin_order_delete', $row->id) }}"
                                                             class="btn btn-danger"
                                                             onClick="return confirm('Você tem certeza?');">Excluír</a>
