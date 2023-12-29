@@ -39,11 +39,6 @@
                                             value="{{ $image->caption }}">
                                     </div>
                                     <div class="mb-4">
-                                        <label class="form-label">Status</label>
-                                        <input type="checkbox" name="status" value="1"
-                                            {{ $image->status ? 'checked' : '' }}> Ativo
-                                    </div>
-                                    <div class="mb-4">
                                         <label class="form-label"></label>
                                         <button type="submit" class="btn btn-success">Atualizar</button>
                                     </div>

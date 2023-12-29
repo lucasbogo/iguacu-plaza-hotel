@@ -58,7 +58,7 @@
                         }
 
                         if(session()->has('billing_state')) {
-                            $billing_state = session()->get('billing_city');
+                            $billing_state = session()->get('billing_state');
                         } else {
                             $billing_state = Auth::guard('customer')->user()->state;
                         }

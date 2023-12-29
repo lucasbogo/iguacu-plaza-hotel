@@ -55,14 +55,6 @@
                                             value="{{ $slider->button_url }}">
                                     </div>
                                     <div class="mb-4">
-                                        <label class="form-label">Status</label>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="status" id="status"
-                                                value="1" {{ $slider->status ? 'checked' : '' }}>
-                                            <label class="form-check-label" for="status">Ativo</label>
-                                        </div>
-                                    </div>
-                                    <div class="mb-4">
                                         <label class="form-label"></label>
                                         <button type="submit" class="btn btn-success">Atualizar</button>
                                     </div>

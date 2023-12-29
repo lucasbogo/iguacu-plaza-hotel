@@ -142,7 +142,9 @@ class BookingController extends Controller
             return redirect()->back()->with('error', 'Não há itens no carrinho.');
         }
 
-        return view('frontend.booking.checkout');
+        $customer = Auth::guard('customer')->user();
+
+        return view('frontend.booking.checkout', compact('customer'));
     }
 
     public function payment(Request $request)

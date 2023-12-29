@@ -44,11 +44,15 @@ class VideoController extends Controller
         $video = Video::findOrFail($id);
 
         $request->validate([
-            'video' => 'sometimes|required',
+            'video' => 'nullable',
             'caption' => 'sometimes|required',
         ]);
 
-        $video->video = $request->video;
+        // Only update 'video' if it's present in the request
+        if ($request->has('video')) {
+            $video->video = $request->video;
+        }
+
         $video->caption = $request->caption;
         $video->save();
 
