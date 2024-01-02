@@ -94,9 +94,9 @@
                         </div>
                     </div>
 
-                    @if ($room->video_id != '')
+                    @if ($room->video != '')
                         <div class="video">
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ $room->video_id }}"
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ $room->video }}"
                                 title="YouTube video player" frameborder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                 allowfullscreen></iframe>
@@ -125,12 +125,12 @@
                                 <div class="form-group mb_20">
                                     <label for="">Adultos</label>
                                     <input type="number" name="adult" class="form-control" min="1" max="30"
-                                        placeholder="Adults">
+                                        placeholder="Adultos">
                                 </div>
                                 <div class="form-group mb_20">
                                     <label for="">Crianças</label>
                                     <input type="number" name="children" class="form-control" min="0" max="30"
-                                        placeholder="Children">
+                                        placeholder="Crianças">
                                 </div>
                                 <button type="submit" class="book-now">Reservar</button>
                             </form>
