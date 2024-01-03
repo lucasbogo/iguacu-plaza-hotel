@@ -24,8 +24,10 @@ class HomeController extends Controller
         // // If there are no active customers, set a default value
         // if ($total_active_customers === 0) {
         //     $total_active_customers = 0;
-        // }
+        // }   
 
-        return view('admin.home', compact('total_completed_orders', 'total_pending_orders', 'total_active_customers', 'total_pending_customers', 'total_rooms', 'total_subscribers', 'orders'));
+        // 'total_active_customers', 'total_pending_customers',
+
+        return view('admin.home', compact('total_completed_orders', 'total_pending_orders',  'total_rooms', 'total_subscribers', 'orders'));
     }
 }
