@@ -15,7 +15,7 @@ class HomeController extends Controller
         $total_completed_orders = Order::where('status', 'Completed')->count();
         $total_pending_orders = Order::where('status', 'Pending')->count();
         // $total_active_customers = Customer::where('status', 1)->count();
-        $total_pending_customers = Customer::where('status', 0)->count();
+        // $total_pending_customers = Customer::where('status', 0)->count();
         $total_rooms = Room::count();
         $total_subscribers = Subscriber::where('status', 1)->count();
 
