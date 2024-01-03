@@ -11,18 +11,28 @@ class CustomerController extends Controller
     public function index()
     {
         $customers = Customer::get();
-        return view('admin.customer.customer', compact('customers'));
+        $customerCount = $customers->count();
+
+        // If there are no customers, set a default value
+        if ($customerCount === 0) {
+            $customerCount = 0;
+        }
+
+        return view('admin.customer.customer', compact('customerCount'));
     }
 
     public function change_status($id)
     {
-        $customer_data = Customer::where('id', $id)->first();
-        if ($customer_data->status == 1) {
-            $customer_data->status = 0;
+        $customerData = Customer::where('id', $id)->first();
+
+        if ($customerData->status == 1) {
+            $customerData->status = 0;
         } else {
-            $customer_data->status = 1;
+            $customerData->status = 1;
         }
-        $customer_data->update();
+
+        $customerData->update();
+
         return redirect()->back()->with('success', 'Status do cliente alterado com sucesso!');
     }
 }
