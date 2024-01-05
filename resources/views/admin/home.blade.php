@@ -48,9 +48,9 @@
                     <div class="card-header">
                         <h4>Clientes Ativos (Acesso ao sitema de reservas)</h4>
                     </div>
-                    {{-- <div class="card-body">
+                    <div class="card-body">
                         {{ $total_active_customers }}
-                    </div> --}}
+                    </div>
                 </div>
             </div>
         </div>
@@ -63,9 +63,9 @@
                     <div class="card-header">
                         <h4>Clientes pendentes (liberar acesso)</h4>
                     </div>
-                    {{-- <div class="card-body">
+                    <div class="card-body">
                         {{ $total_pending_customers }}
-                    </div> --}}
+                    </div>
                 </div>
             </div>
         </div>

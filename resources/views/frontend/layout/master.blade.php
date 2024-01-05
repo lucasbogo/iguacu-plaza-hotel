@@ -41,12 +41,12 @@
         .blog-item .inner .text .button a,
         .room-detail-carousel.owl-carousel .owl-nav .owl-prev:hover,
         .room-detail-carousel.owl-carousel .owl-nav .owl-next:hover {
-            color: {{ $global_setting->theme_color_1 }}
+            color: {{ $global_setting->theme_color_1 }};
         }
 
         .main-nav nav .navbar-nav .nav-item .dropdown-menu li a:hover,
         .primary-color {
-            color: {{ $global_setting->theme_color_1 }} !important;
+            color: {{ $global_setting->theme_color_1 }};
         }
 
         .testimonial-carousel .owl-dots .owl-dot,
@@ -61,7 +61,7 @@
         .search-section button[type="submit"],
         .home-rooms .big-button a,
         .bg-website {
-            background-color: {{ $global_setting->theme_color_1 }} !important;
+            background-color: {{ $global_setting->theme_color_1 }};
         }
 
         .slider .text .button a,
@@ -71,7 +71,7 @@
         .room-detail-carousel.owl-carousel .owl-nav .owl-prev:hover,
         .room-detail-carousel.owl-carousel .owl-nav .owl-next:hover,
         .room-detail .amenity .item {
-            border-color: {{ $global_setting->theme_color_1 }} !important;
+            border-color: {{ $global_setting->theme_color_1 }};
         }
 
         .home-feature .inner .icon i,
@@ -80,7 +80,7 @@
         .room-detail .amenity .item,
         .cart .table-cart tr th,
         .top {
-            background-color: {{ $global_setting->theme_color_2 }} !important;
+            background-color: {{ $global_setting->theme_color_2 }};
         }
     </style>
 
@@ -102,7 +102,7 @@
                 iziToast.error({
                     title: 'Erro',
                     message: '{{ $error }}',
-                    position: 'topRight'
+                    position: 'topRight',
                 });
             @endforeach
         </script>
