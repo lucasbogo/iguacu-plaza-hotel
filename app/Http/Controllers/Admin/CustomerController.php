@@ -18,7 +18,7 @@ class CustomerController extends Controller
             $customerCount = 0;
         }
 
-        return view('admin.customer.customer', compact('customerCount'));
+        return view('admin.customer.customer', compact('customers'));
     }
 
     public function change_status($id)

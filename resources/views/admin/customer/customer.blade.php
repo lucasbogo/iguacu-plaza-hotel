@@ -32,7 +32,7 @@
                                         @endif
                                         
                                     </td>
-                                    <td>{{ $row->name }}</td>
+                                    <td>{{ $row->name }}</td>       
                                     <td>{{ $row->email }}</td>
                                     <td>{{ $row->phone }}</td>
                                     <td class="pt_10 pb_10">
