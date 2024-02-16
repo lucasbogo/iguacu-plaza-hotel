@@ -41,10 +41,10 @@
                                 {!! $blog->content !!}
                             </p>
                         </div>
-                        <div class="share-content">
+                        {{-- <div class="share-content">
                             <h2>Compartilhar</h2>
                             <div class="addthis_inline_share_toolbox"></div>
-                        </div>
+                        </div> --}}
                     </div>
                 @else
                     <div class="col-lg-8 col-md-12">

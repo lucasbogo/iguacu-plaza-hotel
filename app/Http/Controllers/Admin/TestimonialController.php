@@ -23,7 +23,7 @@ class TestimonialController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'photo' => 'required',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif', // Adjust the validation rules as needed
             'name' => 'required',
             'designation' => 'required',
             'comment' => 'required',
@@ -32,6 +32,8 @@ class TestimonialController extends Controller
         $image = $request->file('photo');
         $image_name = time() . '.' . $image->getClientOriginalExtension();
         $image->move(public_path('uploads/testimonial'), $image_name);
+        
+        
 
         $testimonial = new Testimonial();
         $testimonial->photo = $image_name;

@@ -169,17 +169,18 @@
                             @if ($item->status)
                                 <!-- Check if the testimonial is active (status is true) -->
                                 <div class="item">
-                                    <div class="photo">
-                                        <img src="{{ asset('uploads/testimonial/' . $item->photo) }}" alt="">
-                                    </div>
-                                    <div class="text">
-                                        <h4>{{ $item->name }}</h4>
-                                        <p>{{ $item->designation }}</p>
+                                    <div class="testimonial-content">
+                                        <div class="photo">
+                                            <img src="{{ asset('uploads/testimonial/' . $item->photo) }}"
+                                                alt="">
+                                        </div>
+                                        <div class="text">
+                                            <h4>{{ $item->name }}</h4>
+                                            <p>{{ $item->designation }}</p>
+                                        </div>
                                     </div>
                                     <div class="description">
-                                        <p>
-                                            {!! $item->comment !!}
-                                        </p>
+                                        <p>{!! $item->comment !!}</p>
                                     </div>
                                 </div>
                             @endif
@@ -190,6 +191,7 @@
         </div>
     </div>
 @endif
+
 
 @if ($blogs->count() > 0)
     <div class="blog-item">
