@@ -39,24 +39,4 @@ class ReceptionistAuthController extends Controller
         Auth::guard('receptionist')->logout();
         return redirect()->route('receptionist.login');
     }
-
-    public function redefinePassword(Request $request)
-    {
-        $request->validate([
-            'current_password' => 'required',
-            'new_password' => 'required|min:6|confirmed',
-        ]);
-
-        $receptionist = Auth::guard('receptionist')->user();
-
-        if (!Hash::check($request->current_password, $receptionist->password)) {
-            return back()->withErrors(['current_password' => 'Senha atual incorreta.']);
-        }
-
-        // Manually set the password and use save() method
-        $receptionist->password = Hash::make($request->new_password);
-        $receptionist->save();
-
-        return back()->with('success', 'Senha redefinida com sucesso.');
-    }
 }

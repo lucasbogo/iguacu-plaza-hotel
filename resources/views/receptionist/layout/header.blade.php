@@ -10,8 +10,9 @@
     <ul class="navbar-nav navbar-right">
         <li class="dropdown">
             <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                <img alt="Profile Picture" src="{{ asset('uploads/' . Auth::guard('receptionist')->user()->photo) }}"
-                    class="rounded-circle mr-1">
+                @php $receptionistPhoto = Auth::guard('receptionist')->user()->photo; @endphp
+                <img src="{{ $receptionistPhoto ? asset('storage/receptionists/' . $receptionistPhoto) : asset('path/to/default/image.png') }}"
+                    alt="Profile Picture" class="rounded-circle mr-1">
                 <div class="d-sm-none d-lg-inline-block">{{ Auth::guard('receptionist')->user()->name }}</div>
             </a>
             <div class="dropdown-menu dropdown-menu-right">

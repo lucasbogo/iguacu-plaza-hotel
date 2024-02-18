@@ -13,10 +13,8 @@
 
         .logo img {
             max-width: 100px;
-            /* Adjust the maximum width of the logo as needed */
             display: block;
             margin: 0 auto;
-            /* Center the logo horizontally */
         }
     </style>
 
@@ -35,11 +33,9 @@
                             class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
                             <div class="card card-primary border-box">
                                 <div class="card-header card-header-auth">
-                                    {{-- <h4 class="text-center">Login Painel Administrativo</h4> --}}
                                     <img src="{{ asset('uploads/logo-hotel.png') }}" alt="Logo">
                                 </div>
                                 <div class="card-body card-body-auth">
-                                    {{-- show success message --}}
                                     @if (session()->get('success'))
                                         <div class="alert alert-success">
                                             {{ session()->get('success') }}
@@ -49,14 +45,12 @@
                                         @csrf
                                         <div class="form-group">
                                             <input type="text"
-                                                class="form-control @error('email') is-invalid @enderror" name="email"
-                                                placeholder="Email" value="{{ old('email') }}" autofocus>
-                                            @error('email')
+                                                class="form-control @error('username') is-invalid @enderror"
+                                                name="username" placeholder="Usuário" value="{{ old('username') }}"
+                                                autofocus>
+                                            @error('username')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
-                                            @if (session()->get('error'))
-                                                <div class="text-danger">{{ session()->get('error') }}</div>
-                                            @endif
                                         </div>
                                         <div class="form-group">
                                             <input type="password"
@@ -81,6 +75,5 @@
     </div>
     @include('receptionist.layout.scripts_footer')
 </body>
-
 
 </html>

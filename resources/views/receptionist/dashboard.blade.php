@@ -16,9 +16,9 @@
                         <div class="card-header">
                             <h4>Quartos Registrados</h4>
                         </div>
-                        <div class="card-body">
+                        {{-- <div class="card-body">
                             {{ $totalRoomsRegistered }}
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -31,9 +31,9 @@
                         <div class="card-header">
                             <h4>Hóspedes Registrados</h4>
                         </div>
-                        <div class="card-body">
+                        {{-- <div class="card-body">
                             {{ $totalRenterGuests }}
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -46,9 +46,9 @@
                         <div class="card-header">
                             <h4>Valor Total do Aluguel</h4>
                         </div>
-                        <div class="card-body">
+                        {{-- <div class="card-body">
                             R$ {{ number_format($totalRentAmount, 2, ',', '.') }}
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
