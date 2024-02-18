@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SliderController;
@@ -34,6 +34,11 @@ use App\Http\Controllers\Customer\AuthController as CustomerAuthController;
 use App\Http\Controllers\Customer\HomeController as CustomerHomeController;
 use App\Http\Controllers\Customer\ProfileController as CustomerProfileController;
 use App\Http\Controllers\Customer\OrderController as CustomerOrderController;
+
+use App\Http\Controllers\Receptionist\ReceptionistAuthController;
+use App\Http\Controllers\Receptionist\DashboardController;
+use App\Http\Controllers\Receptionist\ProfileController as ReceptionistProfileController;
+
 
 /* Frontend Routes */
 
@@ -94,29 +99,29 @@ Route::group(['middleware' => ['customer:customer'], 'as' => 'customer.'], funct
 });
 
 /* User Routes */
-Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard')->middleware('auth');
+Route::get('/dashboard', [AdminAuthController::class, 'dashboard'])->name('dashboard')->middleware('auth');
 
-Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::get('/login', [AdminAuthController::class, 'login'])->name('login');
 
-Route::post('/login_submit', [AuthController::class, 'login_submit'])->name('login_submit');
+Route::post('/login_submit', [AdminAuthController::class, 'login_submit'])->name('login_submit');
 
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/logout', [AdminAuthController::class, 'logout'])->name('logout');
 
-Route::get('/register', [AuthController::class, 'register'])->name('register');
+Route::get('/register', [AdminAuthController::class, 'register'])->name('register');
 
-Route::post('/register_submit', [AuthController::class, 'register_submit'])->name('register_submit');
+Route::post('/register_submit', [AdminAuthController::class, 'register_submit'])->name('register_submit');
 
-Route::get('/registration/verify/{token}/{email}', [AuthController::class, 'registration_verify']);
+Route::get('/registration/verify/{token}/{email}', [AdminAuthController::class, 'registration_verify']);
 
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/logout', [AdminAuthController::class, 'logout'])->name('logout');
 
-Route::get('/forget-password', [AuthController::class, 'forget_password'])->name('forget_password');
+Route::get('/forget-password', [AdminAuthController::class, 'forget_password'])->name('forget_password');
 
-Route::post('/forget_password_submit', [AuthController::class, 'forget_password_submit'])->name('forget_password_submit');
+Route::post('/forget_password_submit', [AdminAuthController::class, 'forget_password_submit'])->name('forget_password_submit');
 
-Route::get('/reset-password/{token}/{email}', [AuthController::class, 'reset_password'])->name('reset_password');
+Route::get('/reset-password/{token}/{email}', [AdminAuthController::class, 'reset_password'])->name('reset_password');
 
-Route::post('/reset_password_submit', [AuthController::class, 'reset_password_submit'])->name('reset_password_submit');
+Route::post('/reset_password_submit', [AdminAuthController::class, 'reset_password_submit'])->name('reset_password_submit');
 
 // Booking functions
 Route::post('/booking/submit', [BookingController::class, 'cart_submit'])->name('cart_submit');
@@ -136,19 +141,19 @@ Route::post('/payment/stripe/{price}', [BookingController::class, 'stripe'])->na
 
 Route::get('/admin/home', [HomeController::class, 'index'])->name('admin_home')->middleware('admin:admin');
 
-Route::get('/admin/login', [AuthController::class, 'login'])->name('admin_login');
+Route::get('/admin/login', [AdminAuthController::class, 'login'])->name('admin_login');
 
-Route::post('/admin/login-submit', [AuthController::class, 'login_submit'])->name('admin_login_submit');
+Route::post('/admin/login-submit', [AdminAuthController::class, 'login_submit'])->name('admin_login_submit');
 
-Route::get('/admin/forget-password', [AuthController::class, 'forget_password'])->name('admin_forget_password');
+Route::get('/admin/forget-password', [AdminAuthController::class, 'forget_password'])->name('admin_forget_password');
 
-Route::post('/admin/forget-password-submit', [AuthController::class, 'forget_password_submit'])->name('admin_forget_password_submit');
+Route::post('/admin/forget-password-submit', [AdminAuthController::class, 'forget_password_submit'])->name('admin_forget_password_submit');
 
-Route::get('/admin/reset-password/{token}/{email}', [AuthController::class, 'reset_password'])->name('admin_reset_password');
+Route::get('/admin/reset-password/{token}/{email}', [AdminAuthController::class, 'reset_password'])->name('admin_reset_password');
 
-Route::post('/admin/reset-password-submit', [AuthController::class, 'reset_password_submit'])->name('admin_reset_password_submit');
+Route::post('/admin/reset-password-submit', [AdminAuthController::class, 'reset_password_submit'])->name('admin_reset_password_submit');
 
-Route::get('/admin/logout', [AuthController::class, 'logout'])->name('admin_logout');
+Route::get('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin_logout');
 
 Route::get('/admin/profile', [ProfileController::class, 'index'])->name('admin_profile')->middleware('admin:admin');
 
@@ -419,3 +424,16 @@ Route::get('/admin/order/view', [AdminOrderController::class, 'index'])->name('a
 Route::get('/admin/order/invoice/{id}', [AdminOrderController::class, 'invoice'])->name('admin_invoice');
 
 Route::get('/admin/order/delete/{id}', [AdminOrderController::class, 'delete'])->name('admin_order_delete');
+
+// Receptionist Login Routes - No Middleware Required
+Route::get('/receptionist/login', [ReceptionistAuthController::class, 'login'])->name('receptionist.login');
+Route::post('/receptionist/login-submit', [ReceptionistAuthController::class, 'login_submit'])->name('receptionist.login_submit');
+
+// Receptionist Authenticated Routes
+Route::middleware(['auth:receptionist'])->group(function () {
+    Route::get('/receptionist/dashboard', [DashboardController::class, 'index'])->name('receptionist.dashboard');
+    Route::get('/receptionist/profile', [ReceptionistProfileController::class, 'show'])->name('receptionist.profile.show');
+    Route::post('/receptionist/profile/update', [ReceptionistProfileController::class, 'update'])->name('receptionist.profile.update');
+    Route::post('/receptionist/redefine-password', [ReceptionistAuthController::class, 'redefinePassword'])->name('receptionist.redefinePassword');
+    Route::post('/receptionist/logout', [ReceptionistAuthController::class, 'logout'])->name('receptionist.logout');
+});

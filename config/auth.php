@@ -48,6 +48,10 @@ return [
             'driver' => 'session',
             'provider' => 'customers',
         ],
+        'receptionist' => [
+            'driver' => 'session',
+            'provider' => 'receptionists',
+        ],
     ],
 
     /*
@@ -79,6 +83,10 @@ return [
         'customers' => [
             'driver' => 'eloquent',
             'model' => App\Models\Customer::class,
+        ],
+        'receptionists' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Receptionist::class, 
         ],
 
         // 'users' => [

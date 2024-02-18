@@ -192,7 +192,6 @@
     </div>
 @endif
 
-
 @if ($blogs->count() > 0)
     <div class="blog-item">
         <div class="container">
