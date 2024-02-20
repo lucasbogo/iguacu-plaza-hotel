@@ -11,7 +11,7 @@
         <li class="dropdown">
             <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                 @php $receptionistPhoto = Auth::guard('receptionist')->user()->photo; @endphp
-                <img src="{{ $receptionistPhoto ? asset('storage/receptionists/' . $receptionistPhoto) : asset('path/to/default/image.png') }}"
+                <img src="{{ $receptionistPhoto ? asset('uploads/receptionist/' . $receptionistPhoto) : asset('path/to/default/image.png') }}"
                     alt="Profile Picture" class="rounded-circle mr-1">
                 <div class="d-sm-none d-lg-inline-block">{{ Auth::guard('receptionist')->user()->name }}</div>
             </a>

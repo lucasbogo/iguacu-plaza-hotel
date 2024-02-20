@@ -29,15 +29,31 @@ class ProfileController extends Controller
         $receptionist->name = $request->name;
         $receptionist->username = $request->username;
 
-        // Update password only if a new one is provided
         if ($request->filled('password')) {
             $receptionist->password = Hash::make($request->password);
         }
 
-        // Update photo if it's provided
         if ($request->hasFile('photo')) {
-            $path = $request->file('photo')->store('public/receptionists');
-            $receptionist->photo = basename($path);
+            $request->validate([
+                'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            ]);
+
+            // Delete old photo if it exists
+            if ($receptionist->photo) {
+                $oldPhotoPath = public_path('uploads/receptionist/' . $receptionist->photo);
+                if (file_exists($oldPhotoPath)) {
+                    unlink($oldPhotoPath);
+                }
+            }
+
+            // Upload new photo
+            $photo = $request->file('photo');
+            $extension = $photo->getClientOriginalExtension();
+            $fileName = 'receptionist_' . time() . '.' . $extension;
+            $photo->move(public_path('uploads/receptionist'), $fileName);
+
+            // Update photo name in database
+            $receptionist->photo = $fileName;
         }
 
         $receptionist->save();
