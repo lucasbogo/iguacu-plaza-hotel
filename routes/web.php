@@ -38,6 +38,7 @@ use App\Http\Controllers\Customer\OrderController as CustomerOrderController;
 use App\Http\Controllers\Receptionist\ReceptionistAuthController;
 use App\Http\Controllers\Receptionist\DashboardController;
 use App\Http\Controllers\Receptionist\ProfileController as ReceptionistProfileController;
+use App\Http\Controllers\Receptionist\RentalUnitsController;
 
 
 /* Frontend Routes */
@@ -436,4 +437,12 @@ Route::middleware(['auth:receptionist'])->group(function () {
     Route::post('/receptionist/profile/update', [ReceptionistProfileController::class, 'update'])->name('receptionist.profile.update');
     Route::post('/receptionist/redefine-password', [ReceptionistAuthController::class, 'redefinePassword'])->name('receptionist.redefinePassword');
     Route::post('/receptionist/logout', [ReceptionistAuthController::class, 'logout'])->name('receptionist.logout');
+
+    // Rental Units Routes
+    Route::get('/receptionist/rental-units', [RentalUnitsController::class, 'index'])->name('receptionist.rental-units.index');
+    Route::get('/receptionist/rental-units/create', [RentalUnitsController::class, 'create'])->name('receptionist.rental-units.create');
+    Route::post('/receptionist/rental-units', [RentalUnitsController::class, 'store'])->name('receptionist.rental-units.store');
+    Route::get('/receptionist/rental-units/{rentalUnit}/edit', [RentalUnitsController::class, 'edit'])->name('receptionist.rental-units.edit');
+    Route::put('/receptionist/rental-units/{rentalUnit}', [RentalUnitsController::class, 'update'])->name('receptionist.rental-units.update');
+    Route::delete('/receptionist/rental-units/{rentalUnit}', [RentalUnitsController::class, 'destroy'])->name('receptionist.rental-units.destroy');
 });

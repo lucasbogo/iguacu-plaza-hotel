@@ -19,10 +19,14 @@
                 <a href="{{ route('receptionist.profile.show') }}" class="dropdown-item has-icon">
                     <i class="fa fa-user"></i> Editar perfil
                 </a>
-                <a href="{{ route('receptionist.logout') }}" class="dropdown-item has-icon text-danger">
+                <form action="{{ route('receptionist.logout') }}" method="POST" style="display: none;" id="logout-form">
+                    @csrf
+                </form>
+                <a href="#" class="dropdown-item has-icon text-danger" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <i class="fa fa-sign-out"></i> Sair
                 </a>
             </div>
+            
         </li>
     </ul>
 </nav>

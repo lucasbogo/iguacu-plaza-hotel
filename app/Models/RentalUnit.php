@@ -9,6 +9,12 @@ class RentalUnit extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'number', 
+        'type', 
+        'observations',
+    ];
+
     public function occupants()
     {
         return $this->hasMany(Occupant::class);
