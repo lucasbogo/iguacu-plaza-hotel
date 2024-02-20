@@ -16,5 +16,6 @@
 <script src="{{ asset('dist/js/iziToast.min.js') }}"></script>
 <script src="{{ asset('dist/js/fontawesome-iconpicker.js') }}"></script>
 <script src="{{ asset('dist/js/bootstrap4-toggle.min.js') }}"></script>
+<script src="//cdn.datatables.net/2.0.0/js/dataTables.min.js"></script>
 
 
