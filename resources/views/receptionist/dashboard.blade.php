@@ -32,7 +32,7 @@
                             <h4>Mensalistas Registrados</h4>
                         </div>
                         <div class="card-body">
-                            {{ $totalOccupants}}
+                            {{ $totalOccupants }}
                         </div>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
-                            <h4>Valor Total do Aluguel</h4>
+                            <h4>Total em Alugueis</h4>
                         </div>
                         <div class="card-body">
                             R$ {{ number_format($totalRentAmount, 2, ',', '.') }}

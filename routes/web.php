@@ -40,6 +40,7 @@ use App\Http\Controllers\Receptionist\DashboardController;
 use App\Http\Controllers\Receptionist\ProfileController as ReceptionistProfileController;
 use App\Http\Controllers\Receptionist\RentalUnitsController;
 use App\Http\Controllers\Receptionist\OccupantsController;
+use App\Http\Controllers\Receptionist\ServiceTypeController;
 
 
 /* Frontend Routes */
@@ -457,6 +458,11 @@ Route::middleware(['auth:receptionist'])->group(function () {
     Route::post('/receptionist/occupants/{occupant}/transfer', [OccupantsController::class, 'transfer'])->name('receptionist.occupants.transfer');
     Route::get('/receptionist/occupants/print-pdf', [OccupantsController::class, 'printPDF'])->name('receptionist.occupants.print-pdf');
 
-
+    // Service Types Routes
+    Route::get('/receptionist/service-types', [ServiceTypeController::class, 'index'])->name('receptionist.service-types.index');
+    Route::get('/receptionist/service-types/create', [ServiceTypeController::class, 'create'])->name('receptionist.service-types.create');
+    Route::post('/receptionist/service-types', [ServiceTypeController::class, 'store'])->name('receptionist.service-types.store');
+    Route::get('/receptionist/service-types/{serviceType}/edit', [ServiceTypeController::class, 'edit'])->name('receptionist.service-types.edit');
+    Route::put('/receptionist/service-types/{serviceType}', [ServiceTypeController::class, 'update'])->name('receptionist.service-types.update');
+    Route::delete('/receptionist/service-types/{serviceType}', [ServiceTypeController::class, 'destroy'])->name('receptionist.service-types.destroy');
 });
-

@@ -17,5 +17,8 @@
 <script src="{{ asset('dist/js/fontawesome-iconpicker.js') }}"></script>
 <script src="{{ asset('dist/js/bootstrap4-toggle.min.js') }}"></script>
 <script src="//cdn.datatables.net/2.0.0/js/dataTables.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+
 
 
