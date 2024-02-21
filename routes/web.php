@@ -455,6 +455,8 @@ Route::middleware(['auth:receptionist'])->group(function () {
     Route::put('/receptionist/occupants/{occupant}', [OccupantsController::class, 'update'])->name('receptionist.occupants.update');
     Route::delete('/receptionist/occupants/{occupant}', [OccupantsController::class, 'destroy'])->name('receptionist.occupants.destroy');
     Route::post('/receptionist/occupants/{occupant}/transfer', [OccupantsController::class, 'transfer'])->name('receptionist.occupants.transfer');
+    Route::get('/receptionist/occupants/print-pdf', [OccupantsController::class, 'printPDF'])->name('receptionist.occupants.print-pdf');
+
 
 });
 

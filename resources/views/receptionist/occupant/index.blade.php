@@ -4,10 +4,11 @@
 
 @section('main_content')
     <div class="section-header">
-        <h1>Gestão de Ocupantes</h1>
+        <h1>Gestão de Mensalistas</h1>
         <div class="section-header-breadcrumb">
-            <a href="{{ route('receptionist.occupants.create') }}" class="btn btn-success"><i class="fa fa-plus"></i> Adicionar
-                Novo Ocupante</a>
+            <a href="{{ route('receptionist.occupants.create') }}" class="btn btn-success">
+                <i class="fa fa-plus"></i> Adicionar Novo Mensalista
+            </a>
         </div>
     </div>
 
@@ -16,18 +17,17 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
+                        <h4>Mensalistas</h4>
                         <div class="float-right">
                             <input type="text" id="occupantSearchInput" onkeyup="searchOccupantTable()"
                                 placeholder="Buscar por nome..." class="form-control">
                         </div>
-                        <h4>Mensalistas</h4>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
+                        <div class="table-responsive" style="overflow-x:auto;">
                             <table class="table table-bordered" id="occupantTable">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
                                         <th>Nome</th>
                                         <th>Quarto</th>
                                         <th>Check-in</th>
@@ -40,7 +40,6 @@
                                 <tbody>
                                     @foreach ($occupants as $occupant)
                                         <tr>
-                                            <td>{{ $occupant->id }}</td>
                                             <td>{{ $occupant->name }}</td>
                                             <td>{{ $occupant->rentalUnit->number ?? 'N/A' }}</td>
                                             <td>{{ \Carbon\Carbon::parse($occupant->check_in)->format('d/m/Y') }}</td>
@@ -49,15 +48,20 @@
                                             <td>R$ {{ number_format($occupant->rent_amount, 2, ',', '.') }}</td>
                                             <td>{{ \Carbon\Carbon::parse($occupant->payment_date)->format('d/m/Y') }}</td>
                                             <td>
-                                                <a href="{{ route('receptionist.occupants.edit', $occupant->id) }}"
-                                                    class="btn btn-primary">Editar</a>
-                                                <form action="{{ route('receptionist.occupants.destroy', $occupant->id) }}"
-                                                    method="POST" style="display:inline;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger"
-                                                        onclick="return confirm('Tem Certeza?');">Deletar</button>
-                                                </form>
+                                                <div class="btn-group">
+                                                    <a href="{{ route('receptionist.occupants.edit', $occupant->id) }}"
+                                                        class="btn btn-sm btn-primary">Editar</a>
+                                                    <a href="{{ route('receptionist.occupants.print-pdf') }}"
+                                                        class="btn btn-sm btn-info">Imprimir PDF</a>
+                                                    <form
+                                                        action="{{ route('receptionist.occupants.destroy', $occupant->id) }}"
+                                                        method="POST" style="display:inline;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-sm btn-danger"
+                                                            onclick="return confirm('Tem Certeza?');">Deletar</button>
+                                                    </form>
+                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -69,7 +73,6 @@
             </div>
         </div>
     </div>
-
     @push('scripts')
         <script>
             function searchOccupantTable() {
@@ -93,5 +96,4 @@
             }
         </script>
     @endpush
-
 @endsection

@@ -22,7 +22,7 @@
             </li>
             <li class="{{ Request::is('receptionist/room_services*') ? 'active' : '' }}">
                 <a class="nav-link" href="#">
-                    <i class="fa fa-concierge-bell"></i> <span>Serviços Extra</span>
+                    <i class="fa fa-bell"></i> <span>Serviços Extra</span>
                 </a>
             </li>
             <!-- Add other sidebar items here -->

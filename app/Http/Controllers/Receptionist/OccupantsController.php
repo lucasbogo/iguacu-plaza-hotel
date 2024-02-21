@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Occupant;
 use Illuminate\Http\Request;
 use App\Models\RentalUnit;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 class OccupantsController extends Controller
 {
@@ -105,5 +107,12 @@ class OccupantsController extends Controller
         ]);
 
         return redirect()->route('receptionist.occupants.index')->with('success', 'Occupant transferred successfully.');
+    }
+
+    public function printPDF()
+    {
+        $occupants = Occupant::with('rentalUnit')->get();
+        $pdf = PDF::loadView('receptionist.occupant.print', compact('occupants'));
+        return $pdf->download('occupants.pdf');
     }
 }
