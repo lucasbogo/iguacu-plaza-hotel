@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('number');
             $table->enum('type', ['single', 'double', 'couple', 'triple', 'quadruple', 'couple_plus_one', 'couple_plus_two']);
+            $table->enum('status', ['available', 'occupied', 'maintenance', 'housekeeping']);
             $table->text('observations')->nullable();
             $table->timestamps();
         });

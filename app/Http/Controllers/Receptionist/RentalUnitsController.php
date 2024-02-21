@@ -27,8 +27,9 @@ class RentalUnitsController extends Controller
         $request->validate([
             'number' => 'required|string|max:255|unique:rental_units,number',
             'type' => 'required|in:single,double,couple,triple,quadruple,couple_plus_one,couple_plus_two',
+            'status' => 'required|in:available,occupied,maintenance,housekeeping',
             'observations' => 'nullable|string',
-        ]);
+        ]);        
 
         RentalUnit::create($request->all());
 
@@ -47,8 +48,10 @@ class RentalUnitsController extends Controller
         $request->validate([
             'number' => 'required|string|max:255|unique:rental_units,number',
             'type' => 'required|in:single,double,couple,triple,quadruple,couple_plus_one,couple_plus_two',
+            'status' => 'required|in:available,occupied,maintenance,housekeeping',
             'observations' => 'nullable|string',
         ]);
+        
 
         $rentalUnit->update($request->all());
 

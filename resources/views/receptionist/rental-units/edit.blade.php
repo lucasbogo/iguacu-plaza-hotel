@@ -4,7 +4,7 @@
 
 @section('main_content')
     <div class="section-header">
-        <h1>Editar Unidade de Aluguel</h1>
+        <h1>Editar quarto (mensalista)</h1>
     </div>
 
     <div class="section-body">
@@ -12,7 +12,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Informações da Unidade</h4>
+                        <h4>Informações do quarto</h4>
                     </div>
                     <div class="card-body">
                         <form action="{{ route('receptionist.rental-units.update', $rentalUnit->id) }}" method="POST">
@@ -42,6 +42,20 @@
                                         {{ $rentalUnit->type == 'couple_plus_two' ? 'selected' : '' }}>Casal + 2</option>
                                 </select>
                             </div>
+                            <div class="form-group">
+                                <label for="status">Status</label>
+                                <select class="form-control" id="status" name="status">
+                                    <option value="available" {{ $rentalUnit->status == 'available' ? 'selected' : '' }}>
+                                        Disponível</option>
+                                    <option value="occupied" {{ $rentalUnit->status == 'occupied' ? 'selected' : '' }}>
+                                        Ocupado</option>
+                                    <option value="maintenance"
+                                        {{ $rentalUnit->status == 'maintenance' ? 'selected' : '' }}>Manutenção</option>
+                                    <option value="housekeeping"
+                                        {{ $rentalUnit->status == 'housekeeping' ? 'selected' : '' }}>Limpeza</option>
+                                </select>
+                            </div>
+
                             <div class="form-group">
                                 <label for="observations">Observações</label>
                                 <textarea class="form-control" id="observations" name="observations" rows="3">{{ $rentalUnit->observations }}</textarea>

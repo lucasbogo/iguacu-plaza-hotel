@@ -9,7 +9,19 @@ class Occupant extends Model
 {
     use HasFactory;
 
-    public function rentalUnits()
+    protected $fillable = [
+        'rental_unit_id', 'name', 'check_in', 'check_out', 'rent_amount', 'payment_date', 'transfer_date', 'transfer_reason',
+
+    ];
+
+    protected $dates = [
+        'check_in',
+        'check_out',
+        'payment_date',
+        'transfer_date',
+    ];
+
+    public function rentalUnit()
     {
         return $this->belongsTo(RentalUnit::class);
     }

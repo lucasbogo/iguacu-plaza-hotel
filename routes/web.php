@@ -39,6 +39,7 @@ use App\Http\Controllers\Receptionist\ReceptionistAuthController;
 use App\Http\Controllers\Receptionist\DashboardController;
 use App\Http\Controllers\Receptionist\ProfileController as ReceptionistProfileController;
 use App\Http\Controllers\Receptionist\RentalUnitsController;
+use App\Http\Controllers\Receptionist\OccupantsController;
 
 
 /* Frontend Routes */
@@ -445,4 +446,15 @@ Route::middleware(['auth:receptionist'])->group(function () {
     Route::get('/receptionist/rental-units/{rentalUnit}/edit', [RentalUnitsController::class, 'edit'])->name('receptionist.rental-units.edit');
     Route::put('/receptionist/rental-units/{rentalUnit}', [RentalUnitsController::class, 'update'])->name('receptionist.rental-units.update');
     Route::delete('/receptionist/rental-units/{rentalUnit}', [RentalUnitsController::class, 'destroy'])->name('receptionist.rental-units.destroy');
+
+    // Occupants Routes
+    Route::get('/receptionist/occupants', [OccupantsController::class, 'index'])->name('receptionist.occupants.index');
+    Route::get('/receptionist/occupants/create', [OccupantsController::class, 'create'])->name('receptionist.occupants.create');
+    Route::post('/receptionist/occupants', [OccupantsController::class, 'store'])->name('receptionist.occupants.store');
+    Route::get('/receptionist/occupants/{occupant}/edit', [OccupantsController::class, 'edit'])->name('receptionist.occupants.edit');
+    Route::put('/receptionist/occupants/{occupant}', [OccupantsController::class, 'update'])->name('receptionist.occupants.update');
+    Route::delete('/receptionist/occupants/{occupant}', [OccupantsController::class, 'destroy'])->name('receptionist.occupants.destroy');
+    Route::post('/receptionist/occupants/{occupant}/transfer', [OccupantsController::class, 'transfer'])->name('receptionist.occupants.transfer');
+
 });
+

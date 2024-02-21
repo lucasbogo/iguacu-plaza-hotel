@@ -13,7 +13,12 @@
             <li class="{{ Request::is('receptionist/rental-units*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('receptionist.rental-units.index') }}">
                     <i class="fa fa-building"></i> <span>Unidades de Aluguel</span>
-                </a>                
+                </a>
+            </li>
+            <li class="{{ Request::is('receptionist/occupants/*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('receptionist.occupants.index') }}">
+                    <i class="fa fa-users"></i> <span>Ocupação</span>
+                </a>
             </li>
             <li class="{{ Request::is('receptionist/room_services*') ? 'active' : '' }}">
                 <a class="nav-link" href="#">
