@@ -9,6 +9,14 @@ class RoomService extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'occupant_id',
+        'service_type_id',
+        'cost',
+        'service_date',
+        'observations',
+    ];
+
     public function occupant()
     {
         return $this->belongsTo(Occupant::class);

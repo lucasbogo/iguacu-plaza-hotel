@@ -1,13 +1,13 @@
 @extends('receptionist.layout.master')
 
-@section('title', 'Tipos de Serviço')
+@section('title', 'Consumíveis de Bebidas')
 
 @section('main_content')
     <div class="section-header">
-        <h1>Tipos de Serviço</h1>
+        <h1>Bebidas</h1>
         <div class="section-header-breadcrumb">
-            <a href="{{ route('receptionist.service-types.create') }}" class="btn btn-success"><i class="fa fa-plus"></i>
-                Adicionar Novo Tipo de Serviço</a>
+            <a href="{{ route('receptionist.drink-consumables.create') }}" class="btn btn-success"><i class="fa fa-plus"></i>
+                Adicionar Nova Bebida</a>
         </div>
     </div>
 
@@ -16,7 +16,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Todos os Tipos de Serviço</h4>
+                        <h4>Todas as Bebidas</h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -24,25 +24,25 @@
                                 <thead>
                                     <tr>
                                         <th>Nome</th>
-                                        <th>Descrição</th>
+                                        <th>Custo</th>
                                         <th>Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($serviceTypes as $serviceType)
+                                    @foreach ($drinkConsumables as $drinkConsumable)
                                         <tr>
-                                            <td>{{ $serviceType->name }}</td>
-                                            <td>{{ $serviceType->description }}</td>
+                                            <td>{{ $drinkConsumable->name }}</td>
+                                            <td>R$ {{ number_format($drinkConsumable->cost, 2, ',', '.') }}</td>
                                             <td>
-                                                <a href="{{ route('receptionist.service-types.edit', $serviceType->id) }}"
+                                                <a href="{{ route('receptionist.drink-consumables.edit', $drinkConsumable->id) }}"
                                                     class="btn btn-primary">Editar</a>
                                                 <form
-                                                    action="{{ route('receptionist.service-types.destroy', $serviceType->id) }}"
+                                                    action="{{ route('receptionist.drink-consumables.destroy', $drinkConsumable->id) }}"
                                                     method="POST" style="display: inline;">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger"
-                                                        onclick="return confirm('Tem certeza que deseja deletar este tipo de serviço?');">Deletar</button>
+                                                        onclick="return confirm('Tem certeza que deseja deletar este consumível?');">Deletar</button>
                                                 </form>
                                             </td>
                                         </tr>

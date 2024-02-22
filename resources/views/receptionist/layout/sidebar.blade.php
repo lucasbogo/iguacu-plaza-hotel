@@ -27,8 +27,8 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="roomServicesDropdown">
                     <a class="dropdown-item" href="{{ route('receptionist.service-types.index') }}">Tipos de Serviço</a>
-                    <a class="dropdown-item" href="#">Serviços</a>
-                    <!-- Add more links here as needed -->
+                    <a class="dropdown-item" href="{{ route('receptionist.room-services.index') }}">Serviços</a>
+                    <a class="dropdown-item" href="{{ route('receptionist.drink-consumables.index') }}">Bebidas</a>
                 </div>
             </li>
 

@@ -41,6 +41,8 @@ use App\Http\Controllers\Receptionist\ProfileController as ReceptionistProfileCo
 use App\Http\Controllers\Receptionist\RentalUnitsController;
 use App\Http\Controllers\Receptionist\OccupantsController;
 use App\Http\Controllers\Receptionist\ServiceTypeController;
+use App\Http\Controllers\Receptionist\RoomServiceController;
+use App\Http\Controllers\Receptionist\DrinkConsumableController;
 
 
 /* Frontend Routes */
@@ -465,4 +467,20 @@ Route::middleware(['auth:receptionist'])->group(function () {
     Route::get('/receptionist/service-types/{serviceType}/edit', [ServiceTypeController::class, 'edit'])->name('receptionist.service-types.edit');
     Route::put('/receptionist/service-types/{serviceType}', [ServiceTypeController::class, 'update'])->name('receptionist.service-types.update');
     Route::delete('/receptionist/service-types/{serviceType}', [ServiceTypeController::class, 'destroy'])->name('receptionist.service-types.destroy');
+
+    // Room Services Routes
+    Route::get('/receptionist/room-services', [RoomServiceController::class, 'index'])->name('receptionist.room-services.index');
+    Route::get('/receptionist/room-services/create', [RoomServiceController::class, 'create'])->name('receptionist.room-services.create');
+    Route::post('/receptionist/room-services', [RoomServiceController::class, 'store'])->name('receptionist.room-services.store');
+    Route::get('/receptionist/room-services/{roomService}/edit', [RoomServiceController::class, 'edit'])->name('receptionist.room-services.edit');
+    Route::put('/receptionist/room-services/{roomService}', [RoomServiceController::class, 'update'])->name('receptionist.room-services.update');
+    Route::delete('/receptionist/room-services/{roomService}', [RoomServiceController::class, 'destroy'])->name('receptionist.room-services.destroy');
+
+    // Drink Consumables Routes
+    Route::get('/receptionist/drink-consumables', [DrinkConsumableController::class, 'index'])->name('receptionist.drink-consumables.index');
+    Route::get('/receptionist/drink-consumables/create', [DrinkConsumableController::class, 'create'])->name('receptionist.drink-consumables.create');
+    Route::post('/receptionist/drink-consumables', [DrinkConsumableController::class, 'store'])->name('receptionist.drink-consumables.store');
+    Route::get('/receptionist/drink-consumables/{drinkConsumable}/edit', [DrinkConsumableController::class, 'edit'])->name('receptionist.drink-consumables.edit');
+    Route::put('/receptionist/drink-consumables/{drinkConsumable}', [DrinkConsumableController::class, 'update'])->name('receptionist.drink-consumables.update');
+    Route::delete('/receptionist/drink-consumables/{drinkConsumable}', [DrinkConsumableController::class, 'destroy'])->name('receptionist.drink-consumables.destroy');
 });

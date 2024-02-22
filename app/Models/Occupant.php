@@ -30,4 +30,10 @@ class Occupant extends Model
     {
         return $this->hasMany(RoomService::class);
     }
+
+    public function drinkConsumables()
+    {
+        return $this->belongsToMany(DrinkConsumable::class, 'occupant_drink_consumable', 'occupant_id', 'drink_consumable_id')
+            ->withTimestamps();
+    }
 }
