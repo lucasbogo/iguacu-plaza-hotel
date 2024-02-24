@@ -50,15 +50,56 @@
                                     <button type="submit" class="btn btn-sm btn-danger"
                                         onclick="return confirm('Tem Certeza?');">Deletar</button>
                                 </form>
+                                <!-- Trigger Modal Button -->
+                                <button type="button" class="btn btn-sm btn-warning" data-toggle="modal"
+                                    data-target="#buyDrinkModal-{{ $occupant->id }}">Comprar Bebida</button>
                             </div>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
-    </div>
-    </div>
-    </div>
-    </div>
+        @foreach ($occupants as $occupant)
+            <!-- Modal for Buying Drink -->
+            <div class="modal fade" id="buyDrinkModal-{{ $occupant->id }}" tabindex="-1" role="dialog"
+                aria-labelledby="buyDrinkModalLabel-{{ $occupant->id }}" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="buyDrinkModalLabel-{{ $occupant->id }}">Compra de Bebida para
+                                {{ $occupant->name }}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="{{ route('receptionist.occupants.buy-drink', $occupant->id) }}" method="POST">
+                            @csrf
+                            <div class="modal-body">
+                                <!-- Example: Form field for selecting drink -->
+                                <div class="form-group">
+                                    <label for="drink_consumable_id-{{ $occupant->id }}">Bebida</label>
+                                    <select class="form-control" id="drink_consumable_id-{{ $occupant->id }}"
+                                        name="drink_consumable_id">
+                                        @foreach ($drinkConsumables as $drink)
+                                            <option value="{{ $drink->id }}">{{ $drink->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <!-- Quantity Input -->
+                                <div class="form-group">
+                                    <label for="quantity-{{ $occupant->id }}">Quantidade</label>
+                                    <input type="number" class="form-control" id="quantity-{{ $occupant->id }}"
+                                        name="quantity" min="1" value="1">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-primary">Confirmar Compra</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        @endforeach
     </div>
 @endsection

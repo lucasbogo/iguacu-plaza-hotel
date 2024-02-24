@@ -18,6 +18,7 @@ class DrinkConsumable extends Model
     public function occupants()
     {
         return $this->belongsToMany(Occupant::class, 'occupant_drink_consumable', 'drink_consumable_id', 'occupant_id')
+            ->withPivot(['quantity', 'paid'])
             ->withTimestamps();
     }
 }

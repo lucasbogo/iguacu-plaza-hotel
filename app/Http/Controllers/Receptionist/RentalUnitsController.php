@@ -52,7 +52,6 @@ class RentalUnitsController extends Controller
             'observations' => 'nullable|string',
         ]);
         
-
         $rentalUnit->update($request->all());
 
         return redirect()->route('receptionist.rental-units.index')->with('success', 'Unidade de locação atualizada com sucesso.');

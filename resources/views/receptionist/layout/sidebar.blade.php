@@ -26,9 +26,16 @@
                     <i class="fa fa-bell"></i> <span>Serviços & Consumo</span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="roomServicesDropdown">
-                    <a class="dropdown-item" href="{{ route('receptionist.service-types.index') }}">Tipos de Serviço</a>
-                    <a class="dropdown-item" href="{{ route('receptionist.room-services.index') }}">Serviços</a>
-                    <a class="dropdown-item" href="{{ route('receptionist.drink-consumables.index') }}">Bebidas</a>
+                    <a class="dropdown-item" href="{{ route('receptionist.service-types.index') }}"
+                        class="{{ Request::is('receptionist/service-types*') ? 'active' : '' }}">Tipos de Serviço</a>
+                    <a class="dropdown-item" href="{{ route('receptionist.room-services.index') }}"
+                        class="{{ Request::is('receptionist/room-services*') ? 'active' : '' }}">Serviços</a>
+                    <a class="dropdown-item" href="{{ route('receptionist.drink-consumables.index') }}"
+                        class="{{ Request::is('receptionist/drink-consumables*') ? 'active' : '' }}">Bebidas</a>
+                    <a class="dropdown-item" href="{{ route('receptionist.all-occupant-consumables.index') }}">Cobrar
+                        Bebidas</a>
+                    <a class="dropdown-item" href="{{ route('receptionist.paid-consumables.index') }}">Consumíveis
+                        Pagos</a>
                 </div>
             </li>
 

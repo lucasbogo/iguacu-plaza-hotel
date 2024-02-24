@@ -25,6 +25,7 @@
                                     <tr>
                                         <th>Nome</th>
                                         <th>Custo</th>
+                                        <th>Quantidade</th>
                                         <th>Ações</th>
                                     </tr>
                                 </thead>
@@ -33,6 +34,7 @@
                                         <tr>
                                             <td>{{ $drinkConsumable->name }}</td>
                                             <td>R$ {{ number_format($drinkConsumable->cost, 2, ',', '.') }}</td>
+                                            <td>{{ $drinkConsumable->quantity }}</td>
                                             <td>
                                                 <a href="{{ route('receptionist.drink-consumables.edit', $drinkConsumable->id) }}"
                                                     class="btn btn-primary">Editar</a>

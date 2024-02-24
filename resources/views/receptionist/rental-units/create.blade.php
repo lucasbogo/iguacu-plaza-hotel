@@ -21,7 +21,7 @@
                                 <label for="number">Número</label>
                                 <input type="text" class="form-control" id="number" name="number"
                                     placeholder="Número do quarto" required>
-                            </div>
+                            </div>  
                             <div class="form-group">
                                 <label for="type">Tipo do quarto</label>
                                 <select class="form-control" id="type" name="type">

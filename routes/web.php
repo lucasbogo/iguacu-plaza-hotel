@@ -459,6 +459,10 @@ Route::middleware(['auth:receptionist'])->group(function () {
     Route::delete('/receptionist/occupants/{occupant}', [OccupantsController::class, 'destroy'])->name('receptionist.occupants.destroy');
     Route::post('/receptionist/occupants/{occupant}/transfer', [OccupantsController::class, 'transfer'])->name('receptionist.occupants.transfer');
     Route::get('/receptionist/occupants/print-pdf', [OccupantsController::class, 'printPDF'])->name('receptionist.occupants.print-pdf');
+    Route::post('/receptionist/occupants/{occupantId}/buy-drink', [OccupantsController::class, 'buyDrink'])->name('receptionist.occupants.buy-drink');
+    Route::post('/receptionist/occupants/{occupantId}/drink-consumables/{drinkConsumableId}/mark-as-paid', [OccupantsController::class, 'markAsPaid'])->name('receptionist.occupants.markAsPaid');
+    Route::get('/receptionist/occupants/{occupantId}/drink-consumables', [OccupantsController::class, 'showOccupantDrinks'])->name('receptionist.occupants.drink-consumables');
+
 
     // Service Types Routes
     Route::get('/receptionist/service-types', [ServiceTypeController::class, 'index'])->name('receptionist.service-types.index');
@@ -483,4 +487,6 @@ Route::middleware(['auth:receptionist'])->group(function () {
     Route::get('/receptionist/drink-consumables/{drinkConsumable}/edit', [DrinkConsumableController::class, 'edit'])->name('receptionist.drink-consumables.edit');
     Route::put('/receptionist/drink-consumables/{drinkConsumable}', [DrinkConsumableController::class, 'update'])->name('receptionist.drink-consumables.update');
     Route::delete('/receptionist/drink-consumables/{drinkConsumable}', [DrinkConsumableController::class, 'destroy'])->name('receptionist.drink-consumables.destroy');
+    Route::get('/receptionist/paid-consumables', [DrinkConsumableController::class, 'paidIndex'])->name('receptionist.paid-consumables.index');
+    Route::get('/receptionist/all-occupant-consumables', [DrinkConsumableController::class, 'allOccupantConsumables'])->name('receptionist.all-occupant-consumables.index');
 });

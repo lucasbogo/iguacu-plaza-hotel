@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Receptionist;
 
 use App\Http\Controllers\Controller;
 use App\Models\Occupant;
+use App\Models\DrinkConsumable;
 use Illuminate\Http\Request;
 use App\Models\RentalUnit;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -15,7 +16,8 @@ class OccupantsController extends Controller
     public function index()
     {
         $occupants = Occupant::with('rentalUnit')->get();
-        return view('receptionist.occupant.index', compact('occupants'));
+        $drinkConsumables = DrinkConsumable::all();
+        return view('receptionist.occupant.index', compact('occupants', 'drinkConsumables'));
     }
 
     // Show the form for creating a new occupant
@@ -108,6 +110,63 @@ class OccupantsController extends Controller
 
         return redirect()->route('receptionist.occupants.index')->with('success', 'Occupant transferred successfully.');
     }
+
+    public function buyDrink(Request $request, $occupantId)
+    {
+        $occupant = Occupant::findOrFail($occupantId);
+        $drinkConsumableId = $request->input('drink_consumable_id');
+        $quantityToBuy = $request->input('quantity', 1);
+
+        $drink = DrinkConsumable::findOrFail($drinkConsumableId);
+        if ($drink->quantity < $quantityToBuy) {
+            return back()->with('error', 'Not enough stock available.');
+        }
+
+        // Decrement stock
+        $drink->decrement('quantity', $quantityToBuy);
+
+        // Record the purchase
+        $occupant->drinkConsumables()->attach($drinkConsumableId, ['quantity' => $quantityToBuy]);
+
+        return back()->with('success', 'Bebida comprada com sucesso.');
+    }
+
+    public function markAsPaid(Request $request, $occupantId, $drinkConsumableId)
+    {
+        // Find the occupant-drink relationship record in the pivot table
+        $occupant = Occupant::findOrFail($occupantId);
+
+        // Check if the occupant has the specified drink consumable
+        $drinkConsumable = $occupant->drinkConsumables()->where('drink_consumable_id', $drinkConsumableId)->first();
+
+        if (!$drinkConsumable) {
+            return back()->with('error', 'Drink consumable not found for this occupant.');
+        }
+
+        // Mark as paid
+        $occupant->drinkConsumables()->updateExistingPivot($drinkConsumableId, ['paid' => true]);
+
+        return back()->with('success', 'Drink consumable marked as paid successfully.');
+    }
+
+    public function showOccupantConsumables()
+    {
+        $occupants = Occupant::with(['drinkConsumables' => function ($query) {
+            $query->wherePivot('paid', true);
+        }])->get();
+
+        return view('receptionist.drink-consumables.occupant-drinks', compact('occupants'));
+    }
+
+    public function showOccupantDrinks($occupantId)
+    {
+        $occupant = Occupant::with(['drinkConsumables' => function ($query) {
+            $query->withPivot('paid');
+        }])->findOrFail($occupantId);
+
+        return view('receptionist.occupants.drink-consumables', compact('occupant'));
+    }
+
 
     public function printPDF()
     {
