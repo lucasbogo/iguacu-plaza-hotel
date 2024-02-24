@@ -149,25 +149,6 @@ class OccupantsController extends Controller
         return back()->with('success', 'Drink consumable marked as paid successfully.');
     }
 
-    public function showOccupantConsumables()
-    {
-        $occupants = Occupant::with(['drinkConsumables' => function ($query) {
-            $query->wherePivot('paid', true);
-        }])->get();
-
-        return view('receptionist.drink-consumables.occupant-drinks', compact('occupants'));
-    }
-
-    public function showOccupantDrinks($occupantId)
-    {
-        $occupant = Occupant::with(['drinkConsumables' => function ($query) {
-            $query->withPivot('paid');
-        }])->findOrFail($occupantId);
-
-        return view('receptionist.occupants.drink-consumables', compact('occupant'));
-    }
-
-
     public function printPDF()
     {
         $occupants = Occupant::with('rentalUnit')->get();

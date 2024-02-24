@@ -460,9 +460,6 @@ Route::middleware(['auth:receptionist'])->group(function () {
     Route::post('/receptionist/occupants/{occupant}/transfer', [OccupantsController::class, 'transfer'])->name('receptionist.occupants.transfer');
     Route::get('/receptionist/occupants/print-pdf', [OccupantsController::class, 'printPDF'])->name('receptionist.occupants.print-pdf');
     Route::post('/receptionist/occupants/{occupantId}/buy-drink', [OccupantsController::class, 'buyDrink'])->name('receptionist.occupants.buy-drink');
-    Route::post('/receptionist/occupants/{occupantId}/drink-consumables/{drinkConsumableId}/mark-as-paid', [OccupantsController::class, 'markAsPaid'])->name('receptionist.occupants.markAsPaid');
-    Route::get('/receptionist/occupants/{occupantId}/drink-consumables', [OccupantsController::class, 'showOccupantDrinks'])->name('receptionist.occupants.drink-consumables');
-
 
     // Service Types Routes
     Route::get('/receptionist/service-types', [ServiceTypeController::class, 'index'])->name('receptionist.service-types.index');
