@@ -39,6 +39,7 @@
                 overflow: visible;
             }
         }
+
     </style>
 
     <div class="no-print">
@@ -92,7 +93,7 @@
             </div>
         @endforelse
         <div class="total-received">
-            <strong>Total Recebido: R$ {{ number_format($totalReceived, 2, ',', '.') }}</strong>
-        </div>
+            <strong style="color: black;">Total Recebido: <span style="color: red; font-weight: bold;">R$ {{ number_format($totalReceived, 2, ',', '.') }}</span></strong>
+        </div>        
     </div>
 @endsection

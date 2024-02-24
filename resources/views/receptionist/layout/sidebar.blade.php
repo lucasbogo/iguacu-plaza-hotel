@@ -17,7 +17,7 @@
             </li>
             <li class="{{ Request::is('receptionist/occupants/*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('receptionist.occupants.index') }}">
-                    <i class="fa fa-users"></i> <span>Ocupação</span>
+                    <i class="fa fa-users"></i> <span>Mensalistas</span>
                 </a>
             </li>
             <li class="nav-item dropdown {{ Request::is('receptionist/room_services*') ? 'active' : '' }}">
