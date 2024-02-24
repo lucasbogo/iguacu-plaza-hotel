@@ -34,8 +34,8 @@
                         class="{{ Request::is('receptionist/drink-consumables*') ? 'active' : '' }}">Bebidas</a>
                     <a class="dropdown-item" href="{{ route('receptionist.all-occupant-consumables.index') }}">Cobrar
                         Bebidas</a>
-                    <a class="dropdown-item" href="{{ route('receptionist.paid-consumables.index') }}">Consumíveis
-                        Pagos</a>
+                    <a class="dropdown-item" href="{{ route('receptionist.paid-consumables.index') }}">Bebidas
+                        Pagas</a>
                 </div>
             </li>
 
