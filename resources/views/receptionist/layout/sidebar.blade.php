@@ -30,16 +30,20 @@
                         class="{{ Request::is('receptionist/service-types*') ? 'active' : '' }}">Tipos de Serviço</a>
                     <a class="dropdown-item" href="{{ route('receptionist.room-services.index') }}"
                         class="{{ Request::is('receptionist/room-services*') ? 'active' : '' }}">Serviços</a>
-                    <a class="dropdown-item" href="{{ route('receptionist.drink-consumables.index') }}"
-                        class="{{ Request::is('receptionist/drink-consumables*') ? 'active' : '' }}">Bebidas</a>
-                    <a class="dropdown-item" href="{{ route('receptionist.all-occupant-consumables.index') }}">Cobrar
-                        Bebidas</a>
-                    <a class="dropdown-item" href="{{ route('receptionist.paid-consumables.index') }}">Bebidas
-                        Pagas</a>
-                </div>
-            </li>
+                    <a class="dropdown-item" href="{{ route('receptionist.room-services.notPaid') }}">Serviços de
+                        Quarto Não Pagos</a>
+                    <a class="dropdown-item" href="{{ route('receptionist.room-services.paid') }}">Serviços de Quarto
+                        Pagos</a>
+                <a class="dropdown-item" href="{{ route('receptionist.drink-consumables.index') }}"
+                    class="{{ Request::is('receptionist/drink-consumables*') ? 'active' : '' }}">Bebidas</a>
+                <a class="dropdown-item" href="{{ route('receptionist.all-occupant-consumables.index') }}">Cobrar
+                    Bebidas</a>
+                <a class="dropdown-item" href="{{ route('receptionist.paid-consumables.index') }}">Bebidas
+                    Pagas</a>
+</div>
+</li>
 
-            <!-- Add other sidebar items here -->
-        </ul>
-    </aside>
+<!-- Add other sidebar items here -->
+</ul>
+</aside>
 </div>

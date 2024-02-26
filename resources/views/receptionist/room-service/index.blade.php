@@ -23,12 +23,13 @@
                             <table class="table table-bordered" id="example1">
                                 <thead>
                                     <tr>
-                                        <th>Ocupante</th>
+                                        <th>Mensalista</th>
                                         <th>Tipo de Serviço</th>
                                         <th>Custo</th>
                                         <th>Data do Serviço</th>
                                         <th>Observações</th>
                                         <th>Ações</th>
+                                        <th>Pagamento</th> <!-- New column header for Payment action -->
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -51,6 +52,21 @@
                                                     <button type="submit" class="btn btn-danger"
                                                         onclick="return confirm('Tem certeza que deseja deletar este serviço?');">Deletar</button>
                                                 </form>
+                                            </td>
+                                            <td>
+                                                @if (!$roomService->is_paid)
+                                                    <form
+                                                        action="{{ route('receptionist.room-services.markAsPaid', $roomService->id) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="_method" value="PATCH">
+                                                        <!-- or PUT, depending on your preference -->
+                                                        <button type="submit" class="btn btn-success">Marcar como
+                                                            Pago</button>
+                                                    </form>
+                                                @else
+                                                    Pago
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach

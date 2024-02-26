@@ -71,4 +71,30 @@ class RoomServiceController extends Controller
         $roomService->delete();
         return redirect()->route('receptionist.room-services.index')->with('success', 'Serviço excluído com sucesso.');
     }
+
+    public function markAsPaid(RoomService $roomService)
+    {
+        if ($roomService && !$roomService->is_paid) {
+            $roomService->update(['is_paid' => true]);
+            $message = 'Serviço de quarto pago com sucesso.';
+        } else {
+            // Handle case where RoomService is either not found or already marked as paid
+            $message = 'Serviço de quarto já foi pago ou não encontrado.';
+        }
+        return back()->with('success', $message);
+    }
+
+    // Show all room services that are not paid
+    public function notPaidRoomServices()
+    {
+        $roomServices = RoomService::with(['occupant', 'serviceType'])->where('is_paid', false)->get();
+        return view('receptionist.room-service.not-paid-room-services', compact('roomServices'));
+    }
+
+    // Show all paid room services
+    public function paidRoomServices()
+    {
+        $roomServices = RoomService::with(['occupant', 'serviceType'])->where('is_paid', true)->get();
+        return view('receptionist.room-service.paid-room-services', compact('roomServices'));
+    }
 }

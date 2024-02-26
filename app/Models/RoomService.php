@@ -15,6 +15,7 @@ class RoomService extends Model
         'cost',
         'service_date',
         'observations',
+        'is_paid'
     ];
 
     public function occupant()

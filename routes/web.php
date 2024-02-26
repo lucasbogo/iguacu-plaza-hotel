@@ -476,6 +476,10 @@ Route::middleware(['auth:receptionist'])->group(function () {
     Route::get('/receptionist/room-services/{roomService}/edit', [RoomServiceController::class, 'edit'])->name('receptionist.room-services.edit');
     Route::put('/receptionist/room-services/{roomService}', [RoomServiceController::class, 'update'])->name('receptionist.room-services.update');
     Route::delete('/receptionist/room-services/{roomService}', [RoomServiceController::class, 'destroy'])->name('receptionist.room-services.destroy');
+    Route::patch('/room-services/{roomService}/markAsPaid', [RoomServiceController::class, 'markAsPaid'])->name('receptionist.room-services.markAsPaid');
+    Route::get('/receptionist/room-services/not-paid', [RoomServiceController::class, 'notPaidRoomServices'])->name('receptionist.room-services.notPaid');
+    Route::get('/receptionist/room-services/paid', [RoomServiceController::class, 'paidRoomServices'])->name('receptionist.room-services.paid');
+
 
     // Drink Consumables Routes
     Route::get('/receptionist/drink-consumables', [DrinkConsumableController::class, 'index'])->name('receptionist.drink-consumables.index');
