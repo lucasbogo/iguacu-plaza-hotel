@@ -81,4 +81,16 @@ class DrinkConsumableController extends Controller
 
         return view('receptionist.drink-consumables.paid-consumables', compact('occupants'));
     }
+
+    public function markAsPaid(Request $request, $occupantId, $drinkConsumableId)
+    {
+        $occupant = Occupant::findOrFail($occupantId);
+        $drinkConsumable = $occupant->drinkConsumables()->findOrFail($drinkConsumableId);
+
+        // Assuming the pivot table is named 'drink_consumable_occupant' and has a 'paid' column
+        $drinkConsumable->pivot->paid = true;
+        $drinkConsumable->pivot->save();
+
+        return redirect()->route('receptionist.drink-consumables.index')->with('success', 'Consumable marked as paid successfully.');
+    }
 }

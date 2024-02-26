@@ -486,4 +486,5 @@ Route::middleware(['auth:receptionist'])->group(function () {
     Route::delete('/receptionist/drink-consumables/{drinkConsumable}', [DrinkConsumableController::class, 'destroy'])->name('receptionist.drink-consumables.destroy');
     Route::get('/receptionist/paid-consumables', [DrinkConsumableController::class, 'paidIndex'])->name('receptionist.paid-consumables.index');
     Route::get('/receptionist/all-occupant-consumables', [DrinkConsumableController::class, 'allOccupantConsumables'])->name('receptionist.all-occupant-consumables.index');
+    Route::post('/receptionist/occupants/{occupantId}/drink-consumables/{drinkConsumableId}/mark-as-paid', [DrinkConsumableController::class, 'markAsPaid'])->name('receptionist.occupants.markAsPaid');
 });

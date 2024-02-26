@@ -149,6 +149,7 @@ class OccupantsController extends Controller
         return back()->with('success', 'Drink consumable marked as paid successfully.');
     }
 
+
     public function printPDF()
     {
         $occupants = Occupant::with('rentalUnit')->get();

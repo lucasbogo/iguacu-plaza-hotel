@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('service_type_id')->constrained()->onDelete('cascade');
             $table->decimal('cost', 10, 2);
             $table->date('service_date');
+            $table->boolean('is_paid')->default(0);
             $table->text('observations')->nullable();
             $table->timestamps();
         });
