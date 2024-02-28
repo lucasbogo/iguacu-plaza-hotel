@@ -48,6 +48,11 @@
                 </div>
             </li>
 
+            <li class="{{ Request::is('receptionist/cashier-closing-records*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('receptionist.cashier-closing-records.index') }}">
+                    <i class="fa fa-money"></i> <span>Fechamento de Caixa</span>
+                </a>
+            </li>
             <!-- Add other sidebar items here -->
         </ul>
     </aside>

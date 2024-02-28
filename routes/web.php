@@ -43,6 +43,7 @@ use App\Http\Controllers\Receptionist\OccupantsController;
 use App\Http\Controllers\Receptionist\ServiceTypeController;
 use App\Http\Controllers\Receptionist\RoomServiceController;
 use App\Http\Controllers\Receptionist\DrinkConsumableController;
+use App\Http\Controllers\Receptionist\CashierClosingRecordController;
 
 
 /* Frontend Routes */
@@ -491,4 +492,11 @@ Route::middleware(['auth:receptionist'])->group(function () {
     Route::get('/receptionist/paid-consumables', [DrinkConsumableController::class, 'paidIndex'])->name('receptionist.paid-consumables.index');
     Route::get('/receptionist/all-occupant-consumables', [DrinkConsumableController::class, 'allOccupantConsumables'])->name('receptionist.all-occupant-consumables.index');
     Route::post('/receptionist/occupants/{occupantId}/drink-consumables/{drinkConsumableId}/mark-as-paid', [DrinkConsumableController::class, 'markAsPaid'])->name('receptionist.occupants.markAsPaid');
+
+    // Cashier Closing Records Routes
+    Route::get('/receptionist/cashier-closing-records', [CashierClosingRecordController::class, 'index'])->name('receptionist.cashier-closing-records.index');
+    Route::get('/receptionist/cashier-closing-records/create', [CashierClosingRecordController::class, 'create'])->name('receptionist.cashier-closing-records.create');
+    Route::post('/receptionist/cashier-closing-records', [CashierClosingRecordController::class, 'store'])->name('receptionist.cashier-closing-records.store');
+    Route::get('/receptionist/cashier-closing-records/{cashierClosingRecord}', [CashierClosingRecordController::class, 'show'])->name('receptionist.cashier-closing-records.show');
+    Route::get('/receptionist/cashier-closing-records/{id}/print', [CashierClosingRecordController::class, 'print'])->name('receptionist.cashier-closing-records.print');
 });
