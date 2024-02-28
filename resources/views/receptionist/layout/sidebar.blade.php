@@ -48,11 +48,19 @@
                 </div>
             </li>
 
-            <li class="{{ Request::is('receptionist/cashier-closing-records*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('receptionist.cashier-closing-records.index') }}">
-                    <i class="fa fa-money"></i> <span>Fechamento de Caixa</span>
+            <li class="nav-item dropdown {{ Request::is('receptionist/cashier-closing-records*') ? 'active' : '' }}">
+                <a class="nav-link dropdown-toggle" href="#" id="cashierClosingDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-money"></i> <span>Caixa</span>
                 </a>
+                <div class="dropdown-menu" aria-labelledby="cashierClosingDropdown">
+                    <a class="dropdown-item" href="{{ route('receptionist.cashier-closing-records.index') }}">Caixa
+                        Atual</a>
+                    <a class="dropdown-item"
+                        href="{{ route('receptionist.closed-cashier-closing-records.index') }}">Caixas Fechados</a>
+                </div>
             </li>
+
             <!-- Add other sidebar items here -->
         </ul>
     </aside>

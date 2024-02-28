@@ -498,5 +498,6 @@ Route::middleware(['auth:receptionist'])->group(function () {
     Route::get('/receptionist/cashier-closing-records/create', [CashierClosingRecordController::class, 'create'])->name('receptionist.cashier-closing-records.create');
     Route::post('/receptionist/cashier-closing-records', [CashierClosingRecordController::class, 'store'])->name('receptionist.cashier-closing-records.store');
     Route::get('/receptionist/cashier-closing-records/{cashierClosingRecord}', [CashierClosingRecordController::class, 'show'])->name('receptionist.cashier-closing-records.show');
+    Route::get('/receptionist/closed-cashier-closing-records', [CashierClosingRecordController::class, 'closedIndex'])->name('receptionist.closed-cashier-closing-records.index');
     Route::get('/receptionist/cashier-closing-records/{id}/print', [CashierClosingRecordController::class, 'print'])->name('receptionist.cashier-closing-records.print');
 });

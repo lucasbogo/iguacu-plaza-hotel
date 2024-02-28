@@ -4,7 +4,7 @@
 
 @section('main_content')
     <div class="section-header">
-        <h1>Novo Registro de Fechamento de Caixa</h1>
+        <h1>Fechamento de Caixa</h1>
     </div>
 
     <div class="section-body">
@@ -15,31 +15,31 @@
                         <form action="{{ route('receptionist.cashier-closing-records.store') }}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <label for="receptionist_id">Recepcionista</label>
-                                <select name="receptionist_id" id="receptionist_id" class="form-control">
-                                    @foreach ($receptionists as $receptionist)
-                                        <option value="{{ $receptionist->id }}">{{ $receptionist->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group">
                                 <label for="start_amount">Valor Inicial</label>
-                                <input type="text" name="start_amount" id="start_amount" class="form-control" required>
+                                <input type="text" name="start_amount" id="start_amount" class="form-control"
+                                    value="{{ $startingAmount }}" readonly>
                             </div>
                             <div class="form-group">
-                                <label for="end_amount">Valor Final</label>
-                                <input type="text" name="end_amount" id="end_amount" class="form-control" required>
+                                <label for="rent_amount">Aluguel Recebido</label>
+                                <input type="text" name="rent_amount" id="rent_amount" class="form-control"
+                                    value="{{ $rentAmount }}" readonly>
                             </div>
                             <div class="form-group">
-                                <label for="total_sales">Vendas Totais</label>
-                                <input type="text" name="total_sales" id="total_sales" class="form-control" required>
+                                <label for="drink_amount">Drinks Vendidos</label>
+                                <input type="text" name="drink_amount" id="drink_amount" class="form-control"
+                                    value="{{ $drinkAmount }}" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="room_service_amount">Serviços de Quarto</label>
+                                <input type="text" name="room_service_amount" id="room_service_amount"
+                                    class="form-control" value="{{ $roomServiceAmount }}" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="total_cash_received">Valor Recebido</label>
                                 <input type="text" name="total_cash_received" id="total_cash_received"
                                     class="form-control" required>
                             </div>
-                            <button type="submit" class="btn btn-primary">Salvar</button>
+                            <button type="submit" class="btn btn-primary">Fechar Caixa</button>
                         </form>
                     </div>
                 </div>

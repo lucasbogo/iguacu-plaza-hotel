@@ -16,4 +16,8 @@ class Receptionist extends Authenticatable
         'username', 'name', 'password'  // Add other attributes you need
     ];
 
+    public function cashRegisterPayments()
+    {
+        return $this->hasMany(CashRegisterPayment::class);
+    }
 }
