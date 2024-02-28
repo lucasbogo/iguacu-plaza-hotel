@@ -9,11 +9,8 @@ class RentalUnit extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'number', 
-        'type', 
-        'observations',
-    ];
+    protected $fillable = ['number', 'type', 'status', 'observations'];
+
 
     public function occupants()
     {

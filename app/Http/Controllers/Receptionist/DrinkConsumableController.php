@@ -31,7 +31,7 @@ class DrinkConsumableController extends Controller
         DrinkConsumable::create($request->all());
 
         return redirect()->route('receptionist.drink-consumables.index')
-            ->with('success', 'Bebida criado com sucesso.');
+            ->with('success', 'Bebida criada com sucesso.');
     }
 
     public function edit(DrinkConsumable $drinkConsumable)
@@ -91,6 +91,6 @@ class DrinkConsumableController extends Controller
         $drinkConsumable->pivot->paid = true;
         $drinkConsumable->pivot->save();
 
-        return redirect()->route('receptionist.drink-consumables.index')->with('success', 'Consumable marked as paid successfully.');
+        return redirect()->route('receptionist.drink-consumables.index')->with('success', 'Bebida paga com sucesso.');
     }
 }

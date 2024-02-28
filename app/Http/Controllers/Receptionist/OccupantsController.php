@@ -41,9 +41,15 @@ class OccupantsController extends Controller
             'transfer_reason' => 'nullable|string|max:1000',
         ]);
 
-        Occupant::create($request->all());
+        // Create the occupant
+        $occupant = Occupant::create($request->all());
 
-        return redirect()->route('receptionist.occupants.index')->with('success', 'Ocupante criado com sucesso.');
+        // Update the rental unit status to 'occupied'
+        $rentalUnit = RentalUnit::find($request->rental_unit_id);
+        $rentalUnit->status = 'occupied';
+        $rentalUnit->save();
+
+        return redirect()->route('receptionist.occupants.index')->with('success', 'Mensalista criado com sucesso.');
     }
 
     // Show the form for editing the specified occupant
@@ -64,34 +70,34 @@ class OccupantsController extends Controller
             'payment_date' => 'required|date',
         ]);
 
-        // Update common fields
-        $occupant->update($request->only(['name', 'check_in', 'check_out', 'rent_amount', 'payment_date']));
-
         // Check if this is a transfer request
-        if ($request->filled('new_rental_unit_id') && $request->new_rental_unit_id != $occupant->rental_unit_id) {
-            // Validate transfer fields
-            $request->validate([
-                'new_rental_unit_id' => 'required|exists:rental_units,id',
-                'transfer_date' => 'required|date',
-                'transfer_reason' => 'nullable|string',
-            ]);
+        if ($request->filled('rental_unit_id') && $request->rental_unit_id != $occupant->rental_unit_id) {
+            // Update the old rental unit status back to 'available' or another appropriate status
+            $oldRentalUnit = RentalUnit::find($occupant->rental_unit_id);
+            if ($oldRentalUnit) {
+                $oldRentalUnit->status = 'available'; // Or another appropriate status
+                $oldRentalUnit->save();
+            }
 
-            // Handle transfer
-            $occupant->update([
-                'rental_unit_id' => $request->new_rental_unit_id,
-                'transfer_date' => $request->transfer_date,
-                'transfer_reason' => $request->transfer_reason,
-            ]);
+            // Update the new rental unit status to 'occupied'
+            $newRentalUnit = RentalUnit::find($request->rental_unit_id);
+            if ($newRentalUnit) {
+                $newRentalUnit->status = 'occupied';
+                $newRentalUnit->save();
+            }
         }
 
-        return redirect()->route('receptionist.occupants.index')->with('success', 'Ocupante atualizado com sucesso.');
+        // Update occupant details
+        $occupant->update($request->only(['name', 'check_in', 'check_out', 'rent_amount', 'payment_date', 'rental_unit_id']));
+
+        return redirect()->route('receptionist.occupants.index')->with('success', 'Mensalista atualizado com sucesso.');
     }
 
     // Remove the specified occupant from storage
     public function destroy(Occupant $occupant)
     {
         $occupant->delete();
-        return redirect()->route('receptionist.occupants.index')->with('success', 'Ocupante excluído com sucesso.');
+        return redirect()->route('receptionist.occupants.index')->with('success', 'Mensalista excluído com sucesso.');
     }
 
     public function transfer(Request $request, Occupant $occupant)
@@ -108,7 +114,7 @@ class OccupantsController extends Controller
             'transfer_reason' => $request->transfer_reason,
         ]);
 
-        return redirect()->route('receptionist.occupants.index')->with('success', 'Occupant transferred successfully.');
+        return redirect()->route('receptionist.occupants.index')->with('success', 'Mensalista transferido com sucesso.');
     }
 
     public function buyDrink(Request $request, $occupantId)
@@ -140,15 +146,14 @@ class OccupantsController extends Controller
         $drinkConsumable = $occupant->drinkConsumables()->where('drink_consumable_id', $drinkConsumableId)->first();
 
         if (!$drinkConsumable) {
-            return back()->with('error', 'Drink consumable not found for this occupant.');
+            return back()->with('error', 'Bebida não encontrada para este mensalista.');
         }
 
         // Mark as paid
         $occupant->drinkConsumables()->updateExistingPivot($drinkConsumableId, ['paid' => true]);
 
-        return back()->with('success', 'Drink consumable marked as paid successfully.');
+        return back()->with('success', 'Bebida pagga com sucesso.');
     }
-
 
     public function printPDF()
     {

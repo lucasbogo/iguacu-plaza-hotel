@@ -46,7 +46,7 @@ class RentalUnitsController extends Controller
     public function update(Request $request, RentalUnit $rentalUnit)
     {
         $request->validate([
-            'number' => 'required|string|max:255|unique:rental_units,number',
+            'number' => 'required|string|max:255|unique:rental_units,number,' . $rentalUnit->id,
             'type' => 'required|in:single,double,couple,triple,quadruple,couple_plus_one,couple_plus_two',
             'status' => 'required|in:available,occupied,maintenance,housekeeping',
             'observations' => 'nullable|string',
