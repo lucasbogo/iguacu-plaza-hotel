@@ -15,7 +15,10 @@ class CashierClosingRecord extends Model
         'end_amount',
         'total_sales',
         'total_cash_received',
-        'closed_at'
+        'closed_at',
+        'rental_income',
+        'drink_income',
+        'room_service_income',
     ];
 
     // Define the relationship with the Receptionist model
