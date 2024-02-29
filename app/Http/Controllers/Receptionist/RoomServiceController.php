@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\RoomService;
 use App\Models\Occupant;
 use App\Models\ServiceType;
+use Illuminate\Support\Facades\Auth;
+use App\Models\CashierClosingRecord;
+use Illuminate\Support\Facades\DB;
 
 class RoomServiceController extends Controller
 {
@@ -38,7 +41,7 @@ class RoomServiceController extends Controller
 
         RoomService::create($request->all());
 
-        return redirect()->route('receptionist.room-services.index')->with('success', 'Serviço adicionado com sucesso.');
+        return redirect()->route('receptionist.cashier-closing-records.index')->with('success', 'Serviço adicionado com sucesso.');
     }
 
     // Show the form for editing the specified room service
@@ -75,7 +78,38 @@ class RoomServiceController extends Controller
     public function markAsPaid(RoomService $roomService)
     {
         if ($roomService && !$roomService->is_paid) {
-            $roomService->update(['is_paid' => true]);
+            DB::transaction(function () use ($roomService) {
+                $totalPaidAmount = $roomService->cost; // Assume cost attribute exists on RoomService
+
+                $currentClosingRecord = CashierClosingRecord::where([
+                    'receptionist_id' => Auth::id(),
+                    'closed_at' => null,
+                ])->latest()->first();
+
+                if (!$currentClosingRecord) {
+                    // If no open record exists, create a new one with default values
+                    $currentClosingRecord = CashierClosingRecord::create([
+                        'receptionist_id' => Auth::id(),
+                        'closed_at' => null,
+                        'start_amount' => 0,
+                        'end_amount' => 0, // Set default end amount if needed
+                        'total_sales' => 0,
+                        'total_cash_received' => 0,
+                        'rental_income' => 0,
+                        'drink_income' => 0,
+                        'room_service_income' => 0,
+                        'created_at' => now(), // Ensure correct timestamp, or adjust as necessary
+                        'updated_at' => now(),
+                    ]);
+                }
+
+                // Increment room_service_income on the CashierClosingRecord
+                $currentClosingRecord->increment('room_service_income', $totalPaidAmount);
+
+                // Mark the room service as paid
+                $roomService->update(['is_paid' => true]);
+            });
+
             $message = 'Serviço de quarto pago com sucesso.';
         } else {
             // Handle case where RoomService is either not found or already marked as paid
@@ -83,6 +117,7 @@ class RoomServiceController extends Controller
         }
         return back()->with('success', $message);
     }
+
 
     // Show all room services that are not paid
     public function notPaidRoomServices()

@@ -53,7 +53,7 @@ class CashierClosingRecord extends Model
             'rental_income' => $rentalIncome,
             'drink_income' => $drinkIncome,
             'room_service_income' => $roomServiceIncome,
-            // Add other income categories as needed
+            
         ];
     }
 }

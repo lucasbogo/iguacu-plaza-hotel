@@ -9,90 +9,87 @@ use App\Models\Receptionist;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CashRegisterPayment;
+use App\Models\Occupant;
 
 
 class CashierClosingRecordController extends Controller
 {
+    // Shows the current data from amounts received from drinl_income and room_service_income
     public function index()
     {
         $receptionistId = Auth::user()->id;
-        // Fetch the latest or current open CashierClosingRecord
         $currentClosingRecord = CashierClosingRecord::where('receptionist_id', $receptionistId)
-            ->whereNull('closed_at') // Assuming you want the open record
+            ->whereNull('closed_at')
             ->latest()
             ->first();
 
-        if (!$currentClosingRecord) {
-            // Handle the case where there is no current closing record
-            // This could involve setting default values or showing a specific message in the view
-            $drinkIncome = 0;
-        } else {
-            // Use the drink_income directly from the current closing record
+        if ($currentClosingRecord) {
             $drinkIncome = $currentClosingRecord->drink_income;
+            $roomServiceIncome = $currentClosingRecord->room_service_income;
+        } else {
+            // If no current record is found, it means the last shift was closed, and we are starting a new shift.
+            // Initialize variables to reflect the new shift starting state.
+            $drinkIncome = 0;
+            $roomServiceIncome = 0;
         }
 
-        // Pass the drinkIncome to the view
-        return view('receptionist.cashier-closing-records.index', compact('drinkIncome'));
+        return view('receptionist.cashier-closing-records.index', compact('drinkIncome', 'roomServiceIncome'));
     }
 
-
+    // This is where we get that data, as shown in the index method, to read and check the amount, then effectvly close the Cadsh Register
     public function create()
     {
-        // Retrieve the starting amount for the cash register for the shift
-        $startingAmount = CashierClosingRecord::where('receptionist_id', Auth::user()->id)
+        $receptionistId = Auth::user()->id;
+        $drinkIncome = $roomServiceIncome = 0; // Initialize both variables at the start
+
+        $currentClosingRecord = CashierClosingRecord::where('receptionist_id', $receptionistId)
             ->whereNull('closed_at')
             ->latest()
-            ->value('start_amount');
+            ->first();
 
-        // Retrieve the amounts received from rent for the specific shift
-        $rentAmount = CashRegisterPayment::where('receptionist_id', Auth::user()->id)
-            ->whereBetween('created_at', [now()->startOfDay(), now()->endOfDay()])
-            ->sum('rent_amount');
+        if ($currentClosingRecord) {
+            $drinkIncome = $currentClosingRecord->drink_income ?? 0; // Use null coalescing operator to ensure defaults
+            $roomServiceIncome = $currentClosingRecord->room_service_income ?? 0;
+        }
 
-        // Retrieve the amounts received from consumable drinks for the specific shift
-        $drinkAmount = CashRegisterPayment::where('receptionist_id', Auth::user()->id)
-            ->whereBetween('created_at', [now()->startOfDay(), now()->endOfDay()])
-            ->sum('drink_amount');
+        // Retrieve the starting amount for the cash register for the shift directly from the current closing record
+        $startingAmount = $currentClosingRecord ? $currentClosingRecord->start_amount : 0;
 
-        // Retrieve the amounts received from room services for the specific shift
-        $roomServiceAmount = CashRegisterPayment::where('receptionist_id', Auth::user()->id)
-            ->whereBetween('created_at', [now()->startOfDay(), now()->endOfDay()])
-            ->sum('room_service_amount');
-
-        // Return a view to create a new cashier closing record
-        $receptionists = Receptionist::all();
-        return view('receptionist.cashier-closing-records.create', compact('receptionists', 'startingAmount', 'rentAmount', 'drinkAmount', 'roomServiceAmount'));
+        // Pass these values to your view
+        return view('receptionist.cashier-closing-records.create', compact('startingAmount', 'drinkIncome', 'roomServiceIncome'));
     }
 
+    // Method that stores the data from the create method and effectly closes the cash register...
+    // TO DO: make sure that when the Receptiuonist closes the Cash Register, the currentClosingRecord (froo the index method)
     public function store(Request $request)
     {
-        // Set the receptionist_id dynamically
         $request->merge(['receptionist_id' => Auth::user()->id]);
 
-        // Validate the request data
         $validatedData = $request->validate([
             'receptionist_id' => 'required|exists:receptionists,id',
             'start_amount' => 'required|numeric',
             'total_cash_received' => 'required|numeric',
+            'quantity_withdrawn' => 'required|numeric',
         ]);
 
-        // Calculate end_amount
         $validatedData['end_amount'] = $validatedData['start_amount'] + $validatedData['total_cash_received'];
-
-        // Calculate total_sales
         $validatedData['total_sales'] = $validatedData['total_cash_received'];
-
-        // Set the closed_at field to the current timestamp
         $validatedData['closed_at'] = now();
 
         try {
-            // Create a new cashier closing record
-            $cashierClosingRecord = CashierClosingRecord::create($validatedData);
+            // Close the current shift by creating a new closing record
+            CashierClosingRecord::create($validatedData);
 
-            // Redirect to the index page with a success message
+            // Optionally, immediately create a new open Cashier Closing Record for the next shift
+            // This assumes you want to automatically open a new shift right after closing the current one
+            CashierClosingRecord::create([
+                'receptionist_id' => Auth::user()->id,
+                'start_amount' => 0, // Initialize the new shift with a start amount, adjust as needed
+                // Do not set 'closed_at', keeping it null to indicate an open shift
+            ]);
+
             return redirect()->route('receptionist.cashier-closing-records.index')->with('success', 'Caixa fechado com sucesso.');
         } catch (\Exception $e) {
-            // Handle the exception, perhaps redirecting back with an error message
             return redirect()->back()->with('error', 'Erro ao fechar o caixa. Por favor, tente novamente.');
         }
     }

@@ -16,28 +16,28 @@
                             @csrf
                             <div class="form-group">
                                 <label for="start_amount">Valor Inicial</label>
-                                <input type="text" name="start_amount" id="start_amount" class="form-control"
-                                    value="{{ $startingAmount }}" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="rent_amount">Aluguel Recebido</label>
-                                <input type="text" name="rent_amount" id="rent_amount" class="form-control"
-                                    value="{{ $rentAmount }}" readonly>
+                                <input type="text" class="form-control" name="start_amount" value="{{ $startingAmount }}"
+                                    readonly>
                             </div>
                             <div class="form-group">
                                 <label for="drink_amount">Drinks Vendidos</label>
-                                <input type="text" name="drink_amount" id="drink_amount" class="form-control"
-                                    value="{{ $drinkAmount }}" readonly>
+                                <input type="text" class="form-control" name="drink_amount"
+                                    value="{{ number_format($drinkIncome, 2, ',', '.') }}" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="room_service_amount">Serviços de Quarto</label>
-                                <input type="text" name="room_service_amount" id="room_service_amount"
-                                    class="form-control" value="{{ $roomServiceAmount }}" readonly>
+                                <input type="text" class="form-control" name="room_service_amount"
+                                    value="{{ number_format($roomServiceIncome, 2, ',', '.') }}" readonly>
                             </div>
                             <div class="form-group">
-                                <label for="total_cash_received">Valor Recebido</label>
-                                <input type="text" name="total_cash_received" id="total_cash_received"
-                                    class="form-control" required>
+                                <label for="total_cash_received">Total de Receitas (R$)</label>
+                                <input type="number" class="form-control" name="total_cash_received"
+                                    value="{{ number_format($drinkIncome + $roomServiceIncome, 2, ',', '.') }}" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="quantity_withdrawn">Quantidade Retirada</label>
+                                <input type="number" name="quantity_withdrawn" id="quantity_withdrawn" class="form-control"
+                                    required>
                             </div>
                             <button type="submit" class="btn btn-primary">Fechar Caixa</button>
                         </form>

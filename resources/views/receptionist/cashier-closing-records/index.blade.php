@@ -15,11 +15,39 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header">
-                        <h4>Resumo do Caixa</h4>
+                    <div class="card-header bg-primary text-white">
+                        @php
+                            use Carbon\Carbon;
+                            $timestamp = Carbon::now(new \DateTimeZone('America/Sao_Paulo'))->format('d/m/Y H:i:s');
+                        @endphp
+                        <h4 class="text-white">Resumo do Caixa - {{ $timestamp }}</h4>
                     </div>
                     <div class="card-body">
-                        <p>Total de Bebidas Vendidas: R$ {{ number_format($drinkIncome, 2, ',', '.') }}</p>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Tipo de Receita</th>
+                                        <th>Valor (R$)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Bebidas Vendidas</td>
+                                        <td>{{ number_format($drinkIncome, 2, ',', '.') }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Serviços de Quarto Pagos</td>
+                                        <td>{{ number_format($roomServiceIncome, 2, ',', '.') }}</td>
+                                    </tr>
+                                    <tr class="table-success">
+                                        <td><strong>Total de Receitas</strong></td>
+                                        <td><strong>{{ number_format($drinkIncome + $roomServiceIncome, 2, ',', '.') }}</strong>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
