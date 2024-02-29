@@ -16,26 +16,24 @@ class CashierClosingRecordController extends Controller
     public function index()
     {
         $receptionistId = Auth::user()->id;
-
-        // Fetch the latest open CashierClosingRecord for the authenticated user
+        // Fetch the latest or current open CashierClosingRecord
         $currentClosingRecord = CashierClosingRecord::where('receptionist_id', $receptionistId)
-            ->whereNull('closed_at')
+            ->whereNull('closed_at') // Assuming you want the open record
             ->latest()
             ->first();
 
-        $drinkAmount = 0; // Default to 0 to handle case where there's no current closing record
-
-        if ($currentClosingRecord) {
-            // Directly sum the drink_amount associated with the current closing record
-            $drinkAmount = CashRegisterPayment::where('cashier_closing_record_id', $currentClosingRecord->id)
-                ->sum('drink_amount');
+        if (!$currentClosingRecord) {
+            // Handle the case where there is no current closing record
+            // This could involve setting default values or showing a specific message in the view
+            $drinkIncome = 0;
+        } else {
+            // Use the drink_income directly from the current closing record
+            $drinkIncome = $currentClosingRecord->drink_income;
         }
 
-        // Now, $drinkAmount will either be the sum of drink_amounts for the current record, or 0 if no record exists
-
-        return view('receptionist.cashier-closing-records.index', compact('drinkAmount'));
+        // Pass the drinkIncome to the view
+        return view('receptionist.cashier-closing-records.index', compact('drinkIncome'));
     }
-
 
 
     public function create()

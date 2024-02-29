@@ -19,16 +19,9 @@
                         <h4>Resumo do Caixa</h4>
                     </div>
                     <div class="card-body">
-                        <p>Total de Bebidas Vendidas: R$ {{ number_format($currentClosingRecord->drink_income ?? 0, 2, ',', '.') }}</p>
+                        <p>Total de Bebidas Vendidas: R$ {{ number_format($drinkIncome, 2, ',', '.') }}</p>
                     </div>
                 </div>
-                @if ($drinkAmount == 0)
-                    <div class="card">
-                        <div class="card-body">
-                            <h4>Nenhum valor recebido de bebidas até o momento.</h4>
-                        </div>
-                    </div>
-                @endif
             </div>
         </div>
     </div>

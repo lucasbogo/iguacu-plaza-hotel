@@ -28,5 +28,5 @@ class CashRegisterPayment extends Model
     public function receptionist()
     {
         return $this->belongsTo(Receptionist::class);
-    }
+    }   
 }

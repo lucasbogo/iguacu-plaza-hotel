@@ -60,7 +60,6 @@
                                                         method="POST">
                                                         @csrf
                                                         <input type="hidden" name="_method" value="PATCH">
-                                                        <!-- or PUT, depending on your preference -->
                                                         <button type="submit" class="btn btn-success">Marcar como
                                                             Pago</button>
                                                     </form>
