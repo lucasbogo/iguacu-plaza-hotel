@@ -14,22 +14,18 @@
     <div class="section-body">
         <div class="row">
             <div class="col-12">
-                @if ($rentAmount || $drinkAmount || $roomServiceAmount)
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Resumo do Caixa</h4>
-                        </div>
-                        <div class="card-body">
-                            <!-- Display total amounts received -->
-                            <p>Total de Aluguel Recebido: R$ {{ number_format($rentAmount, 2, ',', '.') }}</p>
-                            <p>Total de Bebidas Vendidas: R$ {{ number_format($drinkAmount, 2, ',', '.') }}</p>
-                            <p>Total de Serviços de Quarto: R$ {{ number_format($roomServiceAmount, 2, ',', '.') }}</p>
-                        </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Resumo do Caixa</h4>
                     </div>
-                @else
+                    <div class="card-body">
+                        <p>Total de Bebidas Vendidas: R$ {{ number_format($currentClosingRecord->drink_income ?? 0, 2, ',', '.') }}</p>
+                    </div>
+                </div>
+                @if ($drinkAmount == 0)
                     <div class="card">
                         <div class="card-body">
-                            <h4>Nenhum valor recebido até o momento.</h4>
+                            <h4>Nenhum valor recebido de bebidas até o momento.</h4>
                         </div>
                     </div>
                 @endif

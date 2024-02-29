@@ -9,42 +9,34 @@ use App\Models\Receptionist;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CashRegisterPayment;
-use Illuminate\Support\Facades\Validator;
 
 
 class CashierClosingRecordController extends Controller
 {
     public function index()
     {
-        // Retrieve the cash register data for the specific shift of the authenticated user
-        $records = CashierClosingRecord::where('receptionist_id', Auth::user()->id)
+        $receptionistId = Auth::user()->id;
+
+        // Fetch the latest open CashierClosingRecord for the authenticated user
+        $currentClosingRecord = CashierClosingRecord::where('receptionist_id', $receptionistId)
             ->whereNull('closed_at')
             ->latest()
-            ->get();
+            ->first();
 
-        // Fetch the starting amount for the cash register for the shift
-        $startingAmount = $records->isEmpty() ? 0 : $records->first()->start_amount;
+        $drinkAmount = 0; // Default to 0 to handle case where there's no current closing record
 
-        // Fetch the amounts received from rent for the specific shift
-        $rentAmount = CashRegisterPayment::where('receptionist_id', Auth::user()->id)
-            ->whereBetween('created_at', [now()->startOfDay(), now()->endOfDay()])
-            ->sum('rent_amount');
+        if ($currentClosingRecord) {
+            // Directly sum the drink_amount associated with the current closing record
+            $drinkAmount = CashRegisterPayment::where('cashier_closing_record_id', $currentClosingRecord->id)
+                ->sum('drink_amount');
+        }
 
-        // Fetch the amounts received from consumable drinks for the specific shift
-        $drinkAmount = CashRegisterPayment::where('receptionist_id', Auth::user()->id)
-            ->whereBetween('created_at', [now()->startOfDay(), now()->endOfDay()])
-            ->sum('drink_amount');
+        // Now, $drinkAmount will either be the sum of drink_amounts for the current record, or 0 if no record exists
 
-        // Fetch the amounts received from room services for the specific shift
-        $roomServiceAmount = CashRegisterPayment::where('receptionist_id', Auth::user()->id)
-            ->whereBetween('created_at', [now()->startOfDay(), now()->endOfDay()])
-            ->sum('room_service_amount');
-
-        // Calculate the total amount of all receivables
-        $totalCashReceived = $startingAmount + $rentAmount + $drinkAmount + $roomServiceAmount;
-
-        return view('receptionist.cashier-closing-records.index', compact('records', 'startingAmount', 'rentAmount', 'drinkAmount', 'roomServiceAmount', 'totalCashReceived'));
+        return view('receptionist.cashier-closing-records.index', compact('drinkAmount'));
     }
+
+
 
     public function create()
     {

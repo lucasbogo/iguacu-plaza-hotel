@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\DrinkConsumable;
 use App\Models\Occupant;
+use App\Models\CashRegisterPayment;
+use Illuminate\Support\Facades\Auth;
+use App\Models\CashierClosingRecord;
+use Illuminate\Support\Facades\DB;
 
 class DrinkConsumableController extends Controller
 {
@@ -70,6 +74,7 @@ class DrinkConsumableController extends Controller
         return view('receptionist.drink-consumables.all-occupant-consumables', compact('occupants'));
     }
 
+    // this method get all the paid drink consumables
     public function paidIndex()
     {
         // Fetch occupants with their drink consumables that are marked as paid
@@ -84,13 +89,34 @@ class DrinkConsumableController extends Controller
 
     public function markAsPaid(Request $request, $occupantId, $drinkConsumableId)
     {
-        $occupant = Occupant::findOrFail($occupantId);
-        $drinkConsumable = $occupant->drinkConsumables()->findOrFail($drinkConsumableId);
+        DB::transaction(function () use ($occupantId, $drinkConsumableId) {
+            $occupant = Occupant::findOrFail($occupantId);
+            $drinkConsumable = DrinkConsumable::findOrFail($drinkConsumableId);
 
-        // Assuming the pivot table is named 'drink_consumable_occupant' and has a 'paid' column
-        $drinkConsumable->pivot->paid = true;
-        $drinkConsumable->pivot->save();
+            // Get the quantity and paid status from pivot table
+            $quantityPaid = $occupant->drinkConsumables()->where('drink_consumable_id', $drinkConsumableId)->first()->pivot->quantity;
+            $isPaid = $occupant->drinkConsumables()->where('drink_consumable_id', $drinkConsumableId)->first()->pivot->paid;
 
-        return redirect()->route('receptionist.drink-consumables.index')->with('success', 'Bebida paga com sucesso.');
+            if (!$isPaid) {
+                // Calculate the total cost for the drinks being marked as paid
+                $totalPaidAmount = $drinkConsumable->cost * $quantityPaid;
+
+                // Find the current open CashierClosingRecord for the authenticated receptionist
+                $currentClosingRecord = CashierClosingRecord::where('receptionist_id', Auth::user()->id)
+                    ->whereNull('closed_at')
+                    ->latest()
+                    ->first();
+
+                if ($currentClosingRecord) {
+                    // Directly increment drink_income on the CashierClosingRecord
+                    $currentClosingRecord->increment('drink_income', $totalPaidAmount);
+
+                    // Marking the drink as paid in pivot table
+                    $occupant->drinkConsumables()->updateExistingPivot($drinkConsumableId, ['paid' => true]);
+                }
+            }
+        });
+
+        return redirect()->route('receptionist.cashier-closing-records.index')->with('success', 'Drink marked as paid successfully.');
     }
 }
