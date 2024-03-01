@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\DrinkConsumable;
 use App\Models\Occupant;
-use App\Models\CashRegisterPayment;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CashierClosingRecord;
 use Illuminate\Support\Facades\DB;

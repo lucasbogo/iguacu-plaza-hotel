@@ -7,7 +7,7 @@
 
     <link rel="icon" type="image/png" href="{{ asset('uploads/favicon.ico') }}">
 
-    <title>Ocupação</title>
+    <title>Recepção</title>
 
 
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">

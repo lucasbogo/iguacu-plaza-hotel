@@ -79,7 +79,7 @@ class RoomServiceController extends Controller
     {
         if ($roomService && !$roomService->is_paid) {
             DB::transaction(function () use ($roomService) {
-                $totalPaidAmount = $roomService->cost; // Assume cost attribute exists on RoomService
+                $totalPaidAmount = $roomService->cost; 
 
                 $currentClosingRecord = CashierClosingRecord::where([
                     'receptionist_id' => Auth::id(),

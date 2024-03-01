@@ -38,7 +38,40 @@
                                 @foreach ($rentalUnits as $rentalUnit)
                                     <tr>
                                         <td>{{ $rentalUnit->number }}</td>
-                                        <td>{{ $rentalUnit->type }}</td>
+                                        <td>
+                                            @switch($rentalUnit->type)
+                                                @case('single')
+                                                    Solteiro
+                                                @break
+
+                                                @case('double')
+                                                    Duplo
+                                                @break
+
+                                                @case('couple')
+                                                    Casal
+                                                @break
+
+                                                @case('triple')
+                                                    Triplo
+                                                @break
+
+                                                @case('quadruple')
+                                                    Quádruplo
+                                                @break
+
+                                                @case('couple_plus_one')
+                                                    Casal + 1
+                                                @break
+
+                                                @case('couple_plus_two')
+                                                    Casal + 2
+                                                @break
+
+                                                @default
+                                                    Não especificado
+                                            @endswitch
+                                        </td>
                                         <td>
                                             @switch($rentalUnit->status)
                                                 @case('available')

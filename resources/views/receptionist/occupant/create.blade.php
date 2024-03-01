@@ -22,11 +22,45 @@
                                 <select class="form-control" id="rental_unit_id" name="rental_unit_id" required>
                                     <option value="">Selecione o Quarto</option>
                                     @foreach ($rentalUnits as $unit)
-                                        <option value="{{ $unit->id }}">{{ $unit->number }} - {{ $unit->type }}
+                                        <option value="{{ $unit->id }}">
+                                            {{ $unit->number }} -
+                                            @switch($unit->type)
+                                                @case('single')
+                                                    Solteiro
+                                                @break
+
+                                                @case('double')
+                                                    Duplo
+                                                @break
+
+                                                @case('couple')
+                                                    Casal
+                                                @break
+
+                                                @case('triple')
+                                                    Triplo
+                                                @break
+
+                                                @case('quadruple')
+                                                    Quádruplo
+                                                @break
+
+                                                @case('couple_plus_one')
+                                                    Casal + 1
+                                                @break
+
+                                                @case('couple_plus_two')
+                                                    Casal + 2
+                                                @break
+
+                                                @default
+                                                    Não especificado
+                                            @endswitch
                                         </option>
                                     @endforeach
                                 </select>
                             </div>
+
                             <div class="form-group">
                                 <label for="name">Nome do Mensalista</label>
                                 <input type="text" class="form-control" id="name" name="name"

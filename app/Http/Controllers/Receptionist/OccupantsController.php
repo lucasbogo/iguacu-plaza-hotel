@@ -152,7 +152,7 @@ class OccupantsController extends Controller
         // Mark as paid
         $occupant->drinkConsumables()->updateExistingPivot($drinkConsumableId, ['paid' => true]);
 
-        return back()->with('success', 'Bebida pagga com sucesso.');
+        return back()->with('success', 'Bebida paga com sucesso.');
     }
 
     public function printPDF()
