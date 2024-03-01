@@ -10,6 +10,7 @@
             <a href="{{ route('receptionist.dashboard') }}"></a>
         </div>
         <ul class="sidebar-menu">
+            <!-- Adjusted for direct links -->
             <li class="{{ Request::is('receptionist/rental-units*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('receptionist.rental-units.index') }}">
                     <i class="fa fa-building"></i> <span>Quartos</span>
@@ -20,47 +21,39 @@
                     <i class="fa fa-users"></i> <span>Mensalistas</span>
                 </a>
             </li>
-            <!-- Room Services Dropdown -->
-            <li class="nav-item dropdown {{ Request::is('receptionist/room_services*') ? 'active' : '' }}">
-                <a class="nav-link dropdown-toggle" href="#" id="roomServicesDropdown" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-cutlery"></i> <span>Serviços de Quarto</span>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="roomServicesDropdown">
-                    <a class="dropdown-item" href="{{ route('receptionist.service-types.index') }}">Tipos de Serviço</a>
-                    <a class="dropdown-item" href="{{ route('receptionist.room-services.index') }}">Serviços</a>
-                    <a class="dropdown-item" href="{{ route('receptionist.room-services.notPaid') }}">Não Pagos</a>
-                    <a class="dropdown-item" href="{{ route('receptionist.room-services.paid') }}">Pagos</a>
-                </div>
+            <!-- Optimized for dropdown -->
+            <li class="dropdown {{ Request::is('receptionist/room_services*') ? 'active' : '' }}">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fa fa-cutlery"></i>
+                    <span>Serviços de Quarto</span></a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="{{ route('receptionist.service-types.index') }}">Tipos de Serviço</a>
+                    </li>
+                    <li><a class="nav-link" href="{{ route('receptionist.room-services.index') }}">Serviços</a></li>
+                    <li><a class="nav-link" href="{{ route('receptionist.room-services.notPaid') }}">Não Pagos</a></li>
+                    <li><a class="nav-link" href="{{ route('receptionist.room-services.paid') }}">Pagos</a></li>
+                </ul>
             </li>
-            <!-- Drink Consumables Dropdown -->
-            <li class="nav-item dropdown {{ Request::is('receptionist/drink-consumables*') ? 'active' : '' }}">
-                <a class="nav-link dropdown-toggle" href="#" id="drinkConsumablesDropdown" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-glass"></i> <span>Consumo de Bebidas</span>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="drinkConsumablesDropdown">
-                    <a class="dropdown-item" href="{{ route('receptionist.drink-consumables.index') }}">Bebidas</a>
-                    <a class="dropdown-item" href="{{ route('receptionist.all-occupant-consumables.index') }}">Cobrar
-                        Bebidas</a>
-                    <a class="dropdown-item" href="{{ route('receptionist.paid-consumables.index') }}">Bebidas
-                        Pagas</a>
-                </div>
+            <li class="dropdown {{ Request::is('receptionist/drink-consumables*') ? 'active' : '' }}">
+                <a href="#" class="nav-link has-dropdown"><i class="fa fa-glass"></i> <span>Consumo de
+                        Bebidas</span></a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="{{ route('receptionist.drink-consumables.index') }}">Bebidas</a></li>
+                    <li><a class="nav-link" href="{{ route('receptionist.all-occupant-consumables.index') }}">Cobrar
+                            Bebidas</a></li>
+                    <li><a class="nav-link" href="{{ route('receptionist.paid-consumables.index') }}">Bebidas Pagas</a>
+                    </li>
+                </ul>
             </li>
-
-            <li class="nav-item dropdown {{ Request::is('receptionist/cashier-closing-records*') ? 'active' : '' }}">
-                <a class="nav-link dropdown-toggle" href="#" id="cashierClosingDropdown" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-money"></i> <span>Caixa</span>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="cashierClosingDropdown">
-                    <a class="dropdown-item" href="{{ route('receptionist.cashier-closing-records.index') }}">Caixa
-                        Atual</a>
-                    <a class="dropdown-item"
-                        href="{{ route('receptionist.closed-cashier-closing-records.index') }}">Caixas Fechados</a>
-                </div>
+            <li class="dropdown {{ Request::is('receptionist/cashier-closing-records*') ? 'active' : '' }}">
+                <a href="#" class="nav-link has-dropdown"><i class="fa fa-money"></i> <span>Caixa</span></a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="{{ route('receptionist.cashier-closing-records.index') }}">Caixa
+                            Atual</a></li>
+                    <li><a class="nav-link"
+                            href="{{ route('receptionist.closed-cashier-closing-records.index') }}">Caixas Fechados</a>
+                    </li>
+                </ul>
             </li>
-
             <!-- Add other sidebar items here -->
         </ul>
     </aside>

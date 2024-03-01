@@ -60,4 +60,23 @@ class ProfileController extends Controller
 
         return back()->with('success', 'Perfil atualizado com sucesso.');
     }
+
+    public function deletePhoto()
+    {
+        $receptionist = Auth::guard('receptionist')->user();
+
+        if ($receptionist->photo) {
+            $oldPhotoPath = public_path('uploads/receptionist/' . $receptionist->photo);
+            if (file_exists($oldPhotoPath)) {
+                unlink($oldPhotoPath);
+            }
+
+            $receptionist->photo = null;
+            $receptionist->save();
+
+            return response()->json(['success' => true]);
+        }
+
+        return response()->json(['success' => false]);
+    }
 }

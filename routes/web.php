@@ -44,7 +44,7 @@ use App\Http\Controllers\Receptionist\ServiceTypeController;
 use App\Http\Controllers\Receptionist\RoomServiceController;
 use App\Http\Controllers\Receptionist\DrinkConsumableController;
 use App\Http\Controllers\Receptionist\CashierClosingRecordController;
-
+use App\Models\Receptionist;
 
 /* Frontend Routes */
 
@@ -441,7 +441,7 @@ Route::middleware(['auth:receptionist'])->group(function () {
     Route::get('/receptionist/profile', [ReceptionistProfileController::class, 'show'])->name('receptionist.profile.show');
     Route::post('/receptionist/profile/update', [ReceptionistProfileController::class, 'update'])->name('receptionist.profile.update');
     Route::post('/receptionist/redefine-password', [ReceptionistAuthController::class, 'redefinePassword'])->name('receptionist.redefinePassword');
-    Route::post('/receptionist/logout', [ReceptionistAuthController::class, 'logout'])->name('receptionist.logout');
+    Route::post('/receptionist/logout', [ReceptionistAuthController::class, 'logout'])->name('receptionist.logout');    Route::post('receptionist/profile/delete-photo', [ReceptionistProfileController::class, 'deletePhoto'])->name('receptionist.profile.delete-photo');
 
     // Rental Units Routes
     Route::get('/receptionist/rental-units', [RentalUnitsController::class, 'index'])->name('receptionist.rental-units.index');
@@ -500,4 +500,5 @@ Route::middleware(['auth:receptionist'])->group(function () {
     Route::get('/receptionist/cashier-closing-records/{cashierClosingRecord}', [CashierClosingRecordController::class, 'show'])->name('receptionist.cashier-closing-records.show');
     Route::get('/receptionist/closed-cashier-closing-records', [CashierClosingRecordController::class, 'closedIndex'])->name('receptionist.closed-cashier-closing-records.index');
     Route::get('/receptionist/cashier-closing-records/{id}/print', [CashierClosingRecordController::class, 'print'])->name('receptionist.cashier-closing-records.print');
+    Route::get('/cashier-closing-records/print-all', [CashierClosingRecordController::class, 'printAllClosed'])->name('cashier-closing-records.print-all');
 });

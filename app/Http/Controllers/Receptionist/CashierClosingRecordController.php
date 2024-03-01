@@ -5,11 +5,8 @@ namespace App\Http\Controllers\Receptionist;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\CashierClosingRecord;
-use App\Models\Receptionist;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
-use App\Models\CashRegisterPayment;
-use App\Models\Occupant;
 
 
 class CashierClosingRecordController extends Controller
@@ -60,7 +57,8 @@ class CashierClosingRecordController extends Controller
     }
 
     // Method that stores the data from the create method and effectly closes the cash register...
-    // TO DO: make sure that when the Receptiuonist closes the Cash Register, the currentClosingRecord (froo the index method)
+    // TO DO: make sure that when the Receptiuonist closes the Cash Register, the currentClosingRecord (from the index method)
+    // DONE!
     public function store(Request $request)
     {
         $request->merge(['receptionist_id' => Auth::user()->id]);
@@ -111,5 +109,15 @@ class CashierClosingRecordController extends Controller
 
         // Return PDF to download or view in browser
         return $pdf->download('cashier_closing_record.pdf');
+    }
+
+    public function printAllClosed()
+    {
+        $closedRecords = CashierClosingRecord::whereNotNull('closed_at')->get();
+
+        // Assuming you have a view named 'receptionist.cashier-closing-records.print-all'
+        $pdf = PDF::loadView('receptionist.cashier-closing-records.print-all', compact('closedRecords'));
+
+        return $pdf->download('all_closed_cash_registers.pdf');
     }
 }

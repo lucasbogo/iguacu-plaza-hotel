@@ -11,11 +11,6 @@
             </a>
         </div>
     </div>
-    <div class="float-left">
-        <a href="{{ route('receptionist.occupants.print-pdf') }}" class="btn btn-info">
-            <i class="fa fa-print"></i> Imprimir
-        </a>
-    </div>
     <div class="card-body">
         <table class="table table-bordered" id="example1">
             <thead>
@@ -59,6 +54,14 @@
                 @endforeach
             </tbody>
         </table>
+
+        <div class="float-left">
+            <a href="{{ route('receptionist.occupants.print-pdf') }}" class="btn btn-warning">
+                <i class="fa fa-print"></i> Imprimir
+            </a>
+        </div>
+        <br>
+
         @foreach ($occupants as $occupant)
             <!-- Modal for Buying Drink -->
             <div class="modal fade" id="buyDrinkModal-{{ $occupant->id }}" tabindex="-1" role="dialog"
