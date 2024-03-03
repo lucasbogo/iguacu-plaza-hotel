@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Receptionist;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Receptionist; // Adjust this to your Receptionist model
+use App\Models\Receptionist; 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 

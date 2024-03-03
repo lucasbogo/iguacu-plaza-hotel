@@ -21,6 +21,11 @@
                     <i class="fa fa-users"></i> <span>Mensalistas</span>
                 </a>
             </li>
+            <li class="{{ Request::is('receptionist/logs*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('receptionist.logs.index') }}">
+                    <i class="fa fa-book"></i> <span>Logs</span>
+                </a>
+            </li>
             <!-- Optimized for dropdown -->
             <li class="dropdown {{ Request::is('receptionist/room_services*') ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fa fa-cutlery"></i>

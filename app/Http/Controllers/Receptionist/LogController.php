@@ -53,7 +53,7 @@ class LogController extends Controller
             'status' => $request->status,
         ]);
 
-        return redirect()->route('receptionist.logs.index')->with('success', 'Log created successfully.');
+        return redirect()->route('receptionist.logs.index')->with('success', 'Log criado com successo.');
     }
 
     /**
@@ -69,6 +69,16 @@ class LogController extends Controller
             'status' => $request->status,
         ]);
 
-        return back()->with('success', 'Log updated successfully.');
+        return back()->with('success', 'Log atualizado com sucesso.');
+    }
+
+    public function edit(Log $log)
+    {
+        // Ensure the current receptionist can only edit their logs
+        if ($log->receptionist_id != Auth::guard('receptionist')->id()) {
+            return redirect()->route('receptionist.logs.index')->with('error', 'Acesso não autorizado.');
+        }
+
+        return view('receptionist.logs.edit', compact('log'));
     }
 }

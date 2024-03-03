@@ -16,8 +16,6 @@ return new class extends Migration
             $table->foreignId('receptionist_id')->constrained('receptionists')->onDelete('cascade');
             $table->text('message');
             $table->enum('status', ['resolved', 'pending', 'cannot_be_resolved']);
-            $table->timestamp('created_at')->nullable();
-            $table->timestamp('updated_at')->nullable();
             $table->timestamps();
         });
     }
