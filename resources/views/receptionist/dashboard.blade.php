@@ -54,6 +54,19 @@
             </div>
         </div>
     </div>
+    <!-- Add this form above the logs table in your dashboard view -->
+    <div class="card">
+        <div class="card-body">
+            <form action="{{ route('receptionist.dashboard') }}" method="GET" class="form-inline">
+                <div class="form-group mb-2">
+                    <label for="date" class="mr-2">Filtrar por Data:</label>
+                    <input type="date" class="form-control" id="date" name="date" value="{{ request('date') }}">
+                </div>
+                <button type="submit" class="btn btn-primary mb-2 ml-2">Filtrar</button>
+                <a href="{{ route('receptionist.dashboard') }}" class="btn btn-secondary mb-2 ml-2">Limpar</a>
+            </form>
+        </div>
+    </div>
     <!-- Logs Table -->
     <div class="row mt-4">
         <div class="col-12">
