@@ -125,7 +125,7 @@ class OccupantsController extends Controller
 
         $drink = DrinkConsumable::findOrFail($drinkConsumableId);
         if ($drink->quantity < $quantityToBuy) {
-            return back()->with('error', 'Not enough stock available.');
+            return back()->with('error', 'Quantidade não disponível em estoque.');
         }
 
         // Decrement stock

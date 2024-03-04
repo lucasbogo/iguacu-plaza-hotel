@@ -13,6 +13,8 @@ class Employee extends Model
 
     public function drinkConsumables()
     {
-        return $this->hasMany(EmployeeDrinkConsumable::class);
+        return $this->belongsToMany(DrinkConsumable::class, 'employee_drink_consumables')
+            ->withPivot(['quantity', 'employee_price', 'paid'])
+            ->withTimestamps();
     }
 }

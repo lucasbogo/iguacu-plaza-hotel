@@ -34,6 +34,11 @@
                                 <input type="number" class="form-control" id="quantity" name="quantity"
                                     value="{{ $drinkConsumable->quantity }}" required>
                             </div>
+                            <div class="form-group">
+                                <label for="employee_price">Preço para Funcionários</label>
+                                <input type="number" class="form-control" id="employee_price" name="employee_price"
+                                    value="{{ $drinkConsumable->employee_price }}" step="0.01" required>
+                            </div>
                             <button type="submit" class="btn btn-success">Salvar Alterações</button>
                             <a href="{{ route('receptionist.drink-consumables.index') }}"
                                 class="btn btn-secondary">Cancelar</a>

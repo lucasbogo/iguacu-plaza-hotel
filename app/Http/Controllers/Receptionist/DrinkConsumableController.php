@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\DrinkConsumable;
 use App\Models\Occupant;
+use App\Models\Employee;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CashierClosingRecord;
 use Illuminate\Support\Facades\DB;
@@ -28,7 +29,8 @@ class DrinkConsumableController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'cost' => 'required|numeric',
-            'quantity' => 'required|numeric'
+            'quantity' => 'required|numeric',
+            'employee_price' => 'required|numeric'
         ]);
 
         DrinkConsumable::create($request->all());
@@ -47,7 +49,8 @@ class DrinkConsumableController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'cost' => 'required|numeric',
-            'quantity' => 'required|numeric'
+            'quantity' => 'required|numeric',
+            'employee_price' => 'required|numeric'
         ]);
 
         $drinkConsumable->update($request->all());
@@ -131,5 +134,27 @@ class DrinkConsumableController extends Controller
         });
 
         return redirect()->route('receptionist.cashier-closing-records.index')->with('success', 'Bebida marcada como paga com sucesso.');
+    }
+
+    public function allEmployeeConsumables()
+    {
+        // and  pivot table is named 'employee_drink_consumable' with employee_id and drink_consumable_id as foreign keys.
+        $employees = Employee::with(['drinkConsumables' => function ($query) {
+            $query->withPivot(['quantity', 'paid', 'created_at']);
+        }])->get();
+
+        return view('receptionist.drink-consumables.all-employee-consumables', compact('employees'));
+    }
+
+    public function paidEmployeeIndex()
+    {
+        // Assuming you have a relationship set up in your Employee model similar to the Occupant model's relationship with DrinkConsumables
+        $employees = Employee::whereHas('drinkConsumables', function ($query) {
+            $query->where('employee_drink_consumables.paid', true); // Adjust according to your pivot table and paid column name
+        })->with(['drinkConsumables' => function ($query) {
+            $query->wherePivot('paid', true); // Again, adjust according to your pivot table and column names
+        }])->get();
+
+        return view('receptionist.drink-consumables.paid-consumables-employee', compact('employees'));
     }
 }

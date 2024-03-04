@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->decimal('cost', 8, 2);
+            $table->decimal('employee_price', 8, 2);
             $table->timestamps();
         });
     }

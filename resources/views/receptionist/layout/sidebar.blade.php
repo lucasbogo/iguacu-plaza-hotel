@@ -26,6 +26,15 @@
                     <i class="fa fa-book"></i> <span>Logs</span>
                 </a>
             </li>
+            <li class="dropdown {{ Request::is('receptionist/employees*') ? 'active' : '' }}">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fa fa-id-badge"></i>
+                    <span>Funcionários</span></a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="{{ route('receptionist.employees.index') }}">Ver Funcionários</a>
+                    </li>
+                    <!-- Add more links here as needed -->
+                </ul>
+            </li>
             <!-- Optimized for dropdown -->
             <li class="dropdown {{ Request::is('receptionist/room_services*') ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fa fa-cutlery"></i>
@@ -47,6 +56,10 @@
                             Bebidas</a></li>
                     <li><a class="nav-link" href="{{ route('receptionist.paid-consumables.index') }}">Bebidas Pagas</a>
                     </li>
+                    <li><a class="nav-link" href="{{ route('receptionist.employees.allDrinkConsumables') }}">Cobrar
+                            Bebidas Funcionários</a></li>
+                    <li><a class="nav-link" href="{{ route('receptionist.drink-consumables.paid-employee') }}">Bebidas
+                            Pagas por Funcionários</a></li>
                 </ul>
             </li>
             <li class="dropdown {{ Request::is('receptionist/cashier-closing-records*') ? 'active' : '' }}">

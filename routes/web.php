@@ -45,6 +45,8 @@ use App\Http\Controllers\Receptionist\RoomServiceController;
 use App\Http\Controllers\Receptionist\DrinkConsumableController;
 use App\Http\Controllers\Receptionist\CashierClosingRecordController;
 use App\Http\Controllers\Receptionist\LogController;
+use App\Http\Controllers\Receptionist\EmployeeController;
+use App\Http\Controllers\Receptionist\EmployeeDrinkConsumableController;
 
 
 /* Frontend Routes */
@@ -483,7 +485,6 @@ Route::middleware(['auth:receptionist'])->group(function () {
     Route::get('/receptionist/room-services/not-paid', [RoomServiceController::class, 'notPaidRoomServices'])->name('receptionist.room-services.notPaid');
     Route::get('/receptionist/room-services/paid', [RoomServiceController::class, 'paidRoomServices'])->name('receptionist.room-services.paid');
 
-
     // Drink Consumables Routes
     Route::get('/receptionist/drink-consumables', [DrinkConsumableController::class, 'index'])->name('receptionist.drink-consumables.index');
     Route::get('/receptionist/drink-consumables/create', [DrinkConsumableController::class, 'create'])->name('receptionist.drink-consumables.create');
@@ -494,6 +495,7 @@ Route::middleware(['auth:receptionist'])->group(function () {
     Route::get('/receptionist/paid-consumables', [DrinkConsumableController::class, 'paidIndex'])->name('receptionist.paid-consumables.index');
     Route::get('/receptionist/all-occupant-consumables', [DrinkConsumableController::class, 'allOccupantConsumables'])->name('receptionist.all-occupant-consumables.index');
     Route::post('/receptionist/occupants/{occupantId}/drink-consumables/{drinkConsumableId}/mark-as-paid', [DrinkConsumableController::class, 'markAsPaid'])->name('receptionist.occupants.markAsPaid');
+    Route::get('/receptionist/drink-consumables/paid-employee', [DrinkConsumableController::class, 'paidEmployeeIndex'])->name('receptionist.drink-consumables.paid-employee');
 
     // Cashier Closing Records Routes
     Route::get('/receptionist/cashier-closing-records', [CashierClosingRecordController::class, 'index'])->name('receptionist.cashier-closing-records.index');
@@ -511,4 +513,25 @@ Route::middleware(['auth:receptionist'])->group(function () {
     Route::get('/logs/{log}/edit', [LogController::class, 'edit'])->name('receptionist.logs.edit');
     Route::put('/logs/{log}', [LogController::class, 'update'])->name('receptionist.logs.update');
     Route::delete('/logs/{log}', [LogController::class, 'destroy'])->name('receptionist.logs.destroy');
+
+    // Employee Management
+    Route::get('/receptionist/employees', [EmployeeController::class, 'index'])->name('receptionist.employees.index');
+    Route::get('/receptionist/employees/create', [EmployeeController::class, 'create'])->name('receptionist.employees.create');
+    Route::post('/receptionist/employees', [EmployeeController::class, 'store'])->name('receptionist.employees.store');
+    Route::get('/receptionist/employees/{employee}/edit', [EmployeeController::class, 'edit'])->name('receptionist.employees.edit');
+    Route::put('/receptionist/employees/{employee}', [EmployeeController::class, 'update'])->name('receptionist.employees.update');
+    Route::delete('/receptionist/employees/{employee}', [EmployeeController::class, 'destroy'])->name('receptionist.employees.destroy');
+
+    // Employee Drink Consumables Management
+    Route::get('/receptionist/employee-drink-consumables', [EmployeeDrinkConsumableController::class, 'index'])->name('receptionist.employee-drink-consumables.index');
+    Route::get('/receptionist/employee-drink-consumables/create', [EmployeeDrinkConsumableController::class, 'create'])->name('receptionist.employee-drink-consumables.create');
+    Route::post('/receptionist/employee-drink-consumables', [EmployeeDrinkConsumableController::class, 'store'])->name('receptionist.employee-drink-consumables.store');
+    Route::get('/receptionist/employee-drink-consumables/{employeeDrinkConsumable}/edit', [EmployeeDrinkConsumableController::class, 'edit'])->name('receptionist.employee-drink-consumables.edit');
+    Route::put('/receptionist/employee-drink-consumables/{employeeDrinkConsumable}', [EmployeeDrinkConsumableController::class, 'update'])->name('receptionist.employee-drink-consumables.update');
+    Route::delete('/receptionist/employee-drink-consumables/{employeeDrinkConsumable}', [EmployeeDrinkConsumableController::class, 'destroy'])->name('receptionist.employee-drink-consumables.destroy');
+    Route::post('/receptionist/employees/{employeeId}/buy-drink', [EmployeeDrinkConsumableController::class, 'buyDrinkForEmployee'])->name('receptionist.employees.buy-drink');
+    Route::get('/receptionist/employees/drink-consumables', [EmployeeDrinkConsumableController::class, 'allEmployeeConsumables'])->name('receptionist.employees.allDrinkConsumables');
+    Route::post('/receptionist/employees/{employeeId}/drink-consumables/{drinkConsumableId}/mark-as-paid', [EmployeeDrinkConsumableController::class, 'markAsPaid'])
+    ->name('receptionist.employees.markAsPaid');
+
 });

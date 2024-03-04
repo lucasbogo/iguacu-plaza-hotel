@@ -25,6 +25,7 @@
                                     <tr>
                                         <th>Nome</th>
                                         <th>Custo</th>
+                                        <th>Preço para Funcionários</th> <!-- Add employee price header -->
                                         <th>Quantidade</th>
                                         <th>Ações</th>
                                     </tr>
@@ -34,6 +35,8 @@
                                         <tr>
                                             <td>{{ $drinkConsumable->name }}</td>
                                             <td>R$ {{ number_format($drinkConsumable->cost, 2, ',', '.') }}</td>
+                                            <td>R$ {{ number_format($drinkConsumable->employee_price, 2, ',', '.') }}</td>
+                                            <!-- Display employee price -->
                                             <td>{{ $drinkConsumable->quantity }}</td>
                                             <td>
                                                 <a href="{{ route('receptionist.drink-consumables.edit', $drinkConsumable->id) }}"

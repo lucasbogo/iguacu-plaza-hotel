@@ -9,7 +9,7 @@ class EmployeeDrinkConsumable extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['employee_id', 'drink_consumable_id', 'quantity', 'price'];
+    protected $fillable = ['employee_id', 'drink_consumable_id', 'quantity', 'employee_price', 'paid'];
 
     public function employee()
     {

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('employee_id')->constrained()->onDelete('cascade');
             $table->foreignId('drink_consumable_id')->constrained()->onDelete('cascade');
             $table->integer('quantity');
-            $table->decimal('price', 8, 2);
+            $table->decimal('employee_price', 8, 2); // Use employee_price for consistency with DrinkConsumable
             $table->boolean('paid')->default(false);
             $table->timestamps();
         });
