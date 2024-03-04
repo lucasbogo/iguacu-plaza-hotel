@@ -133,7 +133,7 @@ class DrinkConsumableController extends Controller
             DB::table('occupant_drink_consumable')->where('id', $pivotRecord->id)->update(['paid' => 1]);
         });
 
-        return redirect()->route('receptionist.cashier-closing-records.index')->with('success', 'Bebida marcada como paga com sucesso.');
+        return back()->with('success', 'Bebida marca como "pago" com sucesso e valor atribuído ao caixa atual.');
     }
 
     public function allEmployeeConsumables()

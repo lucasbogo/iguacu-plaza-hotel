@@ -7,13 +7,14 @@ use Illuminate\Http\Request;
 use App\Models\Employee;
 use App\Models\EmployeeDrinkConsumable;
 use App\Models\DrinkConsumable;
+use App\Models\CashierClosingRecord;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class EmployeeDrinkConsumableController extends Controller
 {
     public function index()
     {
-        // Remove the pivot reference
         $employeeDrinkConsumables = EmployeeDrinkConsumable::with(['employee', 'drinkConsumable'])->get();
         return view('receptionist.employee-drink-consumables.index', compact('employeeDrinkConsumables'));
     }
@@ -41,7 +42,7 @@ class EmployeeDrinkConsumableController extends Controller
             'employee_price' => $request->employee_price,
         ]);
 
-        return redirect()->route('receptionist.employee-drink-consumables.index')->with('success', 'Employee Drink Consumable created successfully.');
+        return redirect()->route('receptionist.employee-drink-consumables.index')->with('success', 'Bebida (funcionário_ criada com sucesso.');
     }
 
     public function edit(EmployeeDrinkConsumable $employeeDrinkConsumable)
@@ -84,7 +85,7 @@ class EmployeeDrinkConsumableController extends Controller
 
         $drink = DrinkConsumable::findOrFail($drinkConsumableId);
         if ($drink->quantity < $quantityToBuy) {
-            return back()->with('error', 'Not enough stock available.');
+            return back()->with('error', 'Quantidade em estoque não disponível.');
         }
 
         // Decrement stock
@@ -115,29 +116,65 @@ class EmployeeDrinkConsumableController extends Controller
             ]);
         }
 
-        return back()->with('success', 'Drink purchased successfully for employee.');
+        return back()->with('success', 'Bebida (funcionário) comprado com sucesso.');
     }
 
     public function markAsPaid(Request $request, $employeeId, $drinkConsumableId)
     {
-        // Attempt to mark all unpaid drinks for this employee and drink combination as paid
-        $affectedRows = DB::table('employee_drink_consumables')
-            ->where('employee_id', $employeeId)
-            ->where('drink_consumable_id', $drinkConsumableId)
-            ->where('paid', false)
-            ->update(['paid' => true]);
+        DB::transaction(function () use ($employeeId, $drinkConsumableId) {
+            // Retrieve all unpaid drinks for this employee and drink combination
+            $employeeDrinks = EmployeeDrinkConsumable::where('employee_id', $employeeId)
+                ->where('drink_consumable_id', $drinkConsumableId)
+                ->where('paid', false)
+                ->get();
 
-        if ($affectedRows > 0) {
-            return back()->with('success', 'Drink marked as paid successfully.');
-        } else {
-            return back()->with('error', 'No unpaid drinks found for this employee.');
-        }
+            if ($employeeDrinks->isEmpty()) {
+                return back()->with('error', 'No unpaid drinks found for this employee.');
+            }
+
+            $totalPaidAmount = 0;
+            foreach ($employeeDrinks as $employeeDrink) {
+                // Calculate the total amount based on employee_price and update it
+                $totalPaidAmount += $employeeDrink->quantity * $employeeDrink->employee_price;
+
+                // Mark the drink as paid
+                $employeeDrink->paid = true;
+                $employeeDrink->save();
+            }
+
+            // Update the CashierClosingRecord
+            $currentClosingRecord = CashierClosingRecord::where([
+                'receptionist_id' => Auth::id(),
+                'closed_at' => null,
+            ])->latest()->first();
+
+            if (!$currentClosingRecord) {
+                // Handle the case where there's no open Cashier Closing Record, if necessary
+                $currentClosingRecord = CashierClosingRecord::create([
+                    'receptionist_id' => Auth::id(),
+                    'closed_at' => null,
+                    'start_amount' => 0,
+                    'end_amount' => 0, // Set default end amount if needed
+                    'total_sales' => 0,
+                    'total_cash_received' => 0,
+                    'rental_income' => 0,
+                    'drink_income' => $totalPaidAmount,
+                    'room_service_income' => 0,
+                    'created_at' => now(), // Ensure correct timestamp, or adjust as necessary
+                    'updated_at' => now(),
+                ]);
+            } else {
+                // Increment the drink_income with the total paid amount for employee drinks
+                $currentClosingRecord->increment('drink_income', $totalPaidAmount);
+            }
+        });
+
+        return redirect()->route('receptionist.cashier-closing-records.index')->with('success', 'Bebida marca como "pago" com sucesso e valor atribuído ao caixa atual.');
     }
 
-     public function allEmployeeConsumables()
+    public function allEmployeeConsumables()
     {
         // Fetch all employees and their associated drink consumables
-        // Make sure the relationships are correctly defined in the Employee model
         $employees = Employee::with(['drinkConsumables'])->get();
 
         // Pass the data to the view
