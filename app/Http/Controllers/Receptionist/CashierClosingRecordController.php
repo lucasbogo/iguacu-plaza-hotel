@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Auth;
 
 class CashierClosingRecordController extends Controller
 {
-    // Shows the current data from amounts received from drinl_income and room_service_income
+    // Shows the current data from amounts received from drink_income and room_service_income
+    //TODO: Show rental_income ...
     public function index()
     {
         $receptionistId = Auth::user()->id;
@@ -70,20 +71,26 @@ class CashierClosingRecordController extends Controller
             'quantity_withdrawn' => 'required|numeric',
         ]);
 
+        // Correct calculation for end_amount
         $validatedData['end_amount'] = $validatedData['start_amount'] + $validatedData['total_cash_received'];
-        $validatedData['total_sales'] = $validatedData['total_cash_received'];
+        $validatedData['total_sales'] = $validatedData['total_cash_received']; // total_sales represents total revenue, adjustments may be needed based on your application's requirements
         $validatedData['closed_at'] = now();
+
+        // Correctly calculate the starting amount for the next shift
+        $nextShiftStartingAmount = $validatedData['end_amount'] - $validatedData['quantity_withdrawn'];
 
         try {
             // Close the current shift by creating a new closing record
-            CashierClosingRecord::create($validatedData);
+            $closingRecord = CashierClosingRecord::create($validatedData);
 
-            // Optionally, immediately create a new open Cashier Closing Record for the next shift
-            // This assumes you want to automatically open a new shift right after closing the current one
+            // Immediately create a new open Cashier Closing Record for the next shift
+            // with starting amount adjusted as per the end_amount - quantity_withdrawn from the closing of the current record
             CashierClosingRecord::create([
                 'receptionist_id' => Auth::user()->id,
-                'start_amount' => 0, // Initialize the new shift with a start amount, adjust as needed
+                'start_amount' => max($nextShiftStartingAmount, 0), // Ensure the starting amount is not negative; adjust based on your requirements
                 // Do not set 'closed_at', keeping it null to indicate an open shift
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
 
             return redirect()->route('receptionist.cashier-closing-records.index')->with('success', 'Caixa fechado com sucesso.');
