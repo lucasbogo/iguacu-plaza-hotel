@@ -39,7 +39,7 @@
                                 <input type="number" name="quantity_withdrawn" id="quantity_withdrawn" class="form-control"
                                     required>
                             </div>
-                            <button type="submit" class="btn btn-primary">Fechar Caixa</button>
+                            <button type="submit" class="btn btn-warning">Fechar Caixa</button>
                         </form>
                     </div>
                 </div>

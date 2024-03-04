@@ -169,7 +169,7 @@ class EmployeeDrinkConsumableController extends Controller
             }
         });
 
-        return redirect()->route('receptionist.cashier-closing-records.index')->with('success', 'Bebida marca como "pago" com sucesso e valor atribuído ao caixa atual.');
+        return back()->with('success', 'Bebida marca como "pago" com sucesso e valor atribuído ao caixa atual.');
     }
 
     public function allEmployeeConsumables()

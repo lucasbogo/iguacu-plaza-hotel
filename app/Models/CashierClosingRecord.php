@@ -19,6 +19,7 @@ class CashierClosingRecord extends Model
         'rental_income',
         'drink_income',
         'room_service_income',
+        'quantity_withdrawn',
     ];
 
     // Define the relationship with the Receptionist model

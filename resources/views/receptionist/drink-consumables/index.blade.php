@@ -9,7 +9,7 @@
             <a href="{{ route('receptionist.drink-consumables.create') }}" class="btn btn-success"><i class="fa fa-plus"></i>
                 Adicionar Nova Bebida</a>
         </div>
-    </div>
+    </div>  
 
     <div class="section-body">
         <div class="row">

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->decimal('rental_income', 10, 2)->default(0);
             $table->decimal('drink_income', 10, 2)->default(0);
             $table->decimal('room_service_income', 10, 2)->default(0);
+            $table->decimal('quantity_withdrawn', 10, 2)->default(0.00);
             $table->timestamp('closed_at')->nullable();
             $table->timestamps();
         });

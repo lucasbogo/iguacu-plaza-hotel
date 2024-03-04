@@ -59,7 +59,7 @@
                     <li><a class="nav-link" href="{{ route('receptionist.employees.allDrinkConsumables') }}">Cobrar
                             Bebidas Funcionários</a></li>
                     <li><a class="nav-link" href="{{ route('receptionist.drink-consumables.paid-employee') }}">Bebidas
-                            Pagas por Funcionários</a></li>
+                            Pagas Funcionários</a></li>
                 </ul>
             </li>
             <li class="dropdown {{ Request::is('receptionist/cashier-closing-records*') ? 'active' : '' }}">
@@ -75,4 +75,4 @@
             <!-- Add other sidebar items here -->
         </ul>
     </aside>
-</div>
+</div>  
