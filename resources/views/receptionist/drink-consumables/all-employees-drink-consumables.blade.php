@@ -24,13 +24,14 @@
                                         <th>Preço Unitário</th>
                                         <th>Custo Total</th>
                                         <th>Pago</th>
+                                        <th>Data da Compra</th> <!-- Added column for created_at -->
                                         <th>Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($employee->drinkConsumables as $drinkConsumable)
                                         <tr>
-                                            <td>{{ $drinkConsumable->name }}</td> <!-- Adjusted to fetch the drink name -->
+                                            <td>{{ $drinkConsumable->name }}</td>
                                             <td>{{ $drinkConsumable->pivot->quantity }}</td>
                                             <td>R$ {{ number_format($drinkConsumable->pivot->employee_price, 2, ',', '.') }}
                                             </td>
@@ -38,6 +39,8 @@
                                                 {{ number_format($drinkConsumable->pivot->quantity * $drinkConsumable->pivot->employee_price, 2, ',', '.') }}
                                             </td>
                                             <td>{{ $drinkConsumable->pivot->paid ? 'Sim' : 'Não' }}</td>
+                                            <td>{{ $drinkConsumable->pivot->created_at->format('d/m/Y H:i') }}</td>
+                                            <!-- Displaying created_at -->
                                             <td>
                                                 @if (!$drinkConsumable->pivot->paid)
                                                     <form

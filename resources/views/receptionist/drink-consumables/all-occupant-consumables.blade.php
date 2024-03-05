@@ -23,6 +23,7 @@
                                         <th>Quantidade</th>
                                         <th>Custo Total</th>
                                         <th>Pago</th>
+                                        <th>Data da Compra</th> <!-- Added column for created_at -->
                                         <th>Ações</th>
                                     </tr>
                                 </thead>
@@ -34,6 +35,8 @@
                                             <td>R$ {{ number_format($drink->cost * $drink->pivot->quantity, 2, ',', '.') }}
                                             </td>
                                             <td>{{ $drink->pivot->paid ? 'Sim' : 'Não' }}</td>
+                                            <td>{{ $drink->pivot->created_at->format('d/m/Y H:i') }}</td>
+                                            <!-- Displaying created_at -->
                                             <td>
                                                 @if (!$drink->pivot->paid)
                                                     <form

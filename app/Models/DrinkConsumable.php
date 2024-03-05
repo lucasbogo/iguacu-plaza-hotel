@@ -30,4 +30,10 @@ class DrinkConsumable extends Model
             ->withPivot(['quantity', 'paid'])
             ->withTimestamps();
     }
+
+
+    public function lastUpdatedBy()
+    {
+        return $this->belongsTo(Receptionist::class, 'last_updated_by_receptionist_id');
+    }
 }

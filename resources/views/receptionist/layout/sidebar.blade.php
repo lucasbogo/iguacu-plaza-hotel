@@ -60,6 +60,8 @@
                             Bebidas Funcionários</a></li>
                     <li><a class="nav-link" href="{{ route('receptionist.drink-consumables.paid-employee') }}">Bebidas
                             Pagas Funcionários</a></li>
+                    <li><a class="nav-link" href="{{ route('receptionist.drink-consumables.stock-report') }}">Relatório
+                            de Estoque</a></li>
                 </ul>
             </li>
             <li class="dropdown {{ Request::is('receptionist/cashier-closing-records*') ? 'active' : '' }}">
@@ -75,4 +77,4 @@
             <!-- Add other sidebar items here -->
         </ul>
     </aside>
-</div>  
+</div>

@@ -10,6 +10,7 @@ use App\Models\Employee;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CashierClosingRecord;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class DrinkConsumableController extends Controller
 {
@@ -156,5 +157,84 @@ class DrinkConsumableController extends Controller
         }])->get();
 
         return view('receptionist.drink-consumables.paid-consumables-employee', compact('employees'));
+    }
+
+    public function generateStockReport()
+    {
+        $drinkConsumables = DrinkConsumable::with(['occupants', 'employees'])->get()->map(function ($drink) {
+            // Calculate the total quantity sold to occupants
+            $soldToOccupants = $drink->occupants->sum(function ($occupant) use ($drink) { // Include 'use ($drink)' here
+                return $occupant->pivot->quantity;
+            });
+
+            // Calculate the total quantity sold to employees
+            $soldToEmployees = $drink->employees->sum(function ($employee) use ($drink) { // And here
+                return $employee->pivot->quantity;
+            });
+
+            // Calculate the total amount received from sales to occupants and employees
+            $totalAmountFromOccupants = $drink->occupants->sum(function ($occupant) use ($drink) { // And also here
+                return $occupant->pivot->quantity * $drink->cost;
+            });
+            $totalAmountFromEmployees = $drink->employees->sum(function ($employee) use ($drink) { // And here
+                return $employee->pivot->quantity * $drink->employee_price;
+            });
+
+            // Calculate the initial quantity before sales
+            $initialQuantity = $drink->quantity + $soldToOccupants + $soldToEmployees;
+
+            return [
+                'name' => $drink->name,
+                'initial_quantity' => $initialQuantity,
+                'sold_to_occupants' => $soldToOccupants,
+                'sold_to_employees' => $soldToEmployees,
+                'remaining_quantity' => $drink->quantity,
+                'total_amount_from_occupants' => $totalAmountFromOccupants,
+                'total_amount_from_employees' => $totalAmountFromEmployees,
+                'total_amount' => $totalAmountFromOccupants + $totalAmountFromEmployees
+            ];
+        });
+
+        return view('receptionist.drink-consumables.stock-report', compact('drinkConsumables'));
+    }
+
+    public function printStockReport()
+    {
+        $drinkConsumables = DrinkConsumable::with(['occupants', 'employees'])->get()->map(function ($drink) {
+            // Calculate the total quantity sold to occupants
+            $soldToOccupants = $drink->occupants->sum(function ($occupant) use ($drink) { // Include 'use ($drink)' here
+                return $occupant->pivot->quantity;
+            });
+
+            // Calculate the total quantity sold to employees
+            $soldToEmployees = $drink->employees->sum(function ($employee) use ($drink) { // And here
+                return $employee->pivot->quantity;
+            });
+
+            // Calculate the total amount received from sales to occupants and employees
+            $totalAmountFromOccupants = $drink->occupants->sum(function ($occupant) use ($drink) { // And also here
+                return $occupant->pivot->quantity * $drink->cost;
+            });
+            $totalAmountFromEmployees = $drink->employees->sum(function ($employee) use ($drink) { // And here
+                return $employee->pivot->quantity * $drink->employee_price;
+            });
+
+            // Calculate the initial quantity before sales
+            $initialQuantity = $drink->quantity + $soldToOccupants + $soldToEmployees;
+
+            return [
+                'name' => $drink->name,
+                'initial_quantity' => $initialQuantity,
+                'sold_to_occupants' => $soldToOccupants,
+                'sold_to_employees' => $soldToEmployees,
+                'remaining_quantity' => $drink->quantity,
+                'total_amount_from_occupants' => $totalAmountFromOccupants,
+                'total_amount_from_employees' => $totalAmountFromEmployees,
+                'total_amount' => $totalAmountFromOccupants + $totalAmountFromEmployees
+            ];
+        });
+
+        $pdf = PDF::loadView('receptionist.drink-consumables.stock-report-pdf', compact('drinkConsumables'));
+        return $pdf->download('stock-report.pdf');
     }
 }
