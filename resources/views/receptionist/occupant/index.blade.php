@@ -1,16 +1,3 @@
-@php
-function maskCpf($val)
-{
-return substr($val, 0, 3) . '.' . substr($val, 3, 3) . '.' . substr($val, 6, 3) . '-' . substr($val, 9, 2);
-}
-
-function maskRg($val)
-{
-return substr($val, 0, 1) . '.' . substr($val, 1, 3) . '.' . substr($val, 4, 3) . '-' . substr($val, 7, 1);
-}
-
-@endphp
-
 @extends('receptionist.layout.master')
 
 @section('title', 'Gestão de Mensalistas')
@@ -49,8 +36,16 @@ return substr($val, 0, 1) . '.' . substr($val, 1, 3) . '.' . substr($val, 4, 3) 
                                     <tr>
                                         <td>
                                             {{ $occupant->name }}<br>
-                                            <small>RG: {{ $occupant->rg ? maskRg($occupant->rg) : 'N/D' }}</small><br>
-                                            <small>CPF: {{ $occupant->cpf ? maskCpf($occupant->cpf) : 'N/D' }}</small>
+                                            @if (!empty($occupant->rg) || !empty($occupant->cpf))
+                                                @if (!empty($occupant->rg))
+                                                    <small>RG:
+                                                        {{ \App\Helpers\FormatHelper::maskRg($occupant->rg) }}</small><br>
+                                                @endif
+                                                @if (!empty($occupant->cpf))
+                                                    <small>CPF:
+                                                        {{ \App\Helpers\FormatHelper::maskCpf($occupant->cpf) }}</small>
+                                                @endif
+                                            @endif
                                         </td>
                                         <td>{{ $occupant->rentalUnit->number ?? 'N/D' }}</td>
                                         <td>{{ \Carbon\Carbon::parse($occupant->check_in)->format('d/m/Y') }}</td>
