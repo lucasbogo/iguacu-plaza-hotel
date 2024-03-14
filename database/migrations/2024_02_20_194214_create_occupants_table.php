@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('cpf')->nullable();
             $table->date('check_in');
             $table->date('check_out')->nullable();
+            $table->enum('billing_type', ['private', 'company'])->default('private');
+            $table->string('company_name')->nullable();
             $table->decimal('rent_amount', 10, 2)->nullable();
             $table->decimal('paid_rent_amount', 10, 2)->nullable();
             $table->date('payment_date');

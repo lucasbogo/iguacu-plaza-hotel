@@ -43,6 +43,8 @@ class OccupantsController extends Controller
             'payment_date' => 'required|date',
             'transfer_date' => 'nullable|date|after_or_equal:check_in',
             'transfer_reason' => 'nullable|string|max:1000',
+            'billing_type' => 'required|in:private,company',
+            'company_name' => 'nullable|string|max:255'
         ]);
 
         // Create the occupant
@@ -74,6 +76,9 @@ class OccupantsController extends Controller
             'check_out' => 'nullable|date|after_or_equal:check_in',
             'rent_amount' => 'nullable|numeric',
             'payment_date' => 'required|date',
+            'billing_type' => 'required|in:private,company',
+            'company_name' => 'nullable|string|max:255' 
+            
         ]);
 
         // Check if this is a transfer request
@@ -94,7 +99,7 @@ class OccupantsController extends Controller
         }
 
         // Update occupant details
-        $occupant->update($request->only(['name', 'rg', 'cpf', 'check_in', 'check_out', 'rent_amount', 'paid_rent_amount', 'payment_date', 'rental_unit_id']));
+        $occupant->update($request->only(['name', 'rg', 'cpf', 'check_in', 'check_out', 'rent_amount', 'paid_rent_amount', 'payment_date', 'rental_unit_id', 'billing_type', 'company_name']));
 
         return redirect()->route('receptionist.occupants.index')->with('success', 'Mensalista atualizado com sucesso.');
     }
