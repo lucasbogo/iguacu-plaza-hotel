@@ -15,7 +15,7 @@
                         <h4>Informações do Mensalista {{ $occupant->name }}</h4>
                         <div>
                             <strong>Tipo de Faturamento:</strong>
-                            {{ $occupant->billing_type == 'private' ? 'Particular' : 'Faturado pela Empresa' }}
+                            {{ $occupant->billing_type == 'private' ? 'Particular' : 'Faturado - ' . $occupant->company_name }}
                         </div>
                     </div>
                     <div class="card-body">
