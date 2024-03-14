@@ -15,9 +15,12 @@ return new class extends Migration
             $table->id();
             $table->foreignId('rental_unit_id')->constrained()->onDelete('cascade');
             $table->string('name');
+            $table->string('rg')->nullable();
+            $table->string('cpf')->nullable();
             $table->date('check_in');
             $table->date('check_out')->nullable();
-            $table->decimal('rent_amount', 10, 2);
+            $table->decimal('rent_amount', 10, 2)->nullable();
+            $table->decimal('paid_rent_amount', 10, 2)->nullable();
             $table->date('payment_date');
             $table->date('transfer_date')->nullable();
             $table->text('transfer_reason')->nullable();

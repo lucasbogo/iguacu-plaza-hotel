@@ -533,6 +533,5 @@ Route::middleware(['auth:receptionist'])->group(function () {
     Route::delete('/receptionist/employee-drink-consumables/{employeeDrinkConsumable}', [EmployeeDrinkConsumableController::class, 'destroy'])->name('receptionist.employee-drink-consumables.destroy');
     Route::post('/receptionist/employees/{employeeId}/buy-drink', [EmployeeDrinkConsumableController::class, 'buyDrinkForEmployee'])->name('receptionist.employees.buy-drink');
     Route::get('/receptionist/employees/drink-consumables', [EmployeeDrinkConsumableController::class, 'allEmployeeConsumables'])->name('receptionist.employees.allDrinkConsumables');
-    Route::post('/receptionist/employees/{employeeId}/drink-consumables/{drinkConsumableId}/mark-as-paid', [EmployeeDrinkConsumableController::class, 'markAsPaid'])
-        ->name('receptionist.employees.markAsPaid');
+    Route::post('/receptionist/employees/{employeeId}/drink-consumables/{drinkConsumableId}/mark-as-paid', [EmployeeDrinkConsumableController::class, 'markAsPaid'])->name('receptionist.employees.markAsPaid');
 });

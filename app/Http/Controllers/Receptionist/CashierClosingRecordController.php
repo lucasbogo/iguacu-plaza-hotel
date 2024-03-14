@@ -24,11 +24,13 @@ class CashierClosingRecordController extends Controller
         if ($currentClosingRecord) {
             $drinkIncome = $currentClosingRecord->drink_income;
             $roomServiceIncome = $currentClosingRecord->room_service_income;
+            // $rentIncome = $currentClosingRecord->rental_income;
         } else {
             // If no current record is found, it means the last shift was closed, and we are starting a new shift.
             // Initialize variables to reflect the new shift starting state.
             $drinkIncome = 0;
             $roomServiceIncome = 0;
+            // $rentIncome = 0;
         }
 
         return view('receptionist.cashier-closing-records.index', compact('drinkIncome', 'roomServiceIncome'));
@@ -109,12 +111,20 @@ class CashierClosingRecordController extends Controller
 
     public function print($id)
     {
-        $cashierClosingRecord = CashierClosingRecord::findOrFail($id);
+        $cashierClosingRecord = CashierClosingRecord::with(['receptionist'])->findOrFail($id);
+
+        // Example calculations (adjust these according to your actual application logic)
+        $drinkIncome = $cashierClosingRecord->drink_income;
+        $roomServiceIncome = $cashierClosingRecord->room_service_income;
+        // Assuming you add logic to calculate rent income and store it in the cashier closing record
+        // $rentIncome = $cashierClosingRecord->rental_income;
+
+        // Calculate the total amount
+        $totalAmount = $drinkIncome + $roomServiceIncome; // TODO: + $rentIncome;
 
         // Generate PDF using DomPDF
-        $pdf = PDF::loadView('receptionist.cashier-closing-records.print', compact('cashierClosingRecord'));
+        $pdf = PDF::loadView('receptionist.cashier-closing-records.print', compact('cashierClosingRecord', 'drinkIncome', 'roomServiceIncome', 'totalAmount')); // TODO: 'rentIncome',
 
-        // Return PDF to download or view in browser
         return $pdf->download('cashier_closing_record.pdf');
     }
 

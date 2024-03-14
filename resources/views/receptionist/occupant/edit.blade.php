@@ -1,6 +1,6 @@
 @extends('receptionist.layout.master')
 
-@section('title', 'Editar Ocupante')
+@section('title', 'Editar')
 
 @section('main_content')
     <div class="section-header">
@@ -12,27 +12,67 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Informações do Mensalista</h4>
+                        <h4>Informações do Mensalista {{ $occupant->name }}</h4>
                     </div>
                     <div class="card-body">
                         <form action="{{ route('receptionist.occupants.update', $occupant->id) }}" method="POST">
                             @csrf
                             @method('PUT')
-                            <div class="form-group">
-                                <label for="rental_unit_id">Quarto Atual</label>
-                                <select class="form-control" id="rental_unit_id" name="rental_unit_id">
-                                    @foreach ($rentalUnits as $unit)
-                                        <option value="{{ $unit->id }}"
-                                            {{ $unit->id == $occupant->rental_unit_id ? 'selected' : '' }}>
-                                            {{ $unit->number }} - {{ $unit->type }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                            <!-- Room Information Card -->
+                            <div class="card mb-3">
+                                <div class="card-header">Quarto Atual</div>
+                                <div class="card-body">
+                                    <h5 class="card-title" style="color: #007bff;">{{ $occupant->rentalUnit->number }} -
+                                        @switch($occupant->rentalUnit->type)
+                                            @case('single')
+                                                Solteiro
+                                            @break
+
+                                            @case('double')
+                                                Duplo
+                                            @break
+
+                                            @case('couple')
+                                                Casal
+                                            @break
+
+                                            @case('triple')
+                                                Triplo
+                                            @break
+
+                                            @case('quadruple')
+                                                Quádruplo
+                                            @break
+
+                                            @case('couple_plus_one')
+                                                Casal + 1
+                                            @break
+
+                                            @case('couple_plus_two')
+                                                Casal + 2
+                                            @break
+
+                                            @default
+                                                Não especificado
+                                        @endswitch
+                                    </h5>
+                                </div>
                             </div>
+                            <input type="hidden" name="rental_unit_id" value="{{ $occupant->rental_unit_id }}">
                             <div class="form-group">
                                 <label for="name">Nome</label>
                                 <input type="text" class="form-control" id="name" name="name"
                                     value="{{ $occupant->name }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="name">RG</label>
+                                <input type="text" class="form-control" id="rg" name="rg"
+                                    value="{{ $occupant->rg }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="name">CPF</label>
+                                <input type="text" class="form-control" id="cpf" name="cpf"
+                                    value="{{ $occupant->cpf }}">
                             </div>
                             <div class="form-group">
                                 <label for="check_in">Data de Entrada</label>
@@ -53,28 +93,6 @@
                                 <label for="payment_date">Data do Pagamento</label>
                                 <input type="date" class="form-control" id="payment_date" name="payment_date"
                                     value="{{ $occupant->payment_date }}" required>
-                            </div>
-                            <!-- Transfer Section -->
-                            <h5>Transferência de Quarto</h5>
-                            <div class="form-group">
-                                <label for="new_rental_unit_id">Novo Quarto</label>
-                                <select class="form-control" id="new_rental_unit_id" name="new_rental_unit_id">
-                                    <option value="">Selecione um Novo Quarto</option>
-                                    @foreach ($rentalUnits as $unit)
-                                        @if ($unit->id != $occupant->rental_unit_id)
-                                            <option value="{{ $unit->id }}">{{ $unit->number }} - {{ $unit->type }}
-                                            </option>
-                                        @endif
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="transfer_date">Data de Transferência</label>
-                                <input type="date" class="form-control" id="transfer_date" name="transfer_date">
-                            </div>
-                            <div class="form-group">
-                                <label for="transfer_reason">Motivo da Transferência</label>
-                                <textarea class="form-control" id="transfer_reason" name="transfer_reason" rows="3"></textarea>
                             </div>
                             <button type="submit" class="btn btn-success">Atualizar</button>
                             <a href="{{ route('receptionist.occupants.index') }}" class="btn btn-secondary">Cancelar</a>

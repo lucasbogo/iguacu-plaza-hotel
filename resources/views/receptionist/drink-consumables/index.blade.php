@@ -24,9 +24,9 @@
                                 <thead>
                                     <tr>
                                         <th>Nome</th>
-                                        <th>Custo</th>
-                                        <th>Preço para Funcionários</th> <!-- Add employee price header -->
-                                        <th>Quantidade</th>
+                                        <th>Preço</th>
+                                        <th>Preço Funcionários</th>
+                                        <th>Estoque</th>
                                         <th>Ações</th>
                                     </tr>
                                 </thead>

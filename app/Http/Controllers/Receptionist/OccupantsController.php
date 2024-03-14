@@ -17,7 +17,8 @@ class OccupantsController extends Controller
     {
         $occupants = Occupant::with('rentalUnit')->get();
         $drinkConsumables = DrinkConsumable::all();
-        return view('receptionist.occupant.index', compact('occupants', 'drinkConsumables'));
+        $rentalUnits = RentalUnit::all();
+        return view('receptionist.occupant.index', compact('occupants', 'drinkConsumables', 'rentalUnits'));
     }
 
     // Show the form for creating a new occupant
@@ -33,9 +34,12 @@ class OccupantsController extends Controller
         $request->validate([
             'rental_unit_id' => 'required|exists:rental_units,id',
             'name' => 'required|string|max:255',
+            'rg' => 'nullable|string|max:255',
+            'cpf' => 'nullable|string|max:255',
             'check_in' => 'required|date',
             'check_out' => 'nullable|date|after_or_equal:check_in',
-            'rent_amount' => 'required|numeric',
+            'rent_amount' => 'nullable|numeric',
+            'paid_rent_amount' => 'nullable|numeric',
             'payment_date' => 'required|date',
             'transfer_date' => 'nullable|date|after_or_equal:check_in',
             'transfer_reason' => 'nullable|string|max:1000',
@@ -64,9 +68,11 @@ class OccupantsController extends Controller
         $request->validate([
             'rental_unit_id' => 'required|exists:rental_units,id',
             'name' => 'required|string|max:255',
+            'rg' => 'nullable|string|max:255',
+            'cpf' => 'nullable|string|max:255',
             'check_in' => 'required|date',
             'check_out' => 'nullable|date|after_or_equal:check_in',
-            'rent_amount' => 'required|numeric',
+            'rent_amount' => 'nullable|numeric',
             'payment_date' => 'required|date',
         ]);
 
@@ -88,7 +94,7 @@ class OccupantsController extends Controller
         }
 
         // Update occupant details
-        $occupant->update($request->only(['name', 'check_in', 'check_out', 'rent_amount', 'payment_date', 'rental_unit_id']));
+        $occupant->update($request->only(['name', 'rg', 'cpf', 'check_in', 'check_out', 'rent_amount', 'paid_rent_amount', 'payment_date', 'rental_unit_id']));
 
         return redirect()->route('receptionist.occupants.index')->with('success', 'Mensalista atualizado com sucesso.');
     }
