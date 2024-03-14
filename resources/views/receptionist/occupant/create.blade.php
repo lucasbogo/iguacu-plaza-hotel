@@ -20,7 +20,7 @@
                             <div class="form-group">
                                 <label for="rental_unit_id">Quarto</label>
                                 <select class="form-control" id="rental_unit_id" name="rental_unit_id" required>
-                                    <option value="">Selecionar Quarto</option>
+                                    <option value="" disabled selected hidden>Selecionar Quarto</option>
                                     @foreach ($rentalUnits as $unit)
                                         <option value="{{ $unit->id }}">
                                             {{ $unit->number }} -
@@ -59,6 +59,7 @@
                                         </option>
                                     @endforeach
                                 </select>
+
                             </div>
                             <div class="form-group">
                                 <label for="name">Nome</label>
