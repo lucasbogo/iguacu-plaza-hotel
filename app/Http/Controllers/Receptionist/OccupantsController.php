@@ -40,7 +40,7 @@ class OccupantsController extends Controller
             'check_out' => 'nullable|date|after_or_equal:check_in',
             'rent_amount' => 'nullable|numeric',
             'paid_rent_amount' => 'nullable|numeric',
-            'payment_date' => 'required|date',
+            'payment_date' => 'nullable|date',
             'transfer_date' => 'nullable|date|after_or_equal:check_in',
             'transfer_reason' => 'nullable|string|max:1000',
             'billing_type' => 'required|in:private,company',
@@ -75,7 +75,7 @@ class OccupantsController extends Controller
             'check_in' => 'required|date',
             'check_out' => 'nullable|date|after_or_equal:check_in',
             'rent_amount' => 'nullable|numeric',
-            'payment_date' => 'required|date',
+            'payment_date' => 'nullable|date',
             'billing_type' => 'required|in:private,company',
             'company_name' => 'nullable|string|max:255' 
             

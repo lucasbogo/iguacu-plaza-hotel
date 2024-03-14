@@ -25,9 +25,7 @@
                                     <th>Nome</th>
                                     <th>Quarto</th>
                                     <th>Check-in</th>
-                                    <th>Check-out</th>
-                                    <th>Valor do Aluguel</th>
-                                    <th>Data de Pagamento</th>
+                                    <th>Tipo de Faturamento</th>
                                     <th>Ações</th>
                                 </tr>
                             </thead>
@@ -49,10 +47,15 @@
                                         </td>
                                         <td>{{ $occupant->rentalUnit->number ?? 'N/D' }}</td>
                                         <td>{{ \Carbon\Carbon::parse($occupant->check_in)->format('d/m/Y') }}</td>
-                                        <td>{{ $occupant->check_out ? \Carbon\Carbon::parse($occupant->check_out)->format('d/m/Y') : 'N/A' }}
+                                        <td>
+                                            @if ($occupant->billing_type == 'private')
+                                                Particular - R$ {{ number_format($occupant->rent_amount, 2, ',', '.') }}
+                                            @elseif ($occupant->billing_type == 'company' && !empty($occupant->company_name))
+                                                Faturado - {{ $occupant->company_name }}
+                                            @else
+                                                Não especificado
+                                            @endif
                                         </td>
-                                        <td>R$ {{ number_format($occupant->rent_amount, 2, ',', '.') }}</td>
-                                        <td>{{ \Carbon\Carbon::parse($occupant->payment_date)->format('d/m/Y') }}</td>
                                         <td>
                                             <div class="btn-group">
                                                 <a href="{{ route('receptionist.occupants.edit', $occupant->id) }}"

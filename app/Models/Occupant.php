@@ -10,7 +10,19 @@ class Occupant extends Model
     use HasFactory;
 
     protected $fillable = [
-        'rental_unit_id', 'name','rg', 'cpf', 'check_in', 'check_out', 'rent_amount', 'paid_rent_amount', 'payment_date', 'transfer_date', 'transfer_reason',
+        'rental_unit_id', 
+        'name', 
+        'rg', 
+        'cpf', 
+        'check_in', 
+        'check_out', 
+        'rent_amount', 
+        'paid_rent_amount', 
+        'payment_date', 
+        'transfer_date', 
+        'transfer_reason', 
+        'billing_type', 
+        'company_name',
 
     ];
 
