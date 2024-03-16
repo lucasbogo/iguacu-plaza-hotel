@@ -23,6 +23,7 @@ class Occupant extends Model
         'transfer_reason', 
         'billing_type', 
         'company_name',
+        'status'
 
     ];
 

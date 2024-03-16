@@ -10,21 +10,26 @@
             <a href="{{ route('receptionist.dashboard') }}"></a>
         </div>
         <ul class="sidebar-menu">
-            <!-- Adjusted for direct links -->
+            <li class="{{ Request::is('receptionist/logs*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('receptionist.logs.index') }}">
+                    <i class="fa fa-book"></i> <span>Logs</span>
+                </a>
+            </li>
             <li class="{{ Request::is('receptionist/rental-units*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('receptionist.rental-units.index') }}">
                     <i class="fa fa-building"></i> <span>Quartos</span>
                 </a>
             </li>
-            <li class="{{ Request::is('receptionist/occupants/*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('receptionist.occupants.index') }}">
-                    <i class="fa fa-users"></i> <span>Mensalistas</span>
-                </a>
-            </li>
-            <li class="{{ Request::is('receptionist/logs*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('receptionist.logs.index') }}">
-                    <i class="fa fa-book"></i> <span>Logs</span>
-                </a>
+            <li class="dropdown {{ Request::is('receptionist/occupants*') ? 'active' : '' }}">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fa fa-users"></i>
+                    <span>Mensalistas</span></a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="{{ route('receptionist.occupants.index') }}">Todos os Mensalistas</a>
+                    </li>
+                    <li><a class="nav-link" href="{{ route('receptionist.occupants.closed') }}">Ocupações Encerradas</a>
+                    </li>
+                    <!-- Add more links here if necessary -->
+                </ul>
             </li>
             <li class="dropdown {{ Request::is('receptionist/employees*') ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fa fa-id-badge"></i>

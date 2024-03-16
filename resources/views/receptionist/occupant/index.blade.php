@@ -60,13 +60,6 @@
                                             <div class="btn-group">
                                                 <a href="{{ route('receptionist.occupants.edit', $occupant->id) }}"
                                                     class="btn btn-sm btn-primary">Editar</a>
-                                                <form action="{{ route('receptionist.occupants.destroy', $occupant->id) }}"
-                                                    method="POST" style="display:inline;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger"
-                                                        onclick="return confirm('Tem Certeza?');">Deletar</button>
-                                                </form>
                                                 <!-- Trigger Modal Button -->
                                                 <button type="button" class="btn btn-sm btn-warning" data-toggle="modal"
                                                     data-target="#buyDrinkModal-{{ $occupant->id }}">Comprar
@@ -74,7 +67,25 @@
                                                 <button type="button" class="btn btn-sm btn-info" data-toggle="modal"
                                                     data-target="#transferRoomModal-{{ $occupant->id }}">Transferir
                                                     Quarto</button>
-
+                                                <!-- Charge Rent Button -->
+                                                @if ($occupant->billing_type == 'private' && $occupant->status == 'staying')
+                                                    <!-- Charge Rent Button -->
+                                                    <form
+                                                        action="{{ route('receptionist.occupants.chargeRent', $occupant->id) }}"
+                                                        method="POST" class="d-inline">
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-sm btn-success">Cobrar
+                                                            Aluguel</button>
+                                                    </form>
+                                                @endif
+                                                <!-- Check-out Button -->
+                                                <form
+                                                    action="{{ route('receptionist.occupants.closeRoomOccupancy', $occupant->id) }}"
+                                                    method="POST" class="d-inline"
+                                                    onsubmit="return confirm('Confirmar check-out?');">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-sm btn-danger">Check-out</button>
+                                                </form>
                                             </div>
                                         </td>
                                     </tr>
@@ -157,7 +168,8 @@
                                             @csrf
                                             <div class="modal-body">
                                                 <div class="form-group">
-                                                    <label for="new_rental_unit_id-{{ $occupant->id }}">Novo Quarto</label>
+                                                    <label for="new_rental_unit_id-{{ $occupant->id }}">Novo
+                                                        Quarto</label>
                                                     <select class="form-control"
                                                         id="new_rental_unit_id-{{ $occupant->id }}"
                                                         name="new_rental_unit_id">

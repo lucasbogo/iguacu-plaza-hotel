@@ -23,9 +23,11 @@ return new class extends Migration
             $table->string('company_name')->nullable();
             $table->decimal('rent_amount', 10, 2)->nullable();
             $table->decimal('paid_rent_amount', 10, 2)->nullable();
+            $table->date('last_rent_paid_date')->nullable();
             $table->date('payment_date')->nullable();
             $table->date('transfer_date')->nullable();
             $table->text('transfer_reason')->nullable();
+            $table->enum('status', ['staying', 'checked_out'])->default('staying');
             $table->timestamps();
         });
     }

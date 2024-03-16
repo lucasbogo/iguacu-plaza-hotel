@@ -106,25 +106,25 @@
             </div>
         </div>
     </div>
-@endsection
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const billingTypeSelect = document.getElementById('billing_type');
-        const rentAmountGroup = document.getElementById('rent_amount_group');
-        const companyNameGroup = document.getElementById('company_name_group');
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const billingTypeSelect = document.getElementById('billing_type');
+            const rentAmountGroup = document.getElementById('rent_amount_group');
+            const companyNameGroup = document.getElementById('company_name_group');
 
-        billingTypeSelect.addEventListener('change', function() {
-            // Hide both groups initially
-            rentAmountGroup.style.display = 'none';
-            companyNameGroup.style.display = 'none';
+            billingTypeSelect.addEventListener('change', function() {
+                // Hide both groups initially
+                rentAmountGroup.style.display = 'none';
+                companyNameGroup.style.display = 'none';
 
-            // Show the appropriate group based on the selected option
-            if (this.value === 'private') {
-                rentAmountGroup.style.display = 'block';
-            } else if (this.value === 'company') {
-                companyNameGroup.style.display = 'block';
-            }
+                // Show the appropriate group based on the selected option
+                if (this.value === 'private') {
+                    rentAmountGroup.style.display = 'block';
+                } else if (this.value === 'company') {
+                    companyNameGroup.style.display = 'block';
+                }
+            });
         });
-    });
-</script>
+    </script>
+@endsection

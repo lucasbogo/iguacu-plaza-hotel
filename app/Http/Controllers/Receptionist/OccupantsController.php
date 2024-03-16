@@ -5,9 +5,13 @@ namespace App\Http\Controllers\Receptionist;
 use App\Http\Controllers\Controller;
 use App\Models\Occupant;
 use App\Models\DrinkConsumable;
-use Illuminate\Http\Request;
 use App\Models\RentalUnit;
+use App\Models\RentPayment;
+use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
+use App\Models\CashierClosingRecord;
 
 
 class OccupantsController extends Controller
@@ -15,7 +19,7 @@ class OccupantsController extends Controller
     // Display a listing of the occupants
     public function index()
     {
-        $occupants = Occupant::with('rentalUnit')->get();
+        $occupants = Occupant::where('status', '!=', 'checked-out')->with('rentalUnit')->get();
         $drinkConsumables = DrinkConsumable::all();
         $rentalUnits = RentalUnit::all();
         return view('receptionist.occupant.index', compact('occupants', 'drinkConsumables', 'rentalUnits'));
@@ -77,8 +81,8 @@ class OccupantsController extends Controller
             'rent_amount' => 'nullable|numeric',
             'payment_date' => 'nullable|date',
             'billing_type' => 'required|in:private,company',
-            'company_name' => 'nullable|string|max:255' 
-            
+            'company_name' => 'nullable|string|max:255'
+
         ]);
 
         // Check if this is a transfer request
@@ -164,6 +168,91 @@ class OccupantsController extends Controller
         $occupant->drinkConsumables()->updateExistingPivot($drinkConsumableId, ['paid' => true]);
 
         return back()->with('success', 'Bebida paga com sucesso.');
+    }
+
+    public function chargeRent($occupantId)
+    {
+        $occupant = Occupant::findOrFail($occupantId);
+
+        if ($occupant->billing_type != 'private') {
+            return back()->with('error', 'Aluguel só pode ser cobrado para mensalistas com faturamento particular.');
+        }
+
+        // Create a new RentPayment record
+        RentPayment::create([
+            'occupant_id' => $occupantId,
+            'amount' => $occupant->rent_amount, // Assuming full rent amount
+            'payment_date' => now(),
+        ]);
+
+        // Update the current cashier closing record with rent income
+        $receptionistId = Auth::user()->id;
+        $currentClosingRecord = CashierClosingRecord::where('receptionist_id', $receptionistId)->whereNull('closed_at')->latest()->first();
+
+        if (!$currentClosingRecord) {
+            return back()->with('error', 'Nenhum registro de fechamento de caixa encontrado para atualizar.');
+        }
+
+        // Update or create a field for rent_income in CashierClosingRecord if not exists
+        $currentClosingRecord->rent_income = ($currentClosingRecord->rent_income ?? 0) + $occupant->paid_rent_amount;
+        $currentClosingRecord->save();
+
+        return back()->with('success', 'Aluguel cobrado com sucesso e registro de caixa atualizado.');
+    }
+
+    public function closeRoomOccupancy($occupantId)
+    {
+        $occupant = Occupant::with(['rentalUnit', 'drinkConsumables'])->findOrFail($occupantId);
+
+        // Prevent checking out already checked-out occupant
+        if ($occupant->status == 'checked_out') {
+            return redirect()->back()->with('error', 'O check-out para este mensalista ja foi efetuado.');
+        }
+
+        // Set the check-out date to now
+        $occupant->check_out = now();
+        $occupant->status = 'checked_out';
+        $occupant->save();
+
+        $checkInDate = Carbon::parse($occupant->check_in);
+        $checkOutDate = Carbon::parse($occupant->check_out);
+        $stayDuration = $checkInDate->diffInDays($checkOutDate);
+
+        // Calculate rental amount if private
+        $rentalAmountOwed = $occupant->billing_type == 'private' ? $stayDuration * $occupant->rent_amount : 0;
+
+        // Get consumable drinks and unpaid drinks
+        $consumableDrinks = $occupant->drinkConsumables;
+        $unpaidDrinks = $consumableDrinks->filter(function ($drink) {
+            return !$drink->pivot->paid;
+        });
+
+        $totalUnpaid = $unpaidDrinks->sum(function ($drink) {
+            return $drink->price * $drink->pivot->quantity; // Adjust according to your price attribute
+        });
+
+        // Now include transfer_date and transfer_reason in your compact statement
+        return view('receptionist.occupant.close-occupancy', compact(
+            'occupant',
+            'stayDuration',
+            'rentalAmountOwed',
+            'consumableDrinks',
+            'unpaidDrinks',
+            'totalUnpaid'
+        ));
+    }
+
+    public function showClosedOccupancies()
+    {
+        $closedOccupancies = Occupant::where('status', 'checked-out')->get();
+        return view('receptionist.occupant.closed-occupancies', compact('closedOccupancies'));
+    }
+
+    public function details($occupantId)
+    {
+        $occupant = Occupant::with(['rentalUnit', 'drinkConsumables'])->where('status', 'checked-out')->findOrFail($occupantId);
+        // Process and return a details view
+        return view('receptionist.occupant.details', compact('occupant'));
     }
 
     public function printPDF()
