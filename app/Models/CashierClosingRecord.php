@@ -33,13 +33,12 @@ class CashierClosingRecord extends Model
         return $this->hasMany(CashRegisterPayment::class);
     }
 
-
     // Define a method to calculate specific amounts from related models
     public function calculateSpecificAmounts()
     {
-        $rentalIncome = Occupant::where('status', 'checked_out')
-            ->whereBetween('last_rent_paid_date', [$this->created_at, $this->closed_at])
-            ->sum('paid_rent_amount');
+        // Calculate rental income from all occupants who have made payments within the period
+        $rentalIncome = RentPayment::whereBetween('payment_date', [$this->created_at, $this->closed_at])
+            ->sum('amount');
 
         $drinkIncome = Occupant::whereBetween('payment_date', [$this->created_at, $this->closed_at])
             ->with('drinkConsumables')

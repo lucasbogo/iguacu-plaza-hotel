@@ -41,6 +41,10 @@
                                     </thead>
                                     <tbody>
                                         <tr>
+                                            <td>Aluguel Cobrado</td>
+                                            <td>{{ number_format($rentIncome, 2, ',', '.') }}</td>
+                                        </tr>                                        
+                                        <tr>
                                             <td>Bebidas Vendidas</td>
                                             <td>{{ number_format($drinkIncome, 2, ',', '.') }}</td>
                                         </tr>

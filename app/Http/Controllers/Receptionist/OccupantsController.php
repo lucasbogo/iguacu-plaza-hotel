@@ -173,28 +173,40 @@ class OccupantsController extends Controller
     public function chargeRent($occupantId)
     {
         $occupant = Occupant::findOrFail($occupantId);
-
         if ($occupant->billing_type != 'private') {
             return back()->with('error', 'Aluguel só pode ser cobrado para mensalistas com faturamento particular.');
         }
 
-        // Create a new RentPayment record
-        RentPayment::create([
+        $rentPayment = RentPayment::create([
             'occupant_id' => $occupantId,
-            'amount' => $occupant->rent_amount, // Assuming full rent amount
+            'amount' => $occupant->rent_amount,
             'payment_date' => now(),
         ]);
 
-        // Update the current cashier closing record with rent income
         $receptionistId = Auth::user()->id;
-        $currentClosingRecord = CashierClosingRecord::where('receptionist_id', $receptionistId)->whereNull('closed_at')->latest()->first();
+        $currentClosingRecord = CashierClosingRecord::where('receptionist_id', $receptionistId)
+            ->whereNull('closed_at')
+            ->latest()
+            ->first();
 
         if (!$currentClosingRecord) {
-            return back()->with('error', 'Nenhum registro de fechamento de caixa encontrado para atualizar.');
+            $currentClosingRecord = CashierClosingRecord::create([
+                'receptionist_id' => Auth::id(),
+                'closed_at' => null,
+                'start_amount' => 0,
+                'end_amount' => 0, // Set default end amount if needed
+                'total_sales' => 0,
+                'total_cash_received' => 0,
+                'rental_income' => 0,
+                'drink_income' => 0,
+                'room_service_income' => 0,
+                'created_at' => now(), // Ensure correct timestamp, or adjust as necessary
+                'updated_at' => now(),
+            ]);
         }
 
-        // Update or create a field for rent_income in CashierClosingRecord if not exists
-        $currentClosingRecord->rent_income = ($currentClosingRecord->rent_income ?? 0) + $occupant->paid_rent_amount;
+        // Assuming you have corrected the field to match your database schema
+        $currentClosingRecord->increment('rental_income', $rentPayment->amount);
         $currentClosingRecord->save();
 
         return back()->with('success', 'Aluguel cobrado com sucesso e registro de caixa atualizado.');
