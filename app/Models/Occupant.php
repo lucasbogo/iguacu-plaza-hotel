@@ -10,18 +10,18 @@ class Occupant extends Model
     use HasFactory;
 
     protected $fillable = [
-        'rental_unit_id', 
-        'name', 
-        'rg', 
-        'cpf', 
-        'check_in', 
-        'check_out', 
-        'rent_amount', 
-        'paid_rent_amount', 
-        'payment_date', 
-        'transfer_date', 
-        'transfer_reason', 
-        'billing_type', 
+        'rental_unit_id',
+        'name',
+        'rg',
+        'cpf',
+        'check_in',
+        'check_out',
+        'rent_amount',
+        'paid_rent_amount',
+        'payment_date',
+        'transfer_date',
+        'transfer_reason',
+        'billing_type',
         'company_name',
         'status'
 
@@ -49,5 +49,15 @@ class Occupant extends Model
         return $this->belongsToMany(DrinkConsumable::class, 'occupant_drink_consumable')
             ->withPivot(['quantity', 'paid'])
             ->withTimestamps();
+    }
+
+    public function rentPayments()
+    {
+        return $this->hasMany(RentPayment::class);
+    }
+
+    public function roomTransfers()
+    {
+        return $this->hasMany(RoomTransfer::class);
     }
 }

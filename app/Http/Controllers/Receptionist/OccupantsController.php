@@ -264,12 +264,37 @@ class OccupantsController extends Controller
         return view('receptionist.occupant.closed-occupancies', compact('closedOccupancies'));
     }
 
-
-    public function details($occupantId)
+    public function showDetails($occupantId)
     {
-        $occupant = Occupant::with(['rentalUnit', 'drinkConsumables'])->where('status', 'checked-out')->findOrFail($occupantId);
-        // Process and return a details view
-        return view('receptionist.occupant.details', compact('occupant'));
+        $occupant = Occupant::with(['rentalUnit', 'drinkConsumables', 'rentPayments', 'roomServices'])
+            ->where('id', $occupantId)->firstOrFail();
+
+        $checkIn = Carbon::parse($occupant->check_in);
+        $checkOut = $occupant->check_out ? Carbon::parse($occupant->check_out) : Carbon::now();
+        $stayDuration = $checkIn->diffInDays($checkOut);
+
+        // Include transfer details if available
+        $transferDetails = null;
+        if ($occupant->transfer_date) {
+            $transferDetails = [
+                'date' => $occupant->transfer_date,
+                'reason' => $occupant->transfer_reason,
+                // Assuming the new room is the current rental_unit after transfer
+                'new_room' => $occupant->rentalUnit->number,
+                // Additional logic needed if you want to show previous room number
+            ];
+        }
+
+        $billingType = $occupant->billing_type;
+        $companyName = $billingType == 'company' ? $occupant->company_name : null;
+
+        return view('receptionist.occupant.details', compact(
+            'occupant',
+            'stayDuration',
+            'transferDetails',
+            'billingType',
+            'companyName'
+        ));
     }
 
     public function printPDF()
