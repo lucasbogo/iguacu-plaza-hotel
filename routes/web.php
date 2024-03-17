@@ -470,6 +470,8 @@ Route::middleware(['auth:receptionist'])->group(function () {
     Route::get('/receptionist/occupants/{occupant}/details', [OccupantsController::class, 'showDetails'])->name('receptionist.occupants.details');
     Route::get('/receptionist/occupants/{occupant}/charge-rent', [OccupantsController::class, 'chargeRent'])->name('receptionist.occupants.chargeRent');
     Route::post('/receptionist/occupants/{occupantId}/charge-rent', [OccupantsController::class, 'chargeRent'])->name('receptionist.occupants.chargeRent');
+    Route::get('/receptionist/occupants/{occupant}/staying-details', [OccupantsController::class, 'showStayingDetails'])->name('receptionist.occupants.staying-details');
+
 
 
     // Service Types Routes

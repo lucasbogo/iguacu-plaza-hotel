@@ -9,12 +9,19 @@ class RoomTransfer extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'occupant_id',
+        'old_rental_unit_id',
+        'new_rental_unit_id',
+        'transfer_date',
+        'transfer_reason',
+    ];
+
     public function occupant()
     {
         return $this->belongsTo(Occupant::class);
     }
 
-    // Assuming you want to track both old and new rental units
     public function oldRentalUnit()
     {
         return $this->belongsTo(RentalUnit::class, 'old_rental_unit_id');

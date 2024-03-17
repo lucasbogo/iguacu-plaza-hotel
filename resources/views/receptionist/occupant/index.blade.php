@@ -67,6 +67,9 @@
                                                 <button type="button" class="btn btn-sm btn-info" data-toggle="modal"
                                                     data-target="#transferRoomModal-{{ $occupant->id }}">Transferir
                                                     Quarto</button>
+                                                <!-- Details Button -->
+                                                <a href="{{ route('receptionist.occupants.staying-details', $occupant->id) }}"
+                                                    class="btn btn-sm btn-info">Informações</a>
                                                 <!-- Charge Rent Button -->
                                                 @if ($occupant->billing_type == 'private' && $occupant->status == 'staying')
                                                     <!-- Charge Rent Button -->

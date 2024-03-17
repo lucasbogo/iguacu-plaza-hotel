@@ -7,6 +7,7 @@ use App\Models\Occupant;
 use App\Models\DrinkConsumable;
 use App\Models\RentalUnit;
 use App\Models\RentPayment;
+use App\Models\RoomTransfer;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Carbon;
@@ -123,11 +124,17 @@ class OccupantsController extends Controller
             'transfer_reason' => 'nullable|string',
         ]);
 
-        $occupant->update([
-            'rental_unit_id' => $request->new_rental_unit_id,
+        // Create a RoomTransfer record
+        RoomTransfer::create([
+            'occupant_id' => $occupant->id,
+            'old_rental_unit_id' => $occupant->rental_unit_id,
+            'new_rental_unit_id' => $request->new_rental_unit_id,
             'transfer_date' => $request->transfer_date,
             'transfer_reason' => $request->transfer_reason,
         ]);
+
+        // Update the occupant's rental unit
+        $occupant->update(['rental_unit_id' => $request->new_rental_unit_id]);
 
         return redirect()->route('receptionist.occupants.index')->with('success', 'Mensalista transferido com sucesso.');
     }
@@ -169,6 +176,51 @@ class OccupantsController extends Controller
 
         return back()->with('success', 'Bebida paga com sucesso.');
     }
+
+    public function showStayingDetails($occupantId)
+    {
+        $occupant = Occupant::with([
+            'rentalUnit',
+            'roomTransfers.oldRentalUnit',
+            'roomTransfers.newRentalUnit',
+            'drinkConsumables',
+            'rentPayments'
+        ])
+            ->where('id', $occupantId)
+            ->where('status', 'staying')
+            ->firstOrFail();
+
+        $checkIn = Carbon::parse($occupant->check_in);
+        $now = Carbon::now();
+        $currentStayDuration = $checkIn->diffInDays($now);
+
+        $roomTransfers = $occupant->roomTransfers()
+            ->with('oldRentalUnit', 'newRentalUnit')
+            ->orderBy('transfer_date', 'asc')
+            ->get();
+
+        $transferDetails = [];
+        $previousDate = $checkIn;
+
+        foreach ($roomTransfers as $transfer) {
+            $transferDate = Carbon::parse($transfer->transfer_date);
+            $duration = $previousDate->diffInDays($transferDate);
+            $previousDate = $transferDate;
+
+            $transferDetails[] = [
+                'from_room' => $transfer->oldRentalUnit->number ?? 'N/A',
+                'to_room' => $transfer->newRentalUnit->number,
+                'transfer_date' => Carbon::parse($transfer->transfer_date)->format('d/m/Y'),
+                'duration' => $duration,
+                'reason' => $transfer->transfer_reason ?? 'N/A',
+            ];
+        }
+
+        // Remove logic that adds current stay to transferDetails
+
+        return view('receptionist.occupant.staying-details', compact('occupant', 'currentStayDuration', 'transferDetails'));
+    }
+
 
     public function chargeRent($occupantId)
     {
