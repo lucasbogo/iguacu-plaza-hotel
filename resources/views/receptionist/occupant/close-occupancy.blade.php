@@ -53,8 +53,10 @@
                 Aluguel e Fechar Ocupação</a>
         @else
             {{-- Button to simply close occupancy for company billed occupants --}}
-            <a href="{{ route('receptionist.occupants.closeOccupancy', $occupant->id) }}" class="btn btn-secondary">Fechar
-                Ocupação</a>
+            <a href="{{ route('receptionist.occupants.closeRoomOccupancy', $occupant->id) }}"
+                class="btn btn-secondary">Fechar Ocupação</a>
+            Fechar
+            Ocupação</a>
         @endif
 
     </div>

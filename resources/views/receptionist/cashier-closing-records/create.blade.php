@@ -20,6 +20,11 @@
                                     readonly>
                             </div>
                             <div class="form-group">
+                                <label for="rent_income">Aluguel Cobrado</label>
+                                <input type="text" class="form-control" name="rent_income"
+                                    value="{{ number_format($rentIncome, 2, ',', '.') }}" readonly>
+                            </div>
+                            <div class="form-group">
                                 <label for="drink_amount">Drinks Vendidos</label>
                                 <input type="text" class="form-control" name="drink_amount"
                                     value="{{ number_format($drinkIncome, 2, ',', '.') }}" readonly>

@@ -20,12 +20,12 @@
                                 <thead>
                                     <tr>
                                         <th>Valor Inicial</th>
-                                        <th>Valor Final</th>
                                         <th>Vendas Totais</th>
-                                        <th>Aluguel</th>
-                                        <th>Bebidas</th>
-                                        <th>Serviços de Quarto</th>
-                                        <th>Total Recebido</th>
+                                        <th>Aluguel (R$)</th> <!-- Updated header for clarity -->
+                                        <th>Bebidas (R$)</th>
+                                        <th>Serviços de Quarto (R$)</th>
+                                        <th>Total Recebido (R$)</th> <!-- Including all revenues -->
+                                        <th>Valor Final</th>
                                         <th>Data de Fechamento</th>
                                         <th>Ações</th>
                                     </tr>
@@ -34,19 +34,16 @@
                                     @foreach ($records as $record)
                                         <tr>
                                             <td>R$ {{ number_format($record->start_amount, 2, ',', '.') }}</td>
-                                            <td>R$ {{ number_format($record->end_amount, 2, ',', '.') }}</td>
                                             <td>R$ {{ number_format($record->total_sales, 2, ',', '.') }}</td>
-                                            <td>R$ {{ number_format($record->rent_amount, 2, ',', '.') }}</td>
-                                            <td>R$ {{ number_format($record->drink_amount, 2, ',', '.') }}</td>
-                                            <td>R$ {{ number_format($record->room_service_amount, 2, ',', '.') }}</td>
-                                            <td>R$ {{ number_format($record->total_cash_received, 2, ',', '.') }}</td>
-                                            <td>{{ $record->closed_at ? \Carbon\Carbon::parse($record->closed_at)->format('d/m/Y H:i:s') : '' }}
-                                            </td>
+                                            <td>R$ {{ number_format($record->rental_income, 2, ',', '.') }}</td> <!-- Display rental income -->
+                                            <td>R$ {{ number_format($record->drink_income, 2, ',', '.') }}</td>
+                                            <td>R$ {{ number_format($record->room_service_income, 2, ',', '.') }}</td>
+                                            <td>R$ {{ number_format($record->total_cash_received, 2, ',', '.') }}</td> <!-- Sum of all types of income -->
+                                            <td>R$ {{ number_format($record->end_amount, 2, ',', '.') }}</td>
+                                            <td>{{ $record->closed_at ? \Carbon\Carbon::parse($record->closed_at)->format('d/m/Y H:i:s') : '' }}</td>
                                             <td>
-                                                <a href="{{ route('receptionist.cashier-closing-records.show', $record->id) }}"
-                                                    class="btn btn-primary">Detalhes</a>
-                                                <a href="{{ route('receptionist.cashier-closing-records.print', $record->id) }}"
-                                                    class="btn btn-info">Imprimir PDF</a>
+                                                <a href="{{ route('receptionist.cashier-closing-records.show', $record->id) }}" class="btn btn-primary">Detalhes</a>
+                                                <a href="{{ route('receptionist.cashier-closing-records.print', $record->id) }}" class="btn btn-info">Imprimir PDF</a>
                                             </td>
                                         </tr>
                                     @endforeach

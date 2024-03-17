@@ -19,7 +19,7 @@ class OccupantsController extends Controller
     // Display a listing of the occupants
     public function index()
     {
-        $occupants = Occupant::where('status', '!=', 'checked-out')->with('rentalUnit')->get();
+        $occupants = Occupant::where('status', '!=', 'checked_out')->with('rentalUnit')->get(); // Make sure 'checked_out' matches the database value
         $drinkConsumables = DrinkConsumable::all();
         $rentalUnits = RentalUnit::all();
         return view('receptionist.occupant.index', compact('occupants', 'drinkConsumables', 'rentalUnits'));
@@ -256,9 +256,14 @@ class OccupantsController extends Controller
 
     public function showClosedOccupancies()
     {
-        $closedOccupancies = Occupant::where('status', 'checked-out')->get();
+        $closedOccupancies = Occupant::where('status', 'checked_out')->get()->map(function ($occupant) {
+            $occupant->stayDuration = Carbon::parse($occupant->check_in)->diffInDays(Carbon::parse($occupant->check_out));
+            return $occupant;
+        });
+
         return view('receptionist.occupant.closed-occupancies', compact('closedOccupancies'));
     }
+
 
     public function details($occupantId)
     {

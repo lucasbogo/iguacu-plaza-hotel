@@ -54,7 +54,7 @@
                                         </tr>
                                         <tr class="table-success">
                                             <td><strong>Total de Receitas</strong></td>
-                                            <td><strong>{{ number_format($drinkIncome + $roomServiceIncome, 2, ',', '.') }}</strong>
+                                            <td><strong>{{ number_format($drinkIncome + $roomServiceIncome + $rentIncome, 2, ',', '.') }}</strong>
                                             </td>
                                         </tr>
                                     </tbody>

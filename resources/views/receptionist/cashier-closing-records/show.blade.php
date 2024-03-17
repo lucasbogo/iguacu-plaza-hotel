@@ -21,11 +21,18 @@
                     </li>
                     <li><strong>Vendas Totais:</strong> R$
                         {{ number_format($cashierClosingRecord->total_sales, 2, ',', '.') }}</li>
+                    <li><strong>Aluguel (Renda de Aluguéis):</strong> R$
+                        {{ number_format($cashierClosingRecord->rental_income, 2, ',', '.') }}</li>
+                    <!-- Include rental income -->
+                    <li><strong>Bebidas:</strong> R$ {{ number_format($cashierClosingRecord->drink_income, 2, ',', '.') }}
+                    </li> <!-- Include drink income -->
+                    <li><strong>Serviços de Quarto:</strong> R$
+                        {{ number_format($cashierClosingRecord->room_service_income, 2, ',', '.') }}</li>
+                    <!-- Include room service income -->
                     <li><strong>Valor Recebido:</strong> R$
                         {{ number_format($cashierClosingRecord->total_cash_received, 2, ',', '.') }}</li>
                     <li><strong>Data de Fechamento:</strong>
                         {{ $cashierClosingRecord->closed_at ? \Carbon\Carbon::parse($cashierClosingRecord->closed_at)->format('d/m/Y H:i:s') : '' }}
-                    </li>
                     </li>
                 </ul>
             </div>
