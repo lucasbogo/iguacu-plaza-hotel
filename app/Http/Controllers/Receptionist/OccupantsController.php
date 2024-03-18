@@ -221,6 +221,44 @@ class OccupantsController extends Controller
         return view('receptionist.occupant.staying-details', compact('occupant', 'currentStayDuration', 'transferDetails'));
     }
 
+    public function generateStayingOccupantReport($occupantId)
+    {
+        $occupant = Occupant::with(['rentalUnit', 'roomTransfers', 'drinkConsumables', 'rentPayments'])
+            ->where('id', $occupantId)
+            ->where('status', 'staying')
+            ->firstOrFail();
+
+        $checkIn = Carbon::parse($occupant->check_in);
+        $now = Carbon::now();
+        $currentStayDuration = $checkIn->diffInDays($now);
+
+        $roomTransfers = $occupant->roomTransfers()
+            ->with('oldRentalUnit', 'newRentalUnit')
+            ->orderBy('transfer_date', 'asc')
+            ->get();
+
+        $transferDetails = [];
+        $previousDate = $checkIn;
+
+        foreach ($roomTransfers as $transfer) {
+            $transferDate = Carbon::parse($transfer->transfer_date);
+            $duration = $previousDate->diffInDays($transferDate);
+            $previousDate = $transferDate;
+
+            $transferDetails[] = [
+                'from_room' => $transfer->oldRentalUnit->number ?? 'N/A',
+                'to_room' => $transfer->newRentalUnit->number,
+                'transfer_date' => $transferDate->format('d/m/Y'),
+                'duration' => $duration,
+                'reason' => $transfer->transfer_reason ?? 'N/A',
+            ];
+        }
+
+        $pdf = PDF::loadView('receptionist.occupant.staying-occupant-report', compact('occupant', 'currentStayDuration', 'transferDetails'));
+
+        // Stream PDF to browser for download
+        return $pdf->stream("occupant_{$occupantId}_report.pdf");
+    }
 
     public function chargeRent($occupantId)
     {
@@ -318,24 +356,29 @@ class OccupantsController extends Controller
 
     public function showDetails($occupantId)
     {
-        $occupant = Occupant::with(['rentalUnit', 'drinkConsumables', 'rentPayments', 'roomServices'])
-            ->where('id', $occupantId)->firstOrFail();
+        $occupant = Occupant::with([
+            'rentalUnit',
+            'drinkConsumables',
+            'rentPayments',
+            'roomServices',
+            'roomTransfers.oldRentalUnit',
+            'roomTransfers.newRentalUnit' // Ensure you're loading the necessary relationships for room transfers
+        ])->where('id', $occupantId)->where('status', 'checked_out')->firstOrFail(); // Ensure you're targeting a checked-out occupant
 
         $checkIn = Carbon::parse($occupant->check_in);
-        $checkOut = $occupant->check_out ? Carbon::parse($occupant->check_out) : Carbon::now();
+        $checkOut = Carbon::parse($occupant->check_out); // Since occupant is checked out, check_out is set
         $stayDuration = $checkIn->diffInDays($checkOut);
 
-        // Include transfer details if available
-        $transferDetails = null;
-        if ($occupant->transfer_date) {
-            $transferDetails = [
-                'date' => $occupant->transfer_date,
-                'reason' => $occupant->transfer_reason,
-                // Assuming the new room is the current rental_unit after transfer
-                'new_room' => $occupant->rentalUnit->number,
-                // Additional logic needed if you want to show previous room number
+        // Process transfer details
+        $transferDetails = $occupant->roomTransfers->map(function ($transfer) {
+            return [
+                'from_room' => $transfer->oldRentalUnit->number ?? 'N/A',
+                'to_room' => $transfer->newRentalUnit->number,
+                'transfer_date' => Carbon::parse($transfer->transfer_date)->format('d/m/Y'),
+                'reason' => $transfer->transfer_reason,
+                'duration' => Carbon::parse($transfer->transfer_date)->diffInDays(Carbon::parse($transfer->created_at)), // Calculate duration for each transfer
             ];
-        }
+        });
 
         $billingType = $occupant->billing_type;
         $companyName = $billingType == 'company' ? $occupant->company_name : null;
@@ -349,10 +392,41 @@ class OccupantsController extends Controller
         ));
     }
 
-    public function printPDF()
+    public function generateCheckoutOccupantReport($occupantId)
     {
-        $occupants = Occupant::with('rentalUnit')->get();
-        $pdf = PDF::loadView('receptionist.occupant.print', compact('occupants'));
-        return $pdf->download('occupants.pdf');
+        $occupant = Occupant::with([
+            'rentalUnit',
+            'roomTransfers.oldRentalUnit',
+            'roomTransfers.newRentalUnit',
+            'drinkConsumables',
+            'rentPayments',
+            'roomServices'
+        ])
+            ->where('id', $occupantId)
+            ->where('status', 'checked_out')
+            ->firstOrFail();
+
+        $checkIn = Carbon::parse($occupant->check_in);
+        $checkOut = Carbon::parse($occupant->check_out);
+        $stayDuration = $checkIn->diffInDays($checkOut);
+
+        $transferDetails = collect($occupant->roomTransfers)->map(function ($transfer) use ($checkIn) {
+            $transferStart = Carbon::parse($transfer->transfer_date);
+            $duration = $checkIn->diffInDays($transferStart);
+            $checkIn = $transferStart; // Update for next iteration
+
+            return [
+                'from_room' => $transfer->oldRentalUnit->number ?? 'N/A',
+                'to_room' => $transfer->newRentalUnit->number,
+                'transfer_date' => $transfer->transfer_date->format('d/m/Y'),
+                'duration' => $duration,
+                'reason' => $transfer->transfer_reason ?? 'N/A',
+            ];
+        })->all();
+
+        $pdf = PDF::loadView('receptionist.occupant.checkout-occupant-report', compact('occupant', 'stayDuration', 'transferDetails'));
+
+        // Stream PDF to browser for download
+        return $pdf->stream("occupant_{$occupantId}_report.pdf");
     }
 }

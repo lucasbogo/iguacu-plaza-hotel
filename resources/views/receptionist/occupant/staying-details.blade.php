@@ -18,6 +18,10 @@
                 <p>Quarto Atual: {{ $occupant->rentalUnit->number }}</p>
                 <p>Check-in: {{ \Carbon\Carbon::parse($occupant->check_in)->format('d/m/Y') }}</p>
                 <p>Dias de Estadia Atual: {{ $currentStayDuration }}</p>
+                <!-- Button to generate report -->
+                <a href="{{ route('receptionist.occupants.staying-report', $occupant->id) }}" class="btn btn-primary">Gerar
+                    Relatório</a>
+
             </div>
         </div>
 
